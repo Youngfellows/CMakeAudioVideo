@@ -1,7 +1,7 @@
 #/bin/bash
 rm -r build
 mkdir build && cd build
-cmake ..
+cmake .. -L -DBUILD_RELEASE:BOOL=OFF
 make
 cd ..
 # ./build/Sample 2 3
