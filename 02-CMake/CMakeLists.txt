@@ -9,7 +9,8 @@ project(Sample)
 message("Project: " ${PROJECT_NAME})
 
 # 将当前目录中的源文件名称赋值给变量 SRC_LIST
-aux_source_directory(. SRC_LIST)
+set(SRC_LIST main.cpp MathFunctions.cpp)
+# aux_source_directory(. SRC_LIST)
 message("SRC_LIST: " ${SRC_LIST})
 
 # 指示变量 SRC_LIST 中的源文件需要编译成一个名称为 Sample 的可执行文件
