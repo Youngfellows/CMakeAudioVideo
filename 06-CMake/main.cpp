@@ -24,11 +24,11 @@ int main(int argc, char *argv[])
     int result = 0;
 
 #ifdef USE_MY_MATH
-    std::cout << "定义了USE_MY_MATH" << std::endl;
+    std::cout << "定义了USE_MY_MATH ..." << std::endl;
     result = power(base, exponent); // 求幂
 #else
-    std::cout << "未定义USE_MY_MATH" << std::endl;
-    result = pow(base, exponent);
+    std::cout << "未定义USE_MY_MATH ..." << std::endl;
+    result = pow(base, exponent); // 求幂
 #endif
     std::cout << base << "的" << exponent << "次方的幕是" << result << std::endl;
 
