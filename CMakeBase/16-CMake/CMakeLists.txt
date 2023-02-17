@@ -130,3 +130,20 @@ endif()
 
 # 运行 cmake .. -DDEBUG=Y -L，会打印信息。
 # PS: if() 命令由一个特殊的条件语法，允许以短形式 <variable>，而不是 ${<variable>}。
+message(STATUS "=======================>>判断变量是否被定义")
+
+#[[ 
+2.变量
+    if(DEFINED <name>|CACHE{<name>}|ENV{<name>})
+    如果给定的名称为被定义的变量、缓存变量或环境变量，则为真。变量值无关紧要。
+
+    与 if(<variable|string>) 相比，if(<variable|string>) 是用来判断变量的值，而 if(DEFINED ...) 用来判断变量是否被定义。
+]]
+# 案例: 判断变量是否被定义
+if(DEFINED RELEASE)
+    message(STATUS "DEFINED RELEASE: ${RELEASE}")
+else()
+    message(STATUS "NOT DEFINED RELEASE")
+endif()
+
+# 运行 cmake .. -DRELEASE=N -L，也会打印信息。
