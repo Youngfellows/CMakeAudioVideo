@@ -99,3 +99,54 @@ if(PEAR IN_LIST FRUITS)
 else()
     message(STATUS "${PEAR} 不在列表中:${FRUITS}")
 endif()
+
+message(STATUS "================  数字的比较 ==================")
+
+#[[
+4.数字的比较
+    比较数字的大小
+    # 小于
+    if(<variable|string> LESS <variable|string>)
+    # 大于
+    if(<variable|string> GREATER <variable|string>)
+    # 等于
+    if(<variable|string> EQUAL <variable|string>)
+    # 小于或等于
+    if(<variable|string> LESS_EQUAL <variable|string>)
+    # 大于或等于
+    if(<variable|string> GREATER_EQUAL <variable|string>)
+
+]]
+set(NUMBER 28)
+set(MAX_NUMBER 30)
+set(MIN_NUMBER 15)
+
+if(NUMBER LESS MAX_NUMBER)
+    message(STATUS "${NUMBER} 小于 ${MAX_NUMBER}")
+else()
+    message(STATUS "${NUMBER} 不小于 ${MAX_NUMBER}")
+endif()
+
+if(NUMBER GREATER MIN_NUMBER)
+    message(STATUS "${NUMBER} 大于 ${MIN_NUMBER}")
+else()
+    message(STATUS "${NUMBER} 不大于 ${MIN_NUMBER}")
+endif()
+
+if(NUMBER EQUAL 28)
+    message(STATUS "${NUMBER} 等于 28")
+else()
+    message(STATUS "${NUMBER} 不等于 28")
+endif()
+
+if(NUMBER LESS_EQUAL MAX_NUMBER)
+    message(STATUS "${NUMBER} 小于等于 ${MAX_NUMBER}")
+else()
+    message(STATUS "${NUMBER} 不小于等于 ${MAX_NUMBER}")
+endif()
+
+if(NUMBER GREATER_EQUAL MIN_NUMBER)
+    message(STATUS "${NUMBER} 大于等于 ${MIN_NUMBER}")
+else()
+    message(STATUS "${NUMBER} 不大于等于 ${MIN_NUMBER}")
+endif()
