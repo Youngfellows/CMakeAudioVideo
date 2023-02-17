@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/Sample.dir/main.cpp.o -o Sample  math/libMathFunctions.a 

@@ -1,0 +1,2 @@
+/mnt/d/TempCode2023/NDK/NDK-CMake/CMakeAudioVideo/01-CMake/build/CMakeFiles/edit_cache.dir
+/mnt/d/TempCode2023/NDK/NDK-CMake/CMakeAudioVideo/01-CMake/build/CMakeFiles/rebuild_cache.dir
