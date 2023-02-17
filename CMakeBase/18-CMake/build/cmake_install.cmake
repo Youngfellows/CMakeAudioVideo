@@ -1,4 +1,4 @@
-# Install script for directory: /mnt/d/TempCPPCode2023/NDK-CMake/CMakeAudioVideo/08-CMake
+# Install script for directory: /mnt/d/TempCPPCode2023/NDK-CMake/CMakeAudioVideo/CMakeBase/18-CMake
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -50,5 +50,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/mnt/d/TempCPPCode2023/NDK-CMake/CMakeAudioVideo/08-CMake/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/mnt/d/TempCPPCode2023/NDK-CMake/CMakeAudioVideo/CMakeBase/18-CMake/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

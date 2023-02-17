@@ -54,10 +54,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /mnt/d/TempCPPCode2023/NDK-CMake/CMakeAudioVideo/08-CMake
+CMAKE_SOURCE_DIR = /mnt/d/TempCPPCode2023/NDK-CMake/CMakeAudioVideo/CMakeBase/18-CMake
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /mnt/d/TempCPPCode2023/NDK-CMake/CMakeAudioVideo/08-CMake/build
+CMAKE_BINARY_DIR = /mnt/d/TempCPPCode2023/NDK-CMake/CMakeAudioVideo/CMakeBase/18-CMake/build
 
 #=============================================================================
 # Directory level rules for the build root directory
