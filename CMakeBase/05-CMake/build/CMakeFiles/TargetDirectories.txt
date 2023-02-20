@@ -1,6 +1,0 @@
-/mnt/d/TempCPPCode2023/NDK-CMake/CMakeAudioVideo/05-CMake/build/CMakeFiles/Sample.dir
-/mnt/d/TempCPPCode2023/NDK-CMake/CMakeAudioVideo/05-CMake/build/CMakeFiles/edit_cache.dir
-/mnt/d/TempCPPCode2023/NDK-CMake/CMakeAudioVideo/05-CMake/build/CMakeFiles/rebuild_cache.dir
-/mnt/d/TempCPPCode2023/NDK-CMake/CMakeAudioVideo/05-CMake/build/math/CMakeFiles/MathFunctions.dir
-/mnt/d/TempCPPCode2023/NDK-CMake/CMakeAudioVideo/05-CMake/build/math/CMakeFiles/edit_cache.dir
-/mnt/d/TempCPPCode2023/NDK-CMake/CMakeAudioVideo/05-CMake/build/math/CMakeFiles/rebuild_cache.dir
