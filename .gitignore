@@ -31,3 +31,4 @@
 *.out
 *.app
 */build
+CMakeBase/19-CMake/build/

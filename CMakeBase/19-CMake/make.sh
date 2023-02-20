@@ -4,4 +4,4 @@ mkdir build && cd build
 cmake .. -Ddate=20230220 -DPRICE=123 -L
 make
 cd ..
-# ./build/Sample 2 3
+./build/Sample 4 2
