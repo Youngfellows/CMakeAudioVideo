@@ -92,7 +92,7 @@ message(STATUS "currTime:${currTime}")
 string(TIMESTAMP currTime UTC)
 message(STATUS "currTime:${currTime}")
 
-string(TIMESTAMP currTime "%Y-%m-%d %H:%M%S %j %B %U %w %A")
+string(TIMESTAMP currTime "%Y-%m-%d %H:%M:%S %j %B %U %w %A")
 message(STATUS "currTime:${currTime}")
 
 #[[
