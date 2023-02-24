@@ -1,7 +1,7 @@
 #/bin/bash
 rm -r build
 mkdir build && cd build
-cmake ..
+cmake -DTEST_DEBUG=OFF -D TEST_RELEASE=ON -DUSE_MY_MATH=OFF -L ..
 make
 cd ..
-# ./build/Sample 2 3
+./build/Sample 3 2
