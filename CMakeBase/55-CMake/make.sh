@@ -4,4 +4,4 @@ mkdir build && cd build
 cmake ..
 make
 cd ..
-./build/output/Sample 4 3
+# ./build/Sample 2 3

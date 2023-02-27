@@ -33,10 +33,6 @@ EXCLUDE_FROM_ALL
 #[[
 在父目录下调用cmake .构建之后，在output目录下会出现libsub.a库，sub目录下则没有libsub.a。说明当指定binary_dir，输出目标文件就会放到binary_dir目录下
 ]]
-include_directories(math)
-aux_source_directory(. SRC_LISTS)
-add_executable(${PROJECT_NAME} ${SRC_LISTS})
-target_link_libraries(${PROJECT_NAME} MathFunctions)
 
 # 场景3：父目录CMakeLists.txt的add_subdirectory 指定了EXCLUDE_FROM_ALL选项。
 # 在父目录下调用cmake .构建之后，在output目录或sub目录下不会出现libsub.a库，说明当指定EXCLUDE_FROM_ALL选项，子目录的目标文件不会生成。
@@ -45,3 +41,7 @@ target_link_libraries(${PROJECT_NAME} MathFunctions)
 add_subdirectory(math output EXCLUDE_FROM_ALL)
 
 # 在父目录下调用cmake .构建之后，在output目录会出现libsub.a库，说明即使指定EXCLUDE_FROM_ALL选项，当父目录目标文件对子目录目标文件存在依赖关系时，子目录的目标文件仍然会生成以满足依赖关系。
+include_directories(math)
+aux_source_directory(. SRC_LISTS)
+add_executable(${PROJECT_NAME} ${SRC_LISTS})
+target_link_libraries(${PROJECT_NAME} MathFunctions)
