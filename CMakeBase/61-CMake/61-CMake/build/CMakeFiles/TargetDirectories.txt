@@ -1,0 +1,3 @@
+/mnt/e/StudyCode2023/CMakeAudioVideo/CMakeBase/61-CMake/build/CMakeFiles/Sample.dir
+/mnt/e/StudyCode2023/CMakeAudioVideo/CMakeBase/61-CMake/build/CMakeFiles/edit_cache.dir
+/mnt/e/StudyCode2023/CMakeAudioVideo/CMakeBase/61-CMake/build/CMakeFiles/rebuild_cache.dir
