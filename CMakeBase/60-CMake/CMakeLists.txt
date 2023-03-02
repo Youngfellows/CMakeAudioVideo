@@ -3,4 +3,21 @@ cmake_minimum_required(VERSION 3.15.0)
 
 # 项目名称为 Sample
 project(Sample)
-message("PROJECT_NAME: " ${PROJECT_NAME})
+
+# 添加包含子目录
+# add_subdirectory(math)
+
+# 查找原文件
+aux_source_directory(. SRC_LISTS)
+
+# 生成可执行文件
+add_executable(${PROJECT_NAME} ${SRC_LISTS})
+
+# 添加头文件目录
+target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_SOURCE_DIR}/math)
+
+set(MATH_FUNCTIONS_SO ${CMAKE_SOURCE_DIR}/math/lib/libMathFunctions.so)
+
+# 链接对象库 - 动态库
+target_link_libraries(${PROJECT_NAME} ${MATH_FUNCTIONS_SO})
+

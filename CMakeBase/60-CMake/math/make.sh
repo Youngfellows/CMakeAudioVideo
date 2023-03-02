@@ -3,5 +3,6 @@ rm -r build
 mkdir build && cd build
 cmake ..
 make
-cd ..
-./build/Sample 2 3
+# make install
+# cd ..
+# ./build/Sample 2 3
