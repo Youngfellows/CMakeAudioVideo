@@ -16,8 +16,12 @@ add_library(${PROJECT_NAME} SHARED ${DIR_LIB_SRCS})
 # 安装Obj文件，没有设置目录，直接输出到路径
 #install(FILES $<TARGET_OBJECTS:${PROJECT_NAME}> DESTINATION ${CMAKE_CURRENT_SOURCE}/output)
 
-#生成文件到指定位置
-set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
+# 生成文件到指定位置, 静态库 lib 输出路径
+# set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
+set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/../lib)
+# set(LIBRARY_OUTPUT_PATH ${CMAKE_BINARY_DIR}/../../lib)
+message(STATUS "LIBRARY_OUTPUT_PATH:${LIBRARY_OUTPUT_PATH}")
+
 
 #install 安装文件到指定位置
 #install(TARGETS hello_shared LIBRARY DESTINATION /usr/local/lib)
