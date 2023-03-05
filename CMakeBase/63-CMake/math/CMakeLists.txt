@@ -3,3 +3,7 @@ aux_source_directory(. DIR_LIB_SRCS)
 
 # 生成链接库
 add_library(MathFunctions ${DIR_LIB_SRCS})
+
+set(COMPUTER "惠普")
+set(COMPUTER "戴尔" PARENT_SCOPE)
+message(STATUS "in sub directory,COMPUTER:${COMPUTER}")
