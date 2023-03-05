@@ -1,4 +1,4 @@
-#include "MathFunctions.h"
+#include "../include/MathFunctions.h"
 
 /**
  * @brief 求幕函数
