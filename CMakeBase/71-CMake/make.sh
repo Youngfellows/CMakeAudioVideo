@@ -1,7 +1,7 @@
 #/bin/bash
 rm -r build
 mkdir build && cd build
-cmake ..
+cmake .. -DCMAKE_LIBRARY_PATH=./lib -L
 make
 cd ..
-# ./build/Sample 2 3
+./output/Sample 3 4

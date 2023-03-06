@@ -21,13 +21,16 @@ add_executable(${PROJECT_NAME} ${SRC_LISTS})
 target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_SOURCE_DIR}/include)
 
 # 查找链接库MathFunctions
-#set (CMAKE_LIBRARY_PATH "${CMAKE_SOURCE_DIR}/math/lib")
-set (CMAKE_LIBRARY_PATH "${CMAKE_SOURCE_DIR}/lib")
-# find_library(MyMathFunctions NAMES MathFunctions PATHS ${CMAKE_LIBRARY_PATH})
-# find_library(MyShape NAMES Shape PATHS ${CMAKE_LIBRARY_PATH})
-find_library(MyMathFunctions NAMES MathFunctions HINTS ${CMAKE_LIBRARY_PATH})
-find_library(MyShape NAMES Shape HINTS ${CMAKE_LIBRARY_PATH})
+# set (CMAKE_LIBRARY_PATH "${CMAKE_SOURCE_DIR}/math/lib")
+set(CMAKE_LIBRARY_PATH "${CMAKE_SOURCE_DIR}/lib")
+
+# find_library(MyMathFunctions NAMES MathFunctions PATHS ${CMAKE_LIBRARY_PATH}) # 使用指定路径搜索库
+# find_library(MyShape NAMES Shape PATHS ${CMAKE_LIBRARY_PATH}) # 使用指定路径搜索库
+find_library(MyMathFunctions NAMES MathFunctions HINTS ${CMAKE_LIBRARY_PATH}) # 使用指定路径搜索库
+find_library(MyShape NAMES Shape HINTS ${CMAKE_LIBRARY_PATH}) # 使用指定路径搜索库
+
+# find_library(MyMathFunctions NAMES MathFunctions HINTS ${CMAKE_LIBRARY_PATH}) # 使用默认路径搜索库
+# find_library(MyShape NAMES Shape HINTS ${CMAKE_LIBRARY_PATH}) # 使用默认路径搜索库
 
 # 链接对象库 - 动态库
 target_link_libraries(${PROJECT_NAME} ${MyMathFunctions} ${MyShape})
-
