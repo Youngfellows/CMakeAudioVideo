@@ -1,0 +1,32 @@
+
+[submodule "3rd/libyuv"]
+	path = 3rd/libyuv
+	url = git@github.com:lemenkov/libyuv.git
+[submodule "3rd/descampsa/yuv2rgb"]
+	path = 3rd/descampsa/yuv2rgb
+	url = git@github.com:descampsa/yuv2rgb.git
+[submodule "3rd/latelee/yuv2rgb"]
+	path = 3rd/latelee/yuv2rgb
+	url = git@github.com:latelee/yuv2rgb.git
+[submodule "3rd/zlib"]
+	path = 3rd/zlib
+	url = git@github.com:madler/zlib.git
+[submodule "3rd/svpng"]
+	path = 3rd/svpng
+	url = git@github.com:miloyip/svpng.git
+[submodule "3rd/libattopng"]
+	path = 3rd/libattopng
+	url = git@github.com:misc0110/libattopng.git
+[submodule "3rd/lodepng"]
+	path = 3rd/lodepng
+	url = git@github.com:lvandeve/lodepng.git
+[submodule "3rd/libpng"]
+	path = 3rd/libpng
+	url = git@github.com:glennrp/libpng.git
+[submodule "3rd/libjpeg-turbo"]
+	path = 3rd/libjpeg-turbo
+	url = git@github.com:libjpeg-turbo/libjpeg-turbo.git
+[submodule "3rd/giflib"]
+	path = 3rd/giflib
+	url = git@github.com:Mirrors-srorriM/giflib.git
+	branch = 5.2.1
