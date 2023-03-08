@@ -1,0 +1,7 @@
+/mnt/e/StudyCode2023/CMakeAudioVideo/CMakeBase/73-CMake/test_sdk/build/CMakeFiles/Sample.dir
+/mnt/e/StudyCode2023/CMakeAudioVideo/CMakeBase/73-CMake/test_sdk/build/CMakeFiles/edit_cache.dir
+/mnt/e/StudyCode2023/CMakeAudioVideo/CMakeBase/73-CMake/test_sdk/build/CMakeFiles/rebuild_cache.dir
+/mnt/e/StudyCode2023/CMakeAudioVideo/CMakeBase/73-CMake/test_sdk/build/CMakeFiles/list_install_components.dir
+/mnt/e/StudyCode2023/CMakeAudioVideo/CMakeBase/73-CMake/test_sdk/build/CMakeFiles/install.dir
+/mnt/e/StudyCode2023/CMakeAudioVideo/CMakeBase/73-CMake/test_sdk/build/CMakeFiles/install/local.dir
+/mnt/e/StudyCode2023/CMakeAudioVideo/CMakeBase/73-CMake/test_sdk/build/CMakeFiles/install/strip.dir
