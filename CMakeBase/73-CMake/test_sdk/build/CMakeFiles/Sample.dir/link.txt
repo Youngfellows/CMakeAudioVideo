@@ -1,1 +1,0 @@
-/usr/bin/c++ -O3 -DNDEBUG CMakeFiles/Sample.dir/main.cpp.o -o Sample  -Wl,-rpath,/mnt/e/StudyCode2023/CMakeAudioVideo/CMakeBase/73-CMake/install/lib: /mnt/e/StudyCode2023/CMakeAudioVideo/CMakeBase/73-CMake/install/lib/libMathFunctions.so /mnt/e/StudyCode2023/CMakeAudioVideo/CMakeBase/73-CMake/install/lib/libShape.so 

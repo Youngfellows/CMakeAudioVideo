@@ -1,1 +1,0 @@
-/mnt/e/StudyCode2023/CMakeAudioVideo/CMakeBase/73-CMake/test_sdk_install/bin/Sample
