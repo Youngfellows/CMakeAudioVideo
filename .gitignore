@@ -32,3 +32,6 @@
 *.app
 */build/
 CMakeBase/61-CMake/math/build/
+CMakeBase/75-CMake/install/
+CMakeBase/75-CMake/test_sdk/build/
+CMakeBase/75-CMake/test_sdk_install/
