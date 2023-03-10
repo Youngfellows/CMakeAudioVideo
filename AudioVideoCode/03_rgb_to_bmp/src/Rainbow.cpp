@@ -69,6 +69,7 @@ bool Rainbow::writeRainbow(const char *outputFile, int width, int height)
     fileHeader.bfReserved1 = 0;
     fileHeader.bfReserved2 = 0;
     fileHeader.bfSize = sizeof(BitmapFileHeader) + sizeof(BitmapInfoHeader) + width * height * 3;
+    std::cout << sizeof(BitmapFileHeader) << "," << sizeof(BitmapInfoHeader) << "," << fileHeader.bfSize << std::endl;
     fileHeader.bfOffBits = 0x36; // 偏移数54位
 
     // 设置bmp图片,位图信息头,一共40个字节
@@ -88,8 +89,8 @@ bool Rainbow::writeRainbow(const char *outputFile, int width, int height)
 
     // 向文件中写入,图片文件信息头,位图信息头
     // fwrite(&bfType, sizeof(bfType), 1, bitmapFile);
-    fwrite(&fileHeader, sizeof(fileHeader), 1, bitmapFile);
-    fwrite(&infoHeader, sizeof(infoHeader), 1, bitmapFile);
+    fwrite(&fileHeader, 1, sizeof(fileHeader), bitmapFile);
+    fwrite(&infoHeader, 1, sizeof(infoHeader), bitmapFile);
 
     // 向文件中写入颜色数据
     uint32_t currentColor = rainbowColors[0]; // 当前颜色，默认是红
@@ -172,7 +173,7 @@ bool Rainbow::writeRainbow(const char *outputFile, int width, int height)
  */
 bool Rainbow::writeRainbow2(const char *outputFile, int width, int height)
 {
-    std::cout << "Rainbow::writeRainbow():: outputFile:" << outputFile << std::endl;
+    std::cout << "Rainbow::writeRainbow2():: outputFile:" << outputFile << std::endl;
     int fd;                                                  // 文件描述
     fd = open(outputFile, O_RDWR | O_CREAT | O_TRUNC, 0644); // 打开文件,不存在,创建文件,如果已经存在,置空
     if (fd == -1)
@@ -188,6 +189,7 @@ bool Rainbow::writeRainbow2(const char *outputFile, int width, int height)
     fileHeader.bfReserved1 = 0;
     fileHeader.bfReserved2 = 0;
     fileHeader.bfSize = sizeof(BitmapFileHeader) + sizeof(BitmapInfoHeader) + width * height * 3;
+    std::cout << sizeof(BitmapFileHeader) << "," << sizeof(BitmapInfoHeader) << "," << fileHeader.bfSize << std::endl;
     fileHeader.bfOffBits = 0x36; // 偏移数54位
 
     // 设置bmp图片,位图信息头,一共40个字节
