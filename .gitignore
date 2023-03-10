@@ -43,3 +43,6 @@ CMakeBase/73-CMake/test_sdk/build/
 CMakeBase/73-CMake/test_sdk_install/
 AudioVideoCode/01_examples/build/
 AudioVideoCode/01_examples/install/
+AudioVideoCode/02_rgb_pixel/build/
+AudioVideoCode/02_rgb_pixel/resource/
+AudioVideoCode/02_rgb_pixel/install/
