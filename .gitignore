@@ -41,3 +41,5 @@ CMakeBase/74-CMake/test_sdk_install/
 CMakeBase/73-CMake/install/
 CMakeBase/73-CMake/test_sdk/build/
 CMakeBase/73-CMake/test_sdk_install/
+AudioVideoCode/01_examples/build/
+AudioVideoCode/01_examples/install/
