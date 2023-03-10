@@ -52,3 +52,9 @@ AudioVideoCode/03_rgb_to_bmp/install/
 AudioVideoCode/04_rgb_to_bmp_fix/build/
 AudioVideoCode/04_rgb_to_bmp_fix/resource/
 AudioVideoCode/04_rgb_to_bmp_fix/install/
+AudioVideoCode/05-rgb-to-bmp-library/build/
+AudioVideoCode/05-rgb-to-bmp-library-cpp/build/
+AudioVideoCode/05-rgb-to-bmp-library/install/
+AudioVideoCode/05-rgb-to-bmp-library-cpp/install/
+AudioVideoCode/05-rgb-to-bmp-library/resource/
+AudioVideoCode/05-rgb-to-bmp-library-cpp/resource/
