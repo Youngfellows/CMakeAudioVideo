@@ -55,9 +55,44 @@ bool Rainbow::writeRainbow(const char *outputFile, int width, int height)
 {
     std::cout << "Rainbow::writeRainbow():: outputFile:" << outputFile << std::endl;
     // 打开文件
-    FILE *rgbFile = fopen(outputFile, "wb+");
-    // 当前颜色
-    uint32_t currentColor = rainbowColors[0]; // 默认是红
+    FILE *bitmapFile = fopen(outputFile, "wb+");
+    if (bitmapFile == nullptr) //! rgbFile
+    {
+        std::cout << "创建文件错误:" << outputFile << std::endl;
+        return false;
+    }
+
+    // 设置bmp图片,文件信息,一共14个字节
+    // uint16_t bfType = 0x4d42;    // 文件类型BM
+    BitmapFileHeader fileHeader; // 图片文件头
+    fileHeader.bfType = 0x4d42;  // 文件类型BM
+    fileHeader.bfReserved1 = 0;
+    fileHeader.bfReserved2 = 0;
+    fileHeader.bfSize = sizeof(BitmapFileHeader) + sizeof(BitmapInfoHeader) + width * height * 3;
+    fileHeader.bfOffBits = 0x36; // 偏移数54位
+
+    // 设置bmp图片,位图信息头,一共40个字节
+    BitmapInfoHeader infoHeader;
+    infoHeader.biSize = sizeof(BitmapFileHeader);
+    infoHeader.biWidth = width;
+    // infoHeader.biHeight = height;
+    infoHeader.biHeight = -height;
+    infoHeader.biPlanes = 1;
+    infoHeader.biBitCount = 24;
+    infoHeader.biSizeImage = 0;
+    infoHeader.biCompression = 0;
+    infoHeader.biXPelsPerMeter = 5000;
+    infoHeader.biYPelsPerMeter = 5000;
+    infoHeader.biClrUsed = 0;
+    infoHeader.biClrImportant = 0;
+
+    // 向文件中写入,图片文件信息头,位图信息头
+    // fwrite(&bfType, sizeof(bfType), 1, bitmapFile);
+    fwrite(&fileHeader, sizeof(fileHeader), 1, bitmapFile);
+    fwrite(&infoHeader, sizeof(infoHeader), 1, bitmapFile);
+
+    // 向文件中写入颜色数据
+    uint32_t currentColor = rainbowColors[0]; // 当前颜色，默认是红
     for (int i = 0; i < width; i++)
     {
         if (i < 100)
@@ -87,13 +122,13 @@ bool Rainbow::writeRainbow(const char *outputFile, int width, int height)
         }
         else if (i < 600)
         {
-            currentColor = rainbowColors[4];
-            // currentColor = *(rainbowColors + 4);
+            currentColor = rainbowColors[5];
+            // currentColor = *(rainbowColors + 5);
         }
         else if (i < 700)
         {
             currentColor = rainbowColors[6];
-            // currentColor = *(rainbowColors + 6;
+            // currentColor = *(rainbowColors + 6);
         }
 
         // 获取当前颜色的 R 分量
@@ -111,14 +146,18 @@ bool Rainbow::writeRainbow(const char *outputFile, int width, int height)
         // 按 BGR 顺序写入一个像素 RGB24 到文件中
         for (int j = 0; j < height; j++)
         {
-            fputc(r, rgbFile);
-            fputc(g, rgbFile);
-            fputc(b, rgbFile);
+            // 按 BGR 顺序写入一个像素 RGB24 到文件中
+            // fputc(b, bitmapFile);
+            // fputc(g, bitmapFile);
+            // fputc(r, bitmapFile);
+            fwrite(&b, 1, 1, bitmapFile);
+            fwrite(&g, 1, 1, bitmapFile);
+            fwrite(&r, 1, 1, bitmapFile);
         }
     }
 
     // 关闭文件
-    fclose(rgbFile);
+    fclose(bitmapFile);
     return true;
 }
 

@@ -46,3 +46,6 @@ AudioVideoCode/01_examples/install/
 AudioVideoCode/02_rgb_pixel/build/
 AudioVideoCode/02_rgb_pixel/resource/
 AudioVideoCode/02_rgb_pixel/install/
+AudioVideoCode/03_rgb_to_bmp/build/
+AudioVideoCode/03_rgb_to_bmp/resource/
+AudioVideoCode/03_rgb_to_bmp/install/
