@@ -101,8 +101,8 @@ bool Rainbow::writeRainbow(const char *outputFile, int width, int height)
         uint8_t r = (currentColor & RGB24_MASK_RED) >> 16;
 
         // 获取当前颜色的 G 分量
-        // uint8_t g = (currentColor & 0x00FF00) >> 16;
-        uint8_t g = (currentColor & RGB24_MASK_GREEN) >> 16;
+        // uint8_t g = (currentColor & 0x00FF00) >> 8;
+        uint8_t g = (currentColor & RGB24_MASK_GREEN) >> 8;
 
         // 获取当前颜色的 B 分量
         // uint8_t b = (currentColor & 0x0000FF);
@@ -189,7 +189,7 @@ bool Rainbow::writeRainbow2(const char *outputFile, int width, int height)
 
         // 获取当前颜色的 G 分量
         // uint8_t g = (currentColor & 0x00FF00) >> 16;
-        uint8_t g = (currentColor & RGB24_MASK_GREEN_1) >> 16;
+        uint8_t g = (currentColor & RGB24_MASK_GREEN_1) >> 8;
 
         // 获取当前颜色的 B 分量
         // uint8_t b = (currentColor & 0x0000FF);

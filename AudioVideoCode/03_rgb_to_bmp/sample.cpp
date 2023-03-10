@@ -7,7 +7,7 @@ int main(int arg, char *argv[])
     // 创建对象,动态申请内存
     IRainbow *rainbow = new Rainbow();
     const char *outputFile1 = "./resource/rainbow-700x700.bmp";    // 保存的文件名
-    const char *outputFile2 = "./resource/rainbow2-700x700.rgb24"; // 保存的文件名
+    const char *outputFile2 = "./resource/rainbow2-700x700.bmp"; // 保存的文件名
     rainbow->writeRainbow(outputFile1, 700, 700);
     rainbow->writeRainbow2(outputFile2, 600, 600);
 

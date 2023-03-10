@@ -137,7 +137,7 @@ bool Rainbow::writeRainbow(const char *outputFile, int width, int height)
 
         // 获取当前颜色的 G 分量
         // uint8_t g = (currentColor & 0x00FF00) >> 16;
-        uint8_t g = (currentColor & RGB24_MASK_GREEN) >> 16;
+        uint8_t g = (currentColor & RGB24_MASK_GREEN) >> 8;
 
         // 获取当前颜色的 B 分量
         // uint8_t b = (currentColor & 0x0000FF);
@@ -182,6 +182,33 @@ bool Rainbow::writeRainbow2(const char *outputFile, int width, int height)
         return false;
     }
 
+    // 设置bmp图片,文件信息,一共14个字节
+    BitmapFileHeader fileHeader; // 图片文件头
+    fileHeader.bfType = 0x4d42;  // 文件类型BM
+    fileHeader.bfReserved1 = 0;
+    fileHeader.bfReserved2 = 0;
+    fileHeader.bfSize = sizeof(BitmapFileHeader) + sizeof(BitmapInfoHeader) + width * height * 3;
+    fileHeader.bfOffBits = 0x36; // 偏移数54位
+
+    // 设置bmp图片,位图信息头,一共40个字节
+    BitmapInfoHeader infoHeader;
+    infoHeader.biSize = sizeof(BitmapFileHeader);
+    infoHeader.biWidth = width;
+    infoHeader.biHeight = -height;
+    infoHeader.biPlanes = 1;
+    infoHeader.biBitCount = 24;
+    infoHeader.biSizeImage = 0;
+    infoHeader.biCompression = 0;
+    infoHeader.biXPelsPerMeter = 5000;
+    infoHeader.biYPelsPerMeter = 5000;
+    infoHeader.biClrUsed = 0;
+    infoHeader.biClrImportant = 0;
+
+    // 向文件中写入,图片文件信息头,位图信息头
+    int number = write(fd, &fileHeader, sizeof(fileHeader));
+    number = write(fd, &infoHeader, sizeof(infoHeader));
+    std::cout << "number:" << number << std::endl;
+
     // 当前颜色
     uint32_t currentColor = rainbowColors[0]; // 默认是红
     for (int i = 0; i < width; i++)
@@ -198,28 +225,28 @@ bool Rainbow::writeRainbow2(const char *outputFile, int width, int height)
         }
         else if (i < 300)
         {
-            // currentColor = rainbowColors[1];
-            currentColor = *(rainbowColors + 1);
+            // currentColor = rainbowColors[2];
+            currentColor = *(rainbowColors + 2);
         }
         else if (i < 400)
         {
-            // currentColor = rainbowColors[1];
-            currentColor = *(rainbowColors + 1);
+            // currentColor = rainbowColors[3];
+            currentColor = *(rainbowColors + 3);
         }
         else if (i < 500)
         {
-            // currentColor = rainbowColors[1];
-            currentColor = *(rainbowColors + 1);
+            // currentColor = rainbowColors[4];
+            currentColor = *(rainbowColors + 4);
         }
         else if (i < 600)
         {
-            // currentColor = rainbowColors[1];
-            currentColor = *(rainbowColors + 1);
+            // currentColor = rainbowColors[5];
+            currentColor = *(rainbowColors + 5);
         }
         else if (i < 700)
         {
-            // currentColor = rainbowColors[1];
-            currentColor = *(rainbowColors + 1);
+            // currentColor = rainbowColors[6];
+            currentColor = *(rainbowColors + 6);
         }
 
         // 获取当前颜色的 R 分量
@@ -228,18 +255,20 @@ bool Rainbow::writeRainbow2(const char *outputFile, int width, int height)
 
         // 获取当前颜色的 G 分量
         // uint8_t g = (currentColor & 0x00FF00) >> 16;
-        uint8_t g = (currentColor & RGB24_MASK_GREEN_1) >> 16;
+        uint8_t g = (currentColor & RGB24_MASK_GREEN_1) >> 8;
 
         // 获取当前颜色的 B 分量
         // uint8_t b = (currentColor & 0x0000FF);
         uint8_t b = (currentColor & RGB24_MASK_BLUE_1);
         // std::cout << sizeof(r) << "," << sizeof(g) << "," << sizeof(b) << std::endl;
-        //  按 BGR 顺序写入一个像素 RGB24 到文件中
+        //   按 BGR 顺序写入一个像素 RGB24 到文件中
         for (int j = 0; j < height; j++)
         {
-            int number = write(fd, &r, sizeof(r)); // 写入一个字键数据
-            number = write(fd, &g, sizeof(r));     // 写入一个字键数据
-            number = write(fd, &b, sizeof(r));     // 写入一个字键数据
+
+            int number = write(fd, &b, sizeof(r)); // 写入一个字键数据
+            // std::cout << number << std::endl;
+            number = write(fd, &g, sizeof(r)); // 写入一个字键数据
+            number = write(fd, &r, sizeof(r)); // 写入一个字键数据
         }
     }
 
