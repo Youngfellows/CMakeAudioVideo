@@ -24,7 +24,6 @@
  * $Id$
  */
 
-
 /*
  * BMP File Header  Stores general information about the BMP file.
  * DIB header       Stores detailed information about the bitmap image.
@@ -44,7 +43,8 @@
 #define DEFAULT_DPI_Y 3780
 #define DPI_FACTOR 39.37007874015748
 
-struct _bmpfile {
+struct _bmpfile
+{
   bmp_header_t header;
   bmp_dib_v3_header_t dib;
 
@@ -71,9 +71,11 @@ bmp_create_standard_color_table(bmpfile_t *bmp)
 {
   int i, j, k, ell;
 
-  switch (bmp->dib.depth) {
+  switch (bmp->dib.depth)
+  {
   case 1:
-    for (i = 0; i < 2; ++i) {
+    for (i = 0; i < 2; ++i)
+    {
       bmp->colors[i].red = i * 255;
       bmp->colors[i].green = i * 255;
       bmp->colors[i].blue = i * 255;
@@ -83,27 +85,33 @@ bmp_create_standard_color_table(bmpfile_t *bmp)
 
   case 4:
     i = 0;
-    for (ell = 0; ell < 2; ++ell) {
-      for (k = 0; k < 2; ++k) {
-	for (j = 0; j < 2; ++j) {
-	  bmp->colors[i].red = j * 128;
-	  bmp->colors[i].green = k * 128;
-	  bmp->colors[i].blue = ell * 128;
-	  bmp->colors[i].alpha = 0;
-	  ++i;
-	}
+    for (ell = 0; ell < 2; ++ell)
+    {
+      for (k = 0; k < 2; ++k)
+      {
+        for (j = 0; j < 2; ++j)
+        {
+          bmp->colors[i].red = j * 128;
+          bmp->colors[i].green = k * 128;
+          bmp->colors[i].blue = ell * 128;
+          bmp->colors[i].alpha = 0;
+          ++i;
+        }
       }
     }
 
-    for (ell = 0; ell < 2; ++ell) {
-      for (k = 0; k < 2; ++k) {
-	for (j = 0; j < 2; ++j) {
-	  bmp->colors[i].red = j * 255;
-	  bmp->colors[i].green = k * 255;
-	  bmp->colors[i].blue = ell * 255;
-	  bmp->colors[i].alpha = 0;
-	  ++i;
-	}
+    for (ell = 0; ell < 2; ++ell)
+    {
+      for (k = 0; k < 2; ++k)
+      {
+        for (j = 0; j < 2; ++j)
+        {
+          bmp->colors[i].red = j * 255;
+          bmp->colors[i].green = k * 255;
+          bmp->colors[i].blue = ell * 255;
+          bmp->colors[i].alpha = 0;
+          ++i;
+        }
       }
     }
 
@@ -117,27 +125,33 @@ bmp_create_standard_color_table(bmpfile_t *bmp)
 
   case 8:
     i = 0;
-    for (ell = 0; ell < 4; ++ell) {
-      for (k = 0; k < 8; ++k) {
-	for (j = 0; j < 8; ++j) {
-	  bmp->colors[i].red = j * 32;
-	  bmp->colors[i].green = k * 32;
-	  bmp->colors[i].blue = ell * 64;
-	  bmp->colors[i].alpha = 0;
-	  ++i;
-	}
+    for (ell = 0; ell < 4; ++ell)
+    {
+      for (k = 0; k < 8; ++k)
+      {
+        for (j = 0; j < 8; ++j)
+        {
+          bmp->colors[i].red = j * 32;
+          bmp->colors[i].green = k * 32;
+          bmp->colors[i].blue = ell * 64;
+          bmp->colors[i].alpha = 0;
+          ++i;
+        }
       }
     }
 
     i = 0;
-    for (ell = 0; ell < 2; ++ell) {
-      for (k = 0; k < 2; ++k) {
-	for (j = 0; j < 2; ++j) {
-	  bmp->colors[i].red = j * 128;
-	  bmp->colors[i].green = k * 128;
-	  bmp->colors[i].blue = ell * 128;
-	  ++i;
-	}
+    for (ell = 0; ell < 2; ++ell)
+    {
+      for (k = 0; k < 2; ++k)
+      {
+        for (j = 0; j < 2; ++j)
+        {
+          bmp->colors[i].red = j * 128;
+          bmp->colors[i].green = k * 128;
+          bmp->colors[i].blue = ell * 128;
+          ++i;
+        }
       }
     }
 
@@ -154,8 +168,8 @@ bmp_create_standard_color_table(bmpfile_t *bmp)
     bmp->colors[i].red = 166;
     bmp->colors[i].green = 202;
     bmp->colors[i].blue = 240;
-   
-    // overwrite colors 246 to 255 
+
+    // overwrite colors 246 to 255
     i = 246;
     bmp->colors[i].red = 255;
     bmp->colors[i].green = 251;
@@ -209,14 +223,16 @@ bmp_create_grayscale_color_table(bmpfile_t *bmp)
   int i;
   uint8_t step_size;
 
-  if (!bmp->colors) return;
+  if (!bmp->colors)
+    return;
 
   if (bmp->dib.depth != 1)
     step_size = 255 / (bmp->dib.ncolors - 1);
   else
     step_size = 255;
 
-  for (i = 0; i < bmp->dib.ncolors; ++i) {
+  for (i = 0; i < bmp->dib.ncolors; ++i)
+  {
     uint8_t value = i * step_size;
     rgb_pixel_t color = {value, value, value, 0};
     bmp->colors[i] = color;
@@ -230,7 +246,8 @@ static void
 bmp_malloc_colors(bmpfile_t *bmp)
 {
   bmp->dib.ncolors = uint32_pow(2, bmp->dib.depth);
-  if (bmp->dib.depth == 1 || bmp->dib.depth == 4 || bmp->dib.depth == 8) {
+  if (bmp->dib.depth == 1 || bmp->dib.depth == 4 || bmp->dib.depth == 8)
+  {
     bmp->colors = malloc(sizeof(rgb_pixel_t) * bmp->dib.ncolors);
     bmp_create_standard_color_table(bmp);
   }
@@ -255,9 +272,11 @@ bmp_malloc_pixels(bmpfile_t *bmp)
   int i, j;
 
   bmp->pixels = malloc(sizeof(rgb_pixel_t *) * bmp->dib.width);
-  for (i = 0; i < bmp->dib.width; ++i) {
+  for (i = 0; i < bmp->dib.width; ++i)
+  {
     bmp->pixels[i] = malloc(sizeof(rgb_pixel_t) * bmp->dib.height);
-    for (j = 0; j < bmp->dib.height; ++j) {
+    for (j = 0; j < bmp->dib.height; ++j)
+    {
       bmp->pixels[i][j].red = 255;
       bmp->pixels[i][j].green = 255;
       bmp->pixels[i][j].blue = 255;
@@ -314,6 +333,7 @@ bmp_create(uint32_t width, uint32_t height, uint32_t depth)
     result->dib.compress_type = BI_BITFIELDS;
   else
     result->dib.compress_type = BI_RGB;
+    //
 
   bmp_malloc_pixels(result);
   bmp_malloc_colors(result);
@@ -338,8 +358,7 @@ bmp_create(uint32_t width, uint32_t height, uint32_t depth)
   return result;
 }
 
-void
-bmp_destroy(bmpfile_t *bmp)
+void bmp_destroy(bmpfile_t *bmp)
 {
   bmp_free_pixels(bmp);
   bmp_free_colors(bmp);
@@ -388,8 +407,7 @@ bmp_get_dpi_y(bmpfile_t *bmp)
   return (uint32_t)(bmp->dib.vres / DPI_FACTOR);
 }
 
-void
-bmp_set_dpi(bmpfile_t *bmp, uint32_t x, uint32_t y)
+void bmp_set_dpi(bmpfile_t *bmp, uint32_t x, uint32_t y)
 {
   bmp->dib.hres = (uint32_t)(x * DPI_FACTOR);
   bmp->dib.vres = (uint32_t)(y * DPI_FACTOR);
@@ -404,8 +422,7 @@ bmp_get_pixel(bmpfile_t *bmp, uint32_t x, uint32_t y)
   return &(bmp->pixels[x][y]);
 }
 
-bool
-bmp_set_pixel(bmpfile_t *bmp, uint32_t x, uint32_t y, rgb_pixel_t pixel)
+bool bmp_set_pixel(bmpfile_t *bmp, uint32_t x, uint32_t y, rgb_pixel_t pixel)
 {
   if ((x >= bmp->dib.width) || (y >= bmp->dib.height))
     return FALSE;
@@ -422,19 +439,15 @@ _is_big_endian(void)
   return (*(uint8_t *)&value) != 0x01;
 }
 
-#define UINT16_SWAP_LE_BE_CONSTANT(val)		\
-  ((uint16_t)					\
-   (						\
-    (uint16_t) ((uint16_t) (val) >> 8) |	\
-    (uint16_t) ((uint16_t) (val) << 8)))
+#define UINT16_SWAP_LE_BE_CONSTANT(val)          \
+  ((uint16_t)((uint16_t)((uint16_t)(val) >> 8) | \
+              (uint16_t)((uint16_t)(val) << 8)))
 
-#define UINT32_SWAP_LE_BE_CONSTANT(val)			  \
-  ((uint32_t)						  \
-   (							  \
-    (((uint32_t) (val) & (uint32_t) 0x000000ffU) << 24) | \
-    (((uint32_t) (val) & (uint32_t) 0x0000ff00U) <<  8) | \
-    (((uint32_t) (val) & (uint32_t) 0x00ff0000U) >>  8) | \
-    (((uint32_t) (val) & (uint32_t) 0xff000000U) >> 24)))
+#define UINT32_SWAP_LE_BE_CONSTANT(val)                           \
+  ((uint32_t)((((uint32_t)(val) & (uint32_t)0x000000ffU) << 24) | \
+              (((uint32_t)(val) & (uint32_t)0x0000ff00U) << 8) |  \
+              (((uint32_t)(val) & (uint32_t)0x00ff0000U) >> 8) |  \
+              (((uint32_t)(val) & (uint32_t)0xff000000U) >> 24)))
 
 static void
 bmp_header_swap_endianess(bmp_header_t *header)
@@ -466,7 +479,8 @@ bmp_write_header(bmpfile_t *bmp, FILE *fp)
 {
   bmp_header_t header = bmp->header;
 
-  if (_is_big_endian()) bmp_header_swap_endianess(&header);
+  if (_is_big_endian())
+    bmp_header_swap_endianess(&header);
 
   fwrite(header.magic, sizeof(header.magic), 1, fp);
   fwrite(&(header.filesz), sizeof(uint32_t), 1, fp);
@@ -480,7 +494,8 @@ bmp_write_dib(bmpfile_t *bmp, FILE *fp)
 {
   bmp_dib_v3_header_t dib = bmp->dib;
 
-  if (_is_big_endian()) bmp_dib_v3_header_swap_endianess(&dib);
+  if (_is_big_endian())
+    bmp_dib_v3_header_swap_endianess(&dib);
 
   fwrite(&(dib.header_sz), sizeof(uint32_t), 1, fp);
   fwrite(&(dib.width), sizeof(uint32_t), 1, fp);
@@ -498,18 +513,21 @@ bmp_write_dib(bmpfile_t *bmp, FILE *fp)
 static void
 bmp_write_palette(bmpfile_t *bmp, FILE *fp)
 {
-  if (bmp->dib.depth == 1 || bmp->dib.depth == 4 || bmp->dib.depth == 8) {
+  if (bmp->dib.depth == 1 || bmp->dib.depth == 4 || bmp->dib.depth == 8)
+  {
     int i;
     for (i = 0; i < bmp->dib.ncolors; ++i)
       fwrite(&(bmp->colors[i]), sizeof(rgb_pixel_t), 1, fp);
   }
-  else if (bmp->dib.depth == 16) { /* the bit masks, not palette */
+  else if (bmp->dib.depth == 16)
+  {                             /* the bit masks, not palette */
     uint16_t red_mask = 63488;  /* bits 1-5 */
     uint16_t green_mask = 2016; /* bits 6-11 */
     uint16_t blue_mask = 31;    /* bits 12-16 */
     uint16_t zero_word = 0;
 
-    if (_is_big_endian()) {
+    if (_is_big_endian())
+    {
       red_mask = UINT16_SWAP_LE_BE_CONSTANT(red_mask);
       green_mask = UINT16_SWAP_LE_BE_CONSTANT(green_mask);
       blue_mask = UINT16_SWAP_LE_BE_CONSTANT(blue_mask);
@@ -534,13 +552,15 @@ find_closest_color(bmpfile_t *bmp, rgb_pixel_t pixel)
   int i, best = 0;
   int best_match = 999999;
 
-  for (i = 0; i < bmp->dib.ncolors; ++i) {
+  for (i = 0; i < bmp->dib.ncolors; ++i)
+  {
     rgb_pixel_t color = bmp->colors[i];
     int temp_match = INT_SQUARE(color.red - pixel.red) +
-      INT_SQUARE(color.green - pixel.green) +
-      INT_SQUARE(color.blue - pixel.blue);
+                     INT_SQUARE(color.green - pixel.green) +
+                     INT_SQUARE(color.blue - pixel.blue);
 
-    if (temp_match < best_match) {
+    if (temp_match < best_match)
+    {
       best = i;
       best_match = temp_match;
     }
@@ -554,15 +574,17 @@ find_closest_color(bmpfile_t *bmp, rgb_pixel_t pixel)
 
 static void
 bmp_get_row_data_for_1(bmpfile_t *bmp, unsigned char *buf, size_t buf_len,
-		       uint32_t row)
+                       uint32_t row)
 {
   uint8_t pos_weights[8] = {128, 64, 32, 16, 8, 4, 2, 1};
   uint32_t i = 0, j, k = 0;
   uint32_t index;
 
-  if (bmp->dib.width > 8 * buf_len) return;
+  if (bmp->dib.width > 8 * buf_len)
+    return;
 
-  while (i < bmp->dib.width) {
+  while (i < bmp->dib.width)
+  {
     for (j = 0, index = 0; j < 8 && i < bmp->dib.width; ++i, ++j)
       index += pos_weights[j] * find_closest_color(bmp, bmp->pixels[i][row]);
 
@@ -572,15 +594,17 @@ bmp_get_row_data_for_1(bmpfile_t *bmp, unsigned char *buf, size_t buf_len,
 
 static void
 bmp_get_row_data_for_4(bmpfile_t *bmp, unsigned char *buf, size_t buf_len,
-		       uint32_t row)
+                       uint32_t row)
 {
   uint8_t pos_weights[2] = {16, 1};
   uint32_t i = 0, j, k = 0;
   uint32_t index;
 
-  if (bmp->dib.width > 2 * buf_len) return;
+  if (bmp->dib.width > 2 * buf_len)
+    return;
 
-  while (i < bmp->dib.width) {
+  while (i < bmp->dib.width)
+  {
     for (j = 0, index = 0; j < 2 && i < bmp->dib.width; ++i, ++j)
       index += pos_weights[j] * find_closest_color(bmp, bmp->pixels[i][row]);
 
@@ -590,11 +614,12 @@ bmp_get_row_data_for_4(bmpfile_t *bmp, unsigned char *buf, size_t buf_len,
 
 static void
 bmp_get_row_data_for_8(bmpfile_t *bmp, unsigned char *buf, size_t buf_len,
-		       uint32_t row)
+                       uint32_t row)
 {
   int i;
 
-  if (bmp->dib.width > buf_len) return;
+  if (bmp->dib.width > buf_len)
+    return;
 
   for (i = 0; i < bmp->dib.width; ++i)
     buf[i] = find_closest_color(bmp, bmp->pixels[i][row]);
@@ -602,11 +627,12 @@ bmp_get_row_data_for_8(bmpfile_t *bmp, unsigned char *buf, size_t buf_len,
 
 static void
 bmp_get_row_data_for_24(bmpfile_t *bmp, unsigned char *buf, size_t buf_len,
-			uint32_t row)
+                        uint32_t row)
 {
   int i;
 
-  if (bmp->dib.width * 3 > buf_len) return;
+  if (bmp->dib.width * 3 > buf_len)
+    return;
 
   for (i = 0; i < bmp->dib.width; ++i)
     memcpy(buf + 3 * i, (uint8_t *)&(bmp->pixels[i][row]), 3);
@@ -614,18 +640,18 @@ bmp_get_row_data_for_24(bmpfile_t *bmp, unsigned char *buf, size_t buf_len,
 
 static void
 bmp_get_row_data_for_32(bmpfile_t *bmp, unsigned char *buf, size_t buf_len,
-			uint32_t row)
+                        uint32_t row)
 {
   int i;
 
-  if (bmp->dib.width * 4 > buf_len) return;
+  if (bmp->dib.width * 4 > buf_len)
+    return;
 
   for (i = 0; i < bmp->dib.width; ++i)
     memcpy(buf + 4 * i, (uint8_t *)&(bmp->pixels[i][row]), 4);
 }
 
-bool
-bmp_save(bmpfile_t *bmp, const char *filename)
+bool bmp_save(bmpfile_t *bmp, const char *filename)
 {
   FILE *fp;
   int row;
@@ -640,30 +666,35 @@ bmp_save(bmpfile_t *bmp, const char *filename)
   bmp_write_dib(bmp, fp);
   bmp_write_palette(bmp, fp);
 
-  if (bmp->dib.depth == 16) {
+  if (bmp->dib.depth == 16)
+  {
     uint32_t data_bytes = bmp->dib.width * 2;
     uint32_t padding_bytes = 4 - data_bytes % 4;
 
-    for (row = bmp->dib.height - 1; row >= 0; --row) {
+    for (row = bmp->dib.height - 1; row >= 0; --row)
+    {
       int i;
       unsigned char zero_byte = 0;
       uint32_t write_number = 0;
 
-      for (i = 0; write_number < data_bytes; ++i, write_number += 2) {
-	uint16_t red = (uint16_t)(bmp->pixels[i][row].red / 8);
-	uint16_t green = (uint16_t)(bmp->pixels[i][row].green / 4);
-	uint16_t blue = (uint16_t)(bmp->pixels[i][row].blue / 8);
-	uint16_t value = (red << 11) + (green << 5) + blue;
+      for (i = 0; write_number < data_bytes; ++i, write_number += 2)
+      {
+        uint16_t red = (uint16_t)(bmp->pixels[i][row].red / 8);
+        uint16_t green = (uint16_t)(bmp->pixels[i][row].green / 4);
+        uint16_t blue = (uint16_t)(bmp->pixels[i][row].blue / 8);
+        uint16_t value = (red << 11) + (green << 5) + blue;
 
-	if (_is_big_endian()) value = UINT16_SWAP_LE_BE_CONSTANT(value);
-	fwrite(&value, sizeof(uint16_t), 1, fp);
+        if (_is_big_endian())
+          value = UINT16_SWAP_LE_BE_CONSTANT(value);
+        fwrite(&value, sizeof(uint16_t), 1, fp);
       }
 
       for (write_number = 0; write_number < padding_bytes; ++write_number)
-	fwrite(&zero_byte, 1, 1, fp);
+        fwrite(&zero_byte, 1, 1, fp);
     }
   }
-  else {
+  else
+  {
     double bytes_per_pixel;
     int bytes_per_line;
 
@@ -674,29 +705,31 @@ bmp_save(bmpfile_t *bmp, const char *filename)
 
     buf = malloc(bytes_per_line);
 
-    for (row = bmp->dib.height - 1; row >= 0; --row) {
+    for (row = bmp->dib.height - 1; row >= 0; --row)
+    {
       memset(buf, 0, bytes_per_line);
 
-      switch (bmp->dib.depth) {
+      switch (bmp->dib.depth)
+      {
       case 1:
-	bmp_get_row_data_for_1(bmp, buf, bytes_per_line, row);
-	break;
+        bmp_get_row_data_for_1(bmp, buf, bytes_per_line, row);
+        break;
 
       case 4:
-	bmp_get_row_data_for_4(bmp, buf, bytes_per_line, row);
-	break;
+        bmp_get_row_data_for_4(bmp, buf, bytes_per_line, row);
+        break;
 
       case 8:
-	bmp_get_row_data_for_8(bmp, buf, bytes_per_line, row);
-	break;
+        bmp_get_row_data_for_8(bmp, buf, bytes_per_line, row);
+        break;
 
       case 24:
-	bmp_get_row_data_for_24(bmp, buf, bytes_per_line, row);
-	break;
+        bmp_get_row_data_for_24(bmp, buf, bytes_per_line, row);
+        break;
 
       case 32:
-	bmp_get_row_data_for_32(bmp, buf, bytes_per_line, row);
-	break;
+        bmp_get_row_data_for_32(bmp, buf, bytes_per_line, row);
+        break;
       }
 
       fwrite(buf, bytes_per_line, 1, fp);

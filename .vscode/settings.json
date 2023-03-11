@@ -56,7 +56,8 @@
         "ratio": "cpp",
         "regex": "cpp",
         "shared_mutex": "cpp",
-        "variant": "cpp"
+        "variant": "cpp",
+        "bmp.h": "c"
     },
     "cmake.sourceDirectory": "${workspaceFolder}/CMakeBase/01-CMake"
 }

@@ -2,11 +2,10 @@
 #include <assert.h>
 #include "bmp.h"
 
-#define WIDTH   1024L
-#define HEIGHT  1024L
+#define WIDTH 1024L
+#define HEIGHT 1024L
 
-int
-main(void)
+int main(void)
 {
     FILE *f;
     long x, y;
@@ -19,8 +18,10 @@ main(void)
 
     bmp_init(bmp, WIDTH, HEIGHT);
 
-    for (y = 0; y < HEIGHT; y++) {
-        for (x = 0; x < WIDTH; x++) {
+    for (y = 0; y < HEIGHT; y++)
+    {
+        for (x = 0; x < WIDTH; x++)
+        {
             float r = y / (float)HEIGHT;
             float g = x / (float)WIDTH;
             float b = 1.0f;
@@ -28,8 +29,10 @@ main(void)
         }
     }
 
-    for (y = 0; y < HEIGHT; y++) {
-        for (x = 0; x < WIDTH; x++) {
+    for (y = 0; y < HEIGHT; y++)
+    {
+        for (x = 0; x < WIDTH; x++)
+        {
             float r = y / (float)HEIGHT;
             float g = x / (float)WIDTH;
             float b = 1.0f;
