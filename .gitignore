@@ -58,3 +58,10 @@ AudioVideoCode/05-rgb-to-bmp-library/install/
 AudioVideoCode/05-rgb-to-bmp-library-cpp/install/
 AudioVideoCode/05-rgb-to-bmp-library/resource/
 AudioVideoCode/05-rgb-to-bmp-library-cpp/resource/
+AudioVideoCode/06-drawing-time/build/
+AudioVideoCode/06-drawing-time/install/
+AudioVideoCode/06-drawing-time-cpp/build/
+AudioVideoCode/06-drawing-time/res_bmp/
+AudioVideoCode/06-drawing-time/resource/
+AudioVideoCode/06-drawing-time-cpp/install/
+AudioVideoCode/06-drawing-time-cpp/resource/
