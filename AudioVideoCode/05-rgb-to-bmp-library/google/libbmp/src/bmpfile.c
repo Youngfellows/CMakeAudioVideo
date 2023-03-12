@@ -333,7 +333,6 @@ bmp_create(uint32_t width, uint32_t height, uint32_t depth)
     result->dib.compress_type = BI_BITFIELDS;
   else
     result->dib.compress_type = BI_RGB;
-    //
 
   bmp_malloc_pixels(result);
   bmp_malloc_colors(result);
