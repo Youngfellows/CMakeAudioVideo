@@ -43,6 +43,92 @@ Rainbow::~Rainbow()
 }
 
 /**
+ * @brief 是否是大端字节序
+ *
+ * @return true
+ * @return false
+ */
+bool Rainbow::isBigEndian(void)
+{
+    uint16_t value = 0x0001;
+    return (*(uint8_t *)&value) != 0x01;
+}
+
+void Rainbow::bmpHeaderSwapEndianess(BitmapFileHeader *bmpHeader)
+{
+    bmpHeader->bfType = UINT32_SWAP_LE_BE_CONSTANT(bmpHeader->bfType);
+    bmpHeader->bfSize = UINT32_SWAP_LE_BE_CONSTANT(bmpHeader->bfSize);
+    bmpHeader->bfReserved1 = UINT16_SWAP_LE_BE_CONSTANT(bmpHeader->bfReserved1);
+    bmpHeader->bfReserved2 = UINT16_SWAP_LE_BE_CONSTANT(bmpHeader->bfReserved2);
+    bmpHeader->bfOffBits = UINT32_SWAP_LE_BE_CONSTANT(bmpHeader->bfOffBits);
+}
+
+void Rainbow::bmpInfoHeaderSwapEndianess(BitmapInfoHeader *bmpInfoHeader)
+{
+    /**
+     *
+        dib->header_sz = UINT32_SWAP_LE_BE_CONSTANT(dib->header_sz);
+        dib->width = UINT32_SWAP_LE_BE_CONSTANT(dib->width);
+        dib->height = UINT32_SWAP_LE_BE_CONSTANT(dib->height);
+        dib->nplanes = UINT16_SWAP_LE_BE_CONSTANT(dib->nplanes);
+        dib->depth = UINT16_SWAP_LE_BE_CONSTANT(dib->depth);
+        dib->compress_type = UINT32_SWAP_LE_BE_CONSTANT(dib->compress_type);
+        dib->bmp_bytesz = UINT32_SWAP_LE_BE_CONSTANT(dib->bmp_bytesz);
+        dib->hres = UINT32_SWAP_LE_BE_CONSTANT(dib->hres);
+        dib->vres = UINT32_SWAP_LE_BE_CONSTANT(dib->vres);
+        dib->ncolors = UINT32_SWAP_LE_BE_CONSTANT(dib->ncolors);
+        dib->nimpcolors = UINT32_SWAP_LE_BE_CONSTANT(dib->nimpcolors);
+     */
+}
+
+/**
+ * @brief 写入bmp位图文件头
+ *
+ * @param bmpHeader
+ * @param fp
+ */
+void Rainbow::writeBmpFileHeader(BitmapFileHeader *bmpHeader, FILE *fp)
+{
+    std::cout << "Rainbow::writeBmpFileHeader():: isBigEndian:" << isBigEndian() << std::endl;
+    if (isBigEndian())
+    {
+        bmpHeaderSwapEndianess(bmpHeader);
+    }
+
+    fwrite(&(bmpHeader->bfType), sizeof(bmpHeader->bfType), 1, fp);
+    fwrite(&(bmpHeader->bfSize), sizeof(bmpHeader->bfSize), 1, fp);
+    fwrite(&(bmpHeader->bfReserved1), sizeof(bmpHeader->bfReserved1), 1, fp);
+    fwrite(&(bmpHeader->bfReserved2), sizeof(bmpHeader->bfReserved2), 1, fp);
+    fwrite(&(bmpHeader->bfOffBits), sizeof(bmpHeader->bfOffBits), 1, fp);
+}
+
+/**
+ * @brief 写入bmp位图信息头
+ *
+ * @param bmpInfoHeader
+ * @param fp
+ */
+void Rainbow::writeBmpInfoHeader(BitmapInfoHeader *bmpInfoHeader, FILE *fp)
+{
+    std::cout << "Rainbow::writeBmpInfoHeader():: " << std::endl;
+
+    if (isBigEndian())
+        bmpInfoHeaderSwapEndianess(bmpInfoHeader);
+
+    fwrite(&(bmpInfoHeader->biSize), sizeof(uint32_t), 1, fp);
+    fwrite(&(bmpInfoHeader->biWidth), sizeof(uint32_t), 1, fp);
+    fwrite(&(bmpInfoHeader->biHeight), sizeof(uint32_t), 1, fp);
+    fwrite(&(bmpInfoHeader->biPlanes), sizeof(uint16_t), 1, fp);
+    fwrite(&(bmpInfoHeader->biBitCount), sizeof(uint16_t), 1, fp);
+    fwrite(&(bmpInfoHeader->biSizeImage), sizeof(uint32_t), 1, fp);
+    fwrite(&(bmpInfoHeader->biCompression), sizeof(uint32_t), 1, fp);
+    fwrite(&(bmpInfoHeader->biXPelsPerMeter), sizeof(uint32_t), 1, fp);
+    fwrite(&(bmpInfoHeader->biYPelsPerMeter), sizeof(uint32_t), 1, fp);
+    fwrite(&(bmpInfoHeader->biClrUsed), sizeof(uint32_t), 1, fp);
+    fwrite(&(bmpInfoHeader->biClrImportant), sizeof(uint32_t), 1, fp);
+}
+
+/**
  * @brief 写入彩虹数据到指定文件
  *
  * @param outputFile 文件名
@@ -54,6 +140,7 @@ Rainbow::~Rainbow()
 bool Rainbow::writeRainbow(const char *outputFile, int width, int height)
 {
     std::cout << "Rainbow::writeRainbow():: outputFile:" << outputFile << std::endl;
+    std::cout << "Rainbow::writeRainbow():: isBigEndian:" << isBigEndian() << std::endl;
     // 打开文件
     FILE *bitmapFile = fopen(outputFile, "wb+");
     if (bitmapFile == nullptr) //! rgbFile
@@ -89,8 +176,10 @@ bool Rainbow::writeRainbow(const char *outputFile, int width, int height)
 
     // 向文件中写入,图片文件信息头,位图信息头
     // fwrite(&bfType, sizeof(bfType), 1, bitmapFile);
-    fwrite(&fileHeader, 1, sizeof(fileHeader), bitmapFile);
-    fwrite(&infoHeader, 1, sizeof(infoHeader), bitmapFile);
+    // fwrite(&fileHeader, 1, sizeof(fileHeader), bitmapFile);
+    // fwrite(&infoHeader, 1, sizeof(infoHeader), bitmapFile);
+    writeBmpFileHeader(&fileHeader, bitmapFile);
+    writeBmpInfoHeader(&infoHeader, bitmapFile);
 
     // 向文件中写入颜色数据
     uint32_t currentColor = rainbowColors[0]; // 当前颜色，默认是红

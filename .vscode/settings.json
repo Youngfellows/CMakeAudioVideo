@@ -60,5 +60,6 @@
         "bmp.h": "c",
         "stdio.h": "c"
     },
-    "cmake.sourceDirectory": "${workspaceFolder}/CMakeBase/01-CMake"
+    "cmake.sourceDirectory": "${workspaceFolder}/CMakeBase/01-CMake",
+    "C_Cpp.errorSquiggles": "disabled"
 }
