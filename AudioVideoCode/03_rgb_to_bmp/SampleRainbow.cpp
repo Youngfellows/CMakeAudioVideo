@@ -6,8 +6,8 @@ int main(int arg, char *argv[])
     std::cout << "main:: BMP图片:生成彩虹图片" << std::endl;
     const char *rainbowFilePath = "./resource/rainbow-700x700.bmp";   // 要保存的彩虹文件路径
     const char *rainbowFilePath2 = "./resource/rainbow2-700x700.bmp"; // 要保存的彩虹文件路径
-    uint32_t width = 11;                                              // 图片宽
-    uint32_t height = 11;                                             // 图片高
+    uint32_t width = 711;                                             // 图片宽
+    uint32_t height = 711;                                            // 图片高
     IBitmap *bitmap = new Bitmap();                                   // 创建BMP对象,动态申请内存
     bool isCreate = bitmap->bmpCreate(width, height, 24);             // 初始化BMP图片信息
     if (!isCreate)
@@ -78,7 +78,7 @@ int main(int arg, char *argv[])
     }
 
     // 打印图片像素信息
-    bitmap->displayPixels();
+    // bitmap->displayPixels();
 
     // 3. 保存bmp图片
     bitmap->save(rainbowFilePath);

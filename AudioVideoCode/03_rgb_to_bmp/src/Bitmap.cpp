@@ -22,40 +22,40 @@ bool Bitmap::bmpCreate(uint32_t width, uint32_t height, uint32_t depth)
         return false;
     }
 
-    // 注意4字节对齐
-    // 设置bmp图片,文件信息头,一共14个字节
+    // 1. 设置bmp图片,文件信息头,一共14个字节
     bmpFileHeader->bfType = 0x4d42; // 文件类型BM
     bmpFileHeader->bfReserved1 = 0;
     bmpFileHeader->bfReserved2 = 0;
-    bmpFileHeader->bfSize = 14 + 40 + width * height * (depth / 8); // 整个 BMP 文件的大小
-    bmpFileHeader->bfOffBits = 0x36;                                // 偏移数54位
+    // bmpFileHeader->bfSize = 14 + 40 + width * height * (depth / 8); // 整个 BMP 文件的大小
+    bmpFileHeader->bfOffBits = 0x36; // 偏移数54位
 
-    // 设置bmp图片,位图信息头,一共40个字节
-    bmpInfoHeader->biSize = sizeof(BitmapFileHeader);
+    // 4字节对齐
+    double bytesPerPixel = (depth * 1.0 / 8.0);
+    unsigned int bytesPerLine = (unsigned int)ceil(bytesPerPixel * width);
+    if ((bytesPerLine % 4) != 0)
+    {
+        bytesPerLine += (4 - bytesPerLine % 4);
+    }
+    bmpFileHeader->bfSize = 14 + 40 + bytesPerLine * height;
+    std::cout << "Bitmap::bmpCreate():: bytesPerPixel:" << bytesPerPixel << ",bytesPerLine:" << bytesPerLine << std::endl;
+
+    // 2.设置bmp图片,位图信息头,一共40个字节
+    bmpInfoHeader->biSize = sizeof(BitmapInfoHeader);
     bmpInfoHeader->biWidth = width;
-    // bmpInfoHeader->biHeight = height;
-    bmpInfoHeader->biHeight = height;
+    bmpInfoHeader->biHeight = -height;
     bmpInfoHeader->biPlanes = 1;
-    bmpInfoHeader->biBitCount = 24;
+    bmpInfoHeader->biBitCount = depth;
     bmpInfoHeader->biSizeImage = 0;
     bmpInfoHeader->biCompression = 0;
     bmpInfoHeader->biXPelsPerMeter = 5000;
     bmpInfoHeader->biYPelsPerMeter = 5000;
     bmpInfoHeader->biClrUsed = 0;
     bmpInfoHeader->biClrImportant = 0;
+    std::cout << "Bitmap::bmpCreate():: " << sizeof(BitmapFileHeader) << "," << sizeof(BitmapInfoHeader) << "," << bmpFileHeader->bfSize << std::endl;
 
     // 申请保存图片像素的内存
-    bmpMallocPixels();
-
-    // 4字节对齐
-    // bytes_per_pixel = (result->dib.depth * 1.0) / 8.0;
-    // bytes_per_line = (int)ceil(bytes_per_pixel * result->dib.width);
-    // if (bytes_per_line % 4 != 0)
-    //     bytes_per_line += 4 - bytes_per_line % 4;
-    // result->dib.bmp_bytesz = bytes_per_line * result->dib.height;
-
-    std::cout << "Bitmap::bmpCreate():: " << sizeof(BitmapFileHeader) << "," << sizeof(BitmapInfoHeader) << "," << bmpFileHeader->bfSize << std::endl;
-    return true;
+    bool isMalloc = bmpMallocPixels();
+    return isMalloc;
 }
 /**
  * @brief 申请图片像素信息内存
@@ -66,13 +66,13 @@ bool Bitmap::bmpCreate(uint32_t width, uint32_t height, uint32_t depth)
 bool Bitmap::bmpMallocPixels()
 {
     std::cout << "Bitmap::bmpMallocPixels():: " << std::endl;
-    this->pixels = (RGBPixel **)malloc(sizeof(RGBPixel *) * (bmpInfoHeader->biHeight)); // 申请行(高)数内存
+    this->pixels = (RGBPixel **)malloc(sizeof(RGBPixel *) * (abs(bmpInfoHeader->biHeight))); // 申请行(高)数内存
     if (pixels == NULL)
     {
         return false;
     }
     bool isMallocError = false;
-    for (int i = 0; i < bmpInfoHeader->biHeight; i++)
+    for (int i = 0; i < abs(bmpInfoHeader->biHeight); i++)
     {
         // pixels[i] = (RGBPixel *)malloc(sizeof(RGBPixel) * (bmpInfoHeader->biWidth));  // 申请每一行的宽(列)的内存
         *(pixels + i) = (RGBPixel *)malloc(sizeof(RGBPixel) * (bmpInfoHeader->biWidth)); // 申请每一行的宽(列)的内存
@@ -109,7 +109,7 @@ bool Bitmap::bmpMallocPixels()
 void Bitmap::displayPixels()
 {
     std::cout << "Bitmap::displayPixels()::" << std::endl;
-    for (int i = 0; i < bmpInfoHeader->biHeight; i++)
+    for (int i = 0; i < abs(bmpInfoHeader->biHeight); i++)
     {
         for (int j = 0; j < bmpInfoHeader->biWidth; j++)
         {
@@ -241,6 +241,31 @@ void Bitmap::writeBmpInfoHeader(BitmapInfoHeader *bmpInfoHeader, FILE *fp)
 }
 
 /**
+ * @brief 向文件写入bmp图片像素信息
+ *
+ * @param pixels 像素信息的二级指针
+ * @param fp 文件
+ */
+void Bitmap::writeBmpPixels(RGBPixel **bmpPixels, FILE *fp)
+{
+    std::cout << "Bitmap::writeBmpPixels()::" << std::endl;
+    for (int i = 0; i < abs(bmpInfoHeader->biHeight); i++)
+    {
+        for (int j = 0; j < bmpInfoHeader->biWidth; j++)
+        {
+            unsigned int r = (*(*(bmpPixels + i) + j)).red;
+            unsigned int g = (*(*(bmpPixels + i) + j)).green;
+            unsigned int b = (*(*(bmpPixels + i) + j)).bulue;
+            // std::cout << "(" << r << "," << g << "," << b << ")" << " ";
+            fwrite(&(b), sizeof(unsigned char), 1, fp); // 把每个像素的bulue颜色信息写入文件
+            fwrite(&(g), sizeof(unsigned char), 1, fp); // 把每个像素的green颜色信息写入文件
+            fwrite(&(r), sizeof(unsigned char), 1, fp); // 把每个像素的red颜色信息写入文件
+        }
+        // std::cout << std::endl;
+    }
+}
+
+/**
  * @brief 写入彩虹数据到指定文件
  *
  * @param outputFile 文件名
@@ -263,6 +288,7 @@ bool Bitmap::save(const char *outputFile)
     writeBmpInfoHeader(bmpInfoHeader, bitmapFile);
 
     // 2. 向文件中写入颜色数据
+    writeBmpPixels(pixels, bitmapFile);
 
     // 关闭文件
     fclose(bitmapFile);

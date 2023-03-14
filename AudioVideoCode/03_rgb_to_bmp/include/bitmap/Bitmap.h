@@ -12,6 +12,7 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <unistd.h>
+#include <cmath>
 
 using namespace std;
 
@@ -36,8 +37,9 @@ public:
     virtual void displayPixels() override; // 打印图片像素颜色信息
 
 private:
-    void writeBmpFileHeader(BitmapFileHeader *bmpHeader, FILE *fp);
-    void writeBmpInfoHeader(BitmapInfoHeader *bmpInfoHeader, FILE *fp);
+    void writeBmpFileHeader(BitmapFileHeader *bmpHeader, FILE *fp);     // 向文件写入bmp位图文件头
+    void writeBmpInfoHeader(BitmapInfoHeader *bmpInfoHeader, FILE *fp); // 向文件写入bmp位图信息头
+    void writeBmpPixels(RGBPixel **pixels, FILE *fp);                   // 向文件写入bmp图片像素信息
     void bmpHeaderSwapEndianess(BitmapFileHeader *bmpHeader);
     void bmpInfoHeaderSwapEndianess(BitmapInfoHeader *bmpInfoHeader);
     bool bmpMallocPixels(); // 申请图片像素信息内存
