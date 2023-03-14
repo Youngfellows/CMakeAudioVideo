@@ -1,14 +1,41 @@
-#include "../include/rainbow/Rainbow.h"
+#include "../include/bitmap/Bitmap.h"
 
-Rainbow::Rainbow()
+Bitmap::Bitmap()
 {
-    std::cout << "Rainbow::Rainbow()构造函数" << std::endl;
+    std::cout << "Bitmap::Bitmap()构造函数" << std::endl;
     this->initRainbowColors();
 }
 
-void Rainbow::initRainbowColors()
+/**
+ * @brief 创建BMP图片信息
+ *
+ * @param width
+ * @param height
+ * @param depth
+ */
+void Bitmap::bmpCreate(uint32_t width, uint32_t height, uint32_t depth)
 {
-    std::cout << "Rainbow::initRainbowColors():: ..." << std::endl;
+    std::cout << "Bitmap::bmpCreate():: " << std::endl;
+}
+
+/**
+ * @brief 为每个位置设置像素信息
+ *
+ * @param x x位置
+ * @param y y位置
+ * @param pixel 像素信息
+ * @return true
+ * @return false
+ */
+bool Bitmap::bmpSetPixel(uint32_t x, uint32_t y, RGBPixel pixel)
+{
+    std::cout << "Bitmap::bmpSetPixel():: " << std::endl;
+    return true;
+}
+
+void Bitmap::initRainbowColors()
+{
+    std::cout << "Bitmap::initRainbowColors():: ..." << std::endl;
     int size = sizeof(rainbowColors) / sizeof(uint32_t);
     std::cout << "size:" << size << std::endl;
     // 彩虹的七种颜色
@@ -37,9 +64,9 @@ void Rainbow::initRainbowColors()
     }
 }
 
-Rainbow::~Rainbow()
+Bitmap::~Bitmap()
 {
-    std::cout << "Rainbow::~Rainbow()析构函数" << std::endl;
+    std::cout << "Bitmap::~Bitmap()析构函数" << std::endl;
 }
 
 /**
@@ -48,13 +75,13 @@ Rainbow::~Rainbow()
  * @return true
  * @return false
  */
-bool Rainbow::isBigEndian(void)
+bool Bitmap::isBigEndian(void)
 {
     uint16_t value = 0x0001;
     return (*(uint8_t *)&value) != 0x01;
 }
 
-void Rainbow::bmpHeaderSwapEndianess(BitmapFileHeader *bmpHeader)
+void Bitmap::bmpHeaderSwapEndianess(BitmapFileHeader *bmpHeader)
 {
     bmpHeader->bfType = UINT32_SWAP_LE_BE_CONSTANT(bmpHeader->bfType);
     bmpHeader->bfSize = UINT32_SWAP_LE_BE_CONSTANT(bmpHeader->bfSize);
@@ -63,7 +90,7 @@ void Rainbow::bmpHeaderSwapEndianess(BitmapFileHeader *bmpHeader)
     bmpHeader->bfOffBits = UINT32_SWAP_LE_BE_CONSTANT(bmpHeader->bfOffBits);
 }
 
-void Rainbow::bmpInfoHeaderSwapEndianess(BitmapInfoHeader *bmpInfoHeader)
+void Bitmap::bmpInfoHeaderSwapEndianess(BitmapInfoHeader *bmpInfoHeader)
 {
     /**
      *
@@ -87,9 +114,9 @@ void Rainbow::bmpInfoHeaderSwapEndianess(BitmapInfoHeader *bmpInfoHeader)
  * @param bmpHeader
  * @param fp
  */
-void Rainbow::writeBmpFileHeader(BitmapFileHeader *bmpHeader, FILE *fp)
+void Bitmap::writeBmpFileHeader(BitmapFileHeader *bmpHeader, FILE *fp)
 {
-    std::cout << "Rainbow::writeBmpFileHeader():: isBigEndian:" << isBigEndian() << std::endl;
+    std::cout << "Bitmap::writeBmpFileHeader():: isBigEndian:" << isBigEndian() << std::endl;
     if (isBigEndian())
     {
         bmpHeaderSwapEndianess(bmpHeader);
@@ -108,9 +135,9 @@ void Rainbow::writeBmpFileHeader(BitmapFileHeader *bmpHeader, FILE *fp)
  * @param bmpInfoHeader
  * @param fp
  */
-void Rainbow::writeBmpInfoHeader(BitmapInfoHeader *bmpInfoHeader, FILE *fp)
+void Bitmap::writeBmpInfoHeader(BitmapInfoHeader *bmpInfoHeader, FILE *fp)
 {
-    std::cout << "Rainbow::writeBmpInfoHeader():: " << std::endl;
+    std::cout << "Bitmap::writeBmpInfoHeader():: " << std::endl;
 
     if (isBigEndian())
         bmpInfoHeaderSwapEndianess(bmpInfoHeader);
@@ -137,10 +164,10 @@ void Rainbow::writeBmpInfoHeader(BitmapInfoHeader *bmpInfoHeader, FILE *fp)
  * @return true 写入数据成功
  * @return false 写入数据成功
  */
-bool Rainbow::writeRainbow(const char *outputFile, int width, int height)
+bool Bitmap::save(const char *outputFile, int width, int height)
 {
-    std::cout << "Rainbow::writeRainbow():: outputFile:" << outputFile << std::endl;
-    std::cout << "Rainbow::writeRainbow():: isBigEndian:" << isBigEndian() << std::endl;
+    std::cout << "Bitmap::save():: outputFile:" << outputFile << std::endl;
+    std::cout << "Bitmap::save():: isBigEndian:" << isBigEndian() << std::endl;
     // 打开文件
     FILE *bitmapFile = fopen(outputFile, "wb+");
     if (bitmapFile == nullptr) //! rgbFile
@@ -260,9 +287,9 @@ bool Rainbow::writeRainbow(const char *outputFile, int width, int height)
  * @return true 写入数据成功
  * @return false 写入数据成功
  */
-bool Rainbow::writeRainbow2(const char *outputFile, int width, int height)
+bool Bitmap::save2(const char *outputFile, int width, int height)
 {
-    std::cout << "Rainbow::writeRainbow2():: outputFile:" << outputFile << std::endl;
+    std::cout << "Bitmap::save2():: outputFile:" << outputFile << std::endl;
     int fd;                                                  // 文件描述
     fd = open(outputFile, O_RDWR | O_CREAT | O_TRUNC, 0644); // 打开文件,不存在,创建文件,如果已经存在,置空
     if (fd == -1)
@@ -366,4 +393,9 @@ bool Rainbow::writeRainbow2(const char *outputFile, int width, int height)
     // 关闭文件
     close(fd);
     return true;
+}
+
+void Bitmap::bmpDestroy()
+{
+    std::cout << "Bitmap::bmpDestroy()" << std::endl;
 }
