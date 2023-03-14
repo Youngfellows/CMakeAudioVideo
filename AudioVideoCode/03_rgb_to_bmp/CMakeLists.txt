@@ -17,6 +17,7 @@ add_executable(${PROJECT_NAME} ${SAMPLE_SRC_LIST} ${BMP_SRC_LIST})
 # 设置搜索头文件路径
 target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include/bitmap)
 target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include/bmpstruct)
+target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include/rainbow)
 
 # 安装生成目标到指定目录
 message(STATUS "install,${CMAKE_INSTALL_PREFIX}")

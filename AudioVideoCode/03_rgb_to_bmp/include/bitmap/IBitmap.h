@@ -10,7 +10,6 @@
  */
 class IBitmap
 {
-private:
 public:
     virtual ~IBitmap() = default;
 
@@ -21,7 +20,7 @@ public:
      * @param height 图片高
      * @param depth 每个像素的位数，默认是24位，占3个字节
      */
-    virtual void bmpCreate(uint32_t width, uint32_t height, uint32_t depth) = 0;
+    virtual bool bmpCreate(uint32_t width, uint32_t height, uint32_t depth) = 0;
 
     /**
      * @brief 为每个位置设置像素信息
@@ -38,23 +37,10 @@ public:
      * @brief 写入彩虹数据:纯虚函数,子类必须实现
      *
      * @param outputFile 文件名
-     * @param width 宽
-     * @param height 高
      * @return true 写入数据成功
      * @return false 写入数据成功
      */
-    virtual bool save(const char *outputFile, int width, int height) = 0;
-
-    /**
-     * @brief 写入彩虹数据:纯虚函数,子类必须实现
-     *
-     * @param outputFile 文件名
-     * @param width 宽
-     * @param height 高
-     * @return true 写入数据成功
-     * @return false 写入数据成功
-     */
-    virtual bool save2(const char *outputFile, int width, int height) = 0;
+    virtual bool save(const char *outputFile) = 0;
 
     /**
      * @brief 写入bmp位图文件头
@@ -85,6 +71,12 @@ public:
      * @param bmpInfoHeader
      */
     virtual void bmpInfoHeaderSwapEndianess(BitmapInfoHeader *bmpInfoHeader) = 0;
+
+    /**
+     * @brief 打印图片像素颜色信息
+     *
+     */
+    virtual void displayPixels() = 0;
 
     /**
      * @brief 释放资源
