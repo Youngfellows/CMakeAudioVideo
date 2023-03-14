@@ -124,15 +124,6 @@ void Bitmap::displayPixels()
 }
 
 /**
- * @brief 释放图片像素信息内存
- *
- */
-void Bitmap::bmpFreePixels()
-{
-    std::cout << "Bitmap::bmpFreePixels():: " << std::endl;
-}
-
-/**
  * @brief 为每个位置设置像素信息
  *
  * @param x x位置
@@ -165,6 +156,23 @@ bool Bitmap::bmpSetPixel(unsigned int x, unsigned int y, RGBPixel pixel)
 Bitmap::~Bitmap()
 {
     std::cout << "Bitmap::~Bitmap()析构函数" << std::endl;
+    bmpDestroy();
+}
+
+/**
+ * @brief 释放图片像素信息内存
+ *
+ */
+void Bitmap::bmpFreePixels()
+{
+    std::cout << "Bitmap::bmpFreePixels():: " << std::endl;
+    for (int i = 0; i < abs(bmpInfoHeader->biWidth); i++)
+    {
+        // free(pixels[i]);     // 释放每一行指针
+        free(*(pixels + i)); // 释放每一行指针
+    }
+    free(pixels); // 释放二维数组指针
+    pixels = NULL;
 }
 
 /**
@@ -302,4 +310,15 @@ bool Bitmap::save(const char *outputFile)
 void Bitmap::bmpDestroy()
 {
     std::cout << "Bitmap::bmpDestroy()" << std::endl;
+    bmpFreePixels();
+    if (bmpFileHeader != NULL)
+    {
+        delete bmpFileHeader;
+    }
+    bmpFileHeader = NULL;
+    if (bmpInfoHeader != NULL)
+    {
+        delete bmpInfoHeader;
+    }
+    bmpInfoHeader = NULL;
 }

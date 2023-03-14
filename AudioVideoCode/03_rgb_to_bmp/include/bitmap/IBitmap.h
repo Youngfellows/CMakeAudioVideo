@@ -47,12 +47,6 @@ public:
      *
      */
     virtual void displayPixels() = 0;
-
-    /**
-     * @brief 释放资源
-     *
-     */
-    virtual void bmpDestroy() = 0;
 };
 
 #endif
