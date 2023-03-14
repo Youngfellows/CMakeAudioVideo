@@ -98,7 +98,7 @@ bool Bitmap::bmpMallocPixels()
         return false;
     }
     // 打印图片像素初始颜色信息
-    //displayPixels();
+    // displayPixels();
     return true;
 }
 
@@ -113,9 +113,9 @@ void Bitmap::displayPixels()
     {
         for (int j = 0; j < bmpInfoHeader->biWidth; j++)
         {
-            uint32_t r = (*(*(pixels + i) + j)).red;
-            uint32_t g = (*(*(pixels + i) + j)).green;
-            uint32_t b = (*(*(pixels + i) + j)).bulue;
+            unsigned int r = (*(*(pixels + i) + j)).red;
+            unsigned int g = (*(*(pixels + i) + j)).green;
+            unsigned int b = (*(*(pixels + i) + j)).bulue;
             std::cout << "(" << r << "," << g << "," << b << ")"
                       << " ";
         }
@@ -141,7 +141,7 @@ void Bitmap::bmpFreePixels()
  * @return true
  * @return false
  */
-bool Bitmap::bmpSetPixel(uint32_t x, uint32_t y, RGBPixel pixel)
+bool Bitmap::bmpSetPixel(unsigned int x, unsigned int y, RGBPixel pixel)
 {
     // std::cout << "Bitmap::bmpSetPixel():: " << std::endl;
     if ((bmpInfoHeader == NULL) || (pixels == NULL))
@@ -155,9 +155,9 @@ bool Bitmap::bmpSetPixel(uint32_t x, uint32_t y, RGBPixel pixel)
     (*(*(pixels + x) + y)).green = pixel.green;
     (*(*(pixels + x) + y)).bulue = pixel.bulue;
 
-    uint32_t r = (*(*(pixels + x) + y)).red;
-    uint32_t g = (*(*(pixels + x) + y)).green;
-    uint32_t b = (*(*(pixels + x) + y)).bulue;
+    unsigned int r = (*(*(pixels + x) + y)).red;
+    unsigned int g = (*(*(pixels + x) + y)).green;
+    unsigned int b = (*(*(pixels + x) + y)).bulue;
     // std::cout << "Bitmap::bmpSetPixel()::(" << r << "," << g << "," << b << ")" << std::endl;
     return true;
 }

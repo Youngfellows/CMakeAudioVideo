@@ -31,7 +31,7 @@ public:
      * @return true
      * @return false
      */
-    virtual bool bmpSetPixel(uint32_t x, uint32_t y, RGBPixel pixel) = 0;
+    virtual bool bmpSetPixel(unsigned int x, unsigned int y, RGBPixel pixel) = 0;
 
     /**
      * @brief 写入彩虹数据:纯虚函数,子类必须实现
@@ -41,36 +41,6 @@ public:
      * @return false 写入数据成功
      */
     virtual bool save(const char *outputFile) = 0;
-
-    /**
-     * @brief 写入bmp位图文件头
-     *
-     * @param bmpHeader
-     * @param fp
-     */
-    virtual void writeBmpFileHeader(BitmapFileHeader *bmpHeader, FILE *fp) = 0;
-
-    /**
-     * @brief 写入bmp位图信息头
-     *
-     * @param bmpInfoHeader
-     * @param fp
-     */
-    virtual void writeBmpInfoHeader(BitmapInfoHeader *bmpInfoHeader, FILE *fp) = 0;
-
-    /**
-     * @brief 交换bmp位图文件头大端字节序
-     *
-     * @param bmpHeader
-     */
-    virtual void bmpHeaderSwapEndianess(BitmapFileHeader *bmpHeader) = 0;
-
-    /**
-     * @brief 交换bmp位图信息头大端字节序
-     *
-     * @param bmpInfoHeader
-     */
-    virtual void bmpInfoHeaderSwapEndianess(BitmapInfoHeader *bmpInfoHeader) = 0;
 
     /**
      * @brief 打印图片像素颜色信息

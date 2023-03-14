@@ -1,7 +1,7 @@
 #ifndef RAINBOW_H
 #define RAINBOW_H
 
-const uint32_t RAINBOW_COLORS[] = {
+const unsigned int RAINBOW_COLORS[] = {
     0XFF0000, // 红
     0XFFA500, // 橙
     0XFFFF00, // 黄

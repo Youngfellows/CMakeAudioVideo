@@ -9,9 +9,9 @@
  */
 typedef struct
 {
-    uint32_t bulue; // 红
-    uint32_t green; // 绿
-    uint32_t red;   // 蓝
+    unsigned int bulue; // 红
+    unsigned int green; // 绿
+    unsigned int red;   // 蓝
 } RGBPixel;
 
 #endif
