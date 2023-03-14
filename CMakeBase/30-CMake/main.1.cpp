@@ -1,1 +1,0 @@
-/mnt/d/mnt/d/TempCPPCode2023/NDK-CMake/CMakeAudioVideo/CMakeBase/30-CMake/main.cpp
