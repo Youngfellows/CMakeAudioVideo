@@ -66,3 +66,6 @@ AudioVideoCode/06-drawing-time/resource/
 AudioVideoCode/06-drawing-time-cpp/install/
 AudioVideoCode/06-drawing-time-cpp/resource/
 AudioVideoCode/08-rgb-to-yuv/res/
+AudioVideoCode/08-rgb-to-yuv/build/
+AudioVideoCode/08-rgb-to-yuv/install/
+AudioVideoCode/08-rgb-to-yuv/resource/

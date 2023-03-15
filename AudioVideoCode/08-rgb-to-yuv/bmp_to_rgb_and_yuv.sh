@@ -38,8 +38,10 @@ cp ${SRC_BMP_FILE_PATH} ${BMP_FILE_PATH}
 # ffmpeg -i ./res/rainbow-700x700.bmp -video_size 711x711 -pix_fmt yuv444p ./res/rainbow-bmp-yuv444p.yuv
 RGB24_FILE_PATH=${RESOURCE_DIR}/rainbow-bmp-rgb24.rgb
 YUV444_FILE_PATH=${RESOURCE_DIR}/rainbow-bmp-yuv444p.yuv
+YUV420_FILE_PATH=${RESOURCE_DIR}/rainbow-bmp-yuv420p.yuv
 ffmpeg -i ${BMP_FILE_PATH} -video_size 711x711 -pix_fmt rgb24 ${RGB24_FILE_PATH}
 ffmpeg -i ${BMP_FILE_PATH} -video_size 711x711 -pix_fmt yuv444p ${YUV444_FILE_PATH}
+ffmpeg -i ${BMP_FILE_PATH} -video_size 711x711 -pix_fmt yuv420p ${YUV420_FILE_PATH}
 
 # 判断cpu架构
 ARCH=`arch`

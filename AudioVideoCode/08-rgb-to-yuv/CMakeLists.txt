@@ -12,6 +12,14 @@ add_executable(08-yuv444-to-rgb24 yuv444-to-rgb24.c)
 add_executable(08-yuv444-to-yuv420 yuv444-to-yuv420.c)
 add_executable(08-yuv420-to-yuv444 yuv420-to-yuv444.c)
 
+# 添加math依赖库
+find_library(LIB_MATH m) # 使用默认搜索路径
+target_link_libraries(08-rgb24-to-yuv444 ${LIB_MATH})
+target_link_libraries(08-rgb24-to-yuv420 ${LIB_MATH})
+target_link_libraries(08-yuv444-to-rgb24 ${LIB_MATH})
+target_link_libraries(08-yuv444-to-yuv420 ${LIB_MATH})
+target_link_libraries(08-yuv420-to-yuv444 ${LIB_MATH})
+
 # 安装可执行文件到指定目录
 install(TARGETS 08-rgb24-to-yuv444 DESTINATION bin)
 install(TARGETS 08-rgb24-to-yuv420 DESTINATION bin)
