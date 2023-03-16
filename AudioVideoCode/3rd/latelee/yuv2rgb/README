@@ -1,0 +1,9 @@
+yuv2rgb
+=======
+
+Convert yuv(yuv422p, yuv420p, yuv422sp, yuv420sp, etc) to rgb(save as bmp file), or vice versa.VS 2003 project. 
+
+Late Lee
+
+http://www.latelee.org
+latelee@163.com

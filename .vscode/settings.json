@@ -58,7 +58,9 @@
         "shared_mutex": "cpp",
         "variant": "cpp",
         "bmp.h": "c",
-        "stdio.h": "c"
+        "stdio.h": "c",
+        "yuv_rgb.h": "c",
+        "x86intrin.h": "c"
     },
     "cmake.sourceDirectory": "${workspaceFolder}/CMakeBase/01-CMake",
     "C_Cpp.errorSquiggles": "disabled"
