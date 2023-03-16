@@ -69,3 +69,7 @@ AudioVideoCode/08-rgb-to-yuv/res/
 AudioVideoCode/08-rgb-to-yuv/build/
 AudioVideoCode/08-rgb-to-yuv/install/
 AudioVideoCode/08-rgb-to-yuv/resource/
+AudioVideoCode/00_demos/build/
+AudioVideoCode/00_demos/install/
+AudioVideoCode/00_demos_library/build/
+AudioVideoCode/00_demos_library/install/
