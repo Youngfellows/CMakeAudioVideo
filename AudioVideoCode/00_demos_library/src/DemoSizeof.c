@@ -1,8 +1,6 @@
-#include <iostream>
-#include <cstring>
-// #include <string.h>
-
-using namespace std;
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 #define GIF_STAMP "GIFVER" /* First chars in file - GIF stamp.  */
 #define GIF_STAMP_LEN sizeof(GIF_STAMP) - 1
@@ -18,35 +16,6 @@ typedef struct
     unsigned char g;
     unsigned char b;
 } RGBPixel;
-
-/**
- * @brief 学生信息对象
- *
- */
-class Student
-{
-private:
-    std::string name;
-    int age;
-    double salary;
-    char sex;
-
-public:
-    Student(std::string name, int age);
-    ~Student();
-};
-
-Student::Student(std::string name, int age)
-{
-    // std::cout << "Student::Student()构造函数" << std::endl;
-    this->name = name;
-    this->age = age;
-}
-
-Student::~Student()
-{
-    // std::cout << "Student::~Student()析构函数" << std::endl;
-}
 
 int main(int arg, char *argv[])
 {
@@ -70,20 +39,16 @@ int main(int arg, char *argv[])
     // 8
     printf("sizeOf point GifRowType: %lu\n", sizeof(GifRowType)); // 字符指针的长度也是8
 
-    // 8
-    Student *student = new Student("杨过", 18);
-    printf("sizeOf class Student: %lu\n", sizeof(Student)); // 类的长度不固定
-    printf("sizeOf Student: %lu\n", sizeof(student));       // 指针的长度都是8
-
     // 3
-    RGBPixel pixel = RGBPixel{111, 222, 123};
+    RGBPixel pixel;
+    pixel.r = 111;
+    pixel.g = 222;
+    pixel.b = 128;
     printf("sizeOf struct RGBPixel: %lu\n", sizeof(pixel)); // 结构体的长度为各元素长度的和，3
 
     // 8
     RGBPixel *pPixel = &pixel;
     printf("sizeOf point RGBPixel: %lu\n", sizeof(pPixel)); // 指针的长度都是8
 
-    // 释放内存
-    delete student;
     return 0;
 }
