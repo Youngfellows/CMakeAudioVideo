@@ -17,7 +17,7 @@ Rainbow::~Rainbow()
  * @param width 宽
  * @param height 高
  */
-void Rainbow::rgb24Data(RGBPixel ***pixels, uint32_t width, uint32_t height)
+void Rainbow::rgb24Data(RGBPixel **pixels, uint32_t width, uint32_t height)
 {
     std::cout << "Rainbow::" << __FUNCTION__ << "():: " << __LINE__ << std::endl;
     std::cout << "Rainbow::" << __FUNCTION__ << "():: " << __LINE__ << pixels << std::endl;
@@ -66,16 +66,25 @@ void Rainbow::rgb24Data(RGBPixel ***pixels, uint32_t width, uint32_t height)
         // uint8_t bulue = (currentColor & 0x0000FF);
         // unsigned int bulue = (currentColor & RGB24_MASK_BLUE);
         uint32_t bulue = (currentColor & RGB24_MASK_BLUE);
-        std::cout << "Rainbow::" << __FUNCTION__ << "():: " << __LINE__ << " " << i << ",(" << red << "," << green << "," << bulue << "),red sizeof:" << sizeof(red) << std::endl;
+        std::cout << "Rainbow::" << __FUNCTION__ << "():: ssssssss,i:" << i << ",(" << red << "," << green << "," << bulue << "),red sizeof:" << sizeof(red) << "," << (pixels + i) << std::endl;
 
         for (int j = 0; j < width; j++)
         {
-            RGBPixel rgbPixel;
-            rgbPixel.red = red;     // 右移16位之后,有效数据其实只要1个字节8位,可以赋值
-            rgbPixel.green = green; // 右移8位之后,有效数据其实只要1个字节8位,可以赋值
-            rgbPixel.bulue = bulue; // 右移0位之后,有效数据其实只要1个字节8位,可以赋值
-            // bitmap->bmpSetPixel(i, j, rgbPixel); // 设置每一个像素的颜色信息
-            std::cout << "Rainbow::" << __FUNCTION__ << "():: " << __LINE__ << " " << j << ",(" << red << "," << rgbPixel.green << "," << rgbPixel.bulue << "),red sizeof:" << sizeof(rgbPixel.red) << std::endl;
+            RGBPixel rgbPixel(red, green, bulue);
+            // rgbPixel.red = red;     // 右移16位之后,有效数据其实只要1个字节8位,可以赋值
+            // rgbPixel.green = green; // 右移8位之后,有效数据其实只要1个字节8位,可以赋值
+            // rgbPixel.bulue = bulue; // 右移0位之后,有效数据其实只要1个字节8位,可以赋值
+
+            std::cout << "Rainbow::" << __FUNCTION__ << "():: " << __LINE__ << "(" << i << "," << j << ") ele(" << red << "," << rgbPixel.green << "," << rgbPixel.bulue << "),red sizeof:" << sizeof(rgbPixel.red) << std::endl;
+            // pixels[i][j] = rgbPixel;
+            // pixels[i][j].red = 66;
+            // pixels[i][j].green = 255;
+            // pixels[i][j].bulue = 77;
+            //(*(pixels + i) + j)->red = rgbPixel.red; // 为元素赋值
+            *(*(pixels + i) + j) = rgbPixel; // 为每一个像素赋值rgb颜色值
+
+            RGBPixel ele = *(*(pixels + i) + j);
+            std::cout << "Rainbow::" << __FUNCTION__ << "():: " << __LINE__ << "(" << i << "," << j << ") ele(" << ele.red << "," << ele.green << "," << ele.bulue << "),red sizeof:" << sizeof(ele.red) << std::endl;
         }
     }
 }

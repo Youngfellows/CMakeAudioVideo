@@ -15,6 +15,6 @@ private:
 public:
     Rainbow();
     ~Rainbow();
-    virtual void rgb24Data(RGBPixel ***pixels, uint32_t width, uint32_t height) override; // 生成彩虹图片的rgb24数据
+    virtual void rgb24Data(RGBPixel **pixels, uint32_t width, uint32_t height) override; // 生成彩虹图片的rgb24数据
 };
 #endif

@@ -10,13 +10,13 @@
 class RGBPixel
 {
 public:
-    uint8_t red;
-    uint8_t green;
-    uint8_t bulue;
+    uint32_t red;
+    uint32_t green;
+    uint32_t bulue;
 
 public:
     RGBPixel() = default;
-    RGBPixel(uint8_t r, uint8_t g, uint8_t b);
+    RGBPixel(uint32_t r, uint32_t g, uint32_t b);
     ~RGBPixel() = default;
 };
 

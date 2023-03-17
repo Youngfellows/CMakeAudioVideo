@@ -64,9 +64,9 @@ void RGB24toYUV420p::displayPixels()
     {
         for (int j = 0; j < width; j++)
         {
-            uint8_t red = (*(*(pixels + i) + j)).red;
-            uint8_t green = (*(*(pixels + i) + j)).green;
-            uint8_t bulue = (*(*(pixels + i) + j)).bulue;
+            uint32_t red = (*(*(pixels + i) + j)).red;
+            uint32_t green = (*(*(pixels + i) + j)).green;
+            uint32_t bulue = (*(*(pixels + i) + j)).bulue;
             std::cout << "(" << red << "," << green << "," << bulue << ")"
                       << " ";
         }
@@ -144,7 +144,7 @@ void RGB24toYUV420p::genRGB24Data()
 {
     std::cout << "RGB24toYUV420p::" << __FUNCTION__ << "():: " << __LINE__ << std::endl;
     IRainbow *rainbow = new Rainbow(); // 彩虹图片数据生成器
-    rainbow->rgb24Data(&pixels, width, height);
+    rainbow->rgb24Data(pixels, width, height);
     delete rainbow;
 }
 

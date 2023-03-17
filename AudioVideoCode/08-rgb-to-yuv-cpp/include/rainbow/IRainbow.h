@@ -19,7 +19,7 @@ public:
      * @param width
      * @param height
      */
-    virtual void rgb24Data(RGBPixel ***pixels, uint32_t width, uint32_t height) = 0;
+    virtual void rgb24Data(RGBPixel **pixels, uint32_t width, uint32_t height) = 0;
 };
 
 #endif
