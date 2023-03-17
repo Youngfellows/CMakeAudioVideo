@@ -1,4 +1,4 @@
-#include "../../include/rgb2yuv/entity/RGBPixel.h"
+#include "../../include/entity/RGBPixel.h"
 
 RGBPixel::RGBPixel(uint8_t r, uint8_t g, uint8_t b)
 {

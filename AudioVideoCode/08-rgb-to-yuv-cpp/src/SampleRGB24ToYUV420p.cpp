@@ -9,20 +9,21 @@ int main(int arg, char **argv)
     const char *TAG = "SampleRGB24ToYUV420p";
     std::cout << TAG << " " << __FUNCTION__ << " " << __LINE__ << std::endl;
 
-    // const char *rgb24FilePath = "./res/rainbow-bmp-rgb24.rgb";
-    // const char *yuv444pFilePath = "./resource/rainbow-rgb24-to-yuv444p.yuv";
-    // unsigned int width = 711;
-    // unsigned int height = 711;
+    const char *rgb24FilePath = "./res/rainbow-bmp-rgb24.rgb";
+    const char *yuv420pFilePath = "./resource/rainbow-rgb24-to-yuv420p.yuv";
+    unsigned int width = 11;
+    unsigned int height = 11;
 
-    // // 动态申请内存
-    // // RGB24toYUV444p *rgb24toyuv444p = new RGB24toYUV444p();
-    // IRGB24toYUV444p *rgb24toyuv444p = new RGB24toYUV444p();
-    // bool isInitSuccess = rgb24toyuv444p->create(width, height, rgb24FilePath, yuv444pFilePath); // 初始化
-    // if (isInitSuccess)
-    // {
-    //     rgb24toyuv444p->rgb24ToYuv444p(); // rgb24转化为yuv444p
-    // }
-    // delete rgb24toyuv444p;
-    // std::cout << "11111111111111" << std::endl;
+    // RGB24toYUV420p *rgb24toYuv420p = new RGB24toYUV420p();      // 动态申请内存
+    IRGB24toYUV420p *rgb24toYuv420p = new RGB24toYUV420p();     // 动态申请内存
+    bool isInitSuccess = rgb24toYuv420p->create(width, height); // 初始化
+    // bool isInitSuccess = rgb24toYuv420p->create(width, height, rgb24FilePath); // 初始化
+    if (isInitSuccess)
+    {
+        rgb24toYuv420p->rgb24ToYuv420p(yuv420pFilePath); // rgb24转化为yuv420p
+    }
+
+    delete rgb24toYuv420p; // 释放内存
+
     return 0;
 }

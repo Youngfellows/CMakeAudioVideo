@@ -37,12 +37,12 @@ bool RGB24toYUV420p::mallocPixels()
 
         for (int j = 0; j < width; j++)
         {
-            // pixels[i][j].red = 66;
-            // pixels[i][j].green = 255;
-            // pixels[i][j].bulue = 77;
-            pixels[i][j].red = 255;
+            pixels[i][j].red = 66;
             pixels[i][j].green = 255;
-            pixels[i][j].bulue = 255;
+            pixels[i][j].bulue = 77;
+            // pixels[i][j].red = 255;
+            // pixels[i][j].green = 255;
+            // pixels[i][j].bulue = 255;
         }
     }
     if (isMallocError)
@@ -60,9 +60,9 @@ bool RGB24toYUV420p::mallocPixels()
  */
 void RGB24toYUV420p::displayPixels()
 {
-    for (int i = 0; i < abs(bmpInfoHeader->biHeight); i++)
+    for (int i = 0; i < abs(height); i++)
     {
-        for (int j = 0; j < bmpInfoHeader->biWidth; j++)
+        for (int j = 0; j < width; j++)
         {
             uint8_t red = (*(*(pixels + i) + j)).red;
             uint8_t green = (*(*(pixels + i) + j)).green;
@@ -86,11 +86,13 @@ bool RGB24toYUV420p::create(uint32_t width, uint32_t height)
     this->width = abs(width);
     this->height = abs(height);
     bool isMalloc = mallocPixels(); // 申请rgb24像素信息内存;
-    if (!ismall)
+    if (!isMalloc)
     {
         return false;
     }
+    displayPixels();
     genRGB24Data(); // 生成rgb24数据
+    displayPixels();
     return true;
 }
 
@@ -107,10 +109,11 @@ bool RGB24toYUV420p::create(uint32_t width, uint32_t height, const char *rgb24Fi
     this->width = abs(width);
     this->height = abs(height);
     bool isMalloc = mallocPixels(); // 申请rgb24像素信息内存;
-    if (!ismall)
+    if (!isMalloc)
     {
         return false;
     }
+    getRGB24Data(rgb24FilePath); // 获取rgb24文件的像素信息
     return true;
 }
 
@@ -140,6 +143,9 @@ void RGB24toYUV420p::freeResource()
 void RGB24toYUV420p::genRGB24Data()
 {
     std::cout << "RGB24toYUV420p::" << __FUNCTION__ << "():: " << __LINE__ << std::endl;
+    IRainbow *rainbow = new Rainbow(); // 彩虹图片数据生成器
+    rainbow->rgb24Data(&pixels, width, height);
+    delete rainbow;
 }
 
 /**

@@ -8,7 +8,8 @@ project(SampleRGB2YUV)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include/rgb2yuv)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include/rgb2yuv/interfaces)
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include/rgb2yuv/entity)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include/entity)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include/rainbow)
 
 # 获取源码
 set(RGB24_TO_YUV444P_SRC
@@ -21,7 +22,8 @@ set(YUV444P_TO_RGB24_SRC
 set(RGB24_TO_YUV420P_SRC
     "./src/SampleRGB24ToYUV420p.cpp;\
 ./src/entity/RGBPixel.cpp;\
-./src/rgb2yuv/YUV444ptoRGB24.cpp")
+./src/rainbow/Rainbow.cpp;\
+./src/rgb2yuv/RGB24toYUV420p.cpp")
 
 message(STATUS "RGB24_TO_YUV444P_SRC:${RGB24_TO_YUV444P_SRC}")
 message(STATUS "YUV444P_TO_RGB24_SRC:${YUV444P_TO_RGB24_SRC}")
@@ -32,12 +34,12 @@ set(SAMPLES) # 可执行文件列表
 
 set(SAMPLE_RGB24_TO_YUV444P SampleRGB24ToYUV444p)
 add_executable(${SAMPLE_RGB24_TO_YUV444P} ${RGB24_TO_YUV444P_SRC})
-list(APPEND SAMPLES ${SAMPLE_RGB24_TO_YUV444P})
 
+# list(APPEND SAMPLES ${SAMPLE_RGB24_TO_YUV444P})
 set(SAMPLE_YUV444_TO_RGB24 SampleYUV444pToRGB24)
 add_executable(${SAMPLE_YUV444_TO_RGB24} ${YUV444P_TO_RGB24_SRC})
-list(APPEND SAMPLES ${SAMPLE_YUV444_TO_RGB24})
 
+# list(APPEND SAMPLES ${SAMPLE_YUV444_TO_RGB24})
 set(SAMPLE_RGB24_TO_YUV420P SampleRGB24ToYUV420p)
 add_executable(${SAMPLE_RGB24_TO_YUV420P} ${RGB24_TO_YUV420P_SRC})
 list(APPEND SAMPLES ${SAMPLE_RGB24_TO_YUV420P})

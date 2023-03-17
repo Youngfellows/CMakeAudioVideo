@@ -5,7 +5,8 @@
 #include <cstring>
 // #include <string.h>
 #include "./interfaces/IRGB24toYUV420p.h"
-#include "./entity/RGBPixel.h"
+#include "../entity/RGBPixel.h"
+#include "../rainbow/Rainbow.h"
 
 /**
  * @brief 实现类: rgb24转化为yuv420p
