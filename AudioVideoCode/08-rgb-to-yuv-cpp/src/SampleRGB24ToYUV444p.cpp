@@ -9,19 +9,20 @@ int main(int arg, char **argv)
     const char *TAG = "SampleRGB24ToYUV444";
     std::cout << TAG << " " << __FUNCTION__ << " " << __LINE__ << std::endl;
 
-    const char *rgb24FilePath = "xxxx.rgb24";
-    const char *yuv444pFilePath = "yyyy.yuv444";
-    unsigned int width = 700;
-    unsigned int height = 700;
+    const char *rgb24FilePath = "./res/rainbow-bmp-rgb24.rgb";
+    const char *yuv444pFilePath = "./resource/rainbow-rgb24-to-yuv444p.yuv";
+    unsigned int width = 711;
+    unsigned int height = 711;
 
     // 动态申请内存
     // RGB24toYUV444p *rgb24toyuv444p = new RGB24toYUV444p();
     IRGB24toYUV444p *rgb24toyuv444p = new RGB24toYUV444p();
-    rgb24toyuv444p->create(width, height, rgb24FilePath, yuv444pFilePath);
-
-    // 释放内存
-    rgb24toyuv444p->free();
+    bool isInitSuccess = rgb24toyuv444p->create(width, height, rgb24FilePath, yuv444pFilePath); // 初始化
+    if (isInitSuccess)
+    {
+        rgb24toyuv444p->rgb24ToYuv444p(); // rgb24转化为yuv444p
+    }
     delete rgb24toyuv444p;
-    std::cout << "11111111111111" << std::endl;
+    // std::cout << "11111111111111" << std::endl;
     return 0;
 }
