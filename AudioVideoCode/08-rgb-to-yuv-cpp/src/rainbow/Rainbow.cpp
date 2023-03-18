@@ -123,9 +123,9 @@ void Rainbow::createBmpFileHeaderDate(uint8_t *bitmapData, uint32_t *size, uint3
             // std::cout << "b char is:" << b << std::endl;
 
             // memcpy(bitmapData + currentIndex, "987", sizeof(uint8_t));
-            memcpy(headLength + bitmapData + currentIndex, &r, sizeof(uint8_t));
+            memcpy(headLength + bitmapData + currentIndex, &b, sizeof(uint8_t));
             memcpy(headLength + bitmapData + currentIndex + 1, &g, sizeof(uint8_t));
-            memcpy(headLength + bitmapData + currentIndex + 2, &b, sizeof(uint8_t));
+            memcpy(headLength + bitmapData + currentIndex + 2, &r, sizeof(uint8_t));
             // std::cout << "Rainbow::" << __FUNCTION__ << "():: " << __LINE__ << "(" << i << "," << j << ") 2,ele(" << bitmapData + currentIndex + 2 << "," << bitmapData + currentIndex + 1 << "," << bitmapData + currentIndex << "),red sizeof:" << sizeof(rgbPixel.red) << std::endl;
         }
     }

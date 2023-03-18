@@ -149,8 +149,8 @@ void RGB24toYUV420p::genRGB24Data()
     rainbow->rgb24Data(pixels, width, height);                           // 获取rgb24格式彩虹图片像素数据
     uint8_t *rainbowBmpData = rainbow->bmpData(&bmpSize, width, height); // 获取bmp格式彩虹图片像素数据
     std::cout << "RGB24toYUV420p::" << __FUNCTION__ << "():: " << __LINE__ << ",rainbowBmpData len:" << bmpSize << ",rainbowBmpData:" << rainbowBmpData << std::endl;
-    uint32_t g = (uint32_t)rainbowBmpData[headLength];
-    uint32_t b = (uint32_t)rainbowBmpData[headLength + 1];
+    uint32_t b = (uint32_t)rainbowBmpData[headLength];
+    uint32_t g = (uint32_t)rainbowBmpData[headLength + 1];
     uint32_t r = (uint32_t)rainbowBmpData[headLength + 2];
     std::cout << "RGB24toYUV420p::" << __FUNCTION__ << "():: " << __LINE__ << ",rainbowBmpData len:" << bmpSize << "(" << r << "," << g << "," << b << ")" << std::endl;
     delete rainbow;
