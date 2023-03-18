@@ -2,14 +2,14 @@
 #define _RAINBOW_H_
 
 #include <iostream>
-#include "./IRainbow.h"
+#include "../pixel/IPixel.h"
 #include "./RainbowColors.h"
 
 /**
  * @brief 实现类: 彩虹图片像素数据的实现类
  *
  */
-class Rainbow : public IRainbow
+class Rainbow : public IPixel
 {
 private:
 public:

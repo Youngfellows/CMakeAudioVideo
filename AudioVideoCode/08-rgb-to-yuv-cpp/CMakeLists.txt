@@ -10,6 +10,7 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include/rgb2yuv)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include/rgb2yuv/interfaces)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include/entity)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include/rainbow)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include/pixel)
 
 # 获取源码
 set(RGB24_TO_YUV444P_SRC

@@ -143,7 +143,7 @@ void RGB24toYUV420p::freeResource()
 void RGB24toYUV420p::genRGB24Data()
 {
     std::cout << "RGB24toYUV420p::" << __FUNCTION__ << "():: " << __LINE__ << std::endl;
-    IRainbow *rainbow = new Rainbow(); // 彩虹图片数据生成器
+    IPixel *rainbow = new Rainbow(); // 彩虹图片数据生成器
     rainbow->rgb24Data(pixels, width, height);
     delete rainbow;
 }
