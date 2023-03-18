@@ -11,6 +11,42 @@ Rainbow::~Rainbow()
 }
 
 /**
+ * @brief 生成彩虹图片的bmp格式像素数据
+ *
+ * @param size 数据大小
+ * @param width 宽
+ * @param height 高
+ * @return uint8_t* 返回彩虹图片的bmp格式像素数据
+ */
+uint8_t *Rainbow::bmpData(uint32_t *size, uint32_t width, uint32_t height)
+{
+    std::cout << "Rainbow::" << __FUNCTION__ << "():: " << __LINE__ << ",width:" << width << ",height:" << height << std::endl;
+    *size = width * height;
+    bmpDataBytes = (uint8_t *)malloc(sizeof(uint8_t) * (abs(width) * abs(height))); // 动态申请内存
+    std::cout << "Rainbow::" << __FUNCTION__ << "():: " << __LINE__ << ",bmpDataBytes sizeof:" << sizeof(bmpDataBytes) << ",bmpDataBytes len:" << (width * height) << ",bmpDataBytes:" << bmpDataBytes << std::endl;
+    if (bmpDataBytes == NULL)
+    {
+        std::cout << "Rainbow::" << __FUNCTION__ << "():: " << __LINE__ << ",bmpDataBytes is null" << std::endl;
+    }
+    else
+    {
+        std::cout << "Rainbow::" << __FUNCTION__ << "():: " << __LINE__ << ",bmpDataBytes address:" << &bmpDataBytes << std::endl;
+        std::cout << "Rainbow::" << __FUNCTION__ << "():: " << __LINE__ << ",bmpDataBytes address:" << bmpDataBytes + 1 << std::endl;
+        printf("Rainbow::%s()::%d,%p,%p,%p\n", __FUNCTION__, __LINE__, bmpDataBytes, bmpDataBytes + 1, bmpDataBytes + 2);
+    }
+    bmpDataBytes[0] = 'a';
+    bmpDataBytes[1] = 'b';
+    std::cout << "Rainbow::" << __FUNCTION__ << "():: " << __LINE__ << ",bmpDataBytes:" << bmpDataBytes << std::endl;
+    std::cout << "Rainbow::" << __FUNCTION__ << "():: " << __LINE__ << ",bmpDataBytes:" << bmpDataBytes[1] << std::endl;
+    std::cout << "Rainbow::" << __FUNCTION__ << "():: " << __LINE__ << ",bmpDataBytes address:" << bmpDataBytes + 1 << std::endl;
+    const char *bmpData = "欢迎来到中国深圳,这里是美丽的南山区,SHENZHEN BAI SHI ZHOU";
+    std::cout << "Rainbow::" << __FUNCTION__ << "():: " << __LINE__ << ",bmpData size:" << strlen(bmpData) << std::endl;
+    memcpy(bmpDataBytes, bmpData, strlen(bmpData)); // 向内存中写入数据
+    std::cout << "Rainbow::" << __FUNCTION__ << "():: " << __LINE__ << ",bmpDataBytes:" << bmpDataBytes << std::endl;
+    return bmpDataBytes;
+}
+
+/**
  * @brief 生成彩虹图片的rgb24格式数据
  *
  * @param pixels 图片像素信息内存空间

@@ -2,6 +2,7 @@
 #define _RAINBOW_H_
 
 #include <iostream>
+#include <cstring>
 #include "../pixel/IPixel.h"
 #include "./RainbowColors.h"
 
@@ -12,9 +13,11 @@
 class Rainbow : public IPixel
 {
 private:
+    uint8_t *bmpDataBytes; // 虹图片的bmp数据
 public:
     Rainbow();
     ~Rainbow();
     virtual void rgb24Data(RGBPixel **pixels, uint32_t width, uint32_t height) override; // 生成彩虹图片的rgb24数据
+    virtual uint8_t *bmpData(uint32_t *size, uint32_t width, uint32_t height) override;  // 生成彩虹图片的bmp数据
 };
 #endif
