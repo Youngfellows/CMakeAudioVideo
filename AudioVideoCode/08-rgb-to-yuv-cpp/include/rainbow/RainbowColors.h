@@ -8,7 +8,7 @@
  *
  */
 const uint32_t RAINBOW_COLORS[] = {
-    0XFF0000, // 红
+    0XFF382a, // 红
     0XFFA500, // 橙
     0XFFFF00, // 黄
     0X00FF00, // 绿
