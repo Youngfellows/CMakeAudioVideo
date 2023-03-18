@@ -145,9 +145,14 @@ void RGB24toYUV420p::genRGB24Data()
     std::cout << "RGB24toYUV420p::" << __FUNCTION__ << "():: " << __LINE__ << std::endl;
     IPixel *rainbow = new Rainbow();                                     // 彩虹图片数据生成器
     uint32_t bmpSize;                                                    // bmp格式彩虹图片像素数据大小
+    uint32_t headLength = 54;                                            // 头文件的大小
     rainbow->rgb24Data(pixels, width, height);                           // 获取rgb24格式彩虹图片像素数据
     uint8_t *rainbowBmpData = rainbow->bmpData(&bmpSize, width, height); // 获取bmp格式彩虹图片像素数据
     std::cout << "RGB24toYUV420p::" << __FUNCTION__ << "():: " << __LINE__ << ",rainbowBmpData len:" << bmpSize << ",rainbowBmpData:" << rainbowBmpData << std::endl;
+    uint32_t g = (uint32_t)rainbowBmpData[headLength];
+    uint32_t b = (uint32_t)rainbowBmpData[headLength + 1];
+    uint32_t r = (uint32_t)rainbowBmpData[headLength + 2];
+    std::cout << "RGB24toYUV420p::" << __FUNCTION__ << "():: " << __LINE__ << ",rainbowBmpData len:" << bmpSize << "(" << r << "," << g << "," << b << ")" << std::endl;
     delete rainbow;
 }
 
