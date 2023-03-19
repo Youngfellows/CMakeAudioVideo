@@ -27,4 +27,4 @@ public:
     uint32_t biClrImportant;  // 重要的颜色数，0代表所有颜色都重要,0
 };
 
-#elif
+#endif

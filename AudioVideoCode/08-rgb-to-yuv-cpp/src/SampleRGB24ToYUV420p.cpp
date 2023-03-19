@@ -11,8 +11,8 @@ int main(int arg, char **argv)
 
     const char *rgb24FilePath = "./res/rainbow-bmp-rgb24.rgb";
     const char *yuv420pFilePath = "./resource/rainbow-rgb24-to-yuv420p.yuv";
-    unsigned int width = 6;
-    unsigned int height = 6;
+    unsigned int width = 2;
+    unsigned int height = 1;
 
     // RGB24toYUV420p *rgb24toYuv420p = new RGB24toYUV420p();      // 动态申请内存
     IRGB24toYUV420p *rgb24toYuv420p = new RGB24toYUV420p();     // 动态申请内存
