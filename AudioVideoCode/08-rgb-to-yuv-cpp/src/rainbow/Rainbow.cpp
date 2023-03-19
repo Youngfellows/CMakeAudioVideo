@@ -55,7 +55,33 @@ uint8_t *Rainbow::bmpData(uint32_t *size, uint32_t width, uint32_t height)
  * @param width 宽
  * @param height 高
  */
-void Rainbow::createBmpFileHeaderDate(uint8_t *bitmapData, uint32_t *size, uint32_t width, uint32_t height)
+void Rainbow::createBmpFileHeaderData(uint8_t *bitmapData, uint32_t *size, uint32_t width, uint32_t height)
+{
+    std::cout << "Rainbow::" << __FUNCTION__ << "():: " << __LINE__ << ",width:" << width << ",height:" << height << std::endl;
+}
+
+/**
+ * @brief 生成mp彩虹图片的位图信息头数据
+ *
+ * @param bitmapData bmp图片数据内存
+ * @param size bmp数据
+ * @param width 宽
+ * @param height 高
+ */
+void Rainbow::createBmpInfoHeaderData(uint8_t *bitmapData, uint32_t *size, uint32_t width, uint32_t height)
+{
+    std::cout << "Rainbow::" << __FUNCTION__ << "():: " << __LINE__ << ",width:" << width << ",height:" << height << std::endl;
+}
+
+/**
+ * @brief 生成bmp彩虹图片的像素数据
+ *
+ * @param bitmapData bmp图片数据内存
+ * @param size bmp数据
+ * @param width 宽
+ * @param height 高
+ */
+void Rainbow::createRainbowBmpPixelData(uint8_t *bitmapData, uint32_t *size, uint32_t width, uint32_t height)
 {
     std::cout << "Rainbow::" << __FUNCTION__ << "():: " << __LINE__ << ",width:" << width << ",height:" << height << std::endl;
     uint32_t headLength = 54; // 头文件的大小
@@ -132,19 +158,6 @@ void Rainbow::createBmpFileHeaderDate(uint8_t *bitmapData, uint32_t *size, uint3
 }
 
 /**
- * @brief 生成mp彩虹图片的位图信息头数据
- *
- * @param bitmapData bmp图片数据内存
- * @param size bmp数据
- * @param width 宽
- * @param height 高
- */
-void Rainbow::createBmpInfoHeaderDate(uint8_t *bitmapData, uint32_t *size, uint32_t width, uint32_t height)
-{
-    std::cout << "Rainbow::" << __FUNCTION__ << "():: " << __LINE__ << ",width:" << width << ",height:" << height << std::endl;
-}
-
-/**
  * @brief 生成彩虹图片的bmp数据
  *
  * @param bitmapData bmp图片数据内存
@@ -155,8 +168,9 @@ void Rainbow::createBmpInfoHeaderDate(uint8_t *bitmapData, uint32_t *size, uint3
 void Rainbow::createBmpPixelData(uint8_t *bitmapData, uint32_t *size, uint32_t width, uint32_t height)
 {
     std::cout << "Rainbow::" << __FUNCTION__ << "():: " << __LINE__ << ",width:" << width << ",height:" << height << std::endl;
-    createBmpFileHeaderDate(bitmapData, size, width, height); // 生成mp彩虹图片的位图文件头数据
-    createBmpInfoHeaderDate(bitmapData, size, width, height); // 生成mp彩虹图片的位图信息头数据
+    createBmpFileHeaderData(bitmapData, size, width, height);   // 生成mp彩虹图片的位图文件头数据
+    createBmpInfoHeaderData(bitmapData, size, width, height);   // 生成mp彩虹图片的位图信息头数据
+    createRainbowBmpPixelData(bitmapData, size, width, height); // 生成mp彩虹图片的RGB像素数据
 }
 
 /**
