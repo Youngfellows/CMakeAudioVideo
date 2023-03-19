@@ -8,9 +8,9 @@ project(SampleRGB2YUV)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include/rgb2yuv)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include/rgb2yuv/interfaces)
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include/entity)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include/rainbow)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include/pixel)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include/bitmap)
 
 # 获取源码
 set(RGB24_TO_YUV444P_SRC
@@ -22,7 +22,7 @@ set(YUV444P_TO_RGB24_SRC
 
 set(RGB24_TO_YUV420P_SRC
     "./src/SampleRGB24ToYUV420p.cpp;\
-./src/entity/RGBPixel.cpp;\
+./src/bitmap/RGBPixel.cpp;\
 ./src/rainbow/Rainbow.cpp;\
 ./src/rgb2yuv/RGB24toYUV420p.cpp")
 

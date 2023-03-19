@@ -5,7 +5,7 @@
 #include <cstring>
 // #include <string.h>
 #include "./interfaces/IRGB24toYUV420p.h"
-#include "../entity/RGBPixel.h"
+#include "../bitmap/RGBPixel.h"
 #include "../rainbow/Rainbow.h"
 
 /**

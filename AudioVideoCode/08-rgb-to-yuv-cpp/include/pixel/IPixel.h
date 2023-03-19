@@ -1,7 +1,7 @@
 #ifndef _IPIXEL_H
 #define _IPIXEL_H
 
-#include "../entity/RGBPixel.h"
+#include "../bitmap/RGBPixel.h"
 
 /**
  * @brief 抽象类: 生成图片像素信息类

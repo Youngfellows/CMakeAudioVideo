@@ -84,6 +84,7 @@ void Rainbow::createBmpInfoHeaderData(uint8_t *bitmapData, uint32_t *size, uint3
 void Rainbow::createRainbowBmpPixelData(uint8_t *bitmapData, uint32_t *size, uint32_t width, uint32_t height)
 {
     std::cout << "Rainbow::" << __FUNCTION__ << "():: " << __LINE__ << ",width:" << width << ",height:" << height << std::endl;
+    uint8_t *bmpData = bitmapData;
     uint32_t headLength = 54; // 头文件的大小
     for (int i = 0; i < height; i++)
     {
@@ -149,9 +150,9 @@ void Rainbow::createRainbowBmpPixelData(uint8_t *bitmapData, uint32_t *size, uin
             // std::cout << "b char is:" << b << std::endl;
 
             // memcpy(bitmapData + currentIndex, "987", sizeof(uint8_t));
-            memcpy(headLength + bitmapData + currentIndex, &b, sizeof(uint8_t));
-            memcpy(headLength + bitmapData + currentIndex + 1, &g, sizeof(uint8_t));
-            memcpy(headLength + bitmapData + currentIndex + 2, &r, sizeof(uint8_t));
+            memcpy(headLength + bmpData + currentIndex, &b, sizeof(uint8_t));
+            memcpy(headLength + bmpData + currentIndex + 1, &g, sizeof(uint8_t));
+            memcpy(headLength + bmpData + currentIndex + 2, &r, sizeof(uint8_t));
             // std::cout << "Rainbow::" << __FUNCTION__ << "():: " << __LINE__ << "(" << i << "," << j << ") 2,ele(" << bitmapData + currentIndex + 2 << "," << bitmapData + currentIndex + 1 << "," << bitmapData + currentIndex << "),red sizeof:" << sizeof(rgbPixel.red) << std::endl;
         }
     }
