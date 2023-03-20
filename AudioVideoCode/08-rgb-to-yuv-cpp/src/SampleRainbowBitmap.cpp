@@ -19,7 +19,7 @@ int main(int arg, char **argv)
     // rgb24或bmp彩虹图片生成器,动态申请内存
     uint32_t width = 711;                                          // 宽
     uint32_t height = 711;                                         // 高
-    const char *bmpFilePath = "./resource/rainbow_bitmap_6x6.bmp"; // bmp图片保存路径
+    const char *bmpFilePath = "./resource/rainbow_711x711_bitmap.bmp"; // bmp图片保存路径
     IRainbow *rainbow = new Rainbow();                             // 创建彩虹图片生成器对象
     bool isCreate = rainbow->createBitmap(width, height);          // 创建BMP格式彩虹图片
     if (isCreate)

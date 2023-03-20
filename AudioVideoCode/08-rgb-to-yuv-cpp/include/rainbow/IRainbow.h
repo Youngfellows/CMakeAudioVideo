@@ -10,7 +10,7 @@
 class IRainbow
 {
 protected:
-    Bitmap *bitmap; // BMP位图对象
+    IBitmapPixel *bitmap; // BMP位图对象
 
 public:
     ~IRainbow() = default;

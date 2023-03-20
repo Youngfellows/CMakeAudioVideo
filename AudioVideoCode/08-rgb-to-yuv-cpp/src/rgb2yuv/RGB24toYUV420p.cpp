@@ -145,8 +145,8 @@ void RGB24toYUV420p::genRGB24Data()
     std::cout << "RGB24toYUV420p::" << __FUNCTION__ << "():: " << __LINE__ << std::endl;
     // IPixel *rainbow = new Rainbow();                                     // 彩虹图片数据生成器
     Bitmap *bitmap = new Bitmap();            // 彩虹图片数据生成器
-    bitmap->rgb24Data(pixels, width, height); // 获取rgb24格式彩虹图片像素数据
-    delete bitmap;
+    // bitmap->rgb24Data(pixels, width, height); // 获取rgb24格式彩虹图片像素数据
+    // delete bitmap;
 }
 
 /**
