@@ -32,10 +32,14 @@ int main(int arg, char **argv)
     std::cout << TAG << __FUNCTION__ << "():: LINE:" << __LINE__ << ",rainbowBmpData len:" << bmpSize << ",(" << r << "," << g << "," << b << ")" << std::endl;
 
     // 保存bmp数据到内存
-    // const char *bmpFilePath = "./resource/rainbow_bitmap_6x6.bmp";
+    const char *bmpFilePath = "./resource/rainbow_bitmap_6x6.bmp";
+    rainbow->saveBitmap(bmpFilePath, rainbowBmpData, bmpSize); // 保存到文件
+
     // const char *data = "111111111111122222222222233333333";
     // uint8_t *rainbowBmpData2 = (uint8_t *)data;
     // rainbow->saveBitmap(bmpFilePath, rainbowBmpData2, strlen(data)); // 保存到文件
+    // int *a = new int(3);
+    // RGBPixel *rgbPixel = new RGBPixel();
 
     // delete rainbow; // 释放内存
     rainbow->destory(); // 释放内存

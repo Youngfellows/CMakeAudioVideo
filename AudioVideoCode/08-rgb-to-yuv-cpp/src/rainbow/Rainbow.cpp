@@ -33,8 +33,10 @@ uint8_t *Rainbow::bmpData(uint32_t *size, uint32_t width, uint32_t height)
 {
     std::cout << "Rainbow::" << __FUNCTION__ << "():: " << __LINE__ << ",width:" << width << ",height:" << height << std::endl;
     //*size = width * height;
-    bmpDataBytes = (uint8_t *)malloc(sizeof(uint8_t) * (abs(width) * abs(height))); // 动态申请内存
-    std::cout << "Rainbow::" << __FUNCTION__ << "():: " << __LINE__ << ",bmpDataBytes sizeof:" << sizeof(bmpDataBytes) << ",bmpDataBytes len:" << (width * height) << ",bmpDataBytes:" << bmpDataBytes << std::endl;
+    // bmpDataBytes = (uint8_t *)malloc(sizeof(uint8_t) * (abs(width) * abs(height))); // 动态申请内存
+    *size = 14 + 40 + abs(height) * (abs(width) * 3 + (4 - (abs(width) * 3 % 4)));
+    bmpDataBytes = (uint8_t *)malloc(sizeof(uint8_t) * (*size)); // 动态申请内存
+    std::cout << "Rainbow::" << __FUNCTION__ << "():: " << __LINE__ << ",bmpDataBytes sizeof:" << sizeof(bmpDataBytes) << ",bmpDataBytes len:" << *size << ",bmpDataBytes:" << bmpDataBytes << std::endl;
     if (bmpDataBytes == NULL)
     {
         std::cout << "Rainbow::" << __FUNCTION__ << "():: " << __LINE__ << ",bmpDataBytes is null" << std::endl;
