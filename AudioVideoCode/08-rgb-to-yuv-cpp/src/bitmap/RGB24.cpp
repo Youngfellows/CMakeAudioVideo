@@ -51,6 +51,14 @@ void RGB24::genRGB24Data(const char *rgb24FilePath)
 void RGB24::saveRgb24(const char *rgb24FilePath)
 {
     std::cout << "RGB24::" << __FUNCTION__ << "():: xxx Line " << __LINE__ << std::endl;
+    FILE *rgb24File = fopen(rgb24FilePath, "wb+"); // 获取文件指针
+    std::cout << "RGB24::" << __FUNCTION__ << "():: " << __LINE__ << ",rgb24File:" << rgb24File << std::endl;
+    if (rgb24File == NULL)
+    {
+        return;
+    }
+    uint32_t len = fwrite(rgb24DataBytes, width * height, 1, rgb24File); // 向文件中写入数据
+    fclose(rgb24File);                                                   // 关闭文件
 }
 
 void RGB24::destory()

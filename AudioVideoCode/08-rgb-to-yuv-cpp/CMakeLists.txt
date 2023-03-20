@@ -37,6 +37,7 @@ set(BMP_RAINBOW_SRC
 set(RGB24_RAINBOW_SRC
     "./src/SampleRainbowRGB24.cpp;\
 ./src/bitmap/RGB24.cpp;\
+./src/bitmap/Bitmap.cpp;\
 ./src/rainbow/Rainbow.cpp;\
 ./src/bitmap/RGBPixel.cpp")
 
@@ -65,9 +66,9 @@ add_executable(${SAMPLE_BMP_RAINBOW} ${BMP_RAINBOW_SRC})
 list(APPEND SAMPLES ${SAMPLE_BMP_RAINBOW})
 
 # list(APPEND SAMPLES ${SAMPLE_RGB24_TO_YUV420P})
-#set(SAMPLE_RGB24_RAINBOW SampleRGB24Rainbow)
-#add_executable(${SAMPLE_RGB24_RAINBOW} ${RGB24_RAINBOW_SRC})
-#list(APPEND SAMPLES ${SAMPLE_RGB24_RAINBOW})
+set(SAMPLE_RGB24_RAINBOW SampleRGB24Rainbow)
+add_executable(${SAMPLE_RGB24_RAINBOW} ${RGB24_RAINBOW_SRC})
+list(APPEND SAMPLES ${SAMPLE_RGB24_RAINBOW})
 
 # 安装可执行文件到指定目录
 message(STATUS " install samples start ")
