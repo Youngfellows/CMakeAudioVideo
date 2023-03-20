@@ -47,15 +47,15 @@ uint8_t *Rainbow::bmpData(uint32_t *size, uint32_t width, uint32_t height)
         std::cout << "Rainbow::" << __FUNCTION__ << "():: " << __LINE__ << ",bmpDataBytes address:" << bmpDataBytes + 1 << std::endl;
         printf("Rainbow::%s()::%d,%p,%p,%p\n", __FUNCTION__, __LINE__, bmpDataBytes, bmpDataBytes + 1, bmpDataBytes + 2);
     }
-    bmpDataBytes[0] = 'a';
-    bmpDataBytes[1] = 'b';
-    std::cout << "Rainbow::" << __FUNCTION__ << "():: " << __LINE__ << ",bmpDataBytes:" << bmpDataBytes << std::endl;
-    std::cout << "Rainbow::" << __FUNCTION__ << "():: " << __LINE__ << ",bmpDataBytes:" << bmpDataBytes[1] << std::endl;
-    std::cout << "Rainbow::" << __FUNCTION__ << "():: " << __LINE__ << ",bmpDataBytes address:" << bmpDataBytes + 1 << std::endl;
-    const char *bmpData = "欢迎来到中国深圳,这里是美丽的南山区,SHENZHEN BAI SHI ZHOU";
-    std::cout << "Rainbow::" << __FUNCTION__ << "():: " << __LINE__ << ",bmpData size:" << strlen(bmpData) << std::endl;
-    memcpy(bmpDataBytes, bmpData, strlen(bmpData)); // 向内存中写入数据
-    std::cout << "Rainbow::" << __FUNCTION__ << "():: " << __LINE__ << ",bmpDataBytes:" << bmpDataBytes << std::endl;
+    // bmpDataBytes[0] = 'a';
+    // bmpDataBytes[1] = 'b';
+    // std::cout << "Rainbow::" << __FUNCTION__ << "():: " << __LINE__ << ",bmpDataBytes:" << bmpDataBytes << std::endl;
+    // std::cout << "Rainbow::" << __FUNCTION__ << "():: " << __LINE__ << ",bmpDataBytes:" << bmpDataBytes[1] << std::endl;
+    // std::cout << "Rainbow::" << __FUNCTION__ << "():: " << __LINE__ << ",bmpDataBytes address:" << bmpDataBytes + 1 << std::endl;
+    // const char *bmpData = "欢迎来到中国深圳,这里是美丽的南山区,SHENZHEN BAI SHI ZHOU";
+    // std::cout << "Rainbow::" << __FUNCTION__ << "():: " << __LINE__ << ",bmpData size:" << strlen(bmpData) << std::endl;
+    // memcpy(bmpDataBytes, bmpData, strlen(bmpData)); // 向内存中写入数据
+    // std::cout << "Rainbow::" << __FUNCTION__ << "():: " << __LINE__ << ",bmpDataBytes:" << bmpDataBytes << std::endl;
     createBmpPixelData(bmpDataBytes, size, width, height); // 生成bmp彩虹图片的像素数据
     return bmpDataBytes;
 }
@@ -72,7 +72,7 @@ void Rainbow::createBmpFileHeaderData(uint8_t *bitmapData, uint32_t *size, uint3
 {
     std::cout << "Rainbow::" << __FUNCTION__ << "():: " << __LINE__ << ",width:" << width << ",height:" << height << std::endl;
     this->bmpFHeader;                                                           // 位图文件头
-    bmpFHeader.bfType = 0x424D;                                                 // BM
+    bmpFHeader.bfType = 0x4D42;                                                 // BM
     bmpFHeader.bfSize = 14 + 40 + height * (width * 3 + (4 - (width * 3 % 4))); // BMP大小要4字节对齐
     bmpFHeader.bfReserved1 = 0x00;
     bmpFHeader.bfReserved2 = 0;
@@ -100,6 +100,9 @@ void Rainbow::createBmpFileHeaderData(uint8_t *bitmapData, uint32_t *size, uint3
     uint32_t bfSize = intFromBytes(bmpData, 2);   // 获取内存中的size
     std::cout << "bfSize:" << bfSize << std::endl;
     // std::cout << "bfSize:" << std::bitset<31>(bfSize) << std::endl;
+    setShortToBytes(bmpFHeader.bfReserved1, bmpData, 6);
+    setShortToBytes(bmpFHeader.bfReserved2, bmpData, 8);
+    setIntToBytes(bmpFHeader.bfOffBits, bmpData, 10);
 }
 
 /**
@@ -113,8 +116,8 @@ void Rainbow::setShortToBytes(uint16_t number, uint8_t *bytes, uint32_t pos)
 {
     // *(bytes + pos + 0) = number >> 8;
     // *(bytes + pos + 1) = number >> 0;
-    uint8_t byte1 = number >> 8;
-    uint8_t byte2 = number >> 0;
+    uint8_t byte1 = number >> 0;
+    uint8_t byte2 = number >> 8;
     memcpy(bytes + pos, &byte1, sizeof(uint8_t));
     memcpy(bytes + pos + 1, &byte2, sizeof(uint8_t));
 }
@@ -128,10 +131,10 @@ void Rainbow::setShortToBytes(uint16_t number, uint8_t *bytes, uint32_t pos)
  */
 void Rainbow::setIntToBytes(uint32_t number, uint8_t *bytes, uint32_t pos)
 {
-    *(bytes + pos + 0) = number >> 24;
-    *(bytes + pos + 1) = number >> 16;
-    *(bytes + pos + 2) = number >> 8;
-    *(bytes + pos + 3) = number >> 0;
+    *(bytes + pos + 0) = number >> 0;
+    *(bytes + pos + 1) = number >> 8;
+    *(bytes + pos + 2) = number >> 16;
+    *(bytes + pos + 3) = number >> 24;
 }
 
 /**
@@ -158,7 +161,7 @@ uint16_t Rainbow::shortFromBytes(uint8_t *bytes, uint32_t pos)
     // std::cout << std::bitset<15>(d) << std::endl;
     // uint16_t e = c | d;
     // std::cout << std::bitset<15>(e) << std::endl;
-    return (*(bytes + pos + 0) << 8) | ((*(bytes + pos + 1)) >> 0);
+    return (*(bytes + pos + 0) << 0) | ((*(bytes + pos + 1)) >> 8);
 }
 
 /**
@@ -170,10 +173,10 @@ uint16_t Rainbow::shortFromBytes(uint8_t *bytes, uint32_t pos)
  */
 uint32_t Rainbow::intFromBytes(uint8_t *bytes, uint32_t pos)
 {
-    return (*(bytes + pos + 0) << 24) |
-           ((*(bytes + pos + 1)) >> 16) |
-           (*(bytes + pos + 2)) >> 8 |
-           (*(bytes + pos + 3)) >> 0;
+    return (*(bytes + pos + 0) << 0) |
+           ((*(bytes + pos + 1)) >> 8) |
+           (*(bytes + pos + 2)) >> 16 |
+           (*(bytes + pos + 3)) >> 24;
 }
 
 /**
@@ -187,6 +190,32 @@ uint32_t Rainbow::intFromBytes(uint8_t *bytes, uint32_t pos)
 void Rainbow::createBmpInfoHeaderData(uint8_t *bitmapData, uint32_t *size, uint32_t width, uint32_t height)
 {
     std::cout << "Rainbow::" << __FUNCTION__ << "():: " << __LINE__ << ",width:" << width << ",height:" << height << std::endl;
+    uint8_t *bmpData = bitmapData;
+    BitmapInfoHeader *bmpInfoHeader = new BitmapInfoHeader();
+    bmpInfoHeader->biSize = 40;             // 0x48
+    bmpInfoHeader->biWidth = width;         // 位图宽
+    bmpInfoHeader->biHeight = -abs(height); // 位图高
+    bmpInfoHeader->biPlanes = 1;
+    bmpInfoHeader->biBitCount = 0x18; // 24
+    bmpInfoHeader->biCompression = 0;
+    bmpInfoHeader->biSizeImage = 0;
+    bmpInfoHeader->biXPelsPerMeter = 0;
+    bmpInfoHeader->biYPelsPerMeter = 0;
+    bmpInfoHeader->biClrUsed = 0;
+    bmpInfoHeader->biClrImportant = 0;
+
+    // 把位图信息头写入内存中
+    setIntToBytes(bmpInfoHeader->biSize, bmpData, 14);
+    setIntToBytes(bmpInfoHeader->biWidth, bmpData, 18);
+    setIntToBytes(bmpInfoHeader->biHeight, bmpData, 22);
+    setShortToBytes(bmpInfoHeader->biPlanes, bmpData, 26);
+    setShortToBytes(bmpInfoHeader->biBitCount, bmpData, 28);
+    setIntToBytes(bmpInfoHeader->biCompression, bmpData, 30);
+    setIntToBytes(bmpInfoHeader->biSizeImage, bmpData, 34);
+    setIntToBytes(bmpInfoHeader->biXPelsPerMeter, bmpData, 38);
+    setIntToBytes(bmpInfoHeader->biYPelsPerMeter, bmpData, 42);
+    setIntToBytes(bmpInfoHeader->biClrUsed, bmpData, 46);
+    setIntToBytes(bmpInfoHeader->biClrImportant, bmpData, 50);
 }
 
 /**
@@ -248,7 +277,10 @@ void Rainbow::createRainbowBmpPixelData(uint8_t *bitmapData, uint32_t *size, uin
         // unsigned int bulue = (currentColor & RGB24_MASK_BLUE);
         uint32_t bulue = (currentColor & RGB24_MASK_BLUE);
         // std::cout << "Rainbow::" << __FUNCTION__ << "():: XXXXXXXXX,i:" << i << ",(" << red << "," << green << "," << bulue << "),red sizeof:" << sizeof(red) << std::endl;
-
+        uint32_t pad = (width * -3UL) & 3;
+        uint16_t pad1 = 4 - (width * 3 % 4);
+        // std::cout << "pad:" << pad << std::endl;
+        // std::cout << "pad1:" << pad1 << std::endl;
         for (int j = 0; j < width; j++)
         {
             RGBPixel rgbPixel(red, green, bulue);
@@ -257,19 +289,29 @@ void Rainbow::createRainbowBmpPixelData(uint8_t *bitmapData, uint32_t *size, uin
             //   rgbPixel.bulue = bulue; // 右移0位之后,有效数据其实只要1个字节8位,可以赋值
             // std::cout << "Rainbow::" << __FUNCTION__ << "():: " << __LINE__ << "(" << i << "," << j << ") 1,ele(" << rgbPixel.red << "," << rgbPixel.green << "," << rgbPixel.bulue << "),red sizeof:" << sizeof(rgbPixel.red) << std::endl;
 
-            uint32_t currentIndex = 3 * (i * height + j);
-            uint8_t r = (uint8_t)(rgbPixel.red);
-            uint8_t g = (uint8_t)(rgbPixel.green);
-            uint8_t b = (uint8_t)(rgbPixel.bulue);
-            // std::cout << "r char is:" << r << std::endl;
-            // std::cout << "g char is:" << g << std::endl;
-            // std::cout << "b char is:" << b << std::endl;
+            // 4字节对齐
+            uint32_t curIndex = headLength + i * (3 * width + pad) + j * 3;
+            // std::cout << std::dec << "curIndex:" << curIndex << std::endl;
+            uint8_t *pData = bmpData + curIndex;
 
-            // memcpy(bitmapData + currentIndex, "987", sizeof(uint8_t));
-            memcpy(headLength + bmpData + currentIndex, &b, sizeof(uint8_t));
-            memcpy(headLength + bmpData + currentIndex + 1, &g, sizeof(uint8_t));
-            memcpy(headLength + bmpData + currentIndex + 2, &r, sizeof(uint8_t));
-            // std::cout << "Rainbow::" << __FUNCTION__ << "():: " << __LINE__ << "(" << i << "," << j << ") 2,ele(" << bitmapData + currentIndex + 2 << "," << bitmapData + currentIndex + 1 << "," << bitmapData + currentIndex << "),red sizeof:" << sizeof(rgbPixel.red) << std::endl;
+            uint8_t r = rgbPixel.red & 0xff; // 取低8位，1个字节数据
+            uint8_t g = (uint8_t)(rgbPixel.green & 0xff);
+            uint8_t b = (uint8_t)(rgbPixel.bulue & 0xff);
+            // std::cout << "r char is:" << std::hex << red << ",binary,r:" << std::bitset<8>(r) << ",binary,red:" << std::bitset<15>(red) << std::endl;
+            // std::cout << "r char is:" << r << ",binary,r:" << std::bitset<8>(r) << ",binary,red:" << std::bitset<15>(red) << std::endl;
+            // std::cout << "g char is:" << g << ",binary,green:" << std::bitset<15>(green) << std::endl;
+            // std::cout << "b char is:" << b << ",binary,bulue:" << std::bitset<15>(bulue) << std::endl;
+
+            uint32_t rgb = (r << 16) | (g << 8) | b; // 获取颜色
+            // std::cout << std::hex << "rgb:" << rgb << std::endl;
+            //  std::cout << std::oct<<"curIndex:" << curIndex << std::endl;
+            //  std::cout << std::dec << "curIndex:" << curIndex << std::endl;
+
+            memcpy(pData, &b, sizeof(uint8_t));
+            memcpy(pData + 1, &g, sizeof(uint8_t));
+            memcpy(pData + 2, &r, sizeof(uint8_t));
+            // std::cout << "Rainbow::" << __FUNCTION__ << "():: " << __LINE__
+            //           << "(" << i << "," << j << "),rgb(" << pData + 2 << "," << pData + 1 << "," << pData << ")" << std::endl;
         }
     }
 }

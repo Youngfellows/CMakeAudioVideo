@@ -19,8 +19,8 @@ int main(int arg, char **argv)
     // rgb24或bmp彩虹图片生成器,动态申请内存
     IPixel *rainbow = new Rainbow();
     uint32_t bmpSize;                                                    // bmp格式彩虹图片像素数据大小
-    uint32_t width = 6;                                                  // 宽
-    uint32_t height = 6;                                                 // 高
+    uint32_t width = 711;                                                // 宽
+    uint32_t height = 711;                                               // 高
     uint32_t headLength = 54;                                            // 头文件的大小
     uint8_t *rainbowBmpData = rainbow->bmpData(&bmpSize, width, height); // 获取bmp格式彩虹图片像素数据
     std::cout << TAG << __FUNCTION__ << "():: LINE:" << __LINE__ << ",rainbowBmpData len:" << bmpSize << ",rainbowBmpData:" << rainbowBmpData << std::endl;
