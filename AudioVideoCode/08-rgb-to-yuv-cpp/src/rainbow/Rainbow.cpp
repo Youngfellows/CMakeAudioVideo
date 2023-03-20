@@ -8,6 +8,17 @@ Rainbow::Rainbow()
 Rainbow::~Rainbow()
 {
     std::cout << "Rainbow::" << __FUNCTION__ << "():: " << __LINE__ << std::endl;
+    destory();
+}
+
+void Rainbow::destory()
+{
+    std::cout << "Rainbow::" << __FUNCTION__ << "():: " << __LINE__ << std::endl;
+    if (bmpDataBytes != NULL)
+    {
+        free(bmpDataBytes);
+    }
+    bmpDataBytes = NULL;
 }
 
 /**
@@ -21,7 +32,7 @@ Rainbow::~Rainbow()
 uint8_t *Rainbow::bmpData(uint32_t *size, uint32_t width, uint32_t height)
 {
     std::cout << "Rainbow::" << __FUNCTION__ << "():: " << __LINE__ << ",width:" << width << ",height:" << height << std::endl;
-    *size = width * height;
+    //*size = width * height;
     bmpDataBytes = (uint8_t *)malloc(sizeof(uint8_t) * (abs(width) * abs(height))); // 动态申请内存
     std::cout << "Rainbow::" << __FUNCTION__ << "():: " << __LINE__ << ",bmpDataBytes sizeof:" << sizeof(bmpDataBytes) << ",bmpDataBytes len:" << (width * height) << ",bmpDataBytes:" << bmpDataBytes << std::endl;
     if (bmpDataBytes == NULL)
@@ -64,6 +75,7 @@ void Rainbow::createBmpFileHeaderData(uint8_t *bitmapData, uint32_t *size, uint3
     bmpFHeader.bfReserved1 = 0x00;
     bmpFHeader.bfReserved2 = 0;
     bmpFHeader.bfOffBits = 54; // 0x36
+    *size = bmpFHeader.bfSize; // 整个BMP文件大小
     std::cout << "bfType:" << bmpFHeader.bfType << std::endl;
     std::cout << "bfSize:" << bmpFHeader.bfSize << std::endl;
     std::cout << "bfReserved1:" << bmpFHeader.bfReserved1 << std::endl;
@@ -233,7 +245,7 @@ void Rainbow::createRainbowBmpPixelData(uint8_t *bitmapData, uint32_t *size, uin
         // uint8_t bulue = (currentColor & 0x0000FF);
         // unsigned int bulue = (currentColor & RGB24_MASK_BLUE);
         uint32_t bulue = (currentColor & RGB24_MASK_BLUE);
-        std::cout << "Rainbow::" << __FUNCTION__ << "():: XXXXXXXXX,i:" << i << ",(" << red << "," << green << "," << bulue << "),red sizeof:" << sizeof(red) << std::endl;
+        // std::cout << "Rainbow::" << __FUNCTION__ << "():: XXXXXXXXX,i:" << i << ",(" << red << "," << green << "," << bulue << "),red sizeof:" << sizeof(red) << std::endl;
 
         for (int j = 0; j < width; j++)
         {
@@ -255,7 +267,7 @@ void Rainbow::createRainbowBmpPixelData(uint8_t *bitmapData, uint32_t *size, uin
             memcpy(headLength + bmpData + currentIndex, &b, sizeof(uint8_t));
             memcpy(headLength + bmpData + currentIndex + 1, &g, sizeof(uint8_t));
             memcpy(headLength + bmpData + currentIndex + 2, &r, sizeof(uint8_t));
-            std::cout << "Rainbow::" << __FUNCTION__ << "():: " << __LINE__ << "(" << i << "," << j << ") 2,ele(" << bitmapData + currentIndex + 2 << "," << bitmapData + currentIndex + 1 << "," << bitmapData + currentIndex << "),red sizeof:" << sizeof(rgbPixel.red) << std::endl;
+            // std::cout << "Rainbow::" << __FUNCTION__ << "():: " << __LINE__ << "(" << i << "," << j << ") 2,ele(" << bitmapData + currentIndex + 2 << "," << bitmapData + currentIndex + 1 << "," << bitmapData + currentIndex << "),red sizeof:" << sizeof(rgbPixel.red) << std::endl;
         }
     }
 }
@@ -353,4 +365,39 @@ void Rainbow::rgb24Data(RGBPixel **pixels, uint32_t width, uint32_t height)
             std::cout << "Rainbow::" << __FUNCTION__ << "():: " << __LINE__ << "(" << i << "," << j << ") ele(" << ele.red << "," << ele.green << "," << ele.bulue << "),red sizeof:" << sizeof(ele.red) << std::endl;
         }
     }
+}
+
+/**
+ * @brief 保存rgb24像素数据到文件
+ *
+ * @param path
+ * @param data
+ * @param size
+ */
+bool Rainbow::saveRgb24(const char *path, uint8_t *data, uint32_t size)
+{
+    std::cout << "Rainbow::" << __FUNCTION__ << "():: " << __LINE__ << std::endl;
+    return true;
+}
+
+/**
+ * @brief 保存bmp像素数据到文件
+ *
+ * @param path
+ * @param data
+ * @param size
+ */
+bool Rainbow::saveBitmap(const char *path, uint8_t *data, uint32_t size)
+{
+    std::cout << "Rainbow::" << __FUNCTION__ << "():: " << __LINE__ << ",size:" << size << ",path:" << path << std::endl;
+    FILE *bitmapFile = fopen(path, "wb+"); // 获取文件指针
+    std::cout << "Rainbow::" << __FUNCTION__ << "():: " << __LINE__ << ",bitmapFile:" << bitmapFile << std::endl;
+    if (bitmapFile == NULL)
+    {
+        return false;
+    }
+    uint32_t len = fwrite(data, size, 1, bitmapFile); // 向文件中写入数据
+    std::cout << "Rainbow::" << __FUNCTION__ << "():: " << __LINE__ << ",size:" << size << ",len:" << len << std::endl;
+    fclose(bitmapFile); // 关闭文件
+    return true;
 }
