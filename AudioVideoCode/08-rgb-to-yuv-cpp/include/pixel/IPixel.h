@@ -22,7 +22,31 @@ public:
      * @param height
      * @return uint8_t*
      */
-    virtual uint8_t *bmpData(uint32_t *size, uint32_t width, uint32_t height) = 0;
+    virtual uint8_t *bmpCreate(uint32_t width, uint32_t height) = 0;
+
+    /**
+     * @brief 设置指定位置的rgb像素值
+     *
+     * @param bmpData bmp内存
+     * @param color RGB颜色值
+     * @param x
+     * @param y
+     */
+    virtual void setBmpPixel(uint8_t *bmpData, uint32_t color, uint32_t x, uint32_t y) = 0;
+
+    /**
+     * @brief 获取内存中的bmp位图数据
+     *
+     * @return uint8_t*
+     */
+    virtual uint8_t *bmpData() = 0;
+
+    /**
+     * @brief 获取BMP图片的大小
+     *
+     * @return uint32_t
+     */
+    virtual uint32_t getBmpSize() = 0;
 
     /**
      * @brief 纯虚函数,抽象接口: 生成图片的rgb24格式像素数据

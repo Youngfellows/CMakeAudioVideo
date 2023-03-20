@@ -6,7 +6,7 @@
 // #include <string.h>
 #include "./interfaces/IRGB24toYUV420p.h"
 #include "../bitmap/RGBPixel.h"
-#include "../rainbow/Rainbow.h"
+#include "../pixel/Bitmap.h"
 
 /**
  * @brief 实现类: rgb24转化为yuv420p
