@@ -1,4 +1,5 @@
 #include "../include/rgb2yuv/RGB24toYUV444p.h"
+#include <string>
 
 using namespace std;
 
@@ -9,10 +10,12 @@ int main(int arg, char **argv)
     const char *TAG = "SampleRGB24ToYUV444";
     std::cout << TAG << " " << __FUNCTION__ << " " << __LINE__ << std::endl;
 
-    const char *rgb24FilePath = "./res/rainbow-bmp-rgb24.rgb";
-    const char *yuv444pFilePath = "./resource/rainbow-rgb24-to-yuv444p.yuv";
     unsigned int width = 711;
     unsigned int height = 711;
+    std::string rgb24File = "./res/rainbow_" + std::to_string(width) + "x" + std::to_string(height) + "_rgb24.rgb";
+    std::string yuv444pFile = "./resource/rainbow_" + std::to_string(width) + "x" + std::to_string(height) + "_rgb24_to_yuv444p.yuv";
+    const char *rgb24FilePath = rgb24File.c_str();     // string 转化为字符串
+    const char *yuv444pFilePath = yuv444pFile.c_str(); // string 转化为字符串
 
     // 动态申请内存
     // RGB24toYUV444p *rgb24toyuv444p = new RGB24toYUV444p();

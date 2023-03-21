@@ -21,10 +21,13 @@ public:
     virtual bool createRGB24(uint32_t width, uint32_t height) override;  // 创建RGB24格式彩虹图片
     virtual void saveBitmap(const char *bmpFilePath) override;           // 保存BMP位图到文件
     virtual void saveRGB24(const char *rgb24FilePath) override;          // 保存RGB24位图到文件
+    virtual void destory() override;                                     // 释放资源
 
 private:
-    void destory();                            // 释放资源
     void createBmpPixels(uint8_t *bitmapData); // 设置BMP位图像素信息
+    void createRGB24Pixels();                  // 设置rgb24位图像素信息
+    void rgb24Destory();                       // 释放rgb24位图资源
+    void bmpDestory();                         // 释放BMP位图资源
 };
 
 #endif

@@ -17,11 +17,14 @@ int main(int arg, char **argv)
     std::cout << TAG << __FUNCTION__ << "():: LINE:" << __LINE__ << std::endl;
 
     // rgb24或bmp彩虹图片生成器,动态申请内存
-    uint32_t width = 711;                                          // 宽
-    uint32_t height = 711;                                         // 高
-    const char *bmpFilePath = "./resource/rainbow_711x711_bitmap.bmp"; // bmp图片保存路径
-    IRainbow *rainbow = new Rainbow();                             // 创建彩虹图片生成器对象
-    bool isCreate = rainbow->createBitmap(width, height);          // 创建BMP格式彩虹图片
+    uint32_t width = 711;  // 宽
+    uint32_t height = 711; // 高
+    // const char *bmpFilePath = "./resource/rainbow_711x711_bitmap.bmp"; // bmp图片保存路径
+    std::string bmpFile = "./res/rainbow_" + std::to_string(width) + "x" + std::to_string(height) + "_bitmap.bmp";
+    const char *bmpFilePath = bmpFile.c_str(); // string 转化为字符串
+
+    IRainbow *rainbow = new Rainbow();                    // 创建彩虹图片生成器对象
+    bool isCreate = rainbow->createBitmap(width, height); // 创建BMP格式彩虹图片
     if (isCreate)
     {
         rainbow->saveBitmap(bmpFilePath); // 保存位图

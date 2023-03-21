@@ -6,7 +6,8 @@
 @REM ffplay -pixel_format rgb24 -video_size 711x711 -i ./res/rainbow-bmp-rgb24.rgb
 @REM ffplay -pixel_format yuv444p -video_size 711x711 -framerate 5 ./res/rainbow-bmp-yuv444p.yuv
 @REM ffplay -pixel_format yuv420p -video_size 711x711 -framerate 5 ./res/rainbow-bmp-yuv420p.yuv
-ffplay -pixel_format yuv444p -video_size 711x711 -framerate 5 ./resource/rainbow-rgb24-to-yuv444p.yuv
+@REM ffplay -pixel_format yuv444p -video_size 711x711 -framerate 5 ./resource/rainbow-rgb24-to-yuv444p.yuv
 @REM ffplay -pixel_format yuv420p -video_size 700x700 -framerate 5 ./resource/rainbow-700x700-rgb24-toyuv420p.yuv
 @REM ffplay -pixel_format yuv420p -video_size 700x700 -framerate 5 ./resource/rainbow-700x700-yuv420p.yuv
 @REM ffplay -pixel_format yuv444p -video_size 711x711 -framerate 5 ./resource/rainbow-700x700-yuv420-to-yuv444.yuv
+ffplay -pixel_format yuv444p -video_size 711x711 -framerate 5 ./resource/rainbow_711x711_rgb24_to_yuv444p.yuv

@@ -29,11 +29,50 @@ bool RGB24::rgb24Create(uint32_t width, uint32_t height)
         return false;
     }
     bool isMallocRgb24 = mallocRgb24DataBytes(); // 按字节，申请rgb24像素内存空间
-    if (isMallocRgb24)
-    {
-        genRGB24Data();
-    }
     return isMallocRgb24;
+}
+
+/**
+ * @brief 设置RGB24图片每个像素的RGB颜色信息
+ *
+ * @param color 当前颜色值
+ * @param x x位置,行
+ * @param y y位置,列
+ */
+void RGB24::setRGB24Pixel(uint32_t color, uint32_t x, uint32_t y)
+{
+    //std::cout << "RGB24::" << __FUNCTION__ << "():: Line " << __LINE__ << std::endl;
+
+    // 获取当前颜色的 RGB 分量
+    uint32_t red = (color & RGB24_MASK_RED) >> 16;
+    uint32_t green = (color & RGB24_MASK_GREEN) >> 8;
+    uint32_t bulue = (color & RGB24_MASK_BLUE);
+
+    RGBPixel rgbPixel(red, green, bulue);
+
+    // std::cout << "RGB24::" << __FUNCTION__ << "():: " << __LINE__ << "(" << x << "," << y << ") ele(" << red << "," << rgbPixel.green << "," << rgbPixel.bulue << "),red sizeof:" << sizeof(rgbPixel.red) << std::endl;
+    //  pixels[i][j] = rgbPixel;
+    //  pixels[i][j].red = 66;
+    //  pixels[i][j].green = 255;
+    //  pixels[i][j].bulue = 77;
+    //(*(pixels + i) + j)->red = rgbPixel.red; // 为元素赋值
+    *(*(pixels + x) + y) = rgbPixel; // 为每一个像素赋值rgb颜色值
+
+    RGBPixel ele = *(*(pixels + x) + y);
+    uint8_t r = (uint8_t)red & 0xff;
+    uint8_t g = (uint8_t)green & 0xff;
+    uint8_t b = (uint8_t)bulue & 0xff;
+    // *(rgb24DataBytes + (i * width + j)) = r;
+    // *(rgb24DataBytes + (i * width + j)) + 1 = g;
+    // *(rgb24DataBytes + (i * width + j)) + 2 = b;
+
+    uint32_t index = (x * width + y) * 3;
+    uint32_t rgbColor = (r << 16) | (g << 8) | (b << 0);
+    //std::cout << "index:" << std::dec << index << "(" << x << "," << y << "),rgbColor(" << std::hex << rgbColor << ")" << std::endl;
+    uint8_t *rgb24Data = rgb24DataBytes + index;
+    memccpy(rgb24Data, &r, 1, sizeof(uint8_t));
+    memccpy(rgb24Data + 1, &g, 1, sizeof(uint8_t));
+    memccpy(rgb24Data + 2, &b, 1, sizeof(uint8_t));
 }
 
 /**
@@ -97,7 +136,7 @@ bool RGB24::genRGB24Data(const char *rgb24FilePath)
     // 为二维数组元素赋值
     for (int i = 0; i < height; i++)
     {
-        std::cout << "RGB24::" << __FUNCTION__ << "():: Line " << __LINE__ << ",i:" << i << std::endl;
+        //std::cout << "RGB24::" << __FUNCTION__ << "():: Line " << __LINE__ << ",i:" << i << std::endl;
         for (int j = 0; j < width; j++)
         {
             uint32_t currentIndex = 3 * (i * width + j);          // 当前位置索引
@@ -109,7 +148,7 @@ bool RGB24::genRGB24Data(const char *rgb24FilePath)
             uint32_t green = (*(*(pixels + i) + j)).green;
             uint32_t bulue = (*(*(pixels + i) + j)).bulue;
             uint32_t color = ((red & 0xFF) << 16) | ((green & 0xFF) << 8) | (bulue & 0xFF);
-            std::cout << "rgb(" << color << ") ";
+            //std::cout << "rgb(" << color << ") ";
         }
     }
     return true;
@@ -231,7 +270,7 @@ uint32_t RGB24::rgb24DataSize()
 }
 
 /**
- * @brief 释放资源
+ * @brief 释放二维数组资源
  *
  */
 void RGB24::destory()
@@ -241,11 +280,14 @@ void RGB24::destory()
     {
         for (int i = 0; i < height; i++)
         {
-            free(pixels + i); // 释放内存
-            // free(pixels[i]);  // 释放内存
+            // std::cout << "RGB24::" << __FUNCTION__ << "():: Line " << __LINE__ << std::endl;
+            free(*(pixels + i)); // 释放内存
+            // free(pixels[i]); // 释放内存
         }
     }
+    free(pixels);
     pixels = NULL;
+    // std::cout << "RGB24::" << __FUNCTION__ << "():: Line " << __LINE__ << std::endl;
     if (rgb24DataBytes != NULL)
     {
         free(rgb24DataBytes);
@@ -334,92 +376,4 @@ void RGB24::displayPixels()
         }
         std::cout << std::endl;
     }
-}
-
-/**
- * @brief 生成彩虹图片的rgb24格式数据
- */
-bool RGB24::genRGB24Data()
-{
-    std::cout << "RGB24::" << __FUNCTION__ << "():: " << __LINE__ << pixels << std::endl;
-    for (int i = 0; i < height; i++)
-    {
-        uint32_t currentColor = RAINBOW_COLORS[0]; // 获取改行的rgb彩虹颜色
-        if (i < 100)
-        {
-            currentColor = RAINBOW_COLORS[0]; // 赤色
-        }
-        else if (i < 200)
-        {
-            currentColor = RAINBOW_COLORS[1]; // 橙色
-        }
-        else if (i < 300)
-        {
-            currentColor = RAINBOW_COLORS[2]; // 红色
-        }
-        else if (i < 400)
-        {
-            currentColor = RAINBOW_COLORS[3]; // 绿色
-        }
-        else if (i < 500)
-        {
-            currentColor = RAINBOW_COLORS[4]; // 青色
-        }
-        else if (i < 600)
-        {
-            currentColor = RAINBOW_COLORS[5]; // 蓝色
-        }
-        else if (i < 700)
-        {
-            currentColor = RAINBOW_COLORS[6]; // 紫色
-        }
-
-        // uint8_t red = (currentColor & 0xFF0000) >> 16;
-        //  unsigned int red = (currentColor & 0xFF0000) >> 16;
-        uint32_t red = (currentColor & 0xFF0000) >> 16;
-
-        // 获取当前颜色的 G 分量
-        // uint8_t green = (currentColor & 0x00FF00) >> 8;
-        // unsigned int green = (currentColor & RGB24_MASK_GREEN) >> 8;
-        uint32_t green = (currentColor & RGB24_MASK_GREEN) >> 8;
-
-        // 获取当前颜色的 B 分量
-        // uint8_t bulue = (currentColor & 0x0000FF);
-        // unsigned int bulue = (currentColor & RGB24_MASK_BLUE);
-        uint32_t bulue = (currentColor & RGB24_MASK_BLUE);
-        std::cout << "RGB24::" << __FUNCTION__ << "():: ssssssss,i:" << i << ",(" << red << "," << green << "," << bulue << "),red sizeof:" << sizeof(red) << "," << (pixels + i) << std::endl;
-
-        for (int j = 0; j < width; j++)
-        {
-            RGBPixel rgbPixel(red, green, bulue);
-            // rgbPixel.red = red;     // 右移16位之后,有效数据其实只要1个字节8位,可以赋值
-            // rgbPixel.green = green; // 右移8位之后,有效数据其实只要1个字节8位,可以赋值
-            // rgbPixel.bulue = bulue; // 右移0位之后,有效数据其实只要1个字节8位,可以赋值
-
-            std::cout << "RGB24::" << __FUNCTION__ << "():: " << __LINE__ << "(" << i << "," << j << ") ele(" << red << "," << rgbPixel.green << "," << rgbPixel.bulue << "),red sizeof:" << sizeof(rgbPixel.red) << std::endl;
-            // pixels[i][j] = rgbPixel;
-            // pixels[i][j].red = 66;
-            // pixels[i][j].green = 255;
-            // pixels[i][j].bulue = 77;
-            //(*(pixels + i) + j)->red = rgbPixel.red; // 为元素赋值
-            *(*(pixels + i) + j) = rgbPixel; // 为每一个像素赋值rgb颜色值
-
-            RGBPixel ele = *(*(pixels + i) + j);
-            std::cout << "RGB24::" << __FUNCTION__ << "():: " << __LINE__ << "(" << i << "," << j << ") ele(" << ele.red << "," << ele.green << "," << ele.bulue << "),red sizeof:" << sizeof(ele.red) << std::endl;
-
-            uint8_t r = (uint8_t)red & 0xff;
-            uint8_t g = (uint8_t)green & 0xff;
-            uint8_t b = (uint8_t)bulue & 0xff;
-            // *(rgb24DataBytes + (i * width + j)) = r;
-            // *(rgb24DataBytes + (i * width + j)) + 1 = g;
-            // *(rgb24DataBytes + (i * width + j)) + 2 = b;
-
-            uint8_t *rgb24Data = rgb24DataBytes + (i * width + j) * 3;
-            memccpy(rgb24Data, &r, 1, sizeof(uint8_t));
-            memccpy(rgb24Data + 1, &g, 1, sizeof(uint8_t));
-            memccpy(rgb24Data + 2, &b, 1, sizeof(uint8_t));
-        }
-    }
-
-    return true;
 }

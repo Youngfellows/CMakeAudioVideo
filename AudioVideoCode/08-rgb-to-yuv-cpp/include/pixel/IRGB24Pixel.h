@@ -30,6 +30,21 @@ public:
     virtual bool rgb24Create(const char *rgb24FilePath, uint32_t width, uint32_t height) = 0;
 
     /**
+     * @brief 设置RGB24图片每个像素的RGB颜色信息
+     *
+     * @param color 当前颜色值
+     * @param x x位置
+     * @param y y位置
+     */
+    virtual void setRGB24Pixel(uint32_t color, uint32_t x, uint32_t y) = 0;
+
+    /**
+     * @brief 打印图片像素信息
+     *
+     */
+    virtual void displayPixels() = 0;
+
+    /**
      * @brief 获取rgb24内存数据
      *
      * @return uint8_t*

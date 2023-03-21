@@ -29,12 +29,12 @@ public:
     virtual uint32_t rgb24DataSize() override;                                                     // 获取rgb24像素数据字节大小
     virtual void saveRgb24(const char *rgb24FilePath) override;                                    // 保存rgb24像素数据到文件
     virtual void destory() override;                                                               // 释放内存
-    void displayPixels();                                                                          // 打印图片像素信息
+    virtual void displayPixels() override;                                                         // 打印图片像素信息
+    virtual void setRGB24Pixel(uint32_t color, uint32_t x, uint32_t y) override;                   // 设置每个像素位置的rgb颜色信息
 
 private:
     bool mallocPixels();                               // 按像素,申请rgb24像素信息内存
     bool mallocRgb24DataBytes();                       // 按字节,申请rgb24像素信息内存
-    bool genRGB24Data();                               // 生成rgb24数据
     bool genRGB24Data(const char *rgb24FilePath);      // 获取rgb24文件的像素信息
     uint8_t *readRgb24Data(const char *rgb24FilePath); // 读取rgb24文件字节数据
     size_t getFileSize(const char *filePath);          // 获取文件大小

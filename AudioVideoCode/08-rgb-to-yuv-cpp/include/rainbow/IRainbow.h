@@ -2,6 +2,7 @@
 #define _IRAINBOW_H_
 
 #include "../pixel/Bitmap.h"
+#include "../pixel/RGB24.h"
 
 /**
  * @brief 抽象类: 抽象彩虹图片生成器
@@ -11,6 +12,7 @@ class IRainbow
 {
 protected:
     IBitmapPixel *bitmap; // BMP位图对象
+    IRGB24Pixel *rgb24;   // rgb24位图图像
 
 public:
     ~IRainbow() = default;
@@ -44,5 +46,11 @@ public:
      * @param rgb24FilePath
      */
     virtual void saveRGB24(const char *rgb24FilePath) = 0;
+
+    /**
+     * @brief 释放资源
+     *
+     */
+    virtual void destory() = 0;
 };
 #endif
