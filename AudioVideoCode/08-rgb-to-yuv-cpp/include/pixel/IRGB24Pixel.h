@@ -37,6 +37,13 @@ public:
     virtual uint8_t *rgb24Data() = 0;
 
     /**
+     * @brief 获取rgb24像素数据字节大小
+     *
+     * @return uint32_t
+     */
+    virtual uint32_t rgb24DataSize() = 0;
+
+    /**
      * @brief 保存rgb24像素数据到文件
      *
      * @param path 保存的文件路径

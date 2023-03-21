@@ -10,17 +10,25 @@ RGB24::~RGB24()
     std::cout << "RGB24::" << __FUNCTION__ << "():: Line " << __LINE__ << std::endl;
 }
 
+/**
+ * @brief 初始化rgb24数据
+ *
+ * @param width 宽
+ * @param height 高
+ * @return true
+ * @return false
+ */
 bool RGB24::rgb24Create(uint32_t width, uint32_t height)
 {
     std::cout << "RGB24::" << __FUNCTION__ << "():: Line " << __LINE__ << std::endl;
     this->width = abs(width);
     this->height = abs(height);
-    bool isMalloc = mallocPixels();
-    if (!isMalloc)
+    bool isMallocPixel = mallocPixels(); // 按像素，申请rgb24像素内存空间
+    if (!isMallocPixel)
     {
         return false;
     }
-    bool isMallocRgb24 = mallocRgb24DataBytes();
+    bool isMallocRgb24 = mallocRgb24DataBytes(); // 按字节，申请rgb24像素内存空间
     if (isMallocRgb24)
     {
         genRGB24Data();
@@ -28,44 +36,229 @@ bool RGB24::rgb24Create(uint32_t width, uint32_t height)
     return isMallocRgb24;
 }
 
+/**
+ * @brief 初始化rgb24数据
+ *
+ * @param rgb24FilePath rgb24文件路径
+ * @param width 宽
+ * @param height 高
+ * @return true
+ * @return false
+ */
 bool RGB24::rgb24Create(const char *rgb24FilePath, uint32_t width, uint32_t height)
 {
     std::cout << "RGB24::" << __FUNCTION__ << "():: Line " << __LINE__ << std::endl;
     this->width = abs(width);
     this->height = abs(height);
-    bool isMalloc = mallocPixels();
-    return true;
+    bool isMallocPixel = mallocPixels(); // 按像素，申请rgb24像素内存空间
+    if (!isMallocPixel)
+    {
+        return false;
+    }
+    bool isMallocRgb24 = mallocRgb24DataBytes(); // 按字节，申请rgb24像素内存空间
+    if (isMallocRgb24)
+    {
+        bool isGenRGB24 = genRGB24Data(rgb24FilePath); // 生成rgb24文件的像素数据
+        return isGenRGB24;
+    }
+    return false;
 }
 
+/**
+ * @brief 获取rgb24字节数据
+ *
+ * @return uint8_t*
+ */
 uint8_t *RGB24::rgb24Data()
 {
     std::cout << "RGB24::" << __FUNCTION__ << "():: Line " << __LINE__ << std::endl;
     return this->rgb24DataBytes;
 }
 
-void RGB24::genRGB24Data(const char *rgb24FilePath)
+/**
+ * @brief 生成rgb24文件的像素数据
+ *
+ * @param rgb24FilePath
+ */
+bool RGB24::genRGB24Data(const char *rgb24FilePath)
 {
     std::cout << "RGB24::" << __FUNCTION__ << "():: Line " << __LINE__ << std::endl;
+    uint8_t *rgb24Data = readRgb24Data(rgb24FilePath); // 读取rgb24文件数据
+    if (rgb24Data == NULL)
+    {
+        return false;
+    }
+
+    if (pixels == NULL)
+    {
+        return false;
+    }
+
+    // 为二维数组元素赋值
+    for (int i = 0; i < height; i++)
+    {
+        std::cout << "RGB24::" << __FUNCTION__ << "():: Line " << __LINE__ << ",i:" << i << std::endl;
+        for (int j = 0; j < width; j++)
+        {
+            uint32_t currentIndex = 3 * (i * width + j);          // 当前位置索引
+            pixels[i][j].red = *(rgb24Data + currentIndex);       // 获取内存中的red数据，为二维数组元素赋值
+            pixels[i][j].green = *(rgb24Data + currentIndex + 1); // 获取内存中的green数据，为二维数组元素赋值
+            pixels[i][j].bulue = *(rgb24Data + currentIndex + 2); // 获取内存中的bulue数据，为二维数组元素赋值
+
+            uint32_t red = (*(*(pixels + i) + j)).red;
+            uint32_t green = (*(*(pixels + i) + j)).green;
+            uint32_t bulue = (*(*(pixels + i) + j)).bulue;
+            uint32_t color = ((red & 0xFF) << 16) | ((green & 0xFF) << 8) | (bulue & 0xFF);
+            std::cout << "rgb(" << color << ") ";
+        }
+    }
+    return true;
 }
 
+/**
+ * @brief 读取rgb24文件字节数据
+ *
+ * @param rgb24FilePath
+ * @return uint8_t*
+ */
+uint8_t *RGB24::readRgb24Data(const char *rgb24FilePath)
+{
+    std::cout << "RGB24::" << __FUNCTION__ << "():: Line " << __LINE__ << std::endl;
+    FILE *rgb24File = fopen(rgb24FilePath, "rb"); // 获取rgb24文件指针
+    if (rgb24File == NULL)
+    {
+        return NULL;
+    }
+    size_t fileSize = getFileSize(rgb24FilePath); // 获取文件大小
+    uint32_t rgb24size = rgb24DataSize();         // 获取rgb24文件字节数据大小
+    std::cout << "RGB24::" << __FUNCTION__ << "():: Line " << __LINE__ << ",fileSize:" << fileSize << ",rgb24size:" << rgb24size << std::endl;
+    if (fileSize == 0)
+    {
+        return NULL;
+    }
+
+    if (fileSize < rgb24size)
+    {
+        this->height = fileSize / 2;
+        this->width = fileSize / 2;
+        std::cout << "RGB24::" << __FUNCTION__ << "():: Line " << __LINE__ << ",文件太小了,从新设置大小,width:" << width << ",height:" << height << std::endl;
+        reMalloc(); // 重新申请内存空间
+    }
+
+    if (rgb24DataBytes == NULL)
+    {
+        return NULL;
+    }
+
+    rgb24size = rgb24DataSize();                                 // 从新获取rgb24文件字节数据大小
+    size_t len = fread(rgb24DataBytes, rgb24size, 1, rgb24File); // 读取rgb24文件字节数据
+    std::cout << "RGB24::" << __FUNCTION__ << "():: Line " << __LINE__ << ",read len:" << len << std::endl;
+    fclose(rgb24File); // 关闭文件
+    return rgb24DataBytes;
+}
+
+/**
+ * @brief 重新申请内存空间
+ *
+ * @return true
+ * @return false
+ */
+bool RGB24::reMalloc()
+{
+    std::cout << "RGB24::" << __FUNCTION__ << "():: Line " << __LINE__ << std::endl;
+    destory();                           // 先释放内存
+    bool isMallocPixel = mallocPixels(); // 按像素，申请rgb24像素内存空间
+    if (!isMallocPixel)
+    {
+        return false;
+    }
+    bool isMallocRgb24 = mallocRgb24DataBytes(); // 按字节，申请rgb24像素内存空间
+    return isMallocRgb24;
+}
+
+/**
+ * @brief 获取文件大小
+ *
+ * @param filePath
+ * @return size_t
+ */
+size_t RGB24::getFileSize(const char *filePath)
+{
+    std::cout << "RGB24::" << __FUNCTION__ << "():: Line " << __LINE__ << std::endl;
+    if (filePath == NULL)
+    {
+        return 0;
+    }
+    // 这是一个存储文件(夹)信息的结构体，其中有文件大小和创建时间、访问时间、修改时间等
+    struct stat statbuf;
+
+    // 提供文件名字符串，获得文件属性结构体
+    stat(filePath, &statbuf);
+
+    // 获取文件大小
+    size_t filesize = statbuf.st_size;
+    return filesize;
+}
+
+/**
+ * @brief 保存rgb24像素数据到内存
+ *
+ * @param rgb24FilePath 文件路径
+ */
 void RGB24::saveRgb24(const char *rgb24FilePath)
 {
     std::cout << "RGB24::" << __FUNCTION__ << "():: xxx Line " << __LINE__ << std::endl;
-    FILE *rgb24File = fopen(rgb24FilePath, "wb+"); // 获取文件指针
+    FILE *rgb24File = fopen(rgb24FilePath, "wb+"); // 获取rgb24文件指针
     std::cout << "RGB24::" << __FUNCTION__ << "():: " << __LINE__ << ",rgb24File:" << rgb24File << std::endl;
     if (rgb24File == NULL)
     {
         return;
     }
-    uint32_t len = fwrite(rgb24DataBytes, width * height, 1, rgb24File); // 向文件中写入数据
-    fclose(rgb24File);                                                   // 关闭文件
+    uint32_t size = rgb24DataSize();                           // 获取rgb24像素数据字节大小
+    uint32_t len = fwrite(rgb24DataBytes, size, 1, rgb24File); // 向文件中写入数据
+    fclose(rgb24File);                                         // 关闭文件
 }
 
+/**
+ * @brief 获取rgb24文件字节数据大小
+ *
+ * @return uint32_t
+ */
+uint32_t RGB24::rgb24DataSize()
+{
+    std::cout << "RGB24::" << __FUNCTION__ << "():: Line " << __LINE__ << std::endl;
+    return width * height * 3;
+}
+
+/**
+ * @brief 释放资源
+ *
+ */
 void RGB24::destory()
 {
     std::cout << "RGB24::" << __FUNCTION__ << "():: Line " << __LINE__ << std::endl;
+    if (pixels != NULL)
+    {
+        for (int i = 0; i < height; i++)
+        {
+            free(pixels + i); // 释放内存
+            // free(pixels[i]);  // 释放内存
+        }
+    }
+    pixels = NULL;
+    if (rgb24DataBytes != NULL)
+    {
+        free(rgb24DataBytes);
+    }
+    rgb24DataBytes = NULL;
 }
 
+/**
+ * @brief 按像素，申请rgb24像素内存空间
+ *
+ * @return true
+ * @return false
+ */
 bool RGB24::mallocPixels()
 {
     std::cout << "RGB24::" << __FUNCTION__ << "():: Line " << __LINE__ << std::endl;
@@ -105,10 +298,16 @@ bool RGB24::mallocPixels()
     return true;
 }
 
+/**
+ * @brief 按字节，申请rgb24像素内存空间
+ *
+ * @return true
+ * @return false
+ */
 bool RGB24::mallocRgb24DataBytes()
 {
     std::cout << "RGB24::" << __FUNCTION__ << "():: Line " << __LINE__ << std::endl;
-    this->rgb24DataBytes = (uint8_t *)malloc(sizeof(uint8_t) * width * height); // 申请连续内存空间
+    this->rgb24DataBytes = (uint8_t *)malloc(sizeof(uint8_t) * width * height * 3); // 申请连续内存空间
     if (rgb24DataBytes == NULL)
     {
         return false;
@@ -116,6 +315,10 @@ bool RGB24::mallocRgb24DataBytes()
     return true;
 }
 
+/**
+ * @brief 显示内存rgb24像素信息
+ *
+ */
 void RGB24::displayPixels()
 {
     std::cout << "RGB24::" << __FUNCTION__ << "():: Line " << __LINE__ << std::endl;
@@ -136,7 +339,7 @@ void RGB24::displayPixels()
 /**
  * @brief 生成彩虹图片的rgb24格式数据
  */
-void RGB24::genRGB24Data()
+bool RGB24::genRGB24Data()
 {
     std::cout << "RGB24::" << __FUNCTION__ << "():: " << __LINE__ << pixels << std::endl;
     for (int i = 0; i < height; i++)
@@ -211,10 +414,12 @@ void RGB24::genRGB24Data()
             // *(rgb24DataBytes + (i * width + j)) + 1 = g;
             // *(rgb24DataBytes + (i * width + j)) + 2 = b;
 
-            uint8_t *rgb24Data = rgb24DataBytes + i * width + j;
+            uint8_t *rgb24Data = rgb24DataBytes + (i * width + j) * 3;
             memccpy(rgb24Data, &r, 1, sizeof(uint8_t));
             memccpy(rgb24Data + 1, &g, 1, sizeof(uint8_t));
             memccpy(rgb24Data + 2, &b, 1, sizeof(uint8_t));
         }
     }
+
+    return true;
 }
