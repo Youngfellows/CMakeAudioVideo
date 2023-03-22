@@ -11,15 +11,15 @@ PARENT_ROOT=$(cd $(dirname $0); cd ..; pwd)
 echo "parent root:${PARENT_ROOT}"
 
 # 设置resource目录
-RESOURCE_DIR=${BUILD_ROOT}/res
+RESOURCE_DIR=${BUILD_ROOT}/res2
 if [ -e ${RESOURCE_DIR} ]; then
     echo "rm -rf ${RESOURCE_DIR}"
     rm -rf ${RESOURCE_DIR}
 fi
 mkdir -p ${RESOURCE_DIR}
 
-# 获取rainbow-700x700.bmp图片路径
-BMP_FILE_NAME="rainbow-700x700.bmp"
+# 获取rainbow_700x700.bmp图片路径
+BMP_FILE_NAME="rainbow_711x711.bmp"
 SRC_BMP_FILE_PATH=${PARENT_ROOT}/03_rgb_to_bmp/resource/${BMP_FILE_NAME}
 echo "bitmap file path:${SRC_BMP_FILE_PATH}"
 
@@ -36,9 +36,11 @@ cp ${SRC_BMP_FILE_PATH} ${BMP_FILE_PATH}
 # 使用ffmpeg命令,把bmp转化为rgb24和yuv444
 # ffmpeg -i ./res/rainbow-700x700.bmp -video_size 711x711 -pix_fmt rgb24 ./res/rainbow-bmp-rgb24.rgb
 # ffmpeg -i ./res/rainbow-700x700.bmp -video_size 711x711 -pix_fmt yuv444p ./res/rainbow-bmp-yuv444p.yuv
-RGB24_FILE_PATH=${RESOURCE_DIR}/rainbow-bmp-rgb24.rgb
-YUV444_FILE_PATH=${RESOURCE_DIR}/rainbow-bmp-yuv444p.yuv
-YUV420_FILE_PATH=${RESOURCE_DIR}/rainbow-bmp-yuv420p.yuv
+# rainbow_" + std::to_string(width) + "x" + std::to_string(height) + "_yuv444p.bmp
+# rainbow_711x711_bmp_yuv444p.yuv
+RGB24_FILE_PATH=${RESOURCE_DIR}/rainbow-_711x711_bmp_rgb24.rgb
+YUV444_FILE_PATH=${RESOURCE_DIR}/rainbow_711x711_bmp_yuv444p.yuv
+YUV420_FILE_PATH=${RESOURCE_DIR}/rainbow_711x711_bmp_yuv420p.yuv
 ffmpeg -i ${BMP_FILE_PATH} -video_size 711x711 -pix_fmt rgb24 ${RGB24_FILE_PATH}
 ffmpeg -i ${BMP_FILE_PATH} -video_size 711x711 -pix_fmt yuv444p ${YUV444_FILE_PATH}
 ffmpeg -i ${BMP_FILE_PATH} -video_size 711x711 -pix_fmt yuv420p ${YUV420_FILE_PATH}
@@ -47,9 +49,9 @@ ffmpeg -i ${BMP_FILE_PATH} -video_size 711x711 -pix_fmt yuv420p ${YUV420_FILE_PA
 ARCH=`arch`
 if [[ $ARCH =~ "x86_64" ]];then
     echo "ARCH is x86_64"
-elif [[ $ARCH =~ "aarch64" ]];then
+    elif [[ $ARCH =~ "aarch64" ]];then
     echo "ARCH is arm64"
-elif [[ $ARCH =~ "mips64" ]];then
+    elif [[ $ARCH =~ "mips64" ]];then
     echo "ARCH is mips64"
 else
     echo "Unknown ARCH!!"
