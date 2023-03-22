@@ -35,6 +35,12 @@ public:
      * @param yuv420pFilePath yuv420p文件路径
      */
     virtual void rgb24ToYuv420p(const char *yuv420pFilePath) = 0;
+
+    /**
+     * @brief 释放资源
+     *
+     */
+    virtual void destory() = 0;
 };
 
 #endif

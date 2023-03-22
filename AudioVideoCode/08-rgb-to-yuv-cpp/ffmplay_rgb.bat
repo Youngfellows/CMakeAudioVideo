@@ -8,4 +8,5 @@
 
 @REM ffplay -pixel_format rgb24 -video_size 711x711 -i ./res2/rainbow-_711x711_bmp_rgb24.rgb
 
-ffplay -pixel_format rgb24 -video_size 711x711 -i ./resource/rainbow_711x711_yuv444p_to_rgb24.rgb
+@REM ffplay -pixel_format rgb24 -video_size 711x711 -i ./resource/rainbow_711x711_yuv444p_to_rgb24.rgb
+ffplay -pixel_format rgb24 -video_size 711x711 -i ./resource/rainbow_711x711_rgb24_to_yuv420p_xxx.yuv

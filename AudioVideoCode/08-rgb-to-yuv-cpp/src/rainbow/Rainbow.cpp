@@ -134,7 +134,7 @@ void Rainbow::destory()
 }
 
 /**
- * @brief 设置rgb24位图像素信息
+ * @brief 设置彩虹图片rgb24位图像素信息
  *
  */
 void Rainbow::createRGB24Pixels()

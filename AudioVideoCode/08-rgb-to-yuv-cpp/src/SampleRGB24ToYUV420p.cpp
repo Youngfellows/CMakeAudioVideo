@@ -21,7 +21,7 @@ int main(int arg, char **argv)
     uint32_t height = atof(argv[2]); // 高
 
     std::string rgb24File = "./res/rainbow_" + std::to_string(width) + "x" + std::to_string(height) + "_rgb24.rgb";
-    std::string yuv420pFile = "./res/rainbow_" + std::to_string(width) + "x" + std::to_string(height) + "_rgb24_to_yuv420p.yuv";
+    std::string yuv420pFile = "./resource/rainbow_" + std::to_string(width) + "x" + std::to_string(height) + "_rgb24_to_yuv420p_xxx.yuv";
     const char *rgb24FilePath = rgb24File.c_str();     // string 转化为字符串
     const char *yuv420pFilePath = yuv420pFile.c_str(); // string 转化为字符串
 
@@ -33,8 +33,8 @@ int main(int arg, char **argv)
     {
         rgb24toYuv420p->rgb24ToYuv420p(yuv420pFilePath); // rgb24转化为yuv420p
     }
-
-    delete rgb24toYuv420p; // 释放内存
+    rgb24toYuv420p->destory(); // 释放资源
+    delete rgb24toYuv420p;     // 释放内存
 
     return 0;
 }
