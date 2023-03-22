@@ -26,9 +26,32 @@ bool RGB24toYUV420p::create(uint32_t width, uint32_t height)
     bool isCreate = rainbow->createRGB24(width, height); // 初始化彩虹图片rgb24像素信息
     if (isCreate)
     {
-        return createRainbowRGB24Pixels(); // 创建彩虹图片的RGB24图片信息
+        isCreate = createRainbowRGB24Pixels(); // 创建彩虹图片的RGB24图片信息
+        if (isCreate)
+        {
+            return mallocYuv420pPixels(); // 申请yuv420p内存空间
+        }
     }
     return false;
+}
+
+/**
+ * @brief 申请yuv420p内存空间
+ *
+ * @return true
+ * @return false
+ */
+bool RGB24toYUV420p::mallocYuv420pPixels()
+{
+    uint32_t size = width * height * 3 / 2;
+    std::cout << "RGB24toYUV420p::" << __FUNCTION__ << "():: " << __LINE__ << ",size:" << size << std::endl;
+    this->yuv420pData = (uint8_t *)malloc(sizeof(uint8_t) * size); // 申请yuv420p内存空间
+    if (yuv420pData == NULL)
+    {
+        return false;
+    }
+    memset(yuv420pData, 0, size); // 清空yuv420p内存空间
+    return true;
 }
 
 /**
@@ -48,7 +71,11 @@ bool RGB24toYUV420p::createRainbowRGB24Pixels()
     {
         return false;
     }
-    return true;
+    else
+    {
+        return mallocYuv420pPixels(); // 申请yuv420p内存空间
+    }
+    return false;
 }
 
 /**
@@ -101,6 +128,27 @@ bool RGB24toYUV420p::create(uint32_t width, uint32_t height, const char *rgb24Fi
 void RGB24toYUV420p::rgb24ToYuv420p(const char *yuv420pFilePath)
 {
     std::cout << "RGB24toYUV420p::" << __FUNCTION__ << "():: " << __LINE__ << std::endl;
+    rgb24ToYuv420p();
+    saveYuv420p(yuv420pFilePath);
+}
+
+/**
+ * @brief rgb24转化为yuv420p
+ *
+ */
+void RGB24toYUV420p::rgb24ToYuv420p()
+{
+    std::cout << "RGB24toYUV420p::" << __FUNCTION__ << "():: " << __LINE__ << std::endl;
+}
+
+/**
+ * @brief 保存yuv420p到文件
+ *
+ * @param yuv420pFilePath
+ */
+void RGB24toYUV420p::saveYuv420p(const char *yuv420pFilePath)
+{
+    std::cout << "RGB24toYUV420p::" << __FUNCTION__ << "():: " << __LINE__ << std::endl;
     FILE *yuv420pFile = fopen(yuv420pFilePath, "wb"); // 获取文件指针
     if (yuv420pFile == NULL)
     {
@@ -134,4 +182,9 @@ void RGB24toYUV420p::destory()
         rainbow->destory();
     }
     rainbow = NULL;
+    if (yuv420pData != NULL)
+    {
+        free(yuv420pData);
+    }
+    yuv420pData = NULL;
 }
