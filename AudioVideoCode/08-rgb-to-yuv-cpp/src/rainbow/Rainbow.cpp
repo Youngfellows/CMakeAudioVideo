@@ -67,8 +67,8 @@ void Rainbow::saveBitmap(const char *bmpFilePath)
     if (bitmap != NULL)
     {
         // uint8_t *rainbowBmpData = bitmap->bmpCreate(width, height); // 获取内存中的bmp位图数据
-        uint8_t *rainbowBmpData = bitmap->bmpData();              // 获取内存中的bmp位图数据
-        createBmpPixels(rainbowBmpData);                          // 设置彩虹图像BMP位图像素信息
+        uint8_t *rainbowBmpData = bitmap->bmpData(); // 获取内存中的bmp位图数据
+        // createBmpPixels(rainbowBmpData);                          // 设置彩虹图像BMP位图像素信息
         uint32_t bmpSize = bitmap->getBmpSize();                  // 获取bmp文件大小
         bitmap->saveBitmap(bmpFilePath, rainbowBmpData, bmpSize); // 保存bmp数据到文件
         // destory();                                                   // 释放资源
@@ -86,10 +86,40 @@ void Rainbow::saveRGB24(const char *rgb24FilePath)
     if (rgb24 != NULL)
     {
         // uint8_t *rgb24Data = rgb24->rgb24Data();
-        createRGB24Pixels();             // 设置rgb24彩虹数据
+        // createRGB24Pixels();             // 设置rgb24彩虹数据
         rgb24->saveRgb24(rgb24FilePath); // 保存rgb24文件
         // destory(); // 释放资源
     }
+}
+
+/**
+ * @brief 获取彩虹图片的BMP格式内存数据
+ *
+ * @return uint8_t*
+ */
+uint8_t *Rainbow::rainbowBmpData()
+{
+    std::cout << "Rainbow::" << __FUNCTION__ << "():: " << __LINE__ << std::endl;
+    if (bitmap != NULL)
+    {
+        return bitmap->bmpData(); // 获取bmp内存数据
+    }
+    return NULL;
+}
+
+/**
+ * @brief 获取彩虹图片的RGB24格式内存数据
+ *
+ * @return uint8_t*
+ */
+uint8_t *Rainbow::rainbowRGB24Data()
+{
+    std::cout << "Rainbow::" << __FUNCTION__ << "():: " << __LINE__ << std::endl;
+    if (rgb24 != NULL)
+    {
+        return rgb24->rgb24Data(); // 获取rgb24内存数据
+    }
+    return NULL;
 }
 
 /**
@@ -181,16 +211,15 @@ void Rainbow::bmpDestory()
 /**
  * @brief 设置彩虹图像BMP位图像素信息
  *
- * @param bitmapData bmp位图内存空间
  */
-void Rainbow::createBmpPixels(uint8_t *bitmapData)
+void Rainbow::createBmpPixels()
 {
     std::cout << "Rainbow::" << __FUNCTION__ << "():: " << __LINE__ << ",width:" << width << ",height:" << height << std::endl;
     if (bitmap == NULL)
     {
         return;
     }
-    uint8_t *bmpData = bitmapData; // bmp内存
+    uint8_t *bmpData = bitmap->bmpData(); // 获取内存中的bmp位图数据
     double perHeight = height * 1.0 / 7.0;
     std::cout << "Rainbow::" << __FUNCTION__ << "():: " << __LINE__ << ",perHeight:" << perHeight << std::endl;
     for (int i = 0; i < height; i++)

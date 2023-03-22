@@ -34,6 +34,33 @@ public:
     virtual bool createRGB24(uint32_t width, uint32_t height) = 0;
 
     /**
+     * @brief 设置BMP位图像素信息
+     *
+     * @param bitmapData
+     */
+    virtual void createBmpPixels() = 0;
+
+    /**
+     * @brief 设置rgb24位图像素信息
+     *
+     */
+    virtual void createRGB24Pixels() = 0;
+
+    /**
+     * @brief 获取彩虹图片的BMP格式内存数据
+     *
+     * @return uint8_t*
+     */
+    virtual uint8_t *rainbowBmpData() = 0;
+
+    /**
+     * @brief 获取彩虹图片的RGB24格式内存数据
+     *
+     * @return uint8_t*
+     */
+    virtual uint8_t *rainbowRGB24Data() = 0;
+
+    /**
      * @brief 保存BMP位图到文件
      *
      * @param bmpFilePath

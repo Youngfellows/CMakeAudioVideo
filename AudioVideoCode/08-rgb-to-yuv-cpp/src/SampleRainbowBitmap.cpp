@@ -34,6 +34,7 @@ int main(int arg, char **argv)
     bool isCreate = rainbow->createBitmap(width, height); // 创建BMP格式彩虹图片
     if (isCreate)
     {
+        rainbow->createBmpPixels();       // 设置彩虹图像BMP位图像素信息
         rainbow->saveBitmap(bmpFilePath); // 保存位图
     }
     delete rainbow; // 释放内存

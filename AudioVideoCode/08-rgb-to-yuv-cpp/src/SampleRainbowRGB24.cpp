@@ -36,6 +36,7 @@ int main(int arg, char **argv)
     bool isCreate = rgb24Rainbow->createRGB24(width, height);
     if (isCreate)
     {
+        rgb24Rainbow->createRGB24Pixels();      // 设置rgb24位图像素信息
         rgb24Rainbow->saveRGB24(rgb24FilePath); // 保存到文件
         IRGB24Pixel *rgb24 = new RGB24();       // 创建RGB24对象
         isCreate = rgb24->rgb24Create(rgb24FilePath, width, height);
