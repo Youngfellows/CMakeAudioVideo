@@ -109,35 +109,36 @@ void Rainbow::destory()
  */
 void Rainbow::createRGB24Pixels()
 {
-    std::cout << "Rainbow::" << __FUNCTION__ << "():: " << __LINE__ << std::endl;
+    double perHeight = height * 1.0 / 7.0;
+    std::cout << "Rainbow::" << __FUNCTION__ << "():: " << __LINE__ << ",perHeight:" << perHeight << std::endl;
     for (int i = 0; i < height; i++)
     {
         uint32_t currentColor = RAINBOW_COLORS[0]; // 获取改行的rgb彩虹颜色
-        if (i < 100)
+        if (i < 1 * perHeight)
         {
             currentColor = RAINBOW_COLORS[0]; // 赤色
         }
-        else if (i < 200)
+        else if (i < 2 * perHeight)
         {
             currentColor = RAINBOW_COLORS[1]; // 橙色
         }
-        else if (i < 300)
+        else if (i < 3 * perHeight)
         {
             currentColor = RAINBOW_COLORS[2]; // 红色
         }
-        else if (i < 400)
+        else if (i < 4 * perHeight)
         {
             currentColor = RAINBOW_COLORS[3]; // 绿色
         }
-        else if (i < 500)
+        else if (i < 5 * perHeight)
         {
             currentColor = RAINBOW_COLORS[4]; // 青色
         }
-        else if (i < 600)
+        else if (i < 6 * perHeight)
         {
             currentColor = RAINBOW_COLORS[5]; // 蓝色
         }
-        else if (i < 700)
+        else if (i < 7 * perHeight)
         {
             currentColor = RAINBOW_COLORS[6]; // 紫色
         }
@@ -190,34 +191,36 @@ void Rainbow::createBmpPixels(uint8_t *bitmapData)
         return;
     }
     uint8_t *bmpData = bitmapData; // bmp内存
+    double perHeight = height * 1.0 / 7.0;
+    std::cout << "Rainbow::" << __FUNCTION__ << "():: " << __LINE__ << ",perHeight:" << perHeight << std::endl;
     for (int i = 0; i < height; i++)
     {
         uint32_t currentColor = RAINBOW_COLORS[0]; // 获取该行的rgb彩虹颜色
-        if (i < 100)
+        if (i < 1 * perHeight)
         {
             currentColor = RAINBOW_COLORS[0]; // 赤色
         }
-        else if (i < 200)
+        else if (i < 2 * perHeight)
         {
             currentColor = RAINBOW_COLORS[1]; // 橙色
         }
-        else if (i < 300)
+        else if (i < 3 * perHeight)
         {
             currentColor = RAINBOW_COLORS[2]; // 红色
         }
-        else if (i < 400)
+        else if (i < 4 * perHeight)
         {
             currentColor = RAINBOW_COLORS[3]; // 绿色
         }
-        else if (i < 500)
+        else if (i < 5 * perHeight)
         {
             currentColor = RAINBOW_COLORS[4]; // 青色
         }
-        else if (i < 600)
+        else if (i < 6 * perHeight)
         {
             currentColor = RAINBOW_COLORS[5]; // 蓝色
         }
-        else if (i < 700)
+        else if (i < 7 * perHeight)
         {
             currentColor = RAINBOW_COLORS[6]; // 紫色
         }

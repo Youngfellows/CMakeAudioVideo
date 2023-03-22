@@ -14,9 +14,18 @@ using namespace std;
 int main(int arg, char **argv)
 {
     const char *TAG = "RGB24::";
-    std::cout << TAG << __FUNCTION__ << ",Line " << __LINE__ << std::endl;
-    uint32_t width = 711;  // 宽
-    uint32_t height = 711; // 高
+    std::cout << TAG << __FUNCTION__ << ",Line " << __LINE__ << ",arg:" << arg << std::endl;
+    if (arg < 3)
+    {
+        std::cout << TAG << __FUNCTION__ << ",Line " << __LINE__ << ",使用: " << argv[0] << " 宽 高" << std::endl;
+        std::cout << TAG << __FUNCTION__ << ",Line " << __LINE__ << ",使用: " << argv[0] << " 711 711" << std::endl;
+        return 1;
+    }
+    // uint32_t width = 711;            // 宽
+    // uint32_t height = 711;           // 高
+    uint32_t width = atof(argv[1]);  // 宽
+    uint32_t height = atof(argv[2]); // 高
+
     std::string rgb24File = "./res/rainbow_" + std::to_string(width) + "x" + std::to_string(height) + "_rgb24.rgb";
     std::string copyRgb24File = "./res/rainbow_" + std::to_string(width) + "x" + std::to_string(height) + "_copy2_rgb24.rgb";
     const char *rgb24FilePath = rgb24File.c_str();         // string 转化为字符串

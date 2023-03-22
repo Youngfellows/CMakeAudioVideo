@@ -14,11 +14,18 @@ using namespace std;
 int main(int arg, char **argv)
 {
     const char *TAG = "SampleRainbowBitmap::";
-    std::cout << TAG << __FUNCTION__ << "():: LINE:" << __LINE__ << std::endl;
+    std::cout << TAG << __FUNCTION__ << ",Line " << __LINE__ << ",arg:" << arg << std::endl;
+    if (arg < 3)
+    {
+        std::cout << TAG << __FUNCTION__ << ",Line " << __LINE__ << ",使用: " << argv[0] << " 宽 高" << std::endl;
+        std::cout << TAG << __FUNCTION__ << ",Line " << __LINE__ << ",使用: " << argv[0] << " 711 711" << std::endl;
+        return 1;
+    }
+    // uint32_t width = 711;            // 宽
+    // uint32_t height = 711;           // 高
+    uint32_t width = atof(argv[1]);  // 宽
+    uint32_t height = atof(argv[2]); // 高
 
-    // rgb24或bmp彩虹图片生成器,动态申请内存
-    uint32_t width = 711;  // 宽
-    uint32_t height = 711; // 高
     // const char *bmpFilePath = "./resource/rainbow_711x711_bitmap.bmp"; // bmp图片保存路径
     std::string bmpFile = "./res/rainbow_" + std::to_string(width) + "x" + std::to_string(height) + "_bitmap.bmp";
     const char *bmpFilePath = bmpFile.c_str(); // string 转化为字符串

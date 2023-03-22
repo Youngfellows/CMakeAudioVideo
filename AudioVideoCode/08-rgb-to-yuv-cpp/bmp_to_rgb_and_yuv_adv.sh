@@ -18,8 +18,8 @@ if [ -e ${RESOURCE_DIR} ]; then
 fi
 mkdir -p ${RESOURCE_DIR}
 
-# 获取rainbow-700x700.bmp图片路径
-BMP_FILE_NAME="rainbow-700x700.bmp"
+# 获取rainbow_700x700.bmp图片路径
+BMP_FILE_NAME="rainbow_711x711.bmp"
 SRC_BMP_FILE_PATH=${PARENT_ROOT}/03_rgb_to_bmp/resource/${BMP_FILE_NAME}
 echo "bitmap file path:${SRC_BMP_FILE_PATH}"
 
@@ -49,9 +49,9 @@ ffmpeg -i ${BMP_FILE_PATH} -video_size 711x711 -pix_fmt yuv420p ${YUV420_FILE_PA
 ARCH=`arch`
 if [[ $ARCH =~ "x86_64" ]];then
     echo "ARCH is x86_64"
-elif [[ $ARCH =~ "aarch64" ]];then
+    elif [[ $ARCH =~ "aarch64" ]];then
     echo "ARCH is arm64"
-elif [[ $ARCH =~ "mips64" ]];then
+    elif [[ $ARCH =~ "mips64" ]];then
     echo "ARCH is mips64"
 else
     echo "Unknown ARCH!!"

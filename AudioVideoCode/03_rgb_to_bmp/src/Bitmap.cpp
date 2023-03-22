@@ -41,8 +41,8 @@ bool Bitmap::bmpCreate(uint32_t width, uint32_t height, uint32_t depth)
 
     // 2.设置bmp图片,位图信息头,一共40个字节
     bmpInfoHeader->biSize = sizeof(BitmapInfoHeader);
-    bmpInfoHeader->biWidth = width;
-    bmpInfoHeader->biHeight = -height;
+    bmpInfoHeader->biWidth = abs((int)width);
+    bmpInfoHeader->biHeight = -abs((int)height);
     bmpInfoHeader->biPlanes = 1;
     bmpInfoHeader->biBitCount = depth;
     bmpInfoHeader->biSizeImage = 0;
@@ -53,10 +53,36 @@ bool Bitmap::bmpCreate(uint32_t width, uint32_t height, uint32_t depth)
     bmpInfoHeader->biClrImportant = 0;
     std::cout << "Bitmap::bmpCreate():: " << sizeof(BitmapFileHeader) << "," << sizeof(BitmapInfoHeader) << "," << bmpFileHeader->bfSize << std::endl;
 
-    // 申请保存图片像素的内存
-    bool isMalloc = bmpMallocPixels();
-    return isMalloc;
+    bool isMallocPixel = bmpMallocPixels(); // 申请保存图片像素的内存
+    if (isMallocPixel)
+    {
+        bool isBmpDataMalloc = bmpDataMalloc(); // 申请图片像素信息rgb24字节内存
+        return isBmpDataMalloc;
+    }
+    return false;
 }
+
+/**
+ * @brief 申请图片像素信息rgb24字节内存
+ *
+ * @return true
+ * @return false
+ */
+bool Bitmap::bmpDataMalloc()
+{
+    uint32_t bmpHeadLength = 14 + 40; // BMP头文件长度
+    uint32_t size = bmpFileHeader->bfSize - bmpHeadLength;
+    std::cout << "Bitmap::" << __FUNCTION__ << "():: Line " << __LINE__ << ",size:" << size << std::endl;
+    bmpData = (uint8_t *)malloc(sizeof(uint8_t) * size * 3);
+    std::cout << "Bitmap::" << __FUNCTION__ << "():: Line " << __LINE__ << ",bmpData:" << bmpData << std::endl;
+    if (bmpData == NULL)
+    {
+        std::cout << "Bitmap::" << __FUNCTION__ << "():: Line " << __LINE__ << ",bmpData is null" << bmpData << std::endl;
+        return false;
+    }
+    return true;
+}
+
 /**
  * @brief 申请图片像素信息内存
  *
@@ -149,7 +175,8 @@ bool Bitmap::bmpSetPixel(unsigned int x, unsigned int y, RGBPixel pixel)
     unsigned int r = (*(*(pixels + x) + y)).red;
     unsigned int g = (*(*(pixels + x) + y)).green;
     unsigned int b = (*(*(pixels + x) + y)).bulue;
-    // std::cout << "Bitmap::bmpSetPixel()::(" << r << "," << g << "," << b << ")" << std::endl;
+    uint32_t color = ((r & 0xff) << 16) | ((g & 0xff) << 8) | ((b & 0xff) << 0);
+    // std::cout << "Bitmap::bmpSetPixel()::(" << std::dec << x << "," << y << "),color(" << std::hex << color << ")" << std::endl;
     return true;
 }
 
@@ -166,7 +193,7 @@ Bitmap::~Bitmap()
 void Bitmap::bmpFreePixels()
 {
     std::cout << "Bitmap::bmpFreePixels():: " << std::endl;
-    for (int i = 0; i < abs(bmpInfoHeader->biWidth); i++)
+    for (int i = 0; i < abs(bmpInfoHeader->biHeight); i++)
     {
         // free(pixels[i]);     // 释放每一行指针
         free(*(pixels + i)); // 释放每一行指针
@@ -256,21 +283,43 @@ void Bitmap::writeBmpInfoHeader(BitmapInfoHeader *bmpInfoHeader, FILE *fp)
  */
 void Bitmap::writeBmpPixels(RGBPixel **bmpPixels, FILE *fp)
 {
-    std::cout << "Bitmap::writeBmpPixels()::" << std::endl;
+    // std::cout << "Bitmap::" << __FUNCTION__ << "():: Line" << __LINE__ << " " << bmpData << std::endl;
+    uint32_t bmpHeadLength = 14 + 40; // BMP格式图片头文件大小
+    if (bmpData == NULL)
+    {
+        return;
+    }
+    std::cout << "Bitmap::" << __FUNCTION__ << "():: Line " << __LINE__ << std::endl;
     for (int i = 0; i < abs(bmpInfoHeader->biHeight); i++)
     {
+        // std::cout << "Bitmap::" << __FUNCTION__ << "():: Line " << __LINE__ << std::endl;
         for (int j = 0; j < bmpInfoHeader->biWidth; j++)
         {
-            unsigned int r = (*(*(bmpPixels + i) + j)).red;
-            unsigned int g = (*(*(bmpPixels + i) + j)).green;
-            unsigned int b = (*(*(bmpPixels + i) + j)).bulue;
-            // std::cout << "(" << r << "," << g << "," << b << ")" << " ";
-            fwrite(&(b), sizeof(unsigned char), 1, fp); // 把每个像素的bulue颜色信息写入文件
-            fwrite(&(g), sizeof(unsigned char), 1, fp); // 把每个像素的green颜色信息写入文件
-            fwrite(&(r), sizeof(unsigned char), 1, fp); // 把每个像素的red颜色信息写入文件
+            uint8_t r = ((*(*(bmpPixels + i) + j)).red) & 0xff;
+            uint8_t g = ((*(*(bmpPixels + i) + j)).green) & 0xff;
+            uint8_t b = ((*(*(bmpPixels + i) + j)).bulue) & 0xff;
+            uint32_t color = ((r & 0xff) << 16) | ((g & 0xff) << 8) | ((b & 0xff) << 0);
+            // std::cout << "Bitmap::" << __FUNCTION__ << "():: Line " << __LINE__ << ",color(" << std::hex << color << ")" << std::endl;
+
+            // 可行，只是没有4字节对齐
+            // fwrite(&b, sizeof(uint8_t), 1, fp); // 把每个像素的bulue颜色信息写入文件
+            // fwrite(&g, sizeof(uint8_t), 1, fp); // 把每个像素的green颜色信息写入文件
+            // fwrite(&r, sizeof(uint8_t), 1, fp); // 把每个像素的red颜色信息写入文件
+
+            // 注意要4字节对齐
+            // uint32_t pad = (bmpInfoHeader->biWidth * -3UL) & 3; // 4字节对齐
+            uint32_t pad = 4 - (bmpInfoHeader->biWidth * 3 % 4);
+            uint32_t index = i * (3 * bmpInfoHeader->biWidth + pad) + j * 3;
+            // std::cout << "Bitmap::" << __FUNCTION__ << "():: Line " << __LINE__ << std::dec << "(" << i << "," << j << "),index:" << index + bmpHeadLength << ",color(" << std::hex << color << ")" << std::endl;
+            uint8_t *pData = bmpData + index;
+            memcpy(pData, &b, sizeof(uint8_t));     // 拷贝数据到内存
+            memcpy(pData + 1, &g, sizeof(uint8_t)); // 拷贝数据到内存
+            memcpy(pData + 2, &r, sizeof(uint8_t)); // 拷贝数据到内存
         }
         // std::cout << std::endl;
     }
+    uint32_t size = bmpFileHeader->bfSize - bmpHeadLength;
+    fwrite(bmpData, size, 1, fp); // 把内存中的BMP格式rgb数据写入文件
 }
 
 /**
@@ -321,4 +370,9 @@ void Bitmap::bmpDestroy()
         delete bmpInfoHeader;
     }
     bmpInfoHeader = NULL;
+    if (bmpData != NULL)
+    {
+        free(bmpData);
+    }
+    bmpData = NULL;
 }

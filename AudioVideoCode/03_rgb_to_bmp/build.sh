@@ -36,6 +36,8 @@ make -j4
 make install
 cd -
 
-# 运行
-${BUILD_ROOT}/install/bin/Sample
-# ./install/bin/Sample
+# 运行,如果图片宽不是7的整数倍的话，会出现锯齿，不平均分
+WIDTH=711 # BMP图片宽
+HEIGHT=711 # BMP图片高
+${BUILD_ROOT}/install/bin/Sample ${WIDTH} ${HEIGHT}
+# ./install/bin/Sample ${WIDTH} ${HEIGHT}
