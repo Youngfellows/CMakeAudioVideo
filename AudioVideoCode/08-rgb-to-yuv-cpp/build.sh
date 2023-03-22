@@ -55,6 +55,7 @@ done
 #-n,检测字符串长度是否为0，不为0返回 true。
 if [ -n ${SAMPLE_BMP_RAINBOW} ]
 then
+    echo -e "\nrun::${name}"
     # 执行SampleRGB24Rainbow生成RGB24文件
     ${SAMPLE_BMP_RAINBOW} ${WIDTH} ${HEIGHT} # 运行可执行文件,并传递参数
 else
@@ -71,6 +72,7 @@ done
 #-n,检测字符串长度是否为0，不为0返回 true。
 if [ -n ${SAMPLE_RGB24_RAINBOW} ]
 then
+    echo -e "\nrun::${name}"
     # 执行SampleRGB24Rainbow生成RGB24文件
     ${SAMPLE_RGB24_RAINBOW} ${WIDTH} ${HEIGHT} # 运行可执行文件,并传递参数
 else
@@ -86,6 +88,7 @@ done
 
 if [ -n ${SAMPLE_RGB24} ]
 then
+    echo -e "\nrun::${name}"
     # 执行SampleRGB24Rainbow生成RGB24文件
     ${SAMPLE_RGB24} ${WIDTH} ${HEIGHT} # 运行可执行文件,并传递参数
 else
@@ -97,8 +100,8 @@ fi
 for name in $(find $BIN_DIR -type f -name "*"); do
     if [[ ${name} != ${SAMPLE_RGB24_RAINBOW} && ${name} != ${SAMPLE_RGB24} && ${name} != ${SAMPLE_BMP_RAINBOW} ]]
     then
-        echo "run::${name}"
-        ${name}
+        echo -e "\nrun::${name}"
+        ${name} ${WIDTH} ${HEIGHT} # 运行可执行文件,并传递参数
     fi
 done
 
