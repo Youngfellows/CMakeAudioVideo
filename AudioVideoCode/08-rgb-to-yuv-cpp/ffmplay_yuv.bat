@@ -6,4 +6,5 @@
 @REM ffplay -pixel_format yuv444p -video_size 711x711 -framerate 5 ./res2/rainbow_711x711_bmp_yuv444p.yuv
 @REM ffplay -pixel_format yuv420p -video_size 711x711 -framerate 5 ./res2/rainbow_711x711_bmp_yuv420p.yuv
 
-ffplay -pixel_format yuv444p -video_size 711x711 -framerate 5 ./resource/rainbow_711x711_rgb24_to_yuv444p.yuv
+@REM ffplay -pixel_format yuv444p -video_size 711x711 -framerate 5 ./resource/rainbow_711x711_rgb24_to_yuv444p.yuv
+ffplay -pixel_format yuv420p -video_size 711x711 -framerate 5 ./resource/rainbow_711x711_rgb24_to_yuv420p.yuv

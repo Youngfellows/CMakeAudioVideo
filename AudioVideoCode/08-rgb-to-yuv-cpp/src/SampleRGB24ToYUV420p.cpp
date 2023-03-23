@@ -21,7 +21,7 @@ int main(int arg, char **argv)
     uint32_t height = atof(argv[2]); // 高
 
     std::string rgb24File = "./res/rainbow_" + std::to_string(width) + "x" + std::to_string(height) + "_rgb24.rgb";
-    std::string yuv420pFile = "./resource/rainbow_" + std::to_string(width) + "x" + std::to_string(height) + "_rgb24_to_yuv420p_xxx.yuv";
+    std::string yuv420pFile = "./resource/rainbow_" + std::to_string(width) + "x" + std::to_string(height) + "_rgb24_to_yuv420p.yuv";
     const char *rgb24FilePath = rgb24File.c_str();     // string 转化为字符串
     const char *yuv420pFilePath = yuv420pFile.c_str(); // string 转化为字符串
 
