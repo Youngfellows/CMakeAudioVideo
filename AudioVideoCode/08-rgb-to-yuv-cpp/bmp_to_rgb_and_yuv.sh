@@ -19,7 +19,9 @@ fi
 mkdir -p ${RESOURCE_DIR}
 
 # 获取rainbow_700x700.bmp图片路径
-BMP_FILE_NAME="rainbow_711x711.bmp"
+WIDTH=711
+HEIGHT=711
+BMP_FILE_NAME="rainbow_${WIDTH}x${HEIGHT}.bmp"
 SRC_BMP_FILE_PATH=${PARENT_ROOT}/03_rgb_to_bmp/resource/${BMP_FILE_NAME}
 echo "bitmap file path:${SRC_BMP_FILE_PATH}"
 
@@ -38,12 +40,12 @@ cp ${SRC_BMP_FILE_PATH} ${BMP_FILE_PATH}
 # ffmpeg -i ./res/rainbow-700x700.bmp -video_size 711x711 -pix_fmt yuv444p ./res/rainbow-bmp-yuv444p.yuv
 # rainbow_" + std::to_string(width) + "x" + std::to_string(height) + "_yuv444p.bmp
 # rainbow_711x711_bmp_yuv444p.yuv
-RGB24_FILE_PATH=${RESOURCE_DIR}/rainbow-_711x711_bmp_rgb24.rgb
-YUV444_FILE_PATH=${RESOURCE_DIR}/rainbow_711x711_bmp_yuv444p.yuv
-YUV420_FILE_PATH=${RESOURCE_DIR}/rainbow_711x711_bmp_yuv420p.yuv
-ffmpeg -i ${BMP_FILE_PATH} -video_size 711x711 -pix_fmt rgb24 ${RGB24_FILE_PATH}
-ffmpeg -i ${BMP_FILE_PATH} -video_size 711x711 -pix_fmt yuv444p ${YUV444_FILE_PATH}
-ffmpeg -i ${BMP_FILE_PATH} -video_size 711x711 -pix_fmt yuv420p ${YUV420_FILE_PATH}
+RGB24_FILE_PATH=${RESOURCE_DIR}/rainbow_${WIDTH}x${HEIGHT}_bmp_rgb24.rgb
+YUV444_FILE_PATH=${RESOURCE_DIR}/rainbow_${WIDTH}x${HEIGHT}_bmp_yuv444p.yuv
+YUV420_FILE_PATH=${RESOURCE_DIR}/rainbow_${WIDTH}x${HEIGHT}_bmp_yuv420p.yuv
+ffmpeg -i ${BMP_FILE_PATH} -video_size ${WIDTH}x${HEIGHT} -pix_fmt rgb24 ${RGB24_FILE_PATH}
+ffmpeg -i ${BMP_FILE_PATH} -video_size ${WIDTH}x${HEIGHT} -pix_fmt yuv444p ${YUV444_FILE_PATH}
+ffmpeg -i ${BMP_FILE_PATH} -video_size ${WIDTH}x${HEIGHT} -pix_fmt yuv420p ${YUV420_FILE_PATH}
 
 # 判断cpu架构
 ARCH=`arch`

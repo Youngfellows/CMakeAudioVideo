@@ -1,6 +1,7 @@
 #ifndef _RGB24_TO_YUV420P_H_
 #define _RGB24_TO_YUV420P_H_
 
+#include <cmath>
 #include "./interfaces/IRGB24toYUV420p.h"
 #include "../pixel/RGB24.h"
 #include "../rainbow/Rainbow.h"
@@ -20,6 +21,10 @@ private:
     RGBPixel **rgbPixels; // 图片像素信息
     uint8_t *rgb24Data;   // 内存中按字节存储的图片像素信息
     uint8_t *yuv420pData; // 内存中按字节存储的yvu420p像素信息
+    uint32_t ySize;       // Y分量大小
+    uint32_t uSize;       // Y分量大小
+    uint32_t vSize;       // Y分量大小
+    uint32_t yuv420pSize; // yuv420p内存大小
 
 public:
     RGB24toYUV420p();

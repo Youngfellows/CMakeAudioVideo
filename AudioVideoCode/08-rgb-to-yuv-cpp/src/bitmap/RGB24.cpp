@@ -41,7 +41,7 @@ bool RGB24::rgb24Create(uint32_t width, uint32_t height)
  */
 void RGB24::setRGB24Pixel(uint32_t color, uint32_t x, uint32_t y)
 {
-    //std::cout << "RGB24::" << __FUNCTION__ << "():: Line " << __LINE__ << std::endl;
+    // std::cout << "RGB24::" << __FUNCTION__ << "():: Line " << __LINE__ << std::endl;
 
     // 获取当前颜色的 RGB 分量
     uint32_t red = (color & RGB24_MASK_RED) >> 16;
@@ -68,7 +68,7 @@ void RGB24::setRGB24Pixel(uint32_t color, uint32_t x, uint32_t y)
 
     uint32_t index = (x * width + y) * 3;
     uint32_t rgbColor = (r << 16) | (g << 8) | (b << 0);
-    //std::cout << "index:" << std::dec << index << "(" << x << "," << y << "),rgbColor(" << std::hex << rgbColor << ")" << std::endl;
+    // std::cout << "index:" << std::dec << index << "(" << x << "," << y << "),rgbColor(" << std::hex << rgbColor << ")" << std::endl;
     uint8_t *rgb24Data = rgb24DataBytes + index;
     memccpy(rgb24Data, &r, 1, sizeof(uint8_t));
     memccpy(rgb24Data + 1, &g, 1, sizeof(uint8_t));
@@ -136,7 +136,7 @@ bool RGB24::genRGB24Data(const char *rgb24FilePath)
     // 为二维数组元素赋值
     for (int i = 0; i < height; i++)
     {
-        //std::cout << "RGB24::" << __FUNCTION__ << "():: Line " << __LINE__ << ",i:" << i << std::endl;
+        // std::cout << "RGB24::" << __FUNCTION__ << "():: Line " << __LINE__ << ",i:" << i << std::endl;
         for (int j = 0; j < width; j++)
         {
             uint32_t currentIndex = 3 * (i * width + j);          // 当前位置索引
@@ -148,7 +148,7 @@ bool RGB24::genRGB24Data(const char *rgb24FilePath)
             uint32_t green = (*(*(pixels + i) + j)).green;
             uint32_t bulue = (*(*(pixels + i) + j)).bulue;
             uint32_t color = ((red & 0xFF) << 16) | ((green & 0xFF) << 8) | (bulue & 0xFF);
-            //std::cout << "rgb(" << color << ") ";
+            // std::cout << "rgb(" << color << ") ";
         }
     }
     return true;
@@ -162,10 +162,12 @@ bool RGB24::genRGB24Data(const char *rgb24FilePath)
  */
 uint8_t *RGB24::readRgb24Data(const char *rgb24FilePath)
 {
-    std::cout << "RGB24::" << __FUNCTION__ << "():: Line " << __LINE__ << std::endl;
+    std::cout << "RGB24::" << __FUNCTION__ << "():: Line " << __LINE__ << ",rgb24FilePath:" << rgb24FilePath << std::endl;
     FILE *rgb24File = fopen(rgb24FilePath, "rb"); // 获取rgb24文件指针
+
     if (rgb24File == NULL)
     {
+        std::cout << "RGB24::" << __FUNCTION__ << "():: Line " << __LINE__ << ",rgb24File is NULL" << std::endl;
         return NULL;
     }
     size_t fileSize = getFileSize(rgb24FilePath); // 获取文件大小

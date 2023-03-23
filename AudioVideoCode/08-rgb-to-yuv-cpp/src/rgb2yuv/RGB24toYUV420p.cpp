@@ -43,9 +43,19 @@ bool RGB24toYUV420p::create(uint32_t width, uint32_t height)
  */
 bool RGB24toYUV420p::mallocYuv420pPixels()
 {
-    uint32_t size = width * height * 3 / 2;
-    std::cout << "RGB24toYUV420p::" << __FUNCTION__ << "():: " << __LINE__ << ",size:" << size << std::endl;
-    this->yuv420pData = (uint8_t *)malloc(sizeof(uint8_t) * size); // 申请yuv420p内存空间
+    // uint32_t size = width * height * 3 / 2;
+    // uint32_t size = width * height * 3;
+    size_t y_size = width * height;
+    size_t u_size = ((width + 1) / 2) * ((height + 1) / 2);
+    size_t v_size = ((width + 1) / 2) * (height / 2);
+    uint32_t size = y_size + u_size + v_size;
+    this->ySize = y_size;
+    this->uSize = u_size;
+    this->vSize = v_size;
+    this->yuv420pSize = size;
+    std::cout << "RGB24toYUV420p::" << __FUNCTION__ << "():: " << __LINE__ << ",yuv420pSize:" << yuv420pSize << ",ySize:" << ySize << ",uSize:" << uSize << ",vSize:" << vSize << std::endl;
+
+    this->yuv420pData = (uint8_t *)malloc(sizeof(uint8_t) * yuv420pSize); // 申请yuv420p内存空间
     if (yuv420pData == NULL)
     {
         return false;
@@ -109,11 +119,15 @@ bool RGB24toYUV420p::create(uint32_t width, uint32_t height, const char *rgb24Fi
     // 还有1种方式,直接读取rgb24文件内存数据
     this->rgb24 = new RGB24();                                        // 创建RGB24图片生成器
     bool isCreate = rgb24->rgb24Create(rgb24FilePath, width, height); // 初始化RGB24图片像素信息
+    std::cout << "RGB24toYUV420p::" << __FUNCTION__ << "():: " << __LINE__ << std::endl;
     if (isCreate)
     {
+        std::cout << "RGB24toYUV420p::" << __FUNCTION__ << "():: " << __LINE__ << std::endl;
         isCreate = createRGB24Pixels(rgb24FilePath); // 获取指定路径图片的RGB24图片信息
+        std::cout << "RGB24toYUV420p::" << __FUNCTION__ << "():: " << __LINE__ << std::endl;
         if (isCreate)
         {
+            std::cout << "RGB24toYUV420p::" << __FUNCTION__ << "():: " << __LINE__ << std::endl;
             return mallocYuv420pPixels(); // 申请yuv420p内存空间
         }
     }
@@ -133,48 +147,92 @@ void RGB24toYUV420p::rgb24ToYuv420p(const char *yuv420pFilePath)
 }
 
 /**
- * @brief rgb24转化为yuv420p
+ * @brief rgb24转化为yuv420p,YU12类型
+ *  Y = 0.257*R + 0.504*G + 0.098*B + 16;
+ *  U = -0.148*R - 0.291*G + 0.439*B + 128;
+ *  V = 0.439*R - 0.368*G - 0.071*B + 128;
  *
+ *  int y_val = (int)round(0.257 * R + 0.504 * G + 0.098 * B + 16);
+ *  int u_val = (int)round(-0.148 * R - 0.291 * G + 0.439 * B + 128);
+ *  int v_val = (int)round(0.439 * R - 0.368 * G - 0.071 * B + 128);
  */
 void RGB24toYUV420p::rgb24ToYuv420p()
 {
-    std::cout << "RGB24toYUV420p::" << __FUNCTION__ << "():: " << __LINE__ << std::endl;
-    size_t image_size = width * height;
-    size_t upos = image_size;
-    size_t vpos = upos + upos / 4;
+    // size_t image_size = width * height;
+    // size_t upos = image_size;
+    // size_t vpos = upos + upos / 4;
+    // size_t i = 0;
+
+    size_t upos = ySize;
+    size_t vpos = upos + uSize;
     size_t i = 0;
 
-    for (size_t line = 0; line < height; ++line)
+    std::cout << "RGB24toYUV420p::" << __FUNCTION__ << "():: Line:" << __LINE__ << ",yuv420pSize:" << yuv420pSize << ",upos:" << upos << ",vpos:" << vpos << std::endl;
+
+    for (size_t y = 0; y < height; y++)
     {
-        if (!(line % 2))
+        // std::cout << "RGB24toYUV420p::" << __FUNCTION__ << "():: Line:" << __LINE__ << ",line y:" << y << std::endl;
+        if (!(y % 2)) // 偶数行,能被2整除，保存Y、U
         {
-            for (size_t x = 0; x < width; x += 2)
+            // std::cout << "RGB24toYUV420p::" << __FUNCTION__ << "():: Line:" << __LINE__ << ",1111,y:" << y << std::endl;
+            for (size_t x = 0; x < width; x++)
             {
-                uint8_t r = rgb24Data[3 * i];
-                uint8_t g = rgb24Data[3 * i + 1];
-                uint8_t b = rgb24Data[3 * i + 2];
+                uint32_t index = (y * width + x) * 3;
+                uint8_t r = rgb24Data[index];
+                uint8_t g = rgb24Data[index + 1];
+                uint8_t b = rgb24Data[index + 2];
 
-                yuv420pData[i++] = ((66 * r + 129 * g + 25 * b) >> 8) + 16;
+                int y_val = (int)round(0.257 * r + 0.504 * g + 0.098 * b + 16);
+                int y_val_1 = ((66 * r + 129 * g + 25 * b) >> 8) + 16;
 
-                yuv420pData[upos++] = ((-38 * r + -74 * g + 112 * b) >> 8) + 128;
-                yuv420pData[vpos++] = ((112 * r + -94 * g + -18 * b) >> 8) + 128;
+                uint32_t color = r << 16 | g << 8 | b;
+                // std::cout << std::hex << "color:" << color << std::endl;
+                // std::cout << std::dec << "index:" << index << ",i:" << i << ",upos:" << upos << ",vpos:" << vpos << ",(" << y << "," << x << "),y_val:" << std::hex << y_val << ",y_val_1:" << y_val_1 << std::endl;
+                //  yuv420pData[i++] = ((66 * r + 129 * g + 25 * b) >> 8) + 16;
+                //  yuv420pData[i++] = y_val_1;
+                yuv420pData[i++] = y_val;
 
-                r = rgb24Data[3 * i];
-                g = rgb24Data[3 * i + 1];
-                b = rgb24Data[3 * i + 2];
-
-                yuv420pData[i++] = ((66 * r + 129 * g + 25 * b) >> 8) + 16;
+                // 偶数列保存U分量
+                if (!(x % 2))
+                {
+                    int u_val = (int)round(-0.148 * r - 0.291 * g + 0.439 * b + 128);
+                    // int u_val_1 = ((-38 * r + -74 * g + 112 * b) >> 8) + 128;
+                    // yuv420pData[upos++] = u_val;
+                    // std::cout << "upos:" << std::dec << upos << std::hex << ",U:" << u_val << std::endl;
+                    yuv420pData[upos++] = u_val;
+                }
             }
         }
         else
         {
-            for (size_t x = 0; x < width; x += 1)
+            // 基数行,不能被2整除,，保存Y、V
+            // std::cout << "RGB24toYUV420p::" << __FUNCTION__ << "():: Line:" << __LINE__ << ",2222,line:" << y << std::endl;
+            for (size_t x = 0; x < width; x++)
             {
-                uint8_t r = rgb24Data[3 * i];
-                uint8_t g = rgb24Data[3 * i + 1];
-                uint8_t b = rgb24Data[3 * i + 2];
+                uint32_t index = (y * width + x) * 3;
+                uint8_t r = rgb24Data[index];
+                uint8_t g = rgb24Data[index + 1];
+                uint8_t b = rgb24Data[index + 2];
 
-                yuv420pData[i++] = ((66 * r + 129 * g + 25 * b) >> 8) + 16;
+                int y_val = (int)round(0.257 * r + 0.504 * g + 0.098 * b + 16);
+                int y_val_2 = ((66 * r + 129 * g + 25 * b) >> 8) + 16;
+
+                uint32_t color = r << 16 | g << 8 | b;
+                // std::cout << std::hex << "color:" << color << std::endl;
+                // std::cout << std::dec << "index:" << index << ",i:" << i << ",upos:" << upos << ",vpos:" << vpos << ",(" << y << "," << x << "),y_val:" << std::hex << y_val << ",y_val_2:" << y_val_2 << std::endl;
+                //  yuv420pData[i++] = ((66 * r + 129 * g + 25 * b) >> 8) + 16;
+                //  yuv420pData[i++] = y_val_1;
+                yuv420pData[i++] = y_val;
+
+                // 基数列保存V分量
+                if (!(x % 2))
+                {
+                    int v_val = (int)round(0.439 * r - 0.368 * g - 0.071 * b + 128);
+                    int v_val_1 = ((112 * r + -94 * g + -18 * b) >> 8) + 128;
+                    // std::cout << "vpos:" << std::dec << vpos << std::hex << ",V:" << v_val << std::endl;
+                    //  yuv420pData[vpos++] = v_val_1;
+                    yuv420pData[vpos++] = v_val;
+                }
             }
         }
     }
@@ -193,7 +251,8 @@ void RGB24toYUV420p::saveYuv420p(const char *yuv420pFilePath)
     {
         return;
     }
-    uint32_t size = width * height * 3 / 2;
+    // uint32_t size = width * height * 3 / 2;
+    uint32_t size = yuv420pSize;
     std::cout << "RGB24toYUV420p::" << __FUNCTION__ << "():: " << __LINE__ << ",size::" << size << std::endl;
     if (yuv420pData != NULL)
     {

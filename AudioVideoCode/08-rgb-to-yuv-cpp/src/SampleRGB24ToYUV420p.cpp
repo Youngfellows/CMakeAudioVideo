@@ -20,15 +20,16 @@ int main(int arg, char **argv)
     uint32_t width = atof(argv[1]);  // 宽
     uint32_t height = atof(argv[2]); // 高
 
-    std::string rgb24File = "./res/rainbow_" + std::to_string(width) + "x" + std::to_string(height) + "_rgb24.rgb";
+    // std::string rgb24File = "./res/rainbow_" + std::to_string(width) + "x" + std::to_string(height) + "_rgb24.rgb";
+    std::string rgb24File = "./res2/rainbow_" + std::to_string(width) + "x" + std::to_string(height) + "_bmp_rgb24.rgb";
     std::string yuv420pFile = "./resource/rainbow_" + std::to_string(width) + "x" + std::to_string(height) + "_rgb24_to_yuv420p.yuv";
     const char *rgb24FilePath = rgb24File.c_str();     // string 转化为字符串
     const char *yuv420pFilePath = yuv420pFile.c_str(); // string 转化为字符串
 
     // RGB24toYUV420p *rgb24toYuv420p = new RGB24toYUV420p();      // 动态申请内存
-    IRGB24toYUV420p *rgb24toYuv420p = new RGB24toYUV420p();     // 动态申请内存
-    bool isInitSuccess = rgb24toYuv420p->create(width, height); // 初始化
-    // bool isInitSuccess = rgb24toYuv420p->create(width, height, rgb24FilePath); // 初始化
+    IRGB24toYUV420p *rgb24toYuv420p = new RGB24toYUV420p(); // 动态申请内存
+    // bool isInitSuccess = rgb24toYuv420p->create(width, height); // 初始化
+    bool isInitSuccess = rgb24toYuv420p->create(width, height, rgb24FilePath); // 初始化
     if (isInitSuccess)
     {
         rgb24toYuv420p->rgb24ToYuv420p(yuv420pFilePath); // rgb24转化为yuv420p

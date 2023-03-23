@@ -33,6 +33,7 @@ int main(int arg, char *argv[])
 
     // 2. 向文件中写入颜色数据
     double perHeight = height * 1.0 / 7.0;
+    // double perHeight = 100;
     std::cout << TAG << __FUNCTION__ << ",Line " << __LINE__ << ",perHeight:" << perHeight << std::endl;
     unsigned int currentColor = RAINBOW_COLORS[0]; // 当前颜色，默认是红
     for (int i = 0; i < height; i++)
