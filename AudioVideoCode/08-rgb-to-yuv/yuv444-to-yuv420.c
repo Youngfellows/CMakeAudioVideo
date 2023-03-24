@@ -143,7 +143,7 @@ int main(int arg, char **argv)
     rgb24ToYuv444(yuv444pData, width, height);
     yuv444ToYuv420(yuv444pData, yuv420pData, width, height);
 
-    FILE *yuvFile = fopen("./resource/rainbow-700x700-yuv420p.yuv", "wb");
+    FILE *yuvFile = fopen("./resource/rainbow-700x700-yuv444-to-yuv420p.yuv", "wb");
 
     fwrite(yuv420pData, sizeof(yuv420pData), 1, yuvFile);
 
