@@ -29,6 +29,14 @@ set(RGB24_TO_YUV420P_SRC
 ./src/rainbow/Rainbow.cpp;\
 ./src/rgb2yuv/RGB24toYUV420p.cpp")
 
+set(YUV444P_TO_YUV420P_SRC
+    "./src/SampleYUV444ptoYUV420p.cpp;\
+./src/bitmap/RGBPixel.cpp;\
+./src/bitmap/RGB24.cpp;\
+./src/bitmap/Bitmap.cpp;\
+./src/rainbow/Rainbow.cpp;\
+./src/rgb2yuv/YUV444ptoYUV420p.cpp")
+
 set(BMP_RAINBOW_SRC
     "./src/SampleRainbowBitmap.cpp;\
 ./src/bitmap/RGB24.cpp;\
@@ -53,6 +61,7 @@ set(RGB24_SRC
 message(STATUS "RGB24_TO_YUV444P_SRC:${RGB24_TO_YUV444P_SRC}")
 message(STATUS "YUV444P_TO_RGB24_SRC:${YUV444P_TO_RGB24_SRC}")
 message(STATUS "RGB24_TO_YUV420P_SRC:${RGB24_TO_YUV420P_SRC}")
+message(STATUS "YUV444P_TO_YUV420P_SRC:${YUV444P_TO_YUV420P_SRC}")
 message(STATUS "RGB24_RAINBOW_SRC:${RGB24_RAINBOW_SRC}")
 message(STATUS "RGB24_SRC:${RGB24_SRC}")
 
@@ -70,6 +79,10 @@ list(APPEND SAMPLES ${SAMPLE_YUV444_TO_RGB24})
 set(SAMPLE_RGB24_TO_YUV420P SampleRGB24ToYUV420p)
 add_executable(${SAMPLE_RGB24_TO_YUV420P} ${RGB24_TO_YUV420P_SRC})
 list(APPEND SAMPLES ${SAMPLE_RGB24_TO_YUV420P})
+
+set(SAMPLE_YUV444P_TO_YUV420P SampleYUV444pToYUV420p)
+add_executable(${SAMPLE_YUV444P_TO_YUV420P} ${YUV444P_TO_YUV420P_SRC})
+list(APPEND SAMPLES ${SAMPLE_YUV444P_TO_YUV420P})
 
 set(SAMPLE_BMP_RAINBOW SampleBmpRainbow)
 add_executable(${SAMPLE_BMP_RAINBOW} ${BMP_RAINBOW_SRC})
