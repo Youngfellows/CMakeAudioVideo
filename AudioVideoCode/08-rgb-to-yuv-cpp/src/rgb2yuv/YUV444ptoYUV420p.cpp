@@ -44,11 +44,11 @@ bool YUV444ptoYUV420p::create(uint32_t width, uint32_t height)
         return false;
     }
     std::cout << TAG << __FUNCTION__ << "():: Line " << __LINE__ << std::endl;
-    // bool isMallocYuv444 = mallocYuv444(); // 申请yuv444p内存空间
-    // if (!isMallocYuv444)
-    // {
-    //     return false;
-    // }
+    bool isMallocYuv444 = mallocYuv444(); // 申请yuv444p内存空间
+    if (!isMallocYuv444)
+    {
+        return false;
+    }
     bool isMallocYuv420 = mallocYuv420(); // 申请yuv420p内存空间
     return isMallocYuv420;
 }
@@ -79,11 +79,11 @@ bool YUV444ptoYUV420p::createFromRGB24(const char *rgb24FilePath, uint32_t width
         return false;
     }
     std::cout << TAG << __FUNCTION__ << "():: Line " << __LINE__ << std::endl;
-    // bool isMallocYuv444 = mallocYuv444(); // 申请yuv444p内存空间
-    // if (!isMallocYuv444)
-    // {
-    //     return false;
-    // }
+    bool isMallocYuv444 = mallocYuv444(); // 申请yuv444p内存空间
+    if (!isMallocYuv444)
+    {
+        return false;
+    }
     bool isMallocYuv420 = mallocYuv420(); // 申请yuv420p内存空间
     return isMallocYuv420;
 }
@@ -228,6 +228,7 @@ bool YUV444ptoYUV420p::rgb24ToYuv444()
     int8_t yuv_y[width * height];
     int8_t yuv_u[width * height];
     int8_t yuv_v[width * height];
+    std::cout << TAG << __FUNCTION__ << "():: Line " << __LINE__ << std::endl;
 
     for (int i = 0; i < height; i++)
     {
@@ -253,6 +254,7 @@ bool YUV444ptoYUV420p::rgb24ToYuv444()
     memcpy(yuv444pData, yuv_y, sizeof(yuv_y));
     memcpy(yuv444pData + width * height, yuv_u, sizeof(yuv_u));
     memcpy(yuv444pData + width * height * 2, yuv_v, sizeof(yuv_v));
+    std::cout << TAG << __FUNCTION__ << "():: Line " << __LINE__ << std::endl;
     return true;
 }
 
@@ -447,6 +449,21 @@ void YUV444ptoYUV420p::saveYuv420p(const char *yuv420pFilePath)
  */
 void YUV444ptoYUV420p::destory()
 {
+    std::cout << TAG << __FUNCTION__ << "():: Line " << __LINE__ << std::endl;
+    if (yuv444pData != NULL)
+    {
+        free(yuv444pData);
+    }
+    yuv444pData = NULL;
+    if (yuv420pData != NULL)
+    {
+        free(yuv420pData);
+    }
+    // if (rgb24Data != NULL)
+    // {
+    //     free(rgb24Data);
+    // }
+
     std::cout << TAG << __FUNCTION__ << "():: Line " << __LINE__ << std::endl;
     if (rainbow != NULL)
     {
