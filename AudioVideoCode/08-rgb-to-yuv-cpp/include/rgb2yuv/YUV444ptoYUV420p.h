@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include <string>
-// #include <cmath>
+#include <cmath>
 #include "./interfaces/IYUV444ptoYUV420p.h"
 #include "../rainbow/Rainbow.h"
 #include "../pixel/RGB24.h"
@@ -43,10 +43,13 @@ private:
     bool rgb24ToYuv444();                                                            // rgb24转化为yuv444
     void yuv444pToYuv420p();                                                         // yuv444转化为yuv420
     bool rgb24Parser(const char *rgb24FilePath);                                     // 解析rgb24内存数据
-    bool yuv444pParser(const char *yuv444pFilePath);                                 // 解析yuv444p内存数据
+    bool yuv444ptoRgb24(const char *yuv444pFilePath);                                // 转化yuv444p内存数据为rgb24
     void saveYuv420p(const char *yuv420pFilePath);                                   // 保存yuv420p数据到文件
     bool mallocYuv444();                                                             // 申请yuv444p内存空间
+    bool mallocYuv420();                                                             // 申请yuv420p内存空间
+    bool mallocRGB24();                                                              // 申请RGB24内存空间
     void rgbToYuv(uint8_t R, uint8_t G, uint8_t B, int8_t *Y, int8_t *U, int8_t *V); // RGB转化为YUV
+    uint8_t bound(uint8_t start, int value, uint8_t end);                            // 边界截取
 };
 
 #endif
