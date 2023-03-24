@@ -4,6 +4,7 @@
 
 #include <stdio.h>
 #include <stdint.h>
+#include <math.h>
 
 // 彩虹的七种颜色
 uint32_t rainbowColors[] = {
@@ -123,7 +124,7 @@ void rgb24ToYuv420p2(uint8_t *yuv420pData, uint8_t *rgb24Data, int width, int he
     size_t vpos = upos + u_size;
     size_t i = 0;
 
-    printf("%s():: Line:%d,upos:%d,vpos:%d\n", __FUNCTION__, __LINE__, upos, vpos);
+    printf("%s():: Line:%d,upos:%ld,vpos:%ld\n", __FUNCTION__, __LINE__, upos, vpos);
 
     for (size_t y = 0; y < height; y++)
     {
@@ -196,15 +197,15 @@ void rgb24ToYuv420p2(uint8_t *yuv420pData, uint8_t *rgb24Data, int width, int he
 
 int main(int arg, char **argv)
 {
-    // const char *TAG = "rgb24-to-yuv420";
-    printf("\n%s::%s():: Line:%d,arg:%d\n", __FILE__, __FUNCTION__, __LINE__, arg);
-    // std::cout << TAG << __FUNCTION__ << ",Line " << __LINE__ << ",arg:" << arg << std::endl;
-    // if (arg < 3)
-    // {
-    //     std::cout << TAG << __FUNCTION__ << ",Line " << __LINE__ << ",使用: " << argv[0] << " 宽 高" << std::endl;
-    //     std::cout << TAG << __FUNCTION__ << ",Line " << __LINE__ << ",使用: " << argv[0] << " 711 711" << std::endl;
-    //     return 1;
-    // }
+    const char *TAG = "rgb24-to-yuv420";
+    // printf("\n%s::%s():: Line:%d,arg:%d\n", __FILE__, __FUNCTION__, __LINE__, arg);
+    printf("\n%s::%s():: Line:%d,arg:%d\n", TAG, __FUNCTION__, __LINE__, arg);
+    if (arg < 3)
+    {
+        printf("n%s::%s():: Line:%d,使用:%s 宽 高\n", TAG, __FUNCTION__, __LINE__, argv[0]);
+        printf("n%s::%s():: Line:%d,使用:%s 711 711\n", TAG, __FUNCTION__, __LINE__, argv[0]);
+        return 1;
+    }
     // uint32_t width = 711;  // 宽
     // uint32_t height = 711; // 高
     uint32_t width = atoi(argv[1]);  // 宽

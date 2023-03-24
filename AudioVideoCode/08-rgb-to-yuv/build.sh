@@ -42,5 +42,5 @@ HEIGHT=7
 # ${BUILD_ROOT}/install/bin/08-rgb24-to-yuv444
 ${BUILD_ROOT}/install/bin/08-rgb24-to-yuv420 ${WIDTH} ${HEIGHT}
 # ${BUILD_ROOT}/install/bin/08-yuv444-to-rgb24
-# ${BUILD_ROOT}/install/bin/08-yuv444-to-yuv420
+${BUILD_ROOT}/install/bin/08-yuv444-to-yuv420
 # ${BUILD_ROOT}/install/bin/08-yuv420-to-yuv444

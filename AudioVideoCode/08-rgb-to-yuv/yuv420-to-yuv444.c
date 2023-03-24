@@ -10,10 +10,9 @@ void yuv420ToYuv444(uint8_t *inbuf, uint8_t *outbuf, int w, int h)
 {
     uint8_t *srcY = NULL, *srcU = NULL, *srcV = NULL;
     uint8_t *desY = NULL, *desU = NULL, *desV = NULL;
-    srcY = inbuf;        // Y
-    srcU = srcY + w * h; // U
-    srcV = srcU + w * h / 4;
-    ; // V
+    srcY = inbuf;            // Y
+    srcU = srcY + w * h;     // U
+    srcV = srcU + w * h / 4; // V
 
     desY = outbuf;
     desU = desY + w * h;
@@ -41,12 +40,26 @@ void yuv420ToYuv444(uint8_t *inbuf, uint8_t *outbuf, int w, int h)
 
 int main(int arg, char **argv)
 {
-    printf("\n%s::%s():: Line:%d,arg:%d\n", __FILE__, __FUNCTION__, __LINE__, arg);
-    int width = 700, height = 700;
+    const char *TAG = "yuv420-to-yuv444";
+    // printf("\n%s::%s():: Line:%d,arg:%d\n", __FILE__, __FUNCTION__, __LINE__, arg);
+    printf("\n%s::%s():: Line:%d,arg:%d\n", TAG, __FUNCTION__, __LINE__, arg);
+    if (arg < 3)
+    {
+        printf("n%s::%s():: Line:%d,使用:%s 宽 高\n", TAG, __FUNCTION__, __LINE__, argv[0]);
+        printf("n%s::%s():: Line:%d,使用:%s 711 711\n", TAG, __FUNCTION__, __LINE__, argv[0]);
+        return 1;
+    }
+    // uint32_t width = 711;  // 宽
+    // uint32_t height = 711; // 高
+    uint32_t width = atoi(argv[1]);  // 宽
+    uint32_t height = atoi(argv[2]); // 高
+    printf("width:%d,height:%d\n", width, height);
+
+    // int width = 711, height = 711;
     uint8_t yuv444pData[width * height * 3];
     uint8_t yuv420pData[width * height * 3 / 2];
 
-    FILE *yuv420File = fopen("./res/rainbow-bmp-yuv420p.yuv", "rb");
+    FILE *yuv420File = fopen("./res/rainbow_711x711_bmp_yuv420p.yuv", "rb");
     fread(yuv420pData, sizeof(yuv420pData), 1, yuv420File);
 
     yuv420ToYuv444(yuv420pData, yuv444pData, width, height);

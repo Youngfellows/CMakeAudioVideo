@@ -79,8 +79,22 @@ void rgb24ToYuv444p(const uint8_t *rgb24Data, uint8_t *yuv444pData, int width, i
 
 int main(int arg, char **argv)
 {
-    printf("\n%s::%s():: Line:%d,arg:%d\n", __FILE__, __FUNCTION__, __LINE__, arg);
-    int width = 711, height = 711;
+    const char *TAG = "rgb24-to-yuv444";
+    // printf("\n%s::%s():: Line:%d,arg:%d\n", __FILE__, __FUNCTION__, __LINE__, arg);
+    printf("\n%s::%s():: Line:%d,arg:%d\n", TAG, __FUNCTION__, __LINE__, arg);
+    if (arg < 3)
+    {
+        printf("n%s::%s():: Line:%d,使用:%s 宽 高\n", TAG, __FUNCTION__, __LINE__, argv[0]);
+        printf("n%s::%s():: Line:%d,使用:%s 711 711\n", TAG, __FUNCTION__, __LINE__, argv[0]);
+        return 1;
+    }
+    // uint32_t width = 711;  // 宽
+    // uint32_t height = 711; // 高
+    uint32_t width = atoi(argv[1]);  // 宽
+    uint32_t height = atoi(argv[2]); // 高
+    printf("width:%d,height:%d\n", width, height);
+
+    // int width = 711, height = 711;
     uint8_t yuv444pData[width * height * 3];
     uint8_t rgb24Data[width * height * 3];
 
