@@ -77,8 +77,9 @@ void rgb24ToYuv444p(const uint8_t *rgb24Data, uint8_t *yuv444pData, int width, i
     memcpy(yuv444pData + sizeof(yuv_y) + sizeof(yuv_u), yuv_v, sizeof(yuv_v));
 }
 
-int main()
+int main(int arg, char **argv)
 {
+    printf("\n%s::%s():: Line:%d,arg:%d\n", __FILE__, __FUNCTION__, __LINE__, arg);
     int width = 711, height = 711;
     uint8_t yuv444pData[width * height * 3];
     uint8_t rgb24Data[width * height * 3];

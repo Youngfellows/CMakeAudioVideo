@@ -120,9 +120,9 @@ void yuv444ToYuv420(uint8_t *inbuf, uint8_t *outbuf, int w, int h)
     }
 }
 
-int main()
+int main(int arg, char **argv)
 {
-
+    printf("\n%s::%s():: Line:%d,arg:%d\n", __FILE__, __FUNCTION__, __LINE__, arg);
     int width = 700, height = 700;
     uint8_t yuv444pData[width * height * 3];
     uint8_t yuv420pData[width * height * 3 / 2];
