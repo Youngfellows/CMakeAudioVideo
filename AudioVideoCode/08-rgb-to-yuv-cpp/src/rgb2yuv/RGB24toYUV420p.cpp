@@ -147,6 +147,16 @@ void RGB24toYUV420p::rgb24ToYuv420p(const char *yuv420pFilePath)
 }
 
 /**
+ * @brief yuv420p内存像素数据
+ *
+ * @return uint8_t*
+ */
+uint8_t *RGB24toYUV420p::yuv420pDataBytes()
+{
+    return this->yuv420pData;
+}
+
+/**
  * @brief rgb24转化为yuv420p,YU12类型
  *  Y = 0.257*R + 0.504*G + 0.098*B + 16;
  *  U = -0.148*R - 0.291*G + 0.439*B + 128;

@@ -33,11 +33,13 @@ public:
     virtual bool create(uint32_t width, uint32_t height, const char *rgb24FilePath) override; // 初始化
     virtual void rgb24ToYuv420p(const char *yuv420pFilePath) override;                        // rgb24转化为yuv420p
     virtual void destory() override;                                                          // 释放资源
+    virtual void rgb24ToYuv420p() override;                                                   // rgb24转化为yuv420p
+    virtual uint8_t *yuv420pDataBytes() override;                                             // yuv420p内存像素数据
+
 private:
     bool createRainbowRGB24Pixels();                   // 创建彩虹图片的RGB24图片信息
     bool createRGB24Pixels(const char *rgb24FilePath); // 创建指定路径图片的RGB24图片信息
     bool mallocYuv420pPixels();                        // 申请yuv420p内存空间
-    void rgb24ToYuv420p();                             // rgb24转化为yuv420p
     void saveYuv420p(const char *yuv420pFilePath);     // 保存yuv420p到文件
 };
 #endif

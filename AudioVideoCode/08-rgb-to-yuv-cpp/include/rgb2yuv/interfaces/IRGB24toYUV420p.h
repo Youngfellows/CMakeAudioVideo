@@ -37,6 +37,19 @@ public:
     virtual void rgb24ToYuv420p(const char *yuv420pFilePath) = 0;
 
     /**
+     * @brief  rgb24转化为yuv420p
+     *
+     */
+    virtual void rgb24ToYuv420p() = 0;
+
+    /**
+     * @brief yuv420p内存像素数据
+     *
+     * @return uint8_t*
+     */
+    virtual uint8_t *yuv420pDataBytes() = 0;
+
+    /**
      * @brief 释放资源
      *
      */

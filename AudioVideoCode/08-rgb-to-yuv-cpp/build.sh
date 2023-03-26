@@ -96,9 +96,45 @@ else
     # exit 0
 fi
 
-# 3. 执行剩下的可执行文件
+# 4.生成yuv420p
+for name in $(find $BIN_DIR -type f -name "*SampleRGB24ToYUV420p"); do
+    echo "${name}"
+    SAMPLE_RGB24_TO_YUV420P=${name}
+done
+
+if [ -n ${SAMPLE_RGB24_TO_YUV420P} ]
+then
+    echo -e "\nrun::${name}"
+    # 执行
+    ${SAMPLE_RGB24_TO_YUV420P} ${WIDTH} ${HEIGHT} # 运行可执行文件,并传递参数
+else
+    echo "SampleRGB24 is null"
+    # exit 0
+fi
+
+# 5.生成yuv444p
+for name in $(find $BIN_DIR -type f -name "*SampleRGB24ToYUV444p"); do
+    echo "${name}"
+    SAMPLE_RGB24_TO_YUV444P=${name}
+done
+
+if [ -n ${SAMPLE_RGB24_TO_YUV444P} ]
+then
+    echo -e "\nrun::${name}"
+    # 执行SampleRGB24ToYUV444p
+    ${SAMPLE_RGB24_TO_YUV444P} ${WIDTH} ${HEIGHT} # 运行可执行文件,并传递参数
+else
+    echo "SampleRGB24 is null"
+    # exit 0
+fi
+
+# 6. 执行剩下的可执行文件
 for name in $(find $BIN_DIR -type f -name "*"); do
-    if [[ ${name} != ${SAMPLE_RGB24_RAINBOW} && ${name} != ${SAMPLE_RGB24} && ${name} != ${SAMPLE_BMP_RAINBOW} ]]
+    if [[ ${name} != ${SAMPLE_RGB24_RAINBOW}
+    && ${name} != ${SAMPLE_RGB24} 
+    && ${name} != ${SAMPLE_RGB24_TO_YUV420P} 
+    && ${name} != ${SAMPLE_RGB24_TO_YUV444P} 
+    && ${name} != ${SAMPLE_BMP_RAINBOW} ]]
     then
         echo -e "\nrun::${name}"
         ${name} ${WIDTH} ${HEIGHT} # 运行可执行文件,并传递参数
