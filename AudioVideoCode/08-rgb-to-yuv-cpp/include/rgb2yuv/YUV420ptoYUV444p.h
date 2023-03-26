@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <string>
+#include <cmath>
 #include "./interfaces/IYUV420ptoYUV444p.h"
 #include "./RGB24toYUV420p.h"
 
@@ -34,5 +35,8 @@ public:
 private:
     void yuv420pToYuv444p();                       // yuv420p转化为yuv444p
     void saveYuv444p(const char *yuv444pFilePath); // 保存yuv444p数据到文件
+    bool readYuv420p(const char *yuv420pFilePath); // 读取yuv420p文件数据到内存
+    bool mallocYuv420p();                          // 申请yuv420p数据内存空间
+    bool mallocYuv444p();                          // 申请yuv444p数据内存空间
 };
 #endif
