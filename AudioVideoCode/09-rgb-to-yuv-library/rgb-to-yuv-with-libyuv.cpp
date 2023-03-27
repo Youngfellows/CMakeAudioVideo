@@ -8,7 +8,7 @@
 
 using namespace libyuv;
 
-void libyuv_Rgb24_to_Yuv420p(char *rgbFileName, char *yuvFileName, int width, int height)
+void libyuv_Rgb24_to_Yuv420p(const char *rgbFileName, const char *yuvFileName, int width, int height)
 {
     FILE *rgb_file = fopen(rgbFileName, "rb");
     FILE *yuv_file = fopen(yuvFileName, "wb");
@@ -46,7 +46,7 @@ void libyuv_Rgb24_to_Yuv420p(char *rgbFileName, char *yuvFileName, int width, in
 
 int main(int arg, char **argv)
 {
-    const char *TAG = "SampleRGB24ToYUV420p";
+    const char *TAG = "rgb-to-yuv-with-libyuv::";
     std::cout << TAG << __FUNCTION__ << ",Line " << __LINE__ << ",arg:" << arg << std::endl;
     if (arg < 3)
     {
@@ -54,10 +54,15 @@ int main(int arg, char **argv)
         std::cout << TAG << __FUNCTION__ << ",Line " << __LINE__ << ",使用: " << argv[0] << " 711 711" << std::endl;
         return 1;
     }
-    // uint32_t width = atof(argv[1]);  // 宽
-    // uint32_t height = atof(argv[2]); // 高
+    uint32_t width = atoi(argv[1]);  // 宽
+    uint32_t height = atoi(argv[2]); // 高
 
-    int width = 700, height = 700;
-    libyuv_Rgb24_to_Yuv420p("/Users/hubin/Desktop/rainbow-rgb24.rgb", "/Users/hubin/Desktop/rainbow-rgb24-to-yuv420p-libyuv.yuv", width, height);
+    // int width = 700, height = 700;
+    std::string rgb24File = "./res/rainbow_" + std::to_string(width) + "x" + std::to_string(height) + "_bmp_rgb24.rgb";
+    std::string yuv420pFile = "./resource/rainbow_" + std::to_string(width) + "x" + std::to_string(height) + "_rgb24-to-yuv420p-libyuv.yuv";
+    const char *rgb24FilePath = rgb24File.c_str();     // string 转化为字符串
+    const char *yuv420pFilePath = yuv420pFile.c_str(); // string 转化为字符串
+
+    libyuv_Rgb24_to_Yuv420p(rgb24FilePath, yuv420pFilePath, width, height);
     return 0;
 }

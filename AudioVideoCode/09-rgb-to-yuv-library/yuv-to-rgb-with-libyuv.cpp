@@ -9,7 +9,7 @@
 
 using namespace libyuv;
 
-void libyuv_I444_to_Rgb(char *srcFileName, char *dstFileName, int width, int height)
+void libyuv_I444_to_Rgb(const char *srcFileName, const char *dstFileName, int width, int height)
 {
     FILE *src_file = fopen(srcFileName, "rb");
     FILE *dst_file = fopen(dstFileName, "wb");
@@ -37,18 +37,23 @@ void libyuv_I444_to_Rgb(char *srcFileName, char *dstFileName, int width, int hei
 
 int main(int arg, char **argv)
 {
-    const char *TAG = "yuv-to-rgb-with-libyuv";
-    std::cout << TAG << __FUNCTION__ << ",Line " << __LINE__ << ",arg:" << arg << std::endl;
+    const char *TAG = "yuv-to-rgb-with-libyuv::";
+    std::cout << TAG << __FUNCTION__ << "()::,Line " << __LINE__ << ",arg:" << arg << std::endl;
     if (arg < 3)
     {
-        std::cout << TAG << __FUNCTION__ << ",Line " << __LINE__ << ",使用: " << argv[0] << " 宽 高" << std::endl;
-        std::cout << TAG << __FUNCTION__ << ",Line " << __LINE__ << ",使用: " << argv[0] << " 711 711" << std::endl;
+        std::cout << TAG << __FUNCTION__ << "()::,Line " << __LINE__ << ",使用: " << argv[0] << " 宽 高" << std::endl;
+        std::cout << TAG << __FUNCTION__ << "()::,Line " << __LINE__ << ",使用: " << argv[0] << " 711 711" << std::endl;
         return 1;
     }
-    // uint32_t width = atof(argv[1]);  // 宽
-    // uint32_t height = atof(argv[2]); // 高
+    uint32_t width = atoi(argv[1]);  // 宽
+    uint32_t height = atoi(argv[2]); // 高
 
-    int width = 700, height = 700;
-    libyuv_I444_to_Rgb("/Users/hubin/Desktop/rainbow-yuv444p.yuv", "/Users/hubin/Desktop/rainbow-yuv444p-to-rgb32-libyuv.yuv", width, height);
+    // int width = 700, height = 700;
+    std::string yuv444pFile = "./res/rainbow_" + std::to_string(width) + "x" + std::to_string(height) + "_rainbow_711x711_bmp_yuv444p";
+    std::string rgb24File = "./resource/rainbow_" + std::to_string(width) + "x" + std::to_string(height) + "_yuv444p-to-rgb32-libyuv.rgb";
+    const char *rgb24FilePath = rgb24File.c_str();     // string 转化为字符串
+    const char *yuv444pFilePath = yuv444pFile.c_str(); // string 转化为字符串
+
+    libyuv_I444_to_Rgb(yuv444pFilePath, rgb24FilePath, width, height);
     return 0;
 }

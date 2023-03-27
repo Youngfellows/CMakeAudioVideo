@@ -34,20 +34,20 @@ int main(int arg, char **argv)
         printf("n%s::%s():: Line:%d,使用:%s 711 711\n", TAG, __FUNCTION__, __LINE__, argv[0]);
         return 1;
     }
-    // uint32_t width = atoi(argv[1]);  // 宽
-    // uint32_t height = atoi(argv[2]); // 高
-    // printf("width:%d,height:%d\n", width, height);
+    uint32_t width = atoi(argv[1]);  // 宽
+    uint32_t height = atoi(argv[2]); // 高
+    printf("width:%d,height:%d\n", width, height);
 
-    uint32_t width = 700, height = 700;
+    // uint32_t width = 700, height = 700;
     uint8_t RGB[width * height * 3];
     uint8_t YUV[width * height * 3 / 2];
 
-    FILE *rgb24File = fopen("/Users/hubin/Desktop/rainbow-rgb24.rgb", "rb");
+    FILE *rgb24File = fopen("./res/rainbow_711x711_bmp_rgb24.rgb", "rb");
     fread(RGB, sizeof(RGB), 1, rgb24File);
 
     rgb24ToYuv420p(RGB, YUV, width, height);
 
-    FILE *yuvFile = fopen("/Users/hubin/Desktop/rainbow-rgb24-to-yuv420p-descampsa.yuv", "wb");
+    FILE *yuvFile = fopen("./resource/rainbow-rgb24-to-yuv420p-descampsa.yuv", "wb");
     fwrite(YUV, sizeof(YUV), 1, yuvFile);
 
     fclose(rgb24File);
