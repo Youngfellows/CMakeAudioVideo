@@ -34,6 +34,11 @@ SET_TARGET_PROPERTIES(${ly_lib_shared} PROPERTIES PREFIX "lib")
 ADD_EXECUTABLE(yuvconvert ${ly_base_dir}/util/yuvconvert.cc)
 TARGET_LINK_LIBRARIES(yuvconvert ${ly_lib_static})
 
+add_executable(rgb-to-yuv-with-libyuv ${ly_base_dir}/sample/rgb-to-yuv-with-libyuv.cpp)
+add_executable(yuv-to-rgb-with-libyuv ${ly_base_dir}/sample/yuv-to-rgb-with-libyuv.cpp)
+TARGET_LINK_LIBRARIES(rgb-to-yuv-with-libyuv ${ly_lib_static})
+TARGET_LINK_LIBRARIES(yuv-to-rgb-with-libyuv ${ly_lib_static})
+
 INCLUDE(FindJPEG)
 
 if(JPEG_FOUND)
@@ -89,6 +94,8 @@ INSTALL(PROGRAMS ${CMAKE_BINARY_DIR}/yuvconvert DESTINATION bin)
 INSTALL(TARGETS ${ly_lib_static} DESTINATION lib)
 INSTALL(TARGETS ${ly_lib_shared} LIBRARY DESTINATION lib RUNTIME DESTINATION bin)
 INSTALL(DIRECTORY ${PROJECT_SOURCE_DIR}/include/ DESTINATION include)
+install(TARGETS rgb-to-yuv-with-libyuv DESTINATION bin)
+install(TARGETS yuv-to-rgb-with-libyuv DESTINATION bin)
 
 # create the .deb and .rpm packages using cpack
 INCLUDE(CM_linux_packages.cmake)
