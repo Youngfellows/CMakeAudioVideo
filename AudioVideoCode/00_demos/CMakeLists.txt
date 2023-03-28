@@ -5,7 +5,7 @@ cmake_minimum_required(VERSION 3.15.0)
 project(SampleDemos)
 
 # 设置C/C++语言支持
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 11)
 
 # 设置项目名称
 set(SAMPLE_NAME_SIZEOF DemoSizeof)
