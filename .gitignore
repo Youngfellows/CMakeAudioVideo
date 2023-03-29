@@ -89,3 +89,4 @@ CMakeBase/76-CMake/install/
 CMakeBase/77-CMake/test_sdk/build/
 CMakeBase/77-CMake/install/
 CMakeTutorial/ImportExternalProject/install/
+CMakeTutorial/FindPackage/install/
