@@ -86,3 +86,6 @@ AudioVideoCode/3rd/libyuv/install/
 AudioVideoCode/09-rgb-to-yuv-library/install/
 CMakeBase/76-CMake/test_sdk/build/
 CMakeBase/76-CMake/install/
+CMakeBase/77-CMake/test_sdk/build/
+CMakeBase/77-CMake/install/
+CMakeTutorial/ImportExternalProject/install/

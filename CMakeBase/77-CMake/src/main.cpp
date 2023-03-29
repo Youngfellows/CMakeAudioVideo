@@ -16,5 +16,9 @@ int main(int argc, char *argv[])
     int result = power(base, exponent); // 求幂
     std::cout << base << "的" << exponent << "次方的幕是" << result << std::endl;
 
+#ifdef USE_FFMPEG
+    std::cout << "使用ffmpeg" << std::endl;
+#endif
+    std::cout << "hello defination ..." << std::endl;
     return 0;
 }
