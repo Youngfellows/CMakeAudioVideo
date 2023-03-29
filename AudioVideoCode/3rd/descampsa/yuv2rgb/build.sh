@@ -31,6 +31,8 @@ cd ${BUILD_DIR}
 
 # 编译
 cmake -DCMAKE_CXX_FLAGS=-g -DCMAKE_BUILD_TYPE=Release \
+-DUSE_FFMPEG=OFF \
+-DUSE_IPP=OFF \
 -DCMAKE_INSTALL_PREFIX:PATH=${PROJ_ROOT}/install $PROJ_ROOT
 make -j4
 make install
