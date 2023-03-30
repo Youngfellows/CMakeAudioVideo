@@ -7,6 +7,8 @@ set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Werror -Wall -Wextra -pedantic -std=c99")
 set(USE_FFMPEG FALSE CACHE BOOL "Enable ffmpeg")
 
 if(USE_FFMPEG)
+	set(FFMPEG_ROOT "/mnt/d/LinuxEnvironment/ffmpeg-6.0-sdk" CACHE PATH "ffmpeg install path")
+	include_directories(${FFMPEG_ROOT}/include)
 	add_definitions(-DUSE_FFMPEG=1)
 endif(USE_FFMPEG)
 
@@ -24,7 +26,11 @@ include_directories("${PROJECT_SOURCE_DIR}")
 add_executable(test_yuv_rgb test_yuv_rgb.c yuv_rgb.c)
 
 if(USE_FFMPEG)
-	target_link_libraries(test_yuv_rgb swscale)
+	find_library(lib_swscale swscale PATHS ${FFMPEG_ROOT}/lib)
+	message(STATUS "lib_swscale:${lib_swscale}")
+
+	# target_link_libraries(test_yuv_rgb swscale)
+	target_link_libraries(test_yuv_rgb ${lib_swscale})
 endif(USE_FFMPEG)
 
 if(USE_IPP)

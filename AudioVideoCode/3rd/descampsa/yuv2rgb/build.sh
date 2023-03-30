@@ -31,7 +31,7 @@ cd ${BUILD_DIR}
 
 # 编译
 cmake -DCMAKE_CXX_FLAGS=-g -DCMAKE_BUILD_TYPE=Release \
--DUSE_FFMPEG=OFF \
+-DUSE_FFMPEG=ON \
 -DUSE_IPP=OFF \
 -DCMAKE_INSTALL_PREFIX:PATH=${PROJ_ROOT}/install $PROJ_ROOT
 make -j4
@@ -46,6 +46,9 @@ Or    : test yuv2rgb_nv21 <yuv image file> <image width> <image height> <output 
 Or    : test rgb2yuv <rgb24 binary ppm image file> <output template filename>
 Or    : test rgba2yuv <rgb24 binary ppm image file> <output template filename>
 !
+# 执行,先设置库文件路径
+export LD_LIBRARY_PATH=/mnt/d/LinuxEnvironment/ffmpeg-6.0-sdk/lib
+echo "LD_LIBRARY_PATH:${LD_LIBRARY_PATH}"
 WIDTH=711
 HEIGHT=711
 ${BUILD_ROOT}/install/bin/test_yuv_rgb rgb2yuv ${PROJ_ROOT}/data/test1.ppm ${RESOURCE_DIR}/test1_ppm_rgb24_to_yuv.yuv

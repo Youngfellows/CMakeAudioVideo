@@ -513,6 +513,7 @@ int main(int argc, char **argv)
 		}
 		
 #if USE_FFMPEG
+		printf("use ffmpeg rgb2yuv swscale.\n");
 		rgb2yuv_swscale_ctx = sws_getContext(width, height, AV_PIX_FMT_RGB24, width, height, AV_PIX_FMT_YUV420P, 0, 0, 0, 0);
 #endif
 		
