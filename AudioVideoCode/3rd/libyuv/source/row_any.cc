@@ -1,5 +1,5 @@
 /*
- *  Copyright 2012 The LibYuv Project Authors. All rights reserved.
+ *  Copyright 2012 The LibYuv Project Authors. All rights revoid ARGBToUVRow_Cserved.
  *
  *  Use of this source code is governed by a BSD-style license
  *  that can be found in the LICENSE file in the root of the source
