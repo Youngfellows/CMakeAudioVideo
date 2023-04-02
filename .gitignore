@@ -90,3 +90,7 @@ CMakeBase/77-CMake/test_sdk/build/
 CMakeBase/77-CMake/install/
 CMakeTutorial/ImportExternalProject/install/
 CMakeTutorial/FindPackage/install/
+AudioVideoCode/10-yuv-conversion-libyuv/build/
+AudioVideoCode/10-yuv-conversion-libyuv/res/
+AudioVideoCode/10-yuv-conversion-libyuv/install/
+AudioVideoCode/10-yuv-conversion-libyuv/resource/
