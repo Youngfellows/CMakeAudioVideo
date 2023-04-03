@@ -2,15 +2,15 @@
 #include <stdlib.h>
 #include <string.h>
 
-// ITU-R BT.601¸ø³öµÄ²ÊÉ«ĞÅºÅµÄYCbCrÖµ£¬8ÖÖÑÕÉ«(ÊÓÆµ½âÃÜµÚ3½Ú£¬SDTV)
+// ITU-R BT.601ç»™å‡ºçš„å½©è‰²ä¿¡å·çš„YCbCrå€¼ï¼Œ8ç§é¢œè‰²(è§†é¢‘è§£å¯†ç¬¬3èŠ‚ï¼ŒSDTV)
 // white yellow cyan green magenta red blue black
 unsigned int g_test_yuv[] ={
     0xb48080, 0xa22c8e, 0x839c2c, 0x70483a, 0x54b8c6,
     0x4164d4, 0x23d472, 0x108080};
 
 #define YUV_NUM (sizeof(g_test_yuv)/sizeof(g_test_yuv[0]))
-/// Ìî³äYUVÊı¾İ£¬¸ñÊ½£ºUYVY
-/// ºáÌõ
+/// å¡«å……YUVæ•°æ®ï¼Œæ ¼å¼ï¼šUYVY
+/// æ¨ªæ¡
 void fill_yuv_uyvy_1(unsigned char* buffer, int width, int height)
 {
     unsigned char *src = buffer;
@@ -33,24 +33,24 @@ void fill_yuv_uyvy_1(unsigned char* buffer, int width, int height)
     }
 }
 
-/// Ìî³äYUVÊı¾İ£¬¸ñÊ½£ºUYVY 
-/// ÊúÌõ
+/// å¡«å……YUVæ•°æ®ï¼Œæ ¼å¼ï¼šUYVY 
+/// ç«–æ¡
 void fill_yuv_uyvy_2(unsigned char* buffer, int width, int height)
 {
     unsigned char *src = buffer;
     int i, j, k;
 
     int slice = width / YUV_NUM;
-    for (i = 0; i < (int)YUV_NUM; i++) // ²ÊÌõ¸öÊı
+    for (i = 0; i < (int)YUV_NUM; i++) // å½©æ¡ä¸ªæ•°
     {
         int index = i;
         unsigned char y = (g_test_yuv[index] & 0xff0000 ) >> 16;
         unsigned char u = (g_test_yuv[index] & 0x00ff00) >> 8;
         unsigned char v = (g_test_yuv[index] & 0x0000ff);
-        // ÊúÌõ
+        // ç«–æ¡
         for (j = 0; j < height; j++) // h
         {
-            // ÊúÌõµÄÒ»ĞĞ
+            // ç«–æ¡çš„ä¸€è¡Œ
             for (k = 0; k < slice*2; k += 4)
             {
                 src[index*slice*2 + j*width*2+k+0] = u; // U
@@ -64,7 +64,7 @@ void fill_yuv_uyvy_2(unsigned char* buffer, int width, int height)
 
 //////////////////////////////////////////////////////////////////
 // yuv422
-// ºáÌõ
+// æ¨ªæ¡
 void fill_yuv_yuv422_1(unsigned char* buffer, int width, int height)
 {
     unsigned char *src = buffer;
@@ -101,7 +101,7 @@ void fill_yuv_yuv422_1(unsigned char* buffer, int width, int height)
 }
 
 // yuv422
-// ÊúÌõ
+// ç«–æ¡
 void fill_yuv_yuv422_2(unsigned char* buffer, int width, int height)
 {
     unsigned char *src = buffer;
@@ -114,19 +114,19 @@ void fill_yuv_yuv422_2(unsigned char* buffer, int width, int height)
     p_u = p_y + width * height;
     p_v = p_u + width * height / 2;
 
-    // ¼Æ³öÃ¿ÖÖÑÕÉ«ÓĞ¶àÉÙÏñËØ
+    // è®¡å‡ºæ¯ç§é¢œè‰²æœ‰å¤šå°‘åƒç´ 
     int slice = width / YUV_NUM;
 
     for (i = 0; i < height; i++)
     {
-        // °´ÊúÌõÌî³äÃ¿Ò»ĞĞµÄÏñËØ
+        // æŒ‰ç«–æ¡å¡«å……æ¯ä¸€è¡Œçš„åƒç´ 
         for (j = 0; j < (int)YUV_NUM; j++)
         {
             int index = j;
             unsigned char y = (g_test_yuv[index] & 0xff0000 ) >> 16;
             unsigned char u = (g_test_yuv[index] & 0x00ff00) >> 8;
             unsigned char v = (g_test_yuv[index] & 0x0000ff);
-            for (k = 0; k < slice*2; k += 4)    // Ò»ÖÖÑÕÉ«
+            for (k = 0; k < slice*2; k += 4)    // ä¸€ç§é¢œè‰²
             {
                 p_y[0] = y;
                 p_y[1] = y;
@@ -142,7 +142,7 @@ void fill_yuv_yuv422_2(unsigned char* buffer, int width, int height)
 }
 
 // yuv420
-// ºáÌõ
+// æ¨ªæ¡
 void fill_yuv_yuv420_1(unsigned char* buffer, int width, int height)
 {
     unsigned char *src = buffer;
@@ -181,8 +181,8 @@ void fill_yuv_yuv420_1(unsigned char* buffer, int width, int height)
 }
 
 // yuv420
-// ÊúÌõ
-// »¹ÓĞÎÊÌâ£¬¼ÌĞøÕÒ
+// ç«–æ¡
+// è¿˜æœ‰é—®é¢˜ï¼Œç»§ç»­æ‰¾
 void fill_yuv_yuv420_2(unsigned char* buffer, int width, int height)
 {
     unsigned char *src = buffer;
@@ -195,20 +195,20 @@ void fill_yuv_yuv420_2(unsigned char* buffer, int width, int height)
     p_u = p_y + width * height;
     p_v = p_u + width * height / 4;
 
-    // ¼Æ³öÃ¿ÖÖÑÕÉ«ÓĞ¶àÉÙÏñËØ
+    // è®¡å‡ºæ¯ç§é¢œè‰²æœ‰å¤šå°‘åƒç´ 
     int slice = width / YUV_NUM;
 
     printf("slice: %d\n", slice);
     for (i = 0; i < height; i++)
     {
-        // °´ÊúÌõÌî³äÃ¿Ò»ĞĞµÄÏñËØ
+        // æŒ‰ç«–æ¡å¡«å……æ¯ä¸€è¡Œçš„åƒç´ 
         for (j = 0; j < (int)YUV_NUM; j++)
         {
             int index = j;
             unsigned char y = (g_test_yuv[index] & 0xff0000 ) >> 16;
             unsigned char u = (g_test_yuv[index] & 0x00ff00) >> 8;
             unsigned char v = (g_test_yuv[index] & 0x0000ff);
-            for (k = 0; k < slice; k += 4)    // Ò»ÖÖÑÕÉ«
+            for (k = 0; k < slice; k += 4)    // ä¸€ç§é¢œè‰²
             {
             p_y[0] = y;
             p_y[1] = y;

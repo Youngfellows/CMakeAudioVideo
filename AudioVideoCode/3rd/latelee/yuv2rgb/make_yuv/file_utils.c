@@ -17,12 +17,12 @@ int read_file(const char* filename, char** buffer, int* len)
         return -1;
     }
 
-    fseek(fp, 0, SEEK_END);	// ÎÄ¼þÎ²
+    fseek(fp, 0, SEEK_END);	// æ–‡ä»¶å°¾
     file_size = ftell(fp);
     printf("file size: %d = %.1f(KB) = %.1f(MB)\n",
             file_size, file_size/1024.0, file_size/1024.0/1024.0);
 
-    fseek(fp, 0, SEEK_SET);	// Ö¸»ØÎÄ¼þÍ·
+    fseek(fp, 0, SEEK_SET);	// æŒ‡å›žæ–‡ä»¶å¤´
 
     *buffer = (char*)malloc(file_size);
 
@@ -32,7 +32,7 @@ int read_file(const char* filename, char** buffer, int* len)
         return -1;
     }
 
-    //  ¶ÁÎÄ¼þ
+    //  è¯»æ–‡ä»¶
     ptr = *buffer;
     real_len = 0;
 
@@ -78,7 +78,7 @@ int write_file(const char* filename, char* buffer, int len)
     }
 
 
-    //  Ð´ÎÄ¼þ
+    //  å†™æ–‡ä»¶
     ptr = buffer;
     real_len = 0;
 
@@ -117,10 +117,10 @@ int get_filesize(const char* filename)
         return -1;
     }
 
-    fseek(fp, 0, SEEK_END);	// ÎÄ¼þÎ²
+    fseek(fp, 0, SEEK_END);	// æ–‡ä»¶å°¾
     file_size = ftell(fp);
 
-    fseek(fp, 0, SEEK_SET);	// Ö¸»ØÎÄ¼þÍ·
+    fseek(fp, 0, SEEK_SET);	// æŒ‡å›žæ–‡ä»¶å¤´
 
     return file_size;
 }

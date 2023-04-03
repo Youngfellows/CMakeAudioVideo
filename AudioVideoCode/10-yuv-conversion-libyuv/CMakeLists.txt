@@ -2,7 +2,7 @@
 cmake_minimum_required(VERSION 3.14)
 
 # 设置支持语言
-#set(CMAKE_C_STANDARD 99)
+# set(CMAKE_C_STANDARD 99)
 
 # 设置项目名称
 project(yuv-conversion)

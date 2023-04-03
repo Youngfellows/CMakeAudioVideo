@@ -6,12 +6,12 @@
 #include "fill_yuvdata.h"
 #include "file_utils.h"
 
-// 8的整数倍，否则颜色可能错位
+// 8鐨勬暣鏁板�嶏紝鍚﹀垯棰滆壊鍙兘閿欎綅
 #define WIDTH 720
 #define HEGHT 480
 
-// yuv422是w*h*2
-// yuv420是w*h*3/2
+// yuv422鏄痺*h*2
+// yuv420鏄痺*h*3/2
 #define FILE_SIZE (WIDTH*HEGHT*3/2)
 
 int main(void)

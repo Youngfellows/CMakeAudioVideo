@@ -3,7 +3,7 @@
  * @author Late Lee <latelee@163.com>
  * @date   Fri Feb 14 15:46:52 2014
  * 
- * @brief  Ìî³äYUV²ÊÌõÊı¾İ£¬ÑÕÉ«²Î¿¼ITU-R BT.601±ê×¼£¬¹²8ÖÖÑÕÉ«
+ * @brief  å¡«å……YUVå½©æ¡æ•°æ®ï¼Œé¢œè‰²å‚è€ƒITU-R BT.601æ ‡å‡†ï¼Œå…±8ç§é¢œè‰²
  * 
  * 
  */
@@ -17,56 +17,56 @@ extern "C"
 #endif
 
 /** 
- * Ìî³äUYVY¸ñÊ½Êı¾İ£¬ºáÌõ
+ * å¡«å……UYVYæ ¼å¼æ•°æ®ï¼Œæ¨ªæ¡
  * 
- * @param buffer: Êı¾İ»º³åÇø£¬ÓÉµ÷ÓÃÕßÉêÇë²¢±£Ö¤ÓĞĞ§ 
- * @param width : Í¼Ïñ¿í
- * @param height: Í¼Ïñ¸ß
+ * @param buffer: æ•°æ®ç¼“å†²åŒºï¼Œç”±è°ƒç”¨è€…ç”³è¯·å¹¶ä¿è¯æœ‰æ•ˆ 
+ * @param width : å›¾åƒå®½
+ * @param height: å›¾åƒé«˜
  */
 void fill_yuv_uyvy_1(unsigned char* buffer, int width, int height);
 
 /** 
- * Ìî³äUYVY¸ñÊ½Êı¾İ£¬ÊúÌõ
+ * å¡«å……UYVYæ ¼å¼æ•°æ®ï¼Œç«–æ¡
  * 
- * @param buffer: Êı¾İ»º³åÇø£¬ÓÉµ÷ÓÃÕßÉêÇë²¢±£Ö¤ÓĞĞ§ 
- * @param width : Í¼Ïñ¿í
- * @param height: Í¼Ïñ¸ß
+ * @param buffer: æ•°æ®ç¼“å†²åŒºï¼Œç”±è°ƒç”¨è€…ç”³è¯·å¹¶ä¿è¯æœ‰æ•ˆ 
+ * @param width : å›¾åƒå®½
+ * @param height: å›¾åƒé«˜
  */
 void fill_yuv_uyvy_2(unsigned char* buffer, int width, int height);
 
 /** 
- * Ìî³äYUV422P¸ñÊ½Êı¾İ£¬ºáÌõ
+ * å¡«å……YUV422Pæ ¼å¼æ•°æ®ï¼Œæ¨ªæ¡
  * 
- * @param buffer: Êı¾İ»º³åÇø£¬ÓÉµ÷ÓÃÕßÉêÇë²¢±£Ö¤ÓĞĞ§ 
- * @param width : Í¼Ïñ¿í
- * @param height: Í¼Ïñ¸ß
+ * @param buffer: æ•°æ®ç¼“å†²åŒºï¼Œç”±è°ƒç”¨è€…ç”³è¯·å¹¶ä¿è¯æœ‰æ•ˆ 
+ * @param width : å›¾åƒå®½
+ * @param height: å›¾åƒé«˜
  */
 void fill_yuv_yuv422_1(unsigned char* buffer, int width, int height);
 
 /** 
- * Ìî³äYUV422P¸ñÊ½Êı¾İ£¬ÊúÌõ
+ * å¡«å……YUV422Pæ ¼å¼æ•°æ®ï¼Œç«–æ¡
  * 
- * @param buffer: Êı¾İ»º³åÇø£¬ÓÉµ÷ÓÃÕßÉêÇë²¢±£Ö¤ÓĞĞ§ 
- * @param width : Í¼Ïñ¿í
- * @param height: Í¼Ïñ¸ß
+ * @param buffer: æ•°æ®ç¼“å†²åŒºï¼Œç”±è°ƒç”¨è€…ç”³è¯·å¹¶ä¿è¯æœ‰æ•ˆ 
+ * @param width : å›¾åƒå®½
+ * @param height: å›¾åƒé«˜
  */
 void fill_yuv_yuv422_2(unsigned char* buffer, int width, int height);
 
 /** 
- * Ìî³äYUV420P¸ñÊ½Êı¾İ£¬ºáÌõ
+ * å¡«å……YUV420Pæ ¼å¼æ•°æ®ï¼Œæ¨ªæ¡
  * 
- * @param buffer: Êı¾İ»º³åÇø£¬ÓÉµ÷ÓÃÕßÉêÇë²¢±£Ö¤ÓĞĞ§ 
- * @param width : Í¼Ïñ¿í
- * @param height: Í¼Ïñ¸ß
+ * @param buffer: æ•°æ®ç¼“å†²åŒºï¼Œç”±è°ƒç”¨è€…ç”³è¯·å¹¶ä¿è¯æœ‰æ•ˆ 
+ * @param width : å›¾åƒå®½
+ * @param height: å›¾åƒé«˜
  */
 void fill_yuv_yuv420_1(unsigned char* buffer, int width, int height);
 
 /** 
- * Ìî³äYUV420P¸ñÊ½Êı¾İ£¬ÊúÌõ
+ * å¡«å……YUV420Pæ ¼å¼æ•°æ®ï¼Œç«–æ¡
  * 
- * @param buffer: Êı¾İ»º³åÇø£¬ÓÉµ÷ÓÃÕßÉêÇë²¢±£Ö¤ÓĞĞ§ 
- * @param width : Í¼Ïñ¿í
- * @param height: Í¼Ïñ¸ß
+ * @param buffer: æ•°æ®ç¼“å†²åŒºï¼Œç”±è°ƒç”¨è€…ç”³è¯·å¹¶ä¿è¯æœ‰æ•ˆ 
+ * @param width : å›¾åƒå®½
+ * @param height: å›¾åƒé«˜
  */
 void fill_yuv_yuv420_2(unsigned char* buffer, int width, int height);
 

@@ -190,7 +190,7 @@ int save_bmp420(const char* yuvfile, const char* bmpfile, int width, int height)
     return 0;
 }
 
-// �Ӷ�֡YUV�ļ���ȡ��һ֡
+// 从多帧YUV文件抽取第一帧
 void split_file(const char* src, const char* dst, int width, int height, int type)
 {
     FILE* fp1;
@@ -304,7 +304,7 @@ void ConvertImage(const char* src, const char* dst, int width, int height)
 
 int main(int argc, char* argv[])
 {
-    // ��ȡ�ļ�
+    // 抽取文件
     //split_file("yuvfile/tempete_cif.yuv", "tempete_cif_yuv420p_00.yuv", 352, 288, 0);
 
     // OK
@@ -316,7 +316,7 @@ int main(int argc, char* argv[])
 	// OK
 	//save_bmp422sp("yuvfile/yuv422sp_3000x1024.yuv", "test.bmp", 3000, 1024);
     
-	// SPתP
+	// SP转P
     //ConvertImage("yuvfile/yuv422sp_3000x1024.yuv", "yuvfile/yuv422p.yuv", 3000, 1024);
     
 	//save_bmp420("yuvfile/suzie_qcif_yuv420p_00.yuv", "suzie_qcif_1.bmp", 176, 144);
