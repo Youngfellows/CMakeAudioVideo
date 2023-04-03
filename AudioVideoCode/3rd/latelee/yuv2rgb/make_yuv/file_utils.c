@@ -1,10 +1,18 @@
 
 #include "file_utils.h"
 
-int read_file(const char* filename, char** buffer, int* len)
+/**
+ * @brief 读取文件内容到缓冲区
+ *
+ * @param filename 文件名
+ * @param buffer 缓冲区
+ * @param len 要读取长度
+ * @return int
+ */
+int read_file(const char *filename, char **buffer, int *len)
 {
-    const char* tmp_file = filename;
-    FILE* fp = NULL;
+    const char *tmp_file = filename;
+    FILE *fp = NULL;
     int file_size = 0;
     char *ptr = NULL;
     int real_len = 0;
@@ -17,16 +25,16 @@ int read_file(const char* filename, char** buffer, int* len)
         return -1;
     }
 
-    fseek(fp, 0, SEEK_END);	// 文件尾
+    fseek(fp, 0, SEEK_END); // 文件尾
     file_size = ftell(fp);
     printf("file size: %d = %.1f(KB) = %.1f(MB)\n",
-            file_size, file_size/1024.0, file_size/1024.0/1024.0);
+           file_size, file_size / 1024.0, file_size / 1024.0 / 1024.0);
 
-    fseek(fp, 0, SEEK_SET);	// 指回文件头
+    fseek(fp, 0, SEEK_SET); // 指回文件头
 
-    *buffer = (char*)malloc(file_size);
+    *buffer = (char *)malloc(file_size);
 
-    if ( NULL == *buffer )
+    if (NULL == *buffer)
     {
         printf("malloc failed!\n");
         return -1;
@@ -43,7 +51,7 @@ int read_file(const char* filename, char** buffer, int* len)
         {
             printf("fread failed! real: %d ret: %d\n", file_size, ret);
             *len = 0;
-            return - 1;
+            return -1;
         }
         else if (ret == 0)
         {
@@ -61,10 +69,18 @@ int read_file(const char* filename, char** buffer, int* len)
     return 0;
 }
 
-int write_file(const char* filename, char* buffer, int len)
+/**
+ * @brief 把缓冲区数据写入文件
+ *
+ * @param filename 文件名
+ * @param buffer 缓冲区
+ * @param len 要写入数据的长度
+ * @return int
+ */
+int write_file(const char *filename, char *buffer, int len)
 {
-    const char* tmp_file = filename;
-    FILE* fp = NULL;
+    const char *tmp_file = filename;
+    FILE *fp = NULL;
     int file_size = len;
     char *ptr = NULL;
     int real_len = 0;
@@ -77,7 +93,6 @@ int write_file(const char* filename, char* buffer, int len)
         return -1;
     }
 
-
     //  写文件
     ptr = buffer;
     real_len = 0;
@@ -88,7 +103,7 @@ int write_file(const char* filename, char* buffer, int len)
         if (ret < 0)
         {
             printf("fwrite failed! real: %d ret: %d\n", file_size, ret);
-            return - 1;
+            return -1;
         }
         else if (ret == 0)
         {
@@ -104,10 +119,16 @@ int write_file(const char* filename, char* buffer, int len)
     return 0;
 }
 
-int get_filesize(const char* filename)
+/**
+ * @brief 获取文件大小
+ *
+ * @param filename 文件名
+ * @return int
+ */
+int get_filesize(const char *filename)
 {
-    const char* tmp_file = filename;
-    FILE* fp = NULL;
+    const char *tmp_file = filename;
+    FILE *fp = NULL;
     int file_size = 0;
 
     fp = fopen(tmp_file, "rb");
@@ -117,11 +138,10 @@ int get_filesize(const char* filename)
         return -1;
     }
 
-    fseek(fp, 0, SEEK_END);	// 文件尾
+    fseek(fp, 0, SEEK_END); // 文件尾
     file_size = ftell(fp);
 
-    fseek(fp, 0, SEEK_SET);	// 指回文件头
+    fseek(fp, 0, SEEK_SET); // 指回文件头
 
     return file_size;
 }
-
