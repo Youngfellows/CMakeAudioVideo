@@ -37,6 +37,6 @@ cd -
 # 遍历指定目录下所有文件，包括子目录下的所有文件,并运行
 BIN_DIR=${PROJ_ROOT}/install/bin
 for name in $(find $BIN_DIR -type f -name "*"); do
-    echo "${name}"
+    echo -e "\nrun::${name}"
     ${name}
 done
