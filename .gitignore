@@ -97,3 +97,6 @@ AudioVideoCode/10-yuv-conversion-libyuv/resource/
 AudioVideoCode/00_demos_library/resource/
 AudioVideoCode/00_demos/resource/build.zip
 AudioVideoCode/00_demos/resource/my_build.data
+AudioVideoCode/11-rgb-to-png/build/
+AudioVideoCode/11-rgb-to-png/resource/
+AudioVideoCode/11-rgb-to-png/install/
