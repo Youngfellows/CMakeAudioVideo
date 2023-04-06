@@ -5,6 +5,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdint.h>
 
 // 彩虹的七种颜色
 uint32_t rainbowColors[] = {
@@ -73,7 +74,7 @@ void testRainbow()
 
     // FILE *file = fopen("/Users/hubin/Desktop/lodepng-rgb-rainbow.png", "wb");
     // FILE *file = fopen("C:\\Users\\Administrator\\Desktop\\lodepng-rgb-rainbow.png", "wb+");
-    unsigned error = lodepng_encode24_file("/Users/hubin/Desktop/lodepng-rgb-rainbow.png", rgb24Data, width, height);
+    unsigned error = lodepng_encode24_file("./resource/lodepng-rgb-rainbow.png", rgb24Data, width, height);
     if (error)
         printf("error %u: %s\n", error, lodepng_error_text(error));
 }
@@ -150,7 +151,7 @@ int main(int argc, char *argv[])
 {
     // FILE *file = fopen("/Users/hubin/Desktop/lodepng-test.png", "wb");
     // FILE *file = fopen("C:\\Users\\Administrator\\Desktop\\lodepng-test.png", "wb+");
-    const char *filename = argc > 1 ? argv[1] : "/Users/hubin/Desktop/lodepng-test.png";
+    const char *filename = argc > 1 ? argv[1] : "./resource/lodepng-test.png";
 
     /*generate some image*/
     unsigned width = 512, height = 512;
