@@ -62,7 +62,9 @@
         "yuv_rgb.h": "c",
         "x86intrin.h": "c",
         "stdlib.h": "c",
-        "zlib.h": "c"
+        "zlib.h": "c",
+        "*.inc": "c",
+        "png.h": "c"
     },
     "cmake.sourceDirectory": "${workspaceFolder}/CMakeBase/01-CMake",
     "C_Cpp.errorSquiggles": "disabled"

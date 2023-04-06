@@ -100,3 +100,6 @@ AudioVideoCode/00_demos/resource/my_build.data
 AudioVideoCode/11-rgb-to-png/build/
 AudioVideoCode/11-rgb-to-png/resource/
 AudioVideoCode/11-rgb-to-png/install/
+AudioVideoCode/13-rgb-to-png-library/build/
+AudioVideoCode/13-rgb-to-png-library/resource/
+AudioVideoCode/13-rgb-to-png-library/install/
