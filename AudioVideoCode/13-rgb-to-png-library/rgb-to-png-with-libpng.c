@@ -78,7 +78,7 @@ void testRainbow()
     png_infop info_ptr;
 
     // FILE *file = fopen("C:\\Users\\Administrator\\Desktop\\lodepng-rgb-rainbow.png", "wb+");
-    FILE *png_file = fopen("/Users/hubin/Desktop/libpng-rgb-rainbow.png", "wb");
+    FILE *png_file = fopen("./resource/libpng-rgb-rainbow.png", "wb");
     if (!png_file)
     {
         return;
@@ -147,7 +147,7 @@ void test01()
     png_infop info_ptr;
 
     // FILE *file = fopen("C:\\Users\\Administrator\\Desktop\\lodepng-test01.png", "wb+");
-    FILE *png_file = fopen("/Users/hubin/Desktop/libpng-test01.png", "wb");
+    FILE *png_file = fopen("./resource/libpng-test01.png", "wb");
     if (!png_file)
     {
         return;
