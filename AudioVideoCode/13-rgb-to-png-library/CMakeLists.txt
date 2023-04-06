@@ -64,10 +64,13 @@ include_directories(../3rd/libpng)
 include_directories(../3rd/zlib)
 
 # 生成可执行文件
-# add_executable(13-rgb-to-png-with-libpng rgb-to-png-with-libpng.c ${ZLIB_SRC} ${LIBPNG_SRC})
+add_executable(13-rgb-to-png-with-libpng rgb-to-png-with-libpng.c ${ZLIB_SRC} ${LIBPNG_SRC})
+find_library(LIB_MATH m) # 添加math.h库
+message(STATUS "LIB_MATH:${LIB_MATH}")
+target_link_libraries(13-rgb-to-png-with-libpng ${LIB_MATH})
 
 # 安装可执行文件到指定目录
 install(TARGETS 13-rgb-to-png-with-svpng DESTINATION bin)
 install(TARGETS 13-rgb-to-png-with-libattopng DESTINATION bin)
 install(TARGETS 13-rgb-to-png-with-lodepng DESTINATION bin)
-# install(TARGETS 13-rgb-to-png-with-libpng DESTINATION bin)
+install(TARGETS 13-rgb-to-png-with-libpng DESTINATION bin)
