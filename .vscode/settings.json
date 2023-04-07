@@ -65,7 +65,8 @@
         "zlib.h": "c",
         "*.inc": "c",
         "png.h": "c",
-        "pnglibconf.h": "c"
+        "pnglibconf.h": "c",
+        "stdbool.h": "c"
     },
     "cmake.sourceDirectory": "${workspaceFolder}/CMakeBase/01-CMake",
     "C_Cpp.errorSquiggles": "disabled"

@@ -11,6 +11,9 @@ set(CMAKE_C_STANDARD 99)
 # 设置项目名称
 set(SAMPLE_NAME_SIZEOF DemoSizeof)
 
+# 设置包含头文件
+include_directories(${CMAKE_SOURCE_DIR}/include)
+
 # 编译第三方库,使用zlib库demo
 aux_source_directory(../3rd/zlib ZLIB_SRC) # 包含源码文件
 include_directories(../3rd/zlib) # 包含头文件路径
@@ -18,6 +21,9 @@ aux_source_directory(./src/zlib ZLIB_DEMO_SRC)
 
 # 查找源文件
 aux_source_directory(./src DEMOS_SRC_LISTS)
+
+# 查找编译DemoSwitchUint可执行文件源文件
+aux_source_directory(./src/switch SWITCH_UNIT_SRC)
 
 # 生成可执行文件
 # set(SIZEOF_SRC_LIST "./src/DemoSizeof.cpp")
@@ -63,6 +69,11 @@ endforeach()
 set(ZLIB_DEMO DemoZlib)
 add_executable(${ZLIB_DEMO} ${ZLIB_SRC} ${ZLIB_DEMO_SRC})
 list(APPEND EXECUTABLES ${ZLIB_DEMO})
+
+# 编译DemoSwitchUint可执行文件
+set(SWITCH_UINT_DEMO DemoSwitchUint)
+add_executable(${SWITCH_UINT_DEMO} ${SWITCH_UNIT_SRC})
+list(APPEND EXECUTABLES ${SWITCH_UINT_DEMO})
 
 # 安装可执行文件到指定目录
 # install(TARGETS ${SAMPLE_NAME_SIZEOF} DESTINATION bin)

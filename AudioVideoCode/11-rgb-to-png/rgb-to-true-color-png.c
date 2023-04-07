@@ -14,15 +14,19 @@ void genRGB24Data(uint8_t *rgbData, int width, int height);
 uint32_t switchUint32(uint32_t i);
 uint32_t calcCrc32(uint32_t dataASCII, uint8_t *data, uint32_t length);
 
+/**
+ * @brief 数据块-文件头数据块 IHDR
+ *
+ */
 typedef struct
 {
-    uint32_t width;
-    uint32_t height;
-    uint8_t bitDepth;
-    uint8_t colorType;
-    uint8_t compressionMethod;
-    uint8_t filterMethod;
-    uint8_t interlaceMethod;
+    uint32_t width;            // 图像宽度，以像素为单位
+    uint32_t height;           // 图像高度，以像素为单位
+    uint8_t bitDepth;          // 图像深度： 索引彩色图像：1，2，4或8 灰度图像：1，2，4，8或16 真彩色图像：8或16
+    uint8_t colorType;         // 颜色类型：0：灰度图像, 1，2，4，8或16 2：真彩色图像，8或16 3：索引彩色图像，1，2，4或8 4：带α通道数据的灰度图像，8或16 6：带α通道数据的真彩色图像，8或16
+    uint8_t compressionMethod; // PNG Spec 规定此处总为 0，表示使用压缩方法(LZ77派生算法)
+    uint8_t filterMethod;      // PNG Spec 规定此处总为 0，滤波器方法
+    uint8_t interlaceMethod;   // 隔行扫描方法：0：非隔行扫描 1： Adam7(由Adam M. Costello开发的7遍隔行扫描方法)
 } PNG_IHDR_DATA;
 
 int main()
@@ -36,8 +40,10 @@ int main()
     uint8_t PNG_FILE_SIGNATURE[] = {0x89, 0x50, 0x4E, 0x47, 0x0D, 0x0A, 0x1A, 0x0A};
     // IHDR 每个字母对应的 ASCII
     uint32_t IHDR_ASCII = switchUint32(0x49484452);
+    printf("%s()::%d,uint32_t,IHDR_ASCII:%d\n", __FUNCTION__, __LINE__, IHDR_ASCII);
     // IDAT 每个字母对应的ASCII
     uint32_t IDAT_ASCII = switchUint32(0x49444154);
+    printf("%s()::%d,uint32_t,IDAT_ASCII:%d\n", __FUNCTION__, __LINE__, IDAT_ASCII);
     // PNG 文件的结尾 12 个字节看起来总应该是这样的：（00 00 00 00 49 45 4E 44 AE 42 60 82，十六进制）
     uint8_t PNG_IEND_DATA[] = {0x00, 0x00, 0x00, 0x00, 0x49, 0x45, 0x4E, 0x44, 0xAE, 0x42, 0x60, 0x82};
 
@@ -66,6 +72,8 @@ int main()
     pngIhdrData.compressionMethod = 0;
     pngIhdrData.filterMethod = 0;
     pngIhdrData.interlaceMethod = 0;
+    printf("%s()::%d,width:%d,height:%d\n", __FUNCTION__, __LINE__, pngIhdrData.width, pngIhdrData.height);
+    printf("%s()::%d,width:%d,height:%d\n", __FUNCTION__, __LINE__, switchUint32(pngIhdrData.width), switchUint32(pngIhdrData.width));
 
     // IHDR 数据长度
     uint32_t IHDR_DATA_LENGTH = 13;

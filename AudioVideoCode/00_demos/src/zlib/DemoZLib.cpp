@@ -17,8 +17,8 @@ int main(int arg, char **argv)
 
     // FILE *inFile = fopen("/Users/hubin/Desktop/0.data", "rb");
     // FILE *outFile = fopen("/Users/hubin/Desktop/0-uncompress.data", "wb");
-    FILE *inFile = fopen("./resource/build.zip", "rb");
-    FILE *outFile = fopen("./resource/my_build.data", "wb");
+    FILE *inFile = fopen("./resource/test1.ppm", "rb");
+    FILE *outFile = fopen("./resource/un_test1.ppm", "wb");
     printf("%s()::%d\n", __FUNCTION__, __LINE__);
 
     fseek(inFile, 0L, SEEK_END);
