@@ -22,7 +22,7 @@ mkdir -p ${RESOURCE_DIR}
 WIDTH=711
 HEIGHT=711
 BMP_FILE_NAME="rainbow_${WIDTH}x${HEIGHT}.bmp"
-SRC_BMP_FILE_PATH=${PARENT_ROOT}/03_rgb_to_bmp/resource/${BMP_FILE_NAME}
+SRC_BMP_FILE_PATH=${PARENT_ROOT}/03-rgb-to-bmp-cpp/resource/${BMP_FILE_NAME}
 echo "bitmap file path:${SRC_BMP_FILE_PATH}"
 
 # 判断文件是否存在
