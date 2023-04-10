@@ -13,7 +13,7 @@ fi
 mkdir -p ${RESOURCE_DIR}
 
 # 设置install目录
-INSTALL_DIR=${BUILD_ROOT}/install
+INSTALL_DIR=${BUILD_ROOT}/dist
 if [ -e ${INSTALL_DIR} ]; then
     echo "rm -rf ${INSTALL_DIR}"
     rm -rf ${INSTALL_DIR}
@@ -31,10 +31,10 @@ cd ${BUILD_DIR}
 
 # 编译
 cmake -DCMAKE_CXX_FLAGS=-g -DCMAKE_BUILD_TYPE=Release \
--DCMAKE_INSTALL_PREFIX:PATH=${PROJ_ROOT}/install $PROJ_ROOT
+-DCMAKE_INSTALL_PREFIX:PATH=${INSTALL_DIR} $PROJ_ROOT
 make -j4
 make install
 cd -
 
 # 运行
-${BUILD_ROOT}/install/bin/15-rgb-to-jpeg
+${INSTALL_DIR}/bin/16-rgb-to-jpeg-library

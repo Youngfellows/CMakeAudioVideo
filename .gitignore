@@ -130,3 +130,12 @@ AudioVideoCode/15-rgb-to-jpeg/resource/
 AudioVideoCode/16-rgb-to-jpeg-library/build/
 AudioVideoCode/16-rgb-to-jpeg-library/install/
 AudioVideoCode/16-rgb-to-jpeg-library/resource/
+AudioVideoCode/3rd/libjpeg-turbo/build/
+AudioVideoCode/3rd/libjpeg-turbo/install/
+AudioVideoCode/3rd/libjpeg-turbo/binary/
+AudioVideoCode/3rd/libjpeg-turbo/dist/
+AudioVideoCode/3rd-library/libjpeg-turbo/build/
+AudioVideoCode/3rd-library/libjpeg-turbo/install/
+AudioVideoCode/3rd-library/libjpeg-turbo/binary/
+AudioVideoCode/3rd-library/libjpeg-turbo/dist/
+
