@@ -127,3 +127,6 @@ AudioVideoCode/04-rgb-to-bmp-fix/build/
 AudioVideoCode/15-rgb-to-jpeg/build/
 AudioVideoCode/15-rgb-to-jpeg/install/
 AudioVideoCode/15-rgb-to-jpeg/resource/
+AudioVideoCode/16-rgb-to-jpeg-library/build/
+AudioVideoCode/16-rgb-to-jpeg-library/install/
+AudioVideoCode/16-rgb-to-jpeg-library/resource/
