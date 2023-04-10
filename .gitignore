@@ -114,3 +114,12 @@ AudioVideoCode/02-rgb-pixel-cpp/install/
 AudioVideoCode/03-rgb-to-bmp-cpp/install/
 AudioVideoCode/03-rgb-to-bmp-cpp/resource/
 AudioVideoCode/03-rgb-to-bmp-cpp/res/
+AudioVideoCode/04-rgb-to-bmp-fix-cpp/resource/
+AudioVideoCode/04-rgb-to-bmp-fix-cpp/install/
+AudioVideoCode/04-rgb-to-bmp-fix-cpp/build/
+AudioVideoCode/03-rgb-to-bmp/build/
+AudioVideoCode/03-rgb-to-bmp/resource/
+AudioVideoCode/03-rgb-to-bmp/install/
+AudioVideoCode/04-rgb-to-bmp-fix/resource/
+AudioVideoCode/04-rgb-to-bmp-fix/install/
+AudioVideoCode/04-rgb-to-bmp-fix/build/
