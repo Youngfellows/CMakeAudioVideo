@@ -66,7 +66,8 @@
         "*.inc": "c",
         "png.h": "c",
         "pnglibconf.h": "c",
-        "stdbool.h": "c"
+        "stdbool.h": "c",
+        "huffman.h": "c"
     },
     "cmake.sourceDirectory": "${workspaceFolder}/CMakeBase/01-CMake",
     "C_Cpp.errorSquiggles": "disabled"

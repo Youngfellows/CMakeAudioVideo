@@ -105,3 +105,12 @@ AudioVideoCode/13-rgb-to-png-library/resource/
 AudioVideoCode/13-rgb-to-png-library/install/
 AudioVideoCode/3rd/libpng/pnglibconf.h
 AudioVideoCode/3rd/lodepng/lodepng.c
+AudioVideoCode/02-rgb-pixel/build/
+AudioVideoCode/02-rgb-pixel/install/
+AudioVideoCode/02-rgb-pixel-cpp/build/
+AudioVideoCode/02-rgb-pixel/resource/
+AudioVideoCode/03-rgb-to-bmp-cpp/build/
+AudioVideoCode/02-rgb-pixel-cpp/install/
+AudioVideoCode/03-rgb-to-bmp-cpp/install/
+AudioVideoCode/03-rgb-to-bmp-cpp/resource/
+AudioVideoCode/03-rgb-to-bmp-cpp/res/
