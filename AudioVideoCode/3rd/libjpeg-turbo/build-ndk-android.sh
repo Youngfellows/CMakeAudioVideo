@@ -110,10 +110,10 @@ EOF
     echo "-------------------$2 build end-------------------------"
 }
 
-# 调用编译函数并传递参数
+# 调用编译函数并传递参数,参数2和参数6是一样的
 # params($1:arch,$2:arch_abi,$3:host,$4:compiler,$5:cflags,$6:processor)
 # ARCH=$1                # arm arm64 x86 x86_64
-# ANDROID_ARCH_ABI=$2    # armeabi armeabi-v7a x86 mips
+# ANDROID_ARCH_ABI=$2    # armeabi armeabi-v7a x86 mips mips64
 
 # build armeabi
 # build_bin arm armeabi arm-linux-androideabi arm-linux-androideabi "$ANDROID_ARMV5_CFLAGS" arm
@@ -121,4 +121,11 @@ EOF
 # build_bin x86 x86 arm-linux-androideabi arm-linux-androideabi "$ANDROID_X86_CFLAGS" x86
 # build_bin x86_64 x86_64 arm-linux-androideabi arm-linux-androideabi "$ANDROID_X86_CFLAGS" x86_64
 # build_bin mips mips arm-linux-androideabi arm-linux-androideabi "$ANDROID_X86_64_CFLAGS" mips
-build_bin arm armeabi-v7a arm-linux-androideabi arm-linux-androideabi "$ANDROID_ARMV7_CFLAGS" arm
+build_bin arm arm arm-linux-androideabi arm-linux-androideabi "$ANDROID_ARMV7_CFLAGS" arm
+build_bin arm armeabi arm-linux-androideabi arm-linux-androideabi "$ANDROID_ARMV7_CFLAGS" armeabi
+build_bin arm armeabi-v7a arm-linux-androideabi arm-linux-androideabi "$ANDROID_ARMV7_CFLAGS" armeabi-v7a
+build_bin arm64 arm64 arm-linux-androideabi arm-linux-androideabi "$ANDROID_ARMV7_CFLAGS" arm64
+build_bin x86 x86 arm-linux-androideabi arm-linux-androideabi "$ANDROID_ARMV7_CFLAGS" x86
+build_bin x86_64 x86_64 arm-linux-androideabi arm-linux-androideabi "$ANDROID_ARMV7_CFLAGS" x86_64
+build_bin mips mips arm-linux-androideabi arm-linux-androideabi "$ANDROID_ARMV7_CFLAGS" mips
+build_bin mips64 mips64 arm-linux-androideabi arm-linux-androideabi "$ANDROID_ARMV7_CFLAGS" mips64
