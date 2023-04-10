@@ -17,13 +17,13 @@ uint32_t calcCrc32(uint32_t dataASCII, uint8_t *data, uint32_t length);
 
 typedef struct
 {
-    uint32_t width;
-    uint32_t height;
-    uint8_t bitDepth;
-    uint8_t colorType;
-    uint8_t compressionMethod;
-    uint8_t filterMethod;
-    uint8_t interlaceMethod;
+    uint32_t width;            // 图像宽度，以像素为单位
+    uint32_t height;           // 图像高度，以像素为单位
+    uint8_t bitDepth;          // 图像深度： 索引彩色图像：1，2，4或8 灰度图像：1，2，4，8或16 真彩色图像：8或16
+    uint8_t colorType;         // 颜色类型：0：灰度图像, 1，2，4，8或16 2：真彩色图像，8或16 3：索引彩色图像，1，2，4或8 4：带α通道数据的灰度图像，8或16 6：带α通道数据的真彩色图像，8或16
+    uint8_t compressionMethod; // PNG Spec 规定此处总为 0，表示使用压缩方法(LZ77派生算法)
+    uint8_t filterMethod;      // PNG Spec 规定此处总为 0，滤波器方法
+    uint8_t interlaceMethod;   // 隔行扫描方法：0：非隔行扫描 1： Adam7(由Adam M. Costello开发的7遍隔行扫描方法)
 } PNG_IHDR_DATA;
 
 int main()

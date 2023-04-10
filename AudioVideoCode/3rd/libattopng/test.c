@@ -1,7 +1,6 @@
 #include <libattopng.h>
 #include <stdio.h>
 
-
 #define W 250
 #define H 200
 
@@ -10,20 +9,21 @@
 
 #define ALPHA(c, a) ((c) | ((a) << 8))
 
-
-int main(int argc, char *argv[]) {
+int main(int argc, char *argv[])
+{
     libattopng_t *png = libattopng_new(W, H, PNG_PALETTE);
     uint32_t palette[] = {
-            RGBA(0, 0, 0xff, 0xff),
-            RGBA(0, 0xff, 0, 0x80),
-            RGBA(0xff, 0, 0, 0xff),
-            RGBA(0xff, 0, 0xff, 0x80)
-    };
+        RGBA(0, 0, 0xff, 0xff),
+        RGBA(0, 0xff, 0, 0x80),
+        RGBA(0xff, 0, 0, 0xff),
+        RGBA(0xff, 0, 0xff, 0x80)};
     libattopng_set_palette(png, palette, 4);
 
     int x, y;
-    for (y = 0; y < H; y++) {
-        for (x = 0; x < W; x++) {
+    for (y = 0; y < H; y++)
+    {
+        for (x = 0; x < W; x++)
+        {
             libattopng_set_pixel(png, x, y, (x % 16) / 4);
         }
     }
@@ -35,8 +35,10 @@ int main(int argc, char *argv[]) {
 
     png = libattopng_new(W, H, PNG_RGBA);
 
-    for (y = 0; y < H; y++) {
-        for (x = 0; x < W; x++) {
+    for (y = 0; y < H; y++)
+    {
+        for (x = 0; x < W; x++)
+        {
             libattopng_set_pixel(png, x, y, RGBA(x & 255, y & 255, 128, (255 - ((x / 2) & 255))));
         }
     }
@@ -47,8 +49,10 @@ int main(int argc, char *argv[]) {
 
     png = libattopng_new(W, H, PNG_RGB);
 
-    for (y = 0; y < H; y++) {
-        for (x = 0; x < W; x++) {
+    for (y = 0; y < H; y++)
+    {
+        for (x = 0; x < W; x++)
+        {
             libattopng_set_pixel(png, x, y, RGB(x & 255, y & 255, 128));
         }
     }
@@ -59,8 +63,10 @@ int main(int argc, char *argv[]) {
 
     png = libattopng_new(W, H, PNG_GRAYSCALE);
 
-    for (y = 0; y < H; y++) {
-        for (x = 0; x < W; x++) {
+    for (y = 0; y < H; y++)
+    {
+        for (x = 0; x < W; x++)
+        {
             libattopng_set_pixel(png, x, y, (((x + y) / 2) & 256));
         }
     }
@@ -71,8 +77,10 @@ int main(int argc, char *argv[]) {
 
     png = libattopng_new(W, H, PNG_GRAYSCALE_ALPHA);
 
-    for (y = 0; y < H; y++) {
-        for (x = 0; x < W; x++) {
+    for (y = 0; y < H; y++)
+    {
+        for (x = 0; x < W; x++)
+        {
             libattopng_set_pixel(png, x, y, ALPHA(((x + y) / 2) & 255, 255 - ((y / 2) & 255)));
         }
     }
@@ -84,7 +92,8 @@ int main(int argc, char *argv[]) {
     png = libattopng_new(W, H, PNG_GRAYSCALE);
 
     libattopng_start_stream(png, 0, 0);
-    for (x = 0; x < W * H; x++) {
+    for (x = 0; x < W * H; x++)
+    {
         libattopng_put_pixel(png, 255 * x / (W * H));
     }
     libattopng_save(png, "test_gray_stream.png");

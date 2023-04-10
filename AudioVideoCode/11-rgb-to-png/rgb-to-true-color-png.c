@@ -79,6 +79,7 @@ int main()
     uint32_t IHDR_DATA_LENGTH = 13;
     // IHDR 数据长度 转换成大端字节序
     uint32_t pngIhdrDataSize = switchUint32(IHDR_DATA_LENGTH);
+    // uint32_t pngIhdrDataSize = IHDR_DATA_LENGTH;
     // 计算 IHDR CRC32
     uint32_t ihdrDataCrc32 = calcCrc32(IHDR_ASCII, (uint8_t *)&pngIhdrData, IHDR_DATA_LENGTH);
 
