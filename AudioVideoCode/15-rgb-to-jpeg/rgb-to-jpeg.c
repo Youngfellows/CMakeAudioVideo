@@ -173,11 +173,11 @@ int main()
     }
 
     long dataLength = bitstr_tell(bs);
-    printf("result = %ld", dataLength);
+    printf("result = %ld\n", dataLength);
 
     // 下面开始将数据写入文件
     // FILE *fp = fopen("C:\\Users\\Administrator\\Desktop\\rainbow-rgb-to-jpeg.jpg", "wb+");
-    FILE *fp = fopen("/Users/hubin/Desktop/rainbow-rgb-to-jpeg.jpg", "wb");
+    FILE *fp = fopen("./resource/rainbow-rgb-to-jpeg.jpg", "wb");
 
     // output SOI
     fputc(0xff, fp);
