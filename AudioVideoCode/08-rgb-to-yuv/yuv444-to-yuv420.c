@@ -98,7 +98,7 @@ void yuv444ToYuv420(uint8_t *inbuf, uint8_t *outbuf, int w, int h)
 
     desY = outbuf;
     desU = desY + w * h;
-    desV = desU + w * h / 4;·
+    desV = desU + w * h / 4;
 
     int half_width = w / 2;
     int half_height = h / 2;

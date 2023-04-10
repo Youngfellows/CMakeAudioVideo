@@ -84,6 +84,7 @@ AudioVideoCode/3rd/descampsa/yuv2rgb/resource/
 AudioVideoCode/09-rgb-to-yuv-library/res/
 AudioVideoCode/3rd/libyuv/install/
 AudioVideoCode/09-rgb-to-yuv-library/install/
+AudioVideoCode/09-rgb-to-yuv-library/resource/
 CMakeBase/76-CMake/test_sdk/build/
 CMakeBase/76-CMake/install/
 CMakeBase/77-CMake/test_sdk/build/
