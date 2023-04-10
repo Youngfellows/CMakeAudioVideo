@@ -229,18 +229,22 @@ int tyuv2jpeg(unsigned char *yuv_buffer, int yuv_size, int width, int height, in
     return ret;
 }
 
-// int main(int argc, char* argv[]) {
-//     printf("↓↓↓↓↓↓↓↓↓↓ Decode JPEG to RGB24 ↓↓↓↓↓↓↓↓↓↓\n");
-//     char *inJpegName1 = "/Users/hubin/Desktop/libjpeg-turbo-test-image.jpg";
-//     char *outRgbName1 = "/Users/hubin/Desktop/libjpeg-turbo-test-image.rgb24";
-//     int flag1 = decode_JPEG_file(inJpegName1, outRgbName1);
-//     if (flag1 == 0) {
-//         printf("decode ok!\n");
-//     } else {
-//         printf("decode error!\n");
-//     }
-//     printf("↑↑↑↑↑↑↑↑↑↑ Decode JPEG to RGB24 ↑↑↑↑↑↑↑↑↑↑\n\n");
-// }
+int main(int argc, char *argv[])
+{
+    printf("↓↓↓↓↓↓↓↓↓↓ Decode JPEG to RGB24 ↓↓↓↓↓↓↓↓↓↓\n");
+    char *inJpegName1 = "./resource/libjpeg-turbo-test-image.jpg";
+    char *outRgbName1 = "./resource/libjpeg-turbo-test-image.rgb24";
+    int flag1 = decode_JPEG_file(inJpegName1, outRgbName1);
+    if (flag1 == 0)
+    {
+        printf("decode ok!\n");
+    }
+    else
+    {
+        printf("decode error!\n");
+    }
+    printf("↑↑↑↑↑↑↑↑↑↑ Decode JPEG to RGB24 ↑↑↑↑↑↑↑↑↑↑\n\n");
+}
 
 // int main(int argc, char* argv[]) {
 //     printf("↓↓↓↓↓↓↓↓↓↓ Encode RGB24 to JPEG ↓↓↓↓↓↓↓↓↓↓\n");
