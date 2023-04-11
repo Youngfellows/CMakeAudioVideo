@@ -141,3 +141,6 @@ AudioVideoCode/3rd-library/libjpeg-turbo/dist/
 
 AudioVideoCode/01_examples/dist/
 AudioVideoCode/01_examples/test_sdk/
+AudioVideoCode/01-examples/build/
+AudioVideoCode/01-examples/test_sdk/
+AudioVideoCode/01-examples/dist/
