@@ -139,3 +139,5 @@ AudioVideoCode/3rd-library/libjpeg-turbo/install/
 AudioVideoCode/3rd-library/libjpeg-turbo/binary/
 AudioVideoCode/3rd-library/libjpeg-turbo/dist/
 
+AudioVideoCode/01_examples/dist/
+AudioVideoCode/01_examples/test_sdk/

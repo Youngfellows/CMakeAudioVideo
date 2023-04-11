@@ -1,4 +1,4 @@
-#include "../include/array/MyArray.h"
+#include "MyArray.h"
 
 /**
  * @brief 实现为一个二维数组赋值
