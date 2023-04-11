@@ -23,6 +23,14 @@ message(STATUS "编译动态库:${ARRAY_SRC}")
 set(EASY_ARRAY_LIB easyarray)
 add_library(${EASY_ARRAY_LIB} SHARED ${ARRAY_SRC})
 
-# 安装动态库到指定目录
+# 安装动态库/头文件到指定目录
 message(STATUS "安装动态库:${CMAKE_INSTALL_PREFIX}")
 install(TARGETS ${EASY_ARRAY_LIB} DESTINATION lib)
+install(DIRECTORY ${INCLUDE_PATH} DESTINATION include)
+
+#[[
+install(DIRECTORY ${INCLUDE_PATH}
+    DESTINATION include
+    FILES_MATCHING PATTERN "*.h"
+)
+]]
