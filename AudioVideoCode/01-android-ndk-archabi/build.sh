@@ -19,6 +19,7 @@ fi
 mkdir -p $BUILD_ROOT/build
 cd $BUILD_ROOT/build
 
+# 要编译库的CMakeLists.txt目录
 EASY_ROOT=$PROJ_ROOT/src
 
 cmake -DCMAKE_CXX_FLAGS=-g -DCMAKE_BUILD_TYPE=Release \
