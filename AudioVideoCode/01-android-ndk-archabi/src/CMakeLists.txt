@@ -1,5 +1,5 @@
 # 设置cmake最小版本
-cmake_minimum_required(VERSION 3.15.0)
+cmake_minimum_required(VERSION 3.12.1)
 
 # 设置项目名称
 project(library-easyarray)

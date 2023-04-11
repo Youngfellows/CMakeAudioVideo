@@ -1,5 +1,5 @@
 # cmake要求最低版本
-cmake_minimum_required(VERSION 3.15.0)
+cmake_minimum_required(VERSION 3.12.1)
 
 # 项目名称
 project(Sample)
@@ -16,7 +16,6 @@ message(STATUS "link_directories:${CMAKE_INSTALL_PREFIX}")
 
 # 查找源文件
 aux_source_directory(. EXAMPLE_SRC_LIST)
-
 # aux_source_directory(./src/array ARRAY_SRC_LIST)
 
 # 生成可执行文件

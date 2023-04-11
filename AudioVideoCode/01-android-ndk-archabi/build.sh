@@ -23,6 +23,7 @@ EASY_ROOT=$PROJ_ROOT/src
 
 cmake -DCMAKE_CXX_FLAGS=-g -DCMAKE_BUILD_TYPE=Release \
 -DCMAKE_INSTALL_PREFIX:PATH=$BUILD_ROOT/dist $EASY_ROOT
+make clean
 make -j4
 make install
 cd -
@@ -37,6 +38,7 @@ cd $BUILD_ROOT/test_sdk/build
 
 cmake -DCMAKE_BUILD_TYPE=Release  \
 -DCMAKE_INSTALL_PREFIX:PATH=$PROJ_ROOT/dist $PROJ_ROOT
+make clean
 make -j4
 make install
 cd -
