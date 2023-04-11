@@ -44,7 +44,7 @@ build-android()
     echo "build path:$ARCH_BUILD_DIR"
     
     cmake -DCMAKE_CXX_FLAGS=-g -DCMAKE_BUILD_TYPE=Release \
-    -DANDROID_ABI=armeabi-v7a \
+    -DANDROID_ABI=$ARCH \
     -DCMAKE_INSTALL_PREFIX:PATH=$PREFIX $EASY_ROOT
     make clean
     make -j4
