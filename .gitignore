@@ -150,3 +150,9 @@ AudioVideoCode/01-android-ndk-archabi/build/
 AudioVideoCode/01-android-ndk-archabi/test_sdk/
 AudioVideoCode/01-android-ndk-archabi/dist/
 AudioVideoCode/01-android-ndk-archabi/android/
+AudioVideoCode/01-android-ndk-archabi-chatgpt/build/
+AudioVideoCode/01-android-ndk-archabi-chatgpt/dist/
+AudioVideoCode/01-android-ndk-archabi-chatgpt/test_sdk/
+AudioVideoCode/01-android-ndk-archabi-chatgpt/test_sdk/
+AudioVideoCode/01-android-ndk-archabi-chatgpt/dist/
+AudioVideoCode/01-android-ndk-archabi-chatgpt/android/
