@@ -33,8 +33,9 @@ export PATH=/mnt/d/LinuxEnvironment/cmake-3.12.1-Linux-x86_64/bin:$PATH
 export NDK_PATH=/mnt/d/LinuxEnvironment/android-ndk-r16b-linux-x86_64/android-ndk-r16b
 export PATH=$NDK_PATH:$PATH
 TOOLCHAIN_GCC=gcc
-# TOOLCHAIN_GXX=gxx
-# TOOLCHAIN_CLANG=clang
+TOOLCHAIN_GXX=g++
+TOOLCHAIN_CLANG=clang
+TOOLCHAIN_CLANG=clang++
 
 TOOLCHAIN=$TOOLCHAIN_GCC
 ANDROID_VERSION=21
