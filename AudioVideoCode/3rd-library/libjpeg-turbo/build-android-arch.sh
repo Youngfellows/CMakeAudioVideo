@@ -5,7 +5,7 @@ BUILD_ROOT=$PROJ_ROOT
 echo "build root: $BUILD_ROOT"
 
 # 设置安装目录
-LIBRARY_NAME=easyarray
+LIBRARY_NAME=libjpeg-turbo
 INSTALL_DIR=$BUILD_ROOT/dist/${LIBRARY_NAME}
 if [ -e $INSTALL_DIR ] ;then
     echo "rm $INSTALL_DIR"
@@ -23,7 +23,7 @@ mkdir -p $BUILD_DIR
 # cd $BUILD_DIR
 
 # 要编译库的CMakeLists.txt目录
-EASY_ROOT=$PROJ_ROOT/src
+MY_SOURCE_DIR=$PROJ_ROOT
 
 #  CMake 环境变量
 export PATH=/mnt/d/LinuxEnvironment/cmake-3.12.1-Linux-x86_64/bin:$PATH
@@ -70,7 +70,7 @@ build-android()
     # -DCMAKE_ASM_FLAGS="--target=arm-linux-androideabi${ANDROID_VERSION}" \
     # -DCMAKE_TOOLCHAIN_FILE=${NDK_PATH}/build/cmake/android.toolchain.cmake \
     # -DCMAKE_INSTALL_PREFIX=${PREFIX} \
-    # [additional CMake flags] $EASY_ROOT
+    # [additional CMake flags] $MY_SOURCE_DIR
     
     # 开始编译
     cmake \
@@ -82,7 +82,7 @@ build-android()
     -DASSIMP_NO_EXPORT=TRUE \
     -DANDROID_TOOLCHAIN=${TOOLCHAIN} \
     -DCMAKE_INSTALL_PREFIX=${PREFIX} \
-    -DBUILD_SHARED_LIBS=1 $EASY_ROOT
+    -DBUILD_SHARED_LIBS=1 $MY_SOURCE_DIR
     
     # 注意：
     #  $NDK_ROOT为配置的环境变量指向ndk的具体版本，编译前可自行配置
