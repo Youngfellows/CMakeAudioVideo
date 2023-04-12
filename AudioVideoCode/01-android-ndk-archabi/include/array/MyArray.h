@@ -1,12 +1,17 @@
 #ifndef MY_ARRAY_H
 #define MY_ARRAY_H
 
-#include <cstdint>
-#include <iostream>
+// #include <cstdint>
+// #include <iostream>
+// #include <string.h>
+// #include <ctime>
+#include <stdint.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <time.h>
 #include <string.h>
-#include <ctime>
 
-using namespace std;
+// using namespace std;
 
 /**
  * @brief 为一个二维数组赋值

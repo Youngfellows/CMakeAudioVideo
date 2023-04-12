@@ -5,6 +5,18 @@ cmake_minimum_required(VERSION 3.12.1)
 project(Sample)
 message(STATUS "start build,project name:${PROJECT_NAME}")
 
+# 启动对C++14标准的支持
+set(CMAKE_CXX_STANDARD 14)
+
+# 显式要求指明支持C++标准
+set(CMAKE_CXX_STANDARD_REQUIRED True)
+
+# 启动对C11标准的支持
+set(CMAKE_C_STANDARD 11)
+
+# 显式要求指明支持C标准
+set(CMAKE_C_STANDARD_REQUIRED True)
+
 # 依赖头文件
 include_directories(${CMAKE_SOURCE_DIR}/include/array)
 
@@ -16,6 +28,7 @@ message(STATUS "link_directories:${CMAKE_INSTALL_PREFIX}")
 
 # 查找源文件
 aux_source_directory(. EXAMPLE_SRC_LIST)
+
 # aux_source_directory(./src/array ARRAY_SRC_LIST)
 
 # 生成可执行文件

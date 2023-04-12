@@ -87,11 +87,11 @@ build_bin() {
     cd ${BUILD_DIR}         #此处 进了当前arch_abi的2级编译目录
 
 # 运行时创建临时编译链文件toolchain.cmake
+# set(CMAKE_CXX_COMPILER ${TOOLCHAIN}/bin/${COMPILER}-g++)
 cat >toolchain.cmake << EOF
 set(CMAKE_SYSTEM_NAME Linux)
 set(CMAKE_SYSTEM_PROCESSOR $6)
 set(CMAKE_C_COMPILER ${TOOLCHAIN}/bin/${COMPILER}-gcc)
-set(CMAKE_CXX_COMPILER ${TOOLCHAIN}/bin/${COMPILER}-g++)
 set(CMAKE_FIND_ROOT_PATH ${TOOLCHAIN}/${COMPILER})
 EOF
 
@@ -119,8 +119,8 @@ EOF
 
 # build android abi
 build_bin arm arm arm-linux-androideabi arm-linux-androideabi "$ANDROID_ARMV7_CFLAGS" arm
-# build_bin arm armeabi arm-linux-androideabi arm-linux-androideabi "$ANDROID_ARMV7_CFLAGS" armeabi
-# build_bin arm armeabi-v7a arm-linux-androideabi arm-linux-androideabi "$ANDROID_ARMV7_CFLAGS" armeabi-v7a
-# build_bin arm64 arm64-v8a aarch64-linux-android aarch64-linux-android "$ANDROID_ARMV8_CFLAGS" arm64-v8a
-# build_bin x86 x86 x86 i686-linux-android "$ANDROID_X86_CFLAGS" x86
-# build_bin x86_64 x86_64 x86_64 x86_64-linux-android "$ANDROID_X86_64_CFLAGS" x86_64
+build_bin arm armeabi arm-linux-androideabi arm-linux-androideabi "$ANDROID_ARMV7_CFLAGS" armeabi
+build_bin arm armeabi-v7a arm-linux-androideabi arm-linux-androideabi "$ANDROID_ARMV7_CFLAGS" armeabi-v7a
+build_bin arm64 arm64-v8a aarch64-linux-android aarch64-linux-android "$ANDROID_ARMV8_CFLAGS" arm64-v8a
+build_bin x86 x86 x86 i686-linux-android "$ANDROID_X86_CFLAGS" x86
+build_bin x86_64 x86_64 x86_64 x86_64-linux-android "$ANDROID_X86_64_CFLAGS" x86_64

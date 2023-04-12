@@ -4,6 +4,12 @@ cmake_minimum_required(VERSION 3.12.1)
 # 设置项目名称
 project(library-easyarray)
 
+# 启动对C11标准的支持
+set(CMAKE_C_STANDARD 11)
+
+# 显式要求指明支持C标准
+set(CMAKE_C_STANDARD_REQUIRED True)
+
 # 查找父目录3rd
 message(STATUS "CMAKE_CURRENT_SOURCE_DIR::${CMAKE_CURRENT_SOURCE_DIR}")
 get_filename_component(VAR_PARENT ${CMAKE_CURRENT_SOURCE_DIR}/.. ABSOLUTE)
