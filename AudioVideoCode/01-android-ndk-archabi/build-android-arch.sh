@@ -26,10 +26,11 @@ mkdir -p $BUILD_DIR
 EASY_ROOT=$PROJ_ROOT/src
 
 #  CMake 环境变量
-export PATH=/mnt/d/LinuxEnvironment/cmake-3.12.1-Linux-x86_64/bin:$PATH
+# export PATH=/mnt/d/LinuxEnvironment/cmake-3.12.1-Linux-x86_64/bin:$PATH
+export PATH=/mnt/d/LinuxEnvironment/cmake-3.26.2-linux-x86_64/bin:$PATH
 
 # NDK编译环境
-# export NDK_PATH=/mnt/d/LinuxEnvironment/android-ndk-r25c-linux/android-ndk-r25c
+# export NDK_PATH=/mnt/d/LinuxEnvironment/android-ndk-r22b-linux-x86_64/android-ndk-r22b
 export NDK_PATH=/mnt/d/LinuxEnvironment/android-ndk-r16b-linux-x86_64/android-ndk-r16b
 export PATH=$NDK_PATH:$PATH
 TOOLCHAIN_GCC=gcc
@@ -75,6 +76,7 @@ build-android()
     
     # 开始编译
     cmake \
+    -G"Unix Makefiles" \
     -DCMAKE_TOOLCHAIN_FILE=$NDK_PATH/build/cmake/android.toolchain.cmake \
     -DANDROID_ABI=$ARCH_ABI  \
     -DANDROID_NDK=$NDK_PATH \
