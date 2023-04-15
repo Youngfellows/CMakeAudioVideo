@@ -20,6 +20,14 @@ if [ -e ${INSTALL_DIR} ]; then
 fi
 mkdir -p ${INSTALL_DIR}
 
+# 依赖动态库的全路径
+CURRENT_DIR=$(cd $(dirname $0); pwd)
+echo "current dir: ${CURRENT_DIR}"
+PARENT_DIR=$(cd $(dirname $CURRENT_DIR); pwd)
+echo "parent dir: ${PARENT_DIR}"
+LD_LIBRARY_PATH=${PARENT_DIR}/install/lib
+echo "ld library path:${LD_LIBRARY_PATH}"
+
 # 设置build编译目录
 BUILD_DIR=${BUILD_ROOT}/build
 if [ -e ${BUILD_DIR} ]; then
@@ -31,6 +39,7 @@ cd ${BUILD_DIR}
 
 # 编译
 cmake -DCMAKE_CXX_FLAGS=-g -DCMAKE_BUILD_TYPE=Release \
+-DCMAKE_INSTALL_FULL_LIBDIR=${LD_LIBRARY_PATH} \
 -DCMAKE_INSTALL_PREFIX:PATH=${PROJ_ROOT}/install $PROJ_ROOT
 make -j4
 make install
