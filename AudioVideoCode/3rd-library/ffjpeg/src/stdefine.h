@@ -1,4 +1,4 @@
-/* ��׼ͷ�ļ� */
+/* 标准头文件 */
 #ifndef __STDEFINE_H__
 #define __STDEFINE_H__
 

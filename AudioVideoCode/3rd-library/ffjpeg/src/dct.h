@@ -5,8 +5,8 @@
 extern "C" {
 #endif
 
-/* º¯ÊıÉùÃ÷ */
-/* ¶şÎ¬ 8x8 µÄ DCT ±ä»»º¯Êı */
+/* å‡½æ•°å£°æ˜ */
+/* äºŒç»´ 8x8 çš„ DCT å˜æ¢å‡½æ•° */
 void init_dct_module(void);
 void init_fdct_ftab(int *ftab, int *qtab);
 void init_idct_ftab(int *ftab, int *qtab);

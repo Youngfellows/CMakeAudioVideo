@@ -1,4 +1,4 @@
-/* °üº¬Í·ÎÄ¼ş */
+/* åŒ…å«å¤´æ–‡ä»¶ */
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -12,10 +12,10 @@
 #include "color.h"
 #include "jfif.h"
 
-// Ô¤±àÒë¿ª¹Ø
+// é¢„ç¼–è¯‘å¼€å…³
 #define DEBUG_JFIF  0
 
-// ÄÚ²¿ÀàĞÍ¶¨Òå
+// å†…éƒ¨ç±»å‹å®šä¹‰
 typedef struct {
     // width & height
     int       width;
@@ -45,7 +45,7 @@ typedef struct {
     BYTE *databuf;
 } JFIF;
 
-/* ÄÚ²¿º¯ÊıÊµÏÖ */
+/* å†…éƒ¨å‡½æ•°å®ç° */
 #if DEBUG_JFIF
 static void jfif_dump(JFIF *jfif)
 {
@@ -133,7 +133,7 @@ static int category_decode(int code, int  size)
     return code >= (1 << (size - 1)) ? code : code - (1 << size) + 1;
 }
 
-/* º¯ÊıÊµÏÖ */
+/* å‡½æ•°å®ç° */
 void* jfif_load(char *file)
 {
     JFIF *jfif   = NULL;

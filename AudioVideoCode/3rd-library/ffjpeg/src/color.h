@@ -1,7 +1,7 @@
 #ifndef __FFJPEG_COLOR_H__
 #define __FFJPEG_COLOR_H__
 
-// ╟Э╨╛м╥нд╪Ч
+// Е▄┘Е░╚Е╓╢Ф√┤Д╩╤
 #include "stdefine.h"
 
 #ifdef __cplusplus

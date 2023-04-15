@@ -1,12 +1,12 @@
-/* °üº¬Í·ÎÄ¼ş */
+/* åŒ…å«å¤´æ–‡ä»¶ */
 #include "stdefine.h"
 #include "dct.h"
 
-#if 1 /* ¿ìËÙµÄÕûÊıÔËËã°æ±¾ */
-/* ÄÚ²¿³£Á¿¶¨Òå */
+#if 1 /* å¿«é€Ÿçš„æ•´æ•°è¿ç®—ç‰ˆæœ¬ */
+/* å†…éƒ¨å¸¸é‡å®šä¹‰ */
 #define DCTSIZE  8
 
-/* ÄÚ²¿È«¾Ö±äÁ¿¶¨Òå */
+/* å†…éƒ¨å…¨å±€å˜é‡å®šä¹‰ */
 static const float AAN_DCT_FACTOR[DCTSIZE] = {
     1.0f, 1.387039845f, 1.306562965f, 1.175875602f,
     1.0f, 0.785694958f, 0.541196100f, 0.275899379f,
@@ -74,7 +74,7 @@ void init_idct_ftab(int *ftab, int *qtab)
     }
 }
 
-/* º¯ÊıÊµÏÖ */
+/* å‡½æ•°å®ç° */
 void fdct2d8x8(int *data, int *ftab)
 {
     int tmp0,  tmp1,  tmp2,  tmp3;
@@ -330,12 +330,12 @@ void idct2d8x8(int *data, int *ftab)
 }
 #endif
 
-#if 0 /* ¿ìËÙµÄ¸¡µãÊıÔËËã°æ±¾ */
+#if 0 /* å¿«é€Ÿçš„æµ®ç‚¹æ•°è¿ç®—ç‰ˆæœ¬ */
 
-/* ÄÚ²¿³£Á¿¶¨Òå */
+/* å†…éƒ¨å¸¸é‡å®šä¹‰ */
 #define DCTSIZE  8
 
-/* ÄÚ²¿È«¾Ö±äÁ¿¶¨Òå */
+/* å†…éƒ¨å…¨å±€å˜é‡å®šä¹‰ */
 static float aandctfactor[DCTSIZE] = {
     1.0f, 1.387039845f, 1.306562965f, 1.175875602f,
     1.0f, 0.785694958f, 0.541196100f, 0.275899379f,
@@ -343,7 +343,7 @@ static float aandctfactor[DCTSIZE] = {
 
 static float dctfactor[64] = {0};
 
-/* ÄÚ²¿º¯ÊıÊµÏÖ */
+/* å†…éƒ¨å‡½æ•°å®ç° */
 static initdctfactor()
 {
     int i, j;
@@ -352,7 +352,7 @@ static initdctfactor()
             dctfactor[i * 8 + j] = aandctfactor[i] * aandctfactor[j];
 }
 
-/* º¯ÊıÊµÏÖ */
+/* å‡½æ•°å®ç° */
 void fdct2d8x8(float *data)
 {
     float tmp0, tmp1, tmp2, tmp3;
@@ -600,28 +600,28 @@ static void dcttest(void)
 
 #endif
 
-#if 0 /* ¾ØÕó±ä»»°æ±¾ */
-/* ÄÚ²¿³£Á¿¶¨Òå */
+#if 0 /* çŸ©é˜µå˜æ¢ç‰ˆæœ¬ */
+/* å†…éƒ¨å¸¸é‡å®šä¹‰ */
 #define M_PI  3.14159265358979323846f
 
-/* ÄÚ²¿È«¾Ö±äÁ¿¶¨Òå */
-static float fdctmatrix[8][8] = {0};  /* fdct ±ä»»¾ØÕó */
-static float idctmatrix[8][8] = {0};  /* idct ±ä»»¾ØÕó */
+/* å†…éƒ¨å…¨å±€å˜é‡å®šä¹‰ */
+static float fdctmatrix[8][8] = {0};  /* fdct å˜æ¢çŸ©é˜µ */
+static float idctmatrix[8][8] = {0};  /* idct å˜æ¢çŸ©é˜µ */
 
-/* ÄÚ²¿º¯Êı¶¨Òå */
+/* å†…éƒ¨å‡½æ•°å®šä¹‰ */
 static float c(int u)
 {
     if (u == 0) return (float)sqrt(1.0f / 8.0f);
     else        return (float)sqrt(2.0f / 8.0f);
 }
 
-/* ³õÊ¼»¯ dct ±ä»»¾ØÕó */
+/* åˆå§‹åŒ– dct å˜æ¢çŸ©é˜µ */
 void initdctmatrix(void)
 {
     static int inited = 0;
     int    u, x;
 
-    /* ±ÜÃâÖØ¸´³õÊ¼»¯ */
+    /* é¿å…é‡å¤åˆå§‹åŒ– */
     if (inited) return;
 
     /* init fdct matrix */
@@ -673,25 +673,25 @@ void fdct2d8x8(float *data)
     float temp[64];
     int   i, j;
 
-    /* ³õÊ¼»¯±ä»»¾ØÕó */
+    /* åˆå§‹åŒ–å˜æ¢çŸ©é˜µ */
     initdctmatrix();
 
-    /* ÖğĞĞ½øĞĞ 1d fdct */
+    /* é€è¡Œè¿›è¡Œ 1d fdct */
     for (i=0; i<8; i++) {
         fdct1d8(temp + 8 * i, data + 8 * i);
     }
 
-    /* ×ªÖÃ¾ØÕó */
+    /* è½¬ç½®çŸ©é˜µ */
     for (i=0; i<8; i++)
         for (j=0; j<8; j++)
             *(data + 8 * i + j) = *(temp + 8 * j + i);
 
-    /* ÖğĞĞ½øĞĞ 1d fdct */
+    /* é€è¡Œè¿›è¡Œ 1d fdct */
     for (i=0; i<8; i++) {
         fdct1d8(temp + 8 * i, data + 8 * i);
     }
 
-    /* ×ªÖÃ¾ØÕó */
+    /* è½¬ç½®çŸ©é˜µ */
     for (i=0; i<8; i++)
         for (j=0; j<8; j++)
             *(data + 8 * i + j) = *(temp + 8 * j + i);
@@ -703,36 +703,36 @@ void idct2d8x8(float *data)
     float temp[64];
     int   i, j;
 
-    /* ³õÊ¼»¯±ä»»¾ØÕó */
+    /* åˆå§‹åŒ–å˜æ¢çŸ©é˜µ */
     initdctmatrix();
 
-    /* ÖğĞĞ½øĞĞ 1d idct */
+    /* é€è¡Œè¿›è¡Œ 1d idct */
     for (i=0; i<8; i++) {
         idct1d8(temp + 8 * i, data + 8 * i);
     }
 
-    /* ×ªÖÃ¾ØÕó */
+    /* è½¬ç½®çŸ©é˜µ */
     for (i=0; i<8; i++)
         for (j=0; j<8; j++)
             *(data + 8 * i + j) = *(temp + 8 * j + i);
 
-    /* ÖğĞĞ½øĞĞ 1d idct */
+    /* é€è¡Œè¿›è¡Œ 1d idct */
     for (i=0; i<8; i++) {
         idct1d8(temp + 8 * i, data + 8 * i);
     }
 
-    /* ×ªÖÃ¾ØÕó */
+    /* è½¬ç½®çŸ©é˜µ */
     for (i=0; i<8; i++)
         for (j=0; j<8; j++)
             *(data + 8 * i + j) = *(temp + 8 * j + i);
 }
 #endif
 
-#if 0 /* ÊıÑ§±í´ïÊ½°æ±¾ */
-/* ÄÚ²¿³£Á¿¶¨Òå */
+#if 0 /* æ•°å­¦è¡¨è¾¾å¼ç‰ˆæœ¬ */
+/* å†…éƒ¨å¸¸é‡å®šä¹‰ */
 #define M_PI  3.14159265358979323846f
 
-/* º¯ÊıÊµÏÖ */
+/* å‡½æ•°å®ç° */
 static float alpha(int n)
 {
     if (n == 0) return 1.0f / (float)sqrt(8);

@@ -1,4 +1,4 @@
-// ╟Э╨╛м╥нд╪Ч
+// Е▄┘Е░╚Е╓╢Ф√┤Д╩╤
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>

@@ -1,14 +1,14 @@
 #ifndef __FFJPEG_BITSTR_H__
 #define __FFJPEG_BITSTR_H__
 
-// °üº¬Í·ÎÄ¼ş
+// åŒ…å«å¤´æ–‡ä»¶
 #include <stdio.h>
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-/* º¯ÊıÉùÃ÷ */
+/* å‡½æ•°å£°æ˜ */
 void* bitstr_open (void *fnamebuf, char *fmode, int bufsize);
 int   bitstr_close(void *stream);
 int   bitstr_getc (void *stream);

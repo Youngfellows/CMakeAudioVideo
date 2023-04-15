@@ -1,4 +1,4 @@
-/* °üº¬Í·ÎÄ¼ş */
+/* åŒ…å«å¤´æ–‡ä»¶ */
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -7,8 +7,8 @@
 
 #define ENABLE_DEBUG_DUMP  0
 
-/* ÄÚ²¿º¯ÊıÊµÏÖ */
-/* ++ ÓÃÓÚ¿ìËÙÅÅĞòµÄ±È½Ïº¯Êı */
+/* å†…éƒ¨å‡½æ•°å®ç° */
+/* ++ ç”¨äºå¿«é€Ÿæ’åºçš„æ¯”è¾ƒå‡½æ•° */
 static int cmp_freq_item(const void *a, const void *b)
 {
     return ((HUFCODEITEM*)a)->freq - ((HUFCODEITEM*)b)->freq;
@@ -18,7 +18,7 @@ static int cmp_depth_item(const void *a, const void *b)
 {
     return ((HUFCODEITEM*)a)->depth - ((HUFCODEITEM*)b)->depth;
 }
-/* -- ÓÃÓÚ¿ìËÙÅÅĞòµÄ±È½Ïº¯Êı */
+/* -- ç”¨äºå¿«é€Ÿæ’åºçš„æ¯”è¾ƒå‡½æ•° */
 
 #if ENABLE_DEBUG_DUMP
 static void int_to_bin_str(int v, char *str, int n) {
@@ -47,13 +47,13 @@ static void dump_huffman_codelist(char *title, HUFCODEITEM *list, int n, int hea
 }
 #endif
 
-/* º¯ÊıÊµÏÖ */
-/* Í³¼Æ·ûºÅ´®ÖĞ¸÷¸ö·ûºÅ³öÏÖµÄÆµÂÊ */
+/* å‡½æ•°å®ç° */
+/* ç»Ÿè®¡ç¬¦å·ä¸²ä¸­å„ä¸ªç¬¦å·å‡ºç°çš„é¢‘ç‡ */
 void huffman_stat_freq(HUFCODEITEM codelist[256], void *stream)
 {
     int data, i;
 
-    /* ³õÊ¼»¯ÆµÂÊ±í */
+    /* åˆå§‹åŒ–é¢‘ç‡è¡¨ */
     for (i=0; i<256; i++) {
         codelist[i].symbol = i;
         codelist[i].freq   = 0;
@@ -62,10 +62,10 @@ void huffman_stat_freq(HUFCODEITEM codelist[256], void *stream)
         codelist[i].code   = 0;
     }
 
-    // ×î´óµÄÆµÂÊ£¬³¬¹ıÕâ¸öÖµ£¬Ôò×ö±¥ºÍ´¦Àí
+    // æœ€å¤§çš„é¢‘ç‡ï¼Œè¶…è¿‡è¿™ä¸ªå€¼ï¼Œåˆ™åšé¥±å’Œå¤„ç†
     #define MAX_STAT_FREQ_NUM  (1ul << (MAX_HUFFMAN_CODE_LEN - 1))
 
-    /* Í³¼ÆÆµÂÊ */
+    /* ç»Ÿè®¡é¢‘ç‡ */
     while (1) {
         data = bitstr_getc(stream);
         if (data == EOF) break;
@@ -100,33 +100,33 @@ static void huffman_encode_init_from_codelist(HUFCODEC *phc)
     /* make a copylist which is copy of codelist */
     memcpy(copylist, codelist, sizeof(HUFCODEITEM) * 256);
 
-    /* ¶Ô copylist °´ freq ½øĞĞ¿ìËÙÅÅĞò */
+    /* å¯¹ copylist æŒ‰ freq è¿›è¡Œå¿«é€Ÿæ’åº */
     qsort(copylist, 256, sizeof(HUFCODEITEM), cmp_freq_item);
 
-    /* ²éÕÒ³öµÚÒ»¸ö·ÇÁãÆµÂÊµÄ·ûºÅ
-       ²¢¼ÆËã³ö·ÇÁãÆµÂÊµÄ·ûºÅ¸öÊı */
+    /* æŸ¥æ‰¾å‡ºç¬¬ä¸€ä¸ªéé›¶é¢‘ç‡çš„ç¬¦å·
+       å¹¶è®¡ç®—å‡ºéé›¶é¢‘ç‡çš„ç¬¦å·ä¸ªæ•° */
     for (i=0; i<256 && !copylist[i].freq; i++);
     templist = &copylist[i];
     n = 256 - i;
 
-    /* ³õÊ¼»¯Í·Ö¸ÕëºÍµ±Ç°·Ö×é */
+    /* åˆå§‹åŒ–å¤´æŒ‡é’ˆå’Œå½“å‰åˆ†ç»„ */
     head  = 0;
     group = 256;
 
-    while (head < n - 2) { /* ÔÚÒ»¸ö while Ñ­»·ÖĞ¼ÆËãÂë³¤ */
+    while (head < n - 2) { /* åœ¨ä¸€ä¸ª while å¾ªç¯ä¸­è®¡ç®—ç é•¿ */
 #if ENABLE_DEBUG_DUMP
         // dump sorted code list
         dump_huffman_codelist(" sorted -", templist, n, head);
 #endif
 
-        /* ¸ù¾İ templist ÖĞ head ¿ªÊ¼µÄÁ½¸öÔªËØµÄ·Ö×éÇé¿ö
-           À´¸üĞÂ templist ÖĞ head Ö®Ç°ÏàÓ¦ÔªËØµÄÂë³¤ºÍ·Ö×é */
+        /* æ ¹æ® templist ä¸­ head å¼€å§‹çš„ä¸¤ä¸ªå…ƒç´ çš„åˆ†ç»„æƒ…å†µ
+           æ¥æ›´æ–° templist ä¸­ head ä¹‹å‰ç›¸åº”å…ƒç´ çš„ç é•¿å’Œåˆ†ç»„ */
         for (i=0; i<head; i++) {
             if (  templist[i].group == templist[head + 0].group
                || templist[i].group == templist[head + 1].group)
             {
-                templist[i].depth++;       /* Âë³¤Öµ¼Ó 1 */
-                templist[i].group = group; /* ½øĞĞĞÂµÄ·Ö×é */
+                templist[i].depth++;       /* ç é•¿å€¼åŠ  1 */
+                templist[i].group = group; /* è¿›è¡Œæ–°çš„åˆ†ç»„ */
             }
         }
 
@@ -135,22 +135,22 @@ static void huffman_encode_init_from_codelist(HUFCODEC *phc)
         dump_huffman_codelist(" updated ", templist, n, head);
 #endif
 
-        /* ºÏ²¢ÆµÂÊ×îĞ¡µÄÁ½¸öÏî */
+        /* åˆå¹¶é¢‘ç‡æœ€å°çš„ä¸¤ä¸ªé¡¹ */
         templist[head + 0].depth++;
         templist[head + 1].depth++;
         templist[head + 0].group = group;
         templist[head + 1].group = group;
         templist[head + 1].freq += templist[head + 0].freq;
 
-        head ++; /* ±íÍ·Ö¸Õë */
-        group++; /* ·Ö×é±àºÅ */
+        head ++; /* è¡¨å¤´æŒ‡é’ˆ */
+        group++; /* åˆ†ç»„ç¼–å· */
 
 #if ENABLE_DEBUG_DUMP
         // dump merged code list
         dump_huffman_codelist(" merged -", templist, n, head);
 #endif
 
-        /* ¶Ô templist ÖØĞÂÅÅĞò */
+        /* å¯¹ templist é‡æ–°æ’åº */
         for (i=head; i<n-1; i++) {
             if (templist[i].freq > templist[i+1].freq) {
                 HUFCODEITEM tempitem;
@@ -161,7 +161,7 @@ static void huffman_encode_init_from_codelist(HUFCODEC *phc)
         }
     }
 
-    /* ¶Ô templist °´ depth ½øĞĞ¿ìËÙÅÅĞò */
+    /* å¯¹ templist æŒ‰ depth è¿›è¡Œå¿«é€Ÿæ’åº */
     qsort(templist, n, sizeof(HUFCODEITEM), cmp_depth_item);
 
 #if ENABLE_DEBUG_DUMP
@@ -169,7 +169,7 @@ static void huffman_encode_init_from_codelist(HUFCODEC *phc)
     dump_huffman_codelist(" done ---", templist, n, -1);
 #endif
 
-    // Éú³É jpeg ¸ñÊ½µÄ¹ş·òÂü±í
+    // ç”Ÿæˆ jpeg æ ¼å¼çš„å“ˆå¤«æ›¼è¡¨
     memset(huftab, 0, MAX_HUFFMAN_CODE_LEN);
     for (i=0; i<n; i++) {
         huftab[templist[i].depth - 1]++;
@@ -257,14 +257,14 @@ void huffman_encode_done(HUFCODEC *phc)
 
 BOOL huffman_encode_run(HUFCODEC *phc)
 {
-    /* ¼ì²éÊäÈëÊä³öÊı¾İÁ÷µÄÓĞĞ§ĞÔ */
+    /* æ£€æŸ¥è¾“å…¥è¾“å‡ºæ•°æ®æµçš„æœ‰æ•ˆæ€§ */
     if (!phc->input || !phc->output) return FALSE;
 
 #if ENABLE_DEBUG_DUMP
     printf("\noutput encode bit stream:\n");
 #endif
 
-    /* ¶ÔÊäÈëÂëÁ÷½øĞĞ±àÂë²¢Êä³ö */
+    /* å¯¹è¾“å…¥ç æµè¿›è¡Œç¼–ç å¹¶è¾“å‡º */
     while (1) {
         int code, len;
         int data = bitstr_getc(phc->input);
@@ -276,7 +276,7 @@ BOOL huffman_encode_run(HUFCODEC *phc)
         }
     }
 
-    /* ·µ»Ø³É¹¦ */
+    /* è¿”å›æˆåŠŸ */
     return TRUE;
 }
 
@@ -285,7 +285,7 @@ BOOL huffman_encode_step(HUFCODEC *phc, int data)
     unsigned code;
     int      len ;
 
-    /* ¼ì²éÊäÈëÊä³öÊı¾İÁ÷µÄÓĞĞ§ĞÔ */
+    /* æ£€æŸ¥è¾“å…¥è¾“å‡ºæ•°æ®æµçš„æœ‰æ•ˆæ€§ */
     if (!phc->output) return FALSE;
 
     code = phc->codelist[data].code ;
@@ -301,9 +301,9 @@ void huffman_decode_init(HUFCODEC *phc)
 {
     int i;
 
-    /* ¸ù¾İ¹ş·òÂü±í¹¹Ôì first ±íºÍ index ±í
-       first[i] ±íÊ¾³¤¶ÈÎª i+1 µÄµÚÒ»¸öÂë×ÖµÄÖµ
-       index[i] ±íÊ¾³¤¶ÈÎª i+1 µÄµÚÒ»¸öÂë×ÖµÄË÷Òı */
+    /* æ ¹æ®å“ˆå¤«æ›¼è¡¨æ„é€  first è¡¨å’Œ index è¡¨
+       first[i] è¡¨ç¤ºé•¿åº¦ä¸º i+1 çš„ç¬¬ä¸€ä¸ªç å­—çš„å€¼
+       index[i] è¡¨ç¤ºé•¿åº¦ä¸º i+1 çš„ç¬¬ä¸€ä¸ªç å­—çš„ç´¢å¼• */
     phc->first[0] = 0 ;
     phc->index[0] = MAX_HUFFMAN_CODE_LEN;
     for (i=1; i<MAX_HUFFMAN_CODE_LEN; i++) {
@@ -334,7 +334,7 @@ BOOL huffman_decode_run(HUFCODEC *phc)
 {
     int symbol;
 
-    /* ¼ì²éÊäÈëÊä³öÊı¾İÁ÷µÄÓĞĞ§ĞÔ */
+    /* æ£€æŸ¥è¾“å…¥è¾“å‡ºæ•°æ®æµçš„æœ‰æ•ˆæ€§ */
     if (!phc->input || !phc->output) return FALSE;
 
     /* decode until end of stream */
@@ -350,7 +350,7 @@ BOOL huffman_decode_run(HUFCODEC *phc)
         }
     }
 
-    /* ·µ»Ø³É¹¦ */
+    /* è¿”å›æˆåŠŸ */
     return TRUE;
 }
 
@@ -361,10 +361,10 @@ int huffman_decode_step(HUFCODEC *phc)
     int len  = 0;
     int idx  = 0;
 
-    /* ¼ì²éÊäÈëÊä³öÊı¾İÁ÷µÄÓĞĞ§ĞÔ */
+    /* æ£€æŸ¥è¾“å…¥è¾“å‡ºæ•°æ®æµçš„æœ‰æ•ˆæ€§ */
     if (!phc || !phc->input) return EOF;
 
-    /* ´ÓÊäÈëÁ÷¶ÁÈ¡Âë×Ö */
+    /* ä»è¾“å…¥æµè¯»å–ç å­— */
     while (1) {
         bit = bitstr_getb(phc->input);
         if ( bit == EOF) return EOF;
