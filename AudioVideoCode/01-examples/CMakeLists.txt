@@ -32,3 +32,43 @@ target_link_libraries(${PROJECT_NAME} ${lib-easyarray})
 
 # 指定可执行文件安装路径
 install(TARGETS ${PROJECT_NAME} DESTINATION bin)
+
+# 设置Java和JNI环境
+
+# 查找Java库,查找JNI库
+find_package(Java)
+find_package(JNI)
+
+message(STATUS "Java_FOUND:${Java_FOUND}")
+message(STATUS "JNI_FOUND:${JNI_FOUND}")
+
+if (Java_FOUND)
+    message(STATUS "Java_INCLUDE_DIRS=${Java_INCLUDE_DIRS}")
+    message(STATUS "Java_LIBRARIES=${Java_LIBRARIES}")
+else()
+    message(STATUS "Java_NOT_FOUND")
+endif ()
+
+if (JNI_FOUND)
+    message(STATUS "JNI_INCLUDE_DIRS=${JNI_INCLUDE_DIRS}")
+    message(STATUS "JNI_LIBRARIES=${JNI_LIBRARIES}")
+else()
+    message(STATUS "JNI_NOT_FOUND")
+endif ()
+
+if(Java_FOUND)
+    # Allow the Java compiler flags to be set using an environment variable
+    if(NOT DEFINED CMAKE_JAVA_COMPILE_FLAGS AND DEFINED ENV{JAVAFLAGS})
+        set(CMAKE_JAVA_COMPILE_FLAGS $ENV{JAVAFLAGS})
+    endif()
+
+    include(UseJava)
+
+    set(CMAKE_JAVA_COMPILE_FLAGS "${CMAKE_JAVA_COMPILE_FLAGS} -J-Dfile.encoding=UTF8")
+    message(STATUS "CMAKE_JAVA_COMPILE_FLAGS = ${CMAKE_JAVA_COMPILE_FLAGS}")
+    string(REGEX REPLACE " " ";" CMAKE_JAVA_COMPILE_FLAGS "${CMAKE_JAVA_COMPILE_FLAGS}")
+
+    set(JAVAARGS "" CACHE STRING "Additional arguments to pass to java when running unit tests (example: -d32)")
+    message(STATUS "JAVAARGS = ${JAVAARGS}")
+endif()
+

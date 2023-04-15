@@ -156,3 +156,5 @@ AudioVideoCode/01-android-ndk-archabi-chatgpt/test_sdk/
 AudioVideoCode/01-android-ndk-archabi-chatgpt/test_sdk/
 AudioVideoCode/01-android-ndk-archabi-chatgpt/dist/
 AudioVideoCode/01-android-ndk-archabi-chatgpt/android/
+AudioVideoCode/3rd-library/libjpeg-turbo/java/build/
+AudioVideoCode/3rd-library/libjpeg-turbo/java/install/

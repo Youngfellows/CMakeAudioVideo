@@ -1,3 +1,7 @@
+cmake_minimum_required(VERSION 3.25.1)
+
+project(sample-turbojpeg-java)
+
 find_package(Java REQUIRED)
 find_package(JNI REQUIRED)
 
@@ -77,6 +81,8 @@ endif()
 if(NOT DEFINED CMAKE_INSTALL_DEFAULT_JAVADIR)
   set(CMAKE_INSTALL_DEFAULT_JAVADIR "<CMAKE_INSTALL_DATAROOTDIR>/java")
 endif()
+
+#[[
 GNUInstallDirs_set_install_dir(JAVADIR
   "The directory into which Java classes should be installed")
 GNUInstallDirs_get_absolute_install_dir(CMAKE_INSTALL_FULL_JAVADIR
@@ -86,3 +92,6 @@ set(CMAKE_INSTALL_FULL_JAVADIR ${CMAKE_INSTALL_FULL_JAVADIR} PARENT_SCOPE)
 report_directory(JAVADIR)
 install_jar(turbojpeg-java ${CMAKE_INSTALL_JAVADIR})
 mark_as_advanced(CLEAR CMAKE_INSTALL_JAVADIR)
+]]
+
+install_jar(turbojpeg-java jar)
