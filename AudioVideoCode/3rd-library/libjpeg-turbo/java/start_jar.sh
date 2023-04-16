@@ -61,5 +61,5 @@ export LD_LIBRARY_PATH=${PARENT_DIR}/install/lib/
 echo "library path:${LD_LIBRARY_PATH}"
 
 # 启动jar包 + 指定配置文件环境 +读取启动日志+后台启动
-nohup java ${JVM_OPTS} -Djava.ext.dirs=${LD_LIBRARY_PATH} -jar ${JAR_PATH} --spring.profiles.active=${ACTIVE}>${LOG_PATH} 2>&1 & tail -200f ${LOG_PATH}
+nohup java ${JVM_OPTS} -Djava.library.path=${LD_LIBRARY_PATH} -jar ${JAR_PATH} --spring.profiles.active=${ACTIVE}>${LOG_PATH} 2>&1 & tail -200f ${LOG_PATH}
 echo 'start successful'
