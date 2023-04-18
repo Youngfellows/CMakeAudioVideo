@@ -32,14 +32,24 @@ add_executable(16-rgb-to-jpeg-library rgb-to-jpeg-with-libjpeg-turbo.c util.c)
 # set(LIB_JPEG_TURBO_PATH ../3rd/libjpeg-turbo/install/lib)
 set(LIB_JPEG_TURBO_PATH ${3RD_LIBRARY_DIR}/install/lib)
 set(JPEG_TURBO_LIB_NAME libturbojpeg.so)
-find_library(LIB_TURBO_JPEG ${JPEG_TURBO_LIB_NAME} ${LIB_JPEG_TURBO_PATH})
-message(STATUS "libturbojpeg path:${LIB_TURBO_JPEG}")
+set(JPEG_LIB_NAME libjpeg.so)
+find_library(LIB_JPEG_TURBO ${JPEG_TURBO_LIB_NAME} ${LIB_JPEG_TURBO_PATH})
+find_library(LIB_JPEG ${JPEG_LIB_NAME} ${LIB_JPEG_TURBO_PATH})
+message(STATUS "libturbojpeg path:${LIB_JPEG_TURBO}")
+message(STATUS "libjpeg path:${LIB_JPEG}")
 
-target_link_libraries(16-rgb-to-jpeg-library ${LIB_TURBO_JPEG})
+target_link_libraries(16-rgb-to-jpeg-library ${LIB_JPEG} ${LIB_JPEG_TURBO})
 
 # 方式2,添加链接库,必须设置link_directories
 # target_link_libraries(16-rgb-to-jpeg-library libturbojpeg.dylib)
 # target_link_libraries(16-rgb-to-jpeg-library libturbojpeg.so)
+
+# set(libjpeg_lib_dir ${3RD_LIBRARY_DIR}/install/lib)
+# add_library(libjpeg SHARED IMPORTED)
+# add_library(libturbojpeg SHARED IMPORTED)
+# set_target_properties(libjpeg PROPERTIES IMPORTED_LOCATION ${libjpeg_lib_dir}/libjpeg.so)
+# set_target_properties(libturbojpeg PROPERTIES IMPORTED_LOCATION ${libjpeg_lib_dir}/libturbojpeg.so)
+# target_link_libraries(16-rgb-to-jpeg-library libjpeg libturbojpeg)
 
 # 安装可执行文件到指定目录
 install(TARGETS 16-rgb-to-jpeg-library DESTINATION bin)

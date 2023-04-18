@@ -99,6 +99,7 @@ build-android()
 }
 
 # 编译android各个平台运行库
+build-android arm armeabi
 build-android arm armeabi-v7a
 build-android arm arm64-v8a
 build-android x86 x86
