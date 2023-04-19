@@ -70,7 +70,9 @@
         "huffman.h": "c",
         "jpeglib.h": "c",
         "util.h": "c",
-        "turbojpeg.h": "c"
+        "turbojpeg.h": "c",
+        "turbojpeghelp.h": "c",
+        "imagedata.h": "c"
     },
     "cmake.sourceDirectory": "${workspaceFolder}/CMakeBase/01-CMake",
     "C_Cpp.errorSquiggles": "disabled"

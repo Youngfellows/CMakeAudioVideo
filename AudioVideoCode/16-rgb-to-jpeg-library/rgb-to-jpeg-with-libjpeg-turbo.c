@@ -229,22 +229,24 @@ int tyuv2jpeg(unsigned char *yuv_buffer, int yuv_size, int width, int height, in
     return ret;
 }
 
-int main(int argc, char *argv[])
-{
-    printf("↓↓↓↓↓↓↓↓↓↓ Decode JPEG to RGB24 ↓↓↓↓↓↓↓↓↓↓\n");
-    char *inJpegName1 = "./resource/libjpeg-turbo-test-image.jpg";
-    char *outRgbName1 = "./resource/libjpeg-turbo-test-image.rgb24";
-    int flag1 = decode_JPEG_file(inJpegName1, outRgbName1);
-    if (flag1 == 0)
-    {
-        printf("decode ok!\n");
-    }
-    else
-    {
-        printf("decode error!\n");
-    }
-    printf("↑↑↑↑↑↑↑↑↑↑ Decode JPEG to RGB24 ↑↑↑↑↑↑↑↑↑↑\n\n");
-}
+// int main(int argc, char *argv[])
+// {
+//     const char *TAG = "rgb-to-jpeg-with-libjpeg-turbo::";
+//     printf("%s%s():: Line,%d\n", TAG, __FUNCTION__, __LINE__);
+//     printf("↓↓↓↓↓↓↓↓↓↓ Decode JPEG to RGB24 ↓↓↓↓↓↓↓↓↓↓\n");
+//     char *inJpegName1 = "./resource/libjpeg-turbo-test-image.jpg";
+//     char *outRgbName1 = "./resource/libjpeg-turbo-test-image.rgb24";
+//     int flag1 = decode_JPEG_file(inJpegName1, outRgbName1);
+//     if (flag1 == 0)
+//     {
+//         printf("decode ok!\n");
+//     }
+//     else
+//     {
+//         printf("decode error!\n");
+//     }
+//     printf("↑↑↑↑↑↑↑↑↑↑ Decode JPEG to RGB24 ↑↑↑↑↑↑↑↑↑↑\n\n");
+// }
 
 // int main(int argc, char* argv[]) {
 //     printf("↓↓↓↓↓↓↓↓↓↓ Encode RGB24 to JPEG ↓↓↓↓↓↓↓↓↓↓\n");
@@ -263,89 +265,104 @@ int main(int argc, char *argv[])
 //     printf("↑↑↑↑↑↑↑↑↑↑ Encode RGB24 to JPEG ↑↑↑↑↑↑↑↑↑↑\n\n");
 // }
 
-// int main(int argc, char* argv[]) {
+// int main(int argc, char *argv[])
+// {
 //     printf("↓↓↓↓↓↓↓↓↓↓ Decode JPEG to YUV ↓↓↓↓↓↓↓↓↓↓\n");
 //     char *inJpegName3 = "/Users/hubin/Desktop/libjpeg-turbo-test-image.jpg";
 //     FILE *jpegFile = fopen(inJpegName3, "rb");
-////    fseek(jpegFile, 0, SEEK_END); //定位到文件末
-////    long fileLen = ftell(jpegFile); //文件长度
-////    fseek(jpegFile, 0, SEEK_SET);
-////    printf("fileLength1: %ld\n", fileLen);
-//    struct stat statbuf;
-//    stat(inJpegName3, &statbuf);
-//    int fileLen=statbuf.st_size;
-//    printf("fileLength2: %d\n", fileLen);
-//
-//    //uint8_t jpegData[fileLen];
-//    uint8_t *jpegData = malloc(fileLen);
-//    fread(jpegData, fileLen, 1, jpegFile);
-//    fclose(jpegFile);
-//
-//    uint8_t *yuvData;
-//    int yuvSize;
-//    int yuvType;
-//    tjpeg2yuv(jpegData, fileLen, &yuvData, &yuvSize, &yuvType);
-//    printf("size: %d; type: %d\n", yuvSize, yuvType);
-//    char *yuvSuffix;
-//    if(yuvType == TJSAMP_444) {
-//        yuvSuffix = ".yuv444";
-//    } else if(yuvType == TJSAMP_422) {
-//        yuvSuffix = ".yuv422";
-//    } else if(yuvType == TJSAMP_420) {
-//        yuvSuffix = ".yuv420";
-//    } else if(yuvType == TJSAMP_GRAY) {
-//        yuvSuffix = ".yuv-gray";
-//    } else if(yuvType == TJSAMP_440) {
-//        yuvSuffix = ".yuv440";
-//    } else if(yuvType == TJSAMP_411) {
-//        yuvSuffix = ".yuv411";
-//    } else {
-//        printf("Unsupported type!");
-//        return -1;
-//    }
-//    printf("yuv samp: %s\n", yuvSuffix);
-//    char yuvFileName[100];
-//    sprintf(yuvFileName, "/Users/hubin/Desktop/libjpeg-turbo-test-image%s", yuvSuffix);
-//    FILE *yuvFile = fopen(yuvFileName, "wb");
-//    fwrite(yuvData, yuvSize, 1, yuvFile);
-//
-//    free(jpegData);
-//    free(yuvData);
-//    fflush(yuvFile);
-//    fclose(yuvFile);
-//    printf("↑↑↑↑↑↑↑↑↑↑ Decode JPEG to YUV ↑↑↑↑↑↑↑↑↑↑\n\n");
-//}
+//     //    fseek(jpegFile, 0, SEEK_END); //定位到文件末
+//     //    long fileLen = ftell(jpegFile); //文件长度
+//     //    fseek(jpegFile, 0, SEEK_SET);
+//     //    printf("fileLength1: %ld\n", fileLen);
+//     struct stat statbuf;
+//     stat(inJpegName3, &statbuf);
+//     int fileLen = statbuf.st_size;
+//     printf("fileLength2: %d\n", fileLen);
 
-// int main(int argc, char* argv[]) {
-//
-//     printf("↓↓↓↓↓↓↓↓↓↓ Encode YUV to JPEG ↓↓↓↓↓↓↓↓↓↓\n");
-//     char *yuv420FileName = "/Users/hubin/Desktop/libjpeg-turbo-test-image.yuv420";
-//     FILE *yuv420File = fopen(yuv420FileName, "rb");
-//     int yuv420Width = 800, yuv420Height = 800;
-//     int yuvSubsample = TJSAMP_420;
-//     uint8_t *yuv2jpegBuffer;
-//     unsigned long yuv2JpegSize;
-//
-//     struct stat yuv420FileStat;
-//     stat(yuv420FileName, &yuv420FileStat);
-//     int yuv420FileLen = yuv420FileStat.st_size;
-//     printf("yuv420 file length: %d\n", yuv420FileLen);
-//
-//     uint8_t * yuv420Data = malloc(yuv420FileLen);
-//     fread(yuv420Data, yuv420FileLen, 1, yuv420File);
-//     printf("yuv420 read finish!\n");
-//
-//     tyuv2jpeg(yuv420Data, yuv420FileLen, yuv420Width, yuv420Height, yuvSubsample, &yuv2jpegBuffer, &yuv2JpegSize, 80);
-//     printf("jpeg data size: %ld\n", yuv2JpegSize);
-//
-//     FILE *yuv2JpegOutFile = fopen("/Users/hubin/Desktop/libjpeg-turbo-yuv-to-jpeg.jpeg", "wb");
-//     fwrite(yuv2jpegBuffer, yuv2JpegSize, 1, yuv2JpegOutFile);
-//
-//     fclose(yuv420File);
-//     fflush(yuv2JpegOutFile);
-//     fclose(yuv2JpegOutFile);
-//     free(yuv420Data);
-//
-//     printf("↑↑↑↑↑↑↑↑↑↑ Encode YUV to JPEG ↑↑↑↑↑↑↑↑↑↑\n\n");
-//     return 0;
+//     // uint8_t jpegData[fileLen];
+//     uint8_t *jpegData = malloc(fileLen);
+//     fread(jpegData, fileLen, 1, jpegFile);
+//     fclose(jpegFile);
+
+//     uint8_t *yuvData;
+//     int yuvSize;
+//     int yuvType;
+//     tjpeg2yuv(jpegData, fileLen, &yuvData, &yuvSize, &yuvType);
+//     printf("size: %d; type: %d\n", yuvSize, yuvType);
+//     char *yuvSuffix;
+//     if (yuvType == TJSAMP_444)
+//     {
+//         yuvSuffix = ".yuv444";
+//     }
+//     else if (yuvType == TJSAMP_422)
+//     {
+//         yuvSuffix = ".yuv422";
+//     }
+//     else if (yuvType == TJSAMP_420)
+//     {
+//         yuvSuffix = ".yuv420";
+//     }
+//     else if (yuvType == TJSAMP_GRAY)
+//     {
+//         yuvSuffix = ".yuv-gray";
+//     }
+//     else if (yuvType == TJSAMP_440)
+//     {
+//         yuvSuffix = ".yuv440";
+//     }
+//     else if (yuvType == TJSAMP_411)
+//     {
+//         yuvSuffix = ".yuv411";
+//     }
+//     else
+//     {
+//         printf("Unsupported type!");
+//         return -1;
+//     }
+//     printf("yuv samp: %s\n", yuvSuffix);
+//     char yuvFileName[100];
+//     sprintf(yuvFileName, "/Users/hubin/Desktop/libjpeg-turbo-test-image%s", yuvSuffix);
+//     FILE *yuvFile = fopen(yuvFileName, "wb");
+//     fwrite(yuvData, yuvSize, 1, yuvFile);
+
+//     free(jpegData);
+//     free(yuvData);
+//     fflush(yuvFile);
+//     fclose(yuvFile);
+//     printf("↑↑↑↑↑↑↑↑↑↑ Decode JPEG to YUV ↑↑↑↑↑↑↑↑↑↑\n\n");
 // }
+
+int main(int argc, char *argv[])
+{
+
+    printf("↓↓↓↓↓↓↓↓↓↓ Encode YUV to JPEG ↓↓↓↓↓↓↓↓↓↓\n");
+    char *yuv420FileName = "/Users/hubin/Desktop/libjpeg-turbo-test-image.yuv420";
+    FILE *yuv420File = fopen(yuv420FileName, "rb");
+    int yuv420Width = 800, yuv420Height = 800;
+    int yuvSubsample = TJSAMP_420;
+    uint8_t *yuv2jpegBuffer;
+    unsigned long yuv2JpegSize;
+
+    struct stat yuv420FileStat;
+    stat(yuv420FileName, &yuv420FileStat);
+    int yuv420FileLen = yuv420FileStat.st_size;
+    printf("yuv420 file length: %d\n", yuv420FileLen);
+
+    uint8_t *yuv420Data = malloc(yuv420FileLen);
+    fread(yuv420Data, yuv420FileLen, 1, yuv420File);
+    printf("yuv420 read finish!\n");
+
+    tyuv2jpeg(yuv420Data, yuv420FileLen, yuv420Width, yuv420Height, yuvSubsample, &yuv2jpegBuffer, &yuv2JpegSize, 80);
+    printf("jpeg data size: %ld\n", yuv2JpegSize);
+
+    FILE *yuv2JpegOutFile = fopen("/Users/hubin/Desktop/libjpeg-turbo-yuv-to-jpeg.jpeg", "wb");
+    fwrite(yuv2jpegBuffer, yuv2JpegSize, 1, yuv2JpegOutFile);
+
+    fclose(yuv420File);
+    fflush(yuv2JpegOutFile);
+    fclose(yuv2JpegOutFile);
+    free(yuv420Data);
+
+    printf("↑↑↑↑↑↑↑↑↑↑ Encode YUV to JPEG ↑↑↑↑↑↑↑↑↑↑\n\n");
+    return 0;
+}

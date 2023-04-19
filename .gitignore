@@ -159,3 +159,6 @@ AudioVideoCode/01-android-ndk-archabi-chatgpt/android/
 AudioVideoCode/3rd-library/libjpeg-turbo/java/build/
 AudioVideoCode/3rd-library/libjpeg-turbo/java/install/
 AudioVideoCode/16-rgb-to-jpeg-library/dist/
+AudioVideoCode/16-rgb-to-jpeg-library/jepg-resource/ffmpeg-libjpeg-turbo-test-image-yuv444p.yuv
+AudioVideoCode/16-rgb-to-jpeg-library/jepg-resource/ffmpeg-libjpeg-turbo-test-image-yuv420p.yuv
+AudioVideoCode/16-rgb-to-jpeg-library/jepg-resource/ffmpeg-libjpeg-turbo-test-image-rgg24.rgb

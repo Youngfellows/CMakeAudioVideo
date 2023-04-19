@@ -35,9 +35,8 @@ echo "current dir: ${CURRENT_DIR}"
 PARENT_DIR=$(cd $(dirname $CURRENT_DIR); pwd)
 echo "parent dir: ${PARENT_DIR}"
 
-# export LD_LIBRARY_PATH=${PARENT_DIR}/install/lib/libturbojpeg.so
-export LD_LIBRARY_PATH=${PARENT_DIR}/3rd/libjpeg-turbo/install/lib/
-echo "library path:${LD_LIBRARY_PATH}"
+# export LD_LIBRARY_PATH=${PARENT_DIR}/3rd/libjpeg-turbo/install/lib/
+# echo "library path:${LD_LIBRARY_PATH}"
 
 # 编译
 cmake -DCMAKE_CXX_FLAGS=-g -DCMAKE_BUILD_TYPE=Release \
@@ -46,5 +45,10 @@ make -j4
 make install
 cd -
 
-# 运行
-${INSTALL_DIR}/bin/16-rgb-to-jpeg-library
+# 遍历指定目录下所有文件，包括子目录下的所有文件,并运行
+# ${INSTALL_DIR}/bin/16-rgb-to-jpeg-library
+BIN_DIR=${INSTALL_DIR}/bin/
+for name in $(find $BIN_DIR -type f -name "*"); do
+    echo -e "\nrun::${name}"
+    ${name}
+done
