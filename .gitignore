@@ -162,3 +162,9 @@ AudioVideoCode/16-rgb-to-jpeg-library/dist/
 AudioVideoCode/16-rgb-to-jpeg-library/jepg-resource/ffmpeg-libjpeg-turbo-test-image-yuv444p.yuv
 AudioVideoCode/16-rgb-to-jpeg-library/jepg-resource/ffmpeg-libjpeg-turbo-test-image-yuv420p.yuv
 AudioVideoCode/16-rgb-to-jpeg-library/jepg-resource/ffmpeg-libjpeg-turbo-test-image-rgg24.rgb
+AudioVideoCode/01-android-ndk-archabi-cpp/build/
+AudioVideoCode/01-android-ndk-archabi-cpp/dist/
+AudioVideoCode/01-android-ndk-archabi-cpp/test_sdk/
+libandroidjni/dist/
+libandroidjni/build/
+libandroidjni/resource/
