@@ -82,6 +82,8 @@ build-android()
     -DASSIMP_BUILD_TESTS=OFF \
     -DASSIMP_NO_EXPORT=TRUE \
     -DCMAKE_INSTALL_PREFIX=${PREFIX} \
+    -DCMAKE_C_FLAGS="-fpic -fexceptions -frtti" \
+    -DCMAKE_CXX_FLAGS="-fpic -fexceptions -frtti" \
     -DANDROID_STL=c++_static \
     -DBUILD_SHARED_LIBS=1 $MY_SOURCE_DIR
     

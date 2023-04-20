@@ -89,6 +89,8 @@ build-android()
     -DASSIMP_NO_EXPORT=TRUE \
     -DANDROID_TOOLCHAIN=${TOOLCHAIN} \
     -DCMAKE_INSTALL_PREFIX=${PREFIX} \
+    -DCMAKE_C_FLAGS="-fpic -fexceptions -frtti" \
+    -DCMAKE_CXX_FLAGS="-fpic -fexceptions -frtti" \
     -DANDROID_STL=c++_static \
     -DBUILD_SHARED_LIBS=1 $EASY_ROOT
     
