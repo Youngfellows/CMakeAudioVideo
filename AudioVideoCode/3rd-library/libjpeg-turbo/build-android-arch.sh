@@ -29,13 +29,13 @@ MY_SOURCE_DIR=$PROJ_ROOT
 export PATH=/mnt/d/LinuxEnvironment/cmake-3.12.1-Linux-x86_64/bin:$PATH
 
 # NDK编译环境
-# export NDK_PATH=/mnt/d/LinuxEnvironment/android-ndk-r25c-linux/android-ndk-r25c
+# export NDK_PATH=/mnt/d/LinuxEnvironment/android-ndk-r22b-linux-x86_64/android-ndk-r22b
 export NDK_PATH=/mnt/d/LinuxEnvironment/android-ndk-r16b-linux-x86_64/android-ndk-r16b
 export PATH=$NDK_PATH:$PATH
-TOOLCHAIN_GCC=gcc
-# TOOLCHAIN_GXX=gxx
-# TOOLCHAIN_CLANG=clang
+TOOLCHAIN_GCC=gcc # 只能使用android-ndk-r16b-linux-x86_64
+TOOLCHAIN_CLANG=clang
 
+# TOOLCHAIN=$TOOLCHAIN_CLANG
 TOOLCHAIN=$TOOLCHAIN_GCC
 ANDROID_VERSION=21
 
@@ -99,8 +99,11 @@ build-android()
 }
 
 # 编译android各个平台运行库
+build-android arm armeabi
 build-android arm armeabi-v7a
 build-android arm arm64-v8a
 build-android x86 x86
 build-android x86_64 x86_64
+build-android mips mips
+build-android mips64 mips64
 
