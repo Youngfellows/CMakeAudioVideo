@@ -21,6 +21,15 @@
 int decode_JPEG_file(char *inJpegName, char *outRgbName);
 
 /**
+ * @brief jpeg格式解码为rgb格式
+ *
+ * @param inJpegName jpeg格式文件路径
+ * @param imageData 返回的rgb图片信息
+ * @return int
+ */
+int decode_JPEG_file2(char *inJpegName, struct ImageData *imageData);
+
+/**
  * @brief rgb24编码为jpeg图片格式
  *
  * @param strImageName jpeg文件路径

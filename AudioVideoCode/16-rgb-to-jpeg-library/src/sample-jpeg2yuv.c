@@ -25,7 +25,7 @@ int main(int argc, char *argv[])
     struct stat statbuf;
     stat(inJpegName3, &statbuf);
     fileLen = statbuf.st_size;
-    printf("fileLength2: %d\n", fileLen);
+    printf("fileLength2: %ld\n", fileLen);
 
     // uint8_t jpegData[fileLen];
     printf("%s%s():: Line,%d,sizeof(uint8_t):%d\n", TAG, __FUNCTION__, __LINE__, sizeof(uint8_t));

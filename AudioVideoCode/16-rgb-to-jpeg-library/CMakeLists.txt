@@ -75,6 +75,14 @@ message(STATUS "ENCODE_2_JPEG_SRC:${ENCODE_2_JPEG_SRC}")
 add_executable(sample-encode2-jpeg ${ENCODE_2_JPEG_SRC})
 target_link_libraries(sample-encode2-jpeg libjpeg.a libturbojpeg.a)
 
+set(ENCODE_3_JPEG_SRC "./src/jpeg/decode-jpeg.c;\
+./src/jpeg/encode-jpeg.c;\
+./src/sample-encode3-jpeg.c;\
+./src/util.c")
+message(STATUS "ENCODE_3_JPEG_SRC:${ENCODE_3_JPEG_SRC}")
+add_executable(sample-encode3-jpeg ${ENCODE_3_JPEG_SRC})
+target_link_libraries(sample-encode3-jpeg libjpeg.a libturbojpeg.a)
+
 set(JPEG2YUV_SRC "./src/jpeg/jpeg2yuv.c;\
 ./src/sample-jpeg2yuv.c;\
 ./src/util.c")
@@ -94,6 +102,7 @@ target_link_libraries(sample-yuv2jpeg libjpeg.a libturbojpeg.a)
 list(APPEND SAMPLES sample-decode-jpeg)
 list(APPEND SAMPLES sample-encode-jpeg)
 list(APPEND SAMPLES sample-encode2-jpeg)
+list(APPEND SAMPLES sample-encode3-jpeg)
 list(APPEND SAMPLES sample-jpeg2yuv)
 list(APPEND SAMPLES sample-yuv2jpeg)
 
