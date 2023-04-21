@@ -12,9 +12,11 @@ int main(int argc, char *argv[])
     const char *TAG = "sample-encode2-jpeg::";
     printf("%s%s():: Line,%d\n", TAG, __FUNCTION__, __LINE__);
     printf("↓↓↓↓↓↓↓↓↓↓ Encode RGB24 to JPEG ↓↓↓↓↓↓↓↓↓↓\n");
-    int width = 1010, height = 1324;
+    // int width = 1010, height = 1324;
+    int width = 711, height = 711;
     char *inJpegName1 = "./jepg-resource/ffmpeg-libjpeg-turbo-test-image-rgg24.rgb";
     // char *inJpegName1 = "./jepg-resource/libjpeg-turbo-test-image-rgb24.rgb";
+    // char *inJpegName1 = "./jepg-resource/rainbow_711x711_bmp_rgb24.rgb";
     char *outJpegName2 = "./resource/ffmpeg-libjpeg-turbo-test-image-rgg24.jpg";
     uint8_t *rgbBuffer = malloc(width * height * 3);
     if (!rgbBuffer)
