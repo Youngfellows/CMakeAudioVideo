@@ -4,8 +4,13 @@ cmake_minimum_required(VERSION 3.14)
 # 设置项目名称
 project(Sample-rgb-to-jpeg-library)
 
-# 设置C语言支持
-set(CMAKE_C_STANDARD 99)
+# 启动对C11标准的支持
+set(CMAKE_C_STANDARD 11)
+set(CMAKE_CXX_STANDARD 14)
+
+# 显式要求指明支持C/C++标准
+set(CMAKE_C_STANDARD_REQUIRED TRUE)
+set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
 
 # 全部可执行文件的名称列表
 set(SAMPLES)
