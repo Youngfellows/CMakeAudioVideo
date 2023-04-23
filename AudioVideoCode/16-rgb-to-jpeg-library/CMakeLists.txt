@@ -102,7 +102,7 @@ message(STATUS "YUV2JPEG_SRC:${YUV2JPEG_SRC}")
 add_executable(sample-yuv2jpeg ${YUV2JPEG_SRC})
 target_link_libraries(sample-yuv2jpeg libjpeg.a libturbojpeg.a)
 
-set(TEST_LIB_JPEG_TURBO_SRC "./src/Libjpeg-turbo-Test.cpp;\
+set(TEST_LIB_JPEG_TURBO_SRC "./src/test-libjpeg-turbo.cpp;\
 ./src/jpeg/funset.cpp")
 message(STATUS "TEST_LIB_JPEG_TURBO_SRC:${TEST_LIB_JPEG_TURBO_SRC}")
 add_executable(sample-jpeg-turbo ${TEST_LIB_JPEG_TURBO_SRC})
@@ -110,12 +110,12 @@ target_link_libraries(sample-jpeg-turbo libjpeg.a libturbojpeg.a)
 
 # 添加可执行文件到列表
 # list(APPEND SAMPLES 16-rgb-to-jpeg-library)
-list(APPEND SAMPLES sample-decode-jpeg)
-list(APPEND SAMPLES sample-encode-jpeg)
-list(APPEND SAMPLES sample-encode2-jpeg)
-list(APPEND SAMPLES sample-encode3-jpeg)
-list(APPEND SAMPLES sample-jpeg2yuv)
-list(APPEND SAMPLES sample-yuv2jpeg)
+# list(APPEND SAMPLES sample-decode-jpeg)
+# list(APPEND SAMPLES sample-encode-jpeg)
+# list(APPEND SAMPLES sample-encode2-jpeg)
+# list(APPEND SAMPLES sample-encode3-jpeg)
+# list(APPEND SAMPLES sample-jpeg2yuv)
+# list(APPEND SAMPLES sample-yuv2jpeg)
 list(APPEND SAMPLES sample-jpeg-turbo)
 
 # 安装可执行文件到指定目录
