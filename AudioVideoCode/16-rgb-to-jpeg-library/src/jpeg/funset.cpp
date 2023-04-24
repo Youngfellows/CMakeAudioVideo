@@ -401,7 +401,8 @@ int test_libjpeg_turbo_compress()
     int height;       // 图片高
     int channels;     // 每一个像素占用的字节数
     long long t1 = Timer::getNowTime();
-    std::unique_ptr<unsigned char[]> data = get_jpeg_decompress_data(name.c_str(), width, height, channels, JCS_RGB);
+    // std::unique_ptr<unsigned char[]> data = get_jpeg_decompress_data(name.c_str(), width, height, channels, JCS_RGB);
+    std::unique_ptr<unsigned char[]> data = get_jpeg_decompress_data(name.c_str(), width, height, channels, JCS_EXT_BGR);
     long long t2 = Timer::getNowTime();
     if (data == nullptr)
     {
