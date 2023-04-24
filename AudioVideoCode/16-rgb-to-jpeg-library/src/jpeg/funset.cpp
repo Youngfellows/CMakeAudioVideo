@@ -27,7 +27,7 @@ int test_libjpeg_turbo_decompress()
     // 方式1解码jpeg图片
     int width, height, channels;
     long long t1 = Timer::getNowTime();
-    std::unique_ptr<unsigned char[]> data = get_jpeg_decompress_data(image_name.c_str(), width, height, channels);
+    std::unique_ptr<unsigned char[]> data = get_jpeg_decompress_data(image_name.c_str(), width, height, channels, JCS_RGB);
     long long t2 = Timer::getNowTime();
     if (data == nullptr)
     {
@@ -101,7 +101,7 @@ std::unique_ptr<unsigned char[]> get_jpeg_decompress_data2(const char *image_nam
     fread(srcBuf.get(), srcSize, 1, infile);
     fclose(infile);
 
-    tjhandle handle = tjInitDecompress(); // 回调函数
+    tjhandle handle = tjInitDecompress(); // 函数调用
     int subsamp, cs;
     // 获取jpeg文件头信息
     int ret = tjDecompressHeader3(handle, srcBuf.get(), srcSize, &width, &height, &subsamp, &cs);
@@ -110,6 +110,7 @@ std::unique_ptr<unsigned char[]> get_jpeg_decompress_data2(const char *image_nam
     else
         channels = 3;
 
+    // 解码jpet图片,获取rgb数据
     int pf = TJCS_RGB;
     int ps = tjPixelSize[pf];
     std::unique_ptr<unsigned char[]> data(new unsigned char[width * height * channels]); // 申请rgb内存空间
@@ -127,9 +128,10 @@ std::unique_ptr<unsigned char[]> get_jpeg_decompress_data2(const char *image_nam
  * @param width 宽
  * @param height 高
  * @param channels 位宽,jpeg图片每一个像素占用字节
+ * @param color_space 颜色空间
  * @return std::unique_ptr<unsigned char[]> 返回jpeg图片解码后的rgb数据
  */
-std::unique_ptr<unsigned char[]> get_jpeg_decompress_data(const char *image_name, int &width, int &height, int &channels)
+std::unique_ptr<unsigned char[]> get_jpeg_decompress_data(const char *image_name, int &width, int &height, int &channels, J_COLOR_SPACE color_space)
 {
     FILE *infile = fopen(image_name, "rb");
     if (infile == nullptr)
@@ -155,7 +157,8 @@ std::unique_ptr<unsigned char[]> get_jpeg_decompress_data(const char *image_name
     /* Step 5: Start decompressor */
     jpeg_start_decompress(&cinfo); // 启动解压缩程序
 
-    cinfo.out_color_space = JCS_RGB; // JCS_EXT_BGR;
+    // cinfo.out_color_space = JCS_RGB;     // JCS_EXT_BGR;
+    cinfo.out_color_space = color_space; // JCS_EXT_BGR;
 
     // 图片每一行占用字节数
     int row_stride = cinfo.output_width * cinfo.output_components;
@@ -398,7 +401,7 @@ int test_libjpeg_turbo_compress()
     int height;       // 图片高
     int channels;     // 每一个像素占用的字节数
     long long t1 = Timer::getNowTime();
-    std::unique_ptr<unsigned char[]> data = get_jpeg_decompress_data(name.c_str(), width, height, channels);
+    std::unique_ptr<unsigned char[]> data = get_jpeg_decompress_data(name.c_str(), width, height, channels, JCS_RGB);
     long long t2 = Timer::getNowTime();
     if (data == nullptr)
     {
@@ -482,7 +485,8 @@ int test_libjpeg_turbo()
     int height;
     int channels;
     long long t1 = Timer::getNowTime();
-    std::unique_ptr<unsigned char[]> data = get_jpeg_decompress_data(name1.c_str(), width, height, channels);
+
+    std::unique_ptr<unsigned char[]> data = get_jpeg_decompress_data(name1.c_str(), width, height, channels, JCS_EXT_BGR);
     long long t2 = Timer::getNowTime();
     if (data == nullptr)
     {
@@ -497,16 +501,39 @@ int test_libjpeg_turbo()
     // 把rgb图片数据按BGR写入jpeg图片
     write_jpeg_file(p, width, height, 3, JCS_EXT_BGR, quality, name3.c_str()); // bgr data
 
-    // 把rgb图片数据按RGB写入jpeg图片
+    t1 = Timer::getNowTime();
+    data = get_jpeg_decompress_data(name1.c_str(), width, height, channels, JCS_RGB);
+    t2 = Timer::getNowTime();
+    fprintf(stdout, "decompress time 1: %lldms, width: %d, height: %d, channels: %d\n", t2 - t1, width, height, channels);
+    if (data == nullptr)
+    {
+        fprintf(stderr, "fail to decompress: %s\n", name1.c_str());
+        return -1;
+    }
+    fprintf(stdout, "decompress time 1: %lldms, width: %d, height: %d, channels: %d\n", t2 - t1, width, height, channels);
+    p = data.get();
+
+    //  把rgb图片数据按RGB写入jpeg图片
     name3 = out_image_path + "lena2.jpg";
     write_jpeg_file(p, width, height, 3, JCS_RGB, quality, name3.c_str()); // rgb data
     printf("%s():: Line,%d\n", __FUNCTION__, __LINE__);
 
     // 把rgb图片数据按BGR写入jpeg图片,会抛出异常 “Bogus input colorspace”
-    name3 = out_image_path + "lena3.jpg";
-    printf("%s():: Line,%d\n", __FUNCTION__, __LINE__);
+    // t1 = Timer::getNowTime();
+    // data = get_jpeg_decompress_data(name1.c_str(), width, height, channels, JCS_GRAYSCALE);
+    // t2 = Timer::getNowTime();
+    // fprintf(stdout, "decompress time 1: %lldms, width: %d, height: %d, channels: %d\n", t2 - t1, width, height, channels);
+    // if (data == nullptr)
+    // {
+    //     fprintf(stderr, "fail to decompress: %s\n", name1.c_str());
+    //     return -1;
+    // }
+    // fprintf(stdout, "decompress time 1: %lldms, width: %d, height: %d, channels: %d\n", t2 - t1, width, height, channels);
+    // p = data.get();
+    // name3 = out_image_path + "lena3.jpg";
+    // printf("%s():: Line,%d\n", __FUNCTION__, __LINE__);
     // write_jpeg_file(p, width, height, 3, JCS_GRAYSCALE, quality, name3.c_str()); // gray data
-    printf("%s():: Line,%d\n", __FUNCTION__, __LINE__);
+    // printf("%s():: Line,%d\n", __FUNCTION__, __LINE__);
 
     // 获取压缩后的jpeg图片数据,然后保存为jpeg图片
     int length = width * height * 3;

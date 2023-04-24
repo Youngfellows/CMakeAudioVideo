@@ -35,9 +35,10 @@ int test_libjpeg_turbo_decompress();
  * @param width 宽
  * @param height 高
  * @param channels 位宽,jpeg图片每一个像素占用字节
+ * @param color_space 颜色空间
  * @return std::unique_ptr<unsigned char[]> 返回jpeg图片解码后的rgb数据
  */
-std::unique_ptr<unsigned char[]> get_jpeg_decompress_data(const char *image_name, int &width, int &height, int &channels); // jpeg_read_scanlines
+std::unique_ptr<unsigned char[]> get_jpeg_decompress_data(const char *image_name, int &width, int &height, int &channels, J_COLOR_SPACE color_space); // jpeg_read_scanlines
 
 /**
  * @brief jpeg图片解码
