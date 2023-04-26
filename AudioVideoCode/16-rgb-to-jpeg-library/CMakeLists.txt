@@ -108,6 +108,13 @@ message(STATUS "TEST_LIB_JPEG_TURBO_SRC:${TEST_LIB_JPEG_TURBO_SRC}")
 add_executable(sample-jpeg-turbo ${TEST_LIB_JPEG_TURBO_SRC})
 target_link_libraries(sample-jpeg-turbo libjpeg.a libturbojpeg.a)
 
+set(SAMPLE_JPEG_TRANSFORM_SRC "./src/sample-jpeg-transform.cpp;\
+./src/jpeg/funset.cpp;\
+./src/jpeg/Transform.cpp")
+message(STATUS "TEST_LIB_JPEG_TURBO_SRC:${TEST_LIB_JPEG_TURBO_SRC}")
+add_executable(sample-jpeg-transform ${SAMPLE_JPEG_TRANSFORM_SRC})
+target_link_libraries(sample-jpeg-transform libjpeg.a libturbojpeg.a)
+
 # 添加可执行文件到列表
 list(APPEND SAMPLES 16-rgb-to-jpeg-library)
 list(APPEND SAMPLES sample-decode-jpeg)
@@ -117,6 +124,7 @@ list(APPEND SAMPLES sample-encode3-jpeg)
 list(APPEND SAMPLES sample-jpeg2yuv)
 list(APPEND SAMPLES sample-yuv2jpeg)
 list(APPEND SAMPLES sample-jpeg-turbo)
+list(APPEND SAMPLES sample-jpeg-transform)
 
 # 安装可执行文件到指定目录
 # install(TARGETS 16-rgb-to-jpeg-library DESTINATION bin)
