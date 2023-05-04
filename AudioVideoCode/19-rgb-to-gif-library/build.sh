@@ -46,9 +46,28 @@ make install
 cd -
 
 # 遍历指定目录下所有文件，包括子目录下的所有文件,并运行
-# ${INSTALL_DIR}/bin/16-rgb-to-jpeg-library
+# ${INSTALL_DIR}/bin/19-gif-to-rgb-library
+# ${INSTALL_DIR}/bin/19-rgb-to-gif-library
 BIN_DIR=${INSTALL_DIR}/bin/
-for name in $(find $BIN_DIR -type f -name "*"); do
+for name in $(find $BIN_DIR -type f -name "*gif-to-rgb-library"); do
+    echo "${name}"
+    SAMPLE_GIF_TO_RGB=${name}
+done
+
+if [ -n ${SAMPLE_GIF_TO_RGB} ]
+then
     echo -e "\nrun::${name}"
-    ${name}
+    # 执行19-gif-to-rgb-library
+    ${SAMPLE_GIF_TO_RGB}
+else
+    echo "19-gif-to-rgb-library is null"
+    exit 0
+fi
+
+for name in $(find $BIN_DIR -type f -name "*"); do
+    if [[ ${name} != ${SAMPLE_GIF_TO_RGB} ]]
+    then
+        echo -e "\nrun::${name}"
+        ${name} # 运行可执行文件,19-rgb-to-gif-library
+    fi
 done

@@ -28,7 +28,7 @@ uint32_t rainbowColors[] = {
 
 int main()
 {
-    const char *TAG = "sample-decode-jpeg::";
+    const char *TAG = "gif-file-analyse::";
     printf("%s%s():: Line,%d\n", TAG, __FUNCTION__, __LINE__);
     // LZW 编码初始表大小的位数：3
     unsigned char code_size = 3;

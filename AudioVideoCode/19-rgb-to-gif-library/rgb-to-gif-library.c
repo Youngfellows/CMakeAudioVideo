@@ -145,30 +145,21 @@ static void RGB2GIF(char **RGBFileNames, int NumOfRGBFile, char *GIFFileName,
         EGifGCBToSavedExtension(GCB, GifFile, i);
     }
 
-    printf("输出文件。");
+    printf("输出文件。\n");
     // 输出文件
     EGifSpew(GifFile);
 }
 
 int main(int argc, char **argv)
 {
-    // char *rgbFiles[] = {
-    //     "/Users/hubin/Desktop/rainbow-0.rgb",
-    //     "/Users/hubin/Desktop/rainbow-1.rgb",
-    //     "/Users/hubin/Desktop/rainbow-2.rgb",
-    //     "/Users/hubin/Desktop/rainbow-3.rgb",
-    //     "/Users/hubin/Desktop/rainbow-4.rgb",
-    //     "/Users/hubin/Desktop/rainbow-5.rgb",
-    //     "/Users/hubin/Desktop/rainbow-6.rgb",
-    // };
-
     char *rgbFiles[] = {
-        "./jpeg/1.jpg",
-        "./jpeg/2.jpg",
-        "./jpeg/3.jpg",
-        "./jpeg/4.jpg",
-        "./jpeg/5.jpg",
-        "./jpeg/6.jpg",
+        "./resource/rainbow-0.rgb",
+        "./resource/rainbow-1.rgb",
+        "./resource/rainbow-2.rgb",
+        "./resource/rainbow-3.rgb",
+        "./resource/rainbow-4.rgb",
+        "./resource/rainbow-5.rgb",
+        "./resource/rainbow-6.rgb",
     };
 
     RGB2GIF(rgbFiles, 7, "./resource/rainbow0.gif", 3, 700, 700);
