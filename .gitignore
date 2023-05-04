@@ -168,3 +168,16 @@ AudioVideoCode/01-android-ndk-archabi-cpp/test_sdk/
 libandroidjni/dist/
 libandroidjni/build/
 libandroidjni/resource/
+AudioVideoCode/17-gif-file-analyse/build/
+AudioVideoCode/17-gif-file-analyse/resource/
+AudioVideoCode/17-gif-file-analyse/dist/
+AudioVideoCode/18-rgb-to-gif/build/
+AudioVideoCode/18-rgb-to-gif/resource/
+AudioVideoCode/18-rgb-to-gif/dist/
+AudioVideoCode/19-rgb-to-gif-library/build/
+AudioVideoCode/19-rgb-to-gif-library/resource/
+AudioVideoCode/19-rgb-to-gif-library/dist/
+AudioVideoCode/20-image-to-gif/build/
+AudioVideoCode/20-image-to-gif/resource/
+AudioVideoCode/20-image-to-gif/dist/
+

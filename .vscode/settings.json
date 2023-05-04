@@ -72,7 +72,9 @@
         "util.h": "c",
         "turbojpeg.h": "c",
         "turbojpeghelp.h": "c",
-        "imagedata.h": "c"
+        "imagedata.h": "c",
+        "stdint.h": "c",
+        "lzw.h": "c"
     },
     "cmake.sourceDirectory": "${workspaceFolder}/CMakeBase/01-CMake",
     "C_Cpp.errorSquiggles": "disabled"
