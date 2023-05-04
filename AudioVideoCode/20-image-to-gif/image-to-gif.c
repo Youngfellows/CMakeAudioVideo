@@ -38,8 +38,7 @@ int main()
     decodeBMP(bmp, &bmpRGB);
     char *androidRGB = "./generate-resource/Android.rgb";
     FILE *androidRGBFile = fopen(androidRGB, "wb");
-    // fwrite(bmpRGB, 400 * 400 * 3, 1, androidRGBFile);
-    fwrite(bmpRGB, 700 * 700 * 3, 1, androidRGBFile);
+    fwrite(bmpRGB, 400 * 400 * 3, 1, androidRGBFile);
     fclose(androidRGBFile);
     printf("\n\n");
 
@@ -47,8 +46,7 @@ int main()
     decodePNG(png, &pngRGB);
     char *huaweiRGB = "./generate-resource/Huawei.rgb";
     FILE *huaweiRGBFile = fopen(huaweiRGB, "wb");
-    // fwrite(pngRGB, 400 * 400 * 3, 1, huaweiRGBFile);
-    fwrite(pngRGB, 655 * 996 * 3, 1, huaweiRGBFile);
+    fwrite(pngRGB, 400 * 400 * 3, 1, huaweiRGBFile);
     fclose(huaweiRGBFile);
     printf("\n\n");
 
@@ -56,8 +54,7 @@ int main()
     decodeJPG(jpg, &jpgRGB);
     char *fuchsiaRGB = "./generate-resource/Fuchsia.rgb";
     FILE *fuchsiaRGBFile = fopen(fuchsiaRGB, "wb");
-    // fwrite(jpgRGB, 400 * 400 * 3, 1, fuchsiaRGBFile);
-    fwrite(jpgRGB, 728 * 945 * 3, 1, fuchsiaRGBFile);
+    fwrite(jpgRGB, 400 * 400 * 3, 1, fuchsiaRGBFile);
     fclose(fuchsiaRGBFile);
     printf("\n\n");
 
@@ -65,8 +62,7 @@ int main()
     decodeGIF(gif, &gifRGB);
     char *iOSRGB = "./generate-resource/iOS.rgb";
     FILE *iOSRGBFile = fopen(iOSRGB, "wb");
-    // fwrite(gifRGB, 400 * 400 * 3, 1, iOSRGBFile);
-    fwrite(gifRGB, 179 * 180 * 3, 1, iOSRGBFile);
+    fwrite(gifRGB, 400 * 400 * 3, 1, iOSRGBFile);
     fclose(iOSRGBFile);
     printf("\n\n");
 
@@ -77,13 +73,9 @@ int main()
     rgbBuffers[1] = pngRGB;
     rgbBuffers[2] = jpgRGB;
     rgbBuffers[3] = gifRGB;
-    // rgbBuffers[1] = bmpRGB;
-    // rgbBuffers[2] = bmpRGB;
-    // rgbBuffers[3] = bmpRGB;
 
     printf("%s%s():: Line,%d\n", TAG, __FUNCTION__, __LINE__);
-    // encodeGIF(rgbBuffers, 4, "./generate-resource/image-to-gif.gif", 7, 400, 400);
-    encodeGIF(rgbBuffers, 4, "./generate-resource/image-to-gif.gif", 7, 728, 996);
+    encodeGIF(rgbBuffers, 4, "./generate-resource/image-to-gif.gif", 7, 400, 400);
     printf("%s%s():: Line,%d\n", TAG, __FUNCTION__, __LINE__);
 
     free(bmpRGB);
