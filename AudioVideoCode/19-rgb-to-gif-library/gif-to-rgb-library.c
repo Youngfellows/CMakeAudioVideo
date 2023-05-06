@@ -248,5 +248,6 @@ static void GIF2RGB(char *FileName, char *OutFileNamePattern)
 int main(int argc, char **argv)
 {
     GIF2RGB("./gif/rainbow.gif", "./resource/rainbow-%d.rgb");
+    // GIF2RGB("./gif/rainbow-compressed.gif", "./resource/rainbow-%d.rgb");
     return 0;
 }
