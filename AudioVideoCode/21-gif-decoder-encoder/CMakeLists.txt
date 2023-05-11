@@ -21,7 +21,8 @@ include_directories(pthread/include)
 
 # 设置C++源文件
 # aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/src/cpp/ GIF_SRC)
-set(GIF_DECODER_SRC "${CMAKE_CURRENT_SOURCE_DIR}/src/gif-library/cpp/GifDecoder.cpp;\
+set(GIF_DECODER_SRC "${CMAKE_CURRENT_SOURCE_DIR}/src/gif-library/cpp/AndroidGifDecoder.cpp;\
+${CMAKE_CURRENT_SOURCE_DIR}/src/gif-library/cpp/GifDecoder.cpp;\
 ${CMAKE_CURRENT_SOURCE_DIR}/src/gif-library/cpp/DataBlock.cpp;\
 ${CMAKE_CURRENT_SOURCE_DIR}/src/gif-library/cpp/BitmapIterator.cpp;\
 ${CMAKE_CURRENT_SOURCE_DIR}/src/gif-library/cpp/GifFrame.cpp;\
