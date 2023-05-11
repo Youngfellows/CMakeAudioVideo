@@ -180,4 +180,7 @@ AudioVideoCode/19-rgb-to-gif-library/dist/
 AudioVideoCode/20-image-to-gif/build/
 AudioVideoCode/20-image-to-gif/generate-resource/
 AudioVideoCode/20-image-to-gif/dist/
+AudioVideoCode/21-gif-decoder-encoder/build/
+AudioVideoCode/21-gif-decoder-encoder/generate-resource/
+AudioVideoCode/21-gif-decoder-encoder/dist/
 
