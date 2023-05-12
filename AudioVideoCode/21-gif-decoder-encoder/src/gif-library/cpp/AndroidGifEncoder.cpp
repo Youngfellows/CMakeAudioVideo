@@ -90,4 +90,10 @@ void AndroidGifEncoder::setThreadCount(uint32_t threadCount)
 void AndroidGifEncoder::destory()
 {
     printf("%s():: Line %d\n", __FUNCTION__, __LINE__);
+    if (gifEncoder != NULL)
+    {
+        gifEncoder->release();
+    }
+    delete gifEncoder;
+    gifEncoder = NULL;
 }
