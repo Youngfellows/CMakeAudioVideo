@@ -7,3 +7,4 @@ void testSimpleGCTGifEncoder();
 void testFastGifEncoder();
 void testGCTGifEncoder();
 void testLCTGifEncoder();
+void testGifEncoder();
