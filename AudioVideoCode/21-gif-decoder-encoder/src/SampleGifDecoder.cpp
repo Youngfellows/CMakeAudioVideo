@@ -1,5 +1,6 @@
 #include <iostream>
 #include "AndroidGifDecoder.h"
+#include "GifDecoderEncoderSample.h"
 
 using namespace std;
 
@@ -12,12 +13,21 @@ using namespace std;
  */
 int main(int arc, char *argv[])
 {
+    gifDecoderTest1();
+    gifDecoderTest2();
+    return 0;
+}
+
+/**
+ * @brief  Gif解码方式1,按帧加载
+ *
+ */
+void gifDecoderTest1()
+{
     const char *tag = "SampleGifDecoder::";
     printf("%s%s,Line %d\n", tag, __FUNCTION__, __LINE__);
     const char *gifFilePath1 = "./resource/test1.gif";
-    const char *gifFilePath2 = "./resource/test2.gif";
     const char *outFileNamePattern1 = "./generate-resource/gif-decoder1-%d.rgb";
-    const char *outFileNamePattern2 = "./generate-resource/gif-decoder2-%d.rgb";
 
     AndroidGifDecoder *androidGifDecoder = new AndroidGifDecoder();
     bool init = androidGifDecoder->initialize();
@@ -67,12 +77,24 @@ int main(int arc, char *argv[])
         }
     }
     delete androidGifDecoder;
+}
+
+/**
+ * @brief Gif解码方式2,使用迭代器加载
+ *
+ */
+void gifDecoderTest2()
+{
+    const char *tag = "SampleGifDecoder::";
+    printf("\n%s%s,Line %d\n", tag, __FUNCTION__, __LINE__);
+    const char *gifFilePath2 = "./resource/test2.gif";
+    const char *outFileNamePattern2 = "./generate-resource/gif-decoder2-%d.rgb";
 
     AndroidGifDecoder *androidGifDecoder2 = new AndroidGifDecoder();
-    init = androidGifDecoder2->initialize();
+    bool init = androidGifDecoder2->initialize();
     // Gif解码方式2,使用迭代器加载
     bool result1 = androidGifDecoder2->loadUsingIterator(gifFilePath2);
-    printf("\n%s%s,Line %d,init:%d\n", tag, __FUNCTION__, __LINE__, result);
+    printf("\n%s%s,Line %d,init:%d\n", tag, __FUNCTION__, __LINE__, result1);
     if (result1)
     {
         uint32_t width = androidGifDecoder2->getWidth();
@@ -108,6 +130,5 @@ int main(int arc, char *argv[])
             hasNext = androidGifDecoder2->bitmapIteratorHasNext(); // 继续迭代下一帧
         }
     }
-
-    return 0;
+    delete androidGifDecoder2;
 }
