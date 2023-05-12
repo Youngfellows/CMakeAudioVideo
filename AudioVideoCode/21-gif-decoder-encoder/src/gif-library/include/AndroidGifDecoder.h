@@ -1,6 +1,7 @@
 #pragma once
 
 #include "GifDecoder.h"
+#include "BitmapIterator.h"
 
 /**
  * @brief Gif解码器封装
@@ -21,8 +22,8 @@ public:
     bool bitmapIteratorHasNext();                 // 获取是否有下一帧
     GifFrame *bitmapIteratornext();               // 获取下一帧数据
     uint32_t getFrameCount();                     // 获取Gif动画帧数
-    uint32_t getDelay(uint32_t index);            // 获取每一帧延时时长
-    GifFrame *getFrame(uint32_t index);           // 获取每一帧数据
+    uint32_t getDelay(int32_t index);             // 获取每一帧延时时长
+    GifFrame *getFrame(int32_t index);            // 获取每一帧数据
     uint32_t getWidth();                          // 获取Gif图片宽
     uint32_t getHeight();                         // 获取Gif图片高
     void destory();                               // 销毁Gif解码器资源

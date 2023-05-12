@@ -1,5 +1,6 @@
 
 #include "AndroidGifDecoder.h"
+#include <cstring>
 
 AndroidGifDecoder::AndroidGifDecoder()
 {
@@ -70,9 +71,13 @@ bool AndroidGifDecoder::loadUsingIterator(const char *filePath)
     {
         return false;
     }
-    bool result = gifDecoder->loadUsingIterator(filePath);
-    printf("%s():: Line %d,result:%d\n", __FUNCTION__, __LINE__, result);
-    return result;
+    bitmapIterator = gifDecoder->loadUsingIterator(filePath);
+    printf("%s():: Line %d,result:%p\n", __FUNCTION__, __LINE__, bitmapIterator);
+    if (bitmapIterator == NULL)
+    {
+        return false;
+    }
+    return true;
 }
 
 /**
@@ -84,7 +89,11 @@ bool AndroidGifDecoder::loadUsingIterator(const char *filePath)
 bool AndroidGifDecoder::bitmapIteratorHasNext()
 {
     printf("%s():: Line %d\n", __FUNCTION__, __LINE__);
-    return true;
+    if (bitmapIterator == NULL)
+    {
+        return false;
+    }
+    return bitmapIterator->hasNext();
 }
 
 /**
@@ -96,7 +105,34 @@ bool AndroidGifDecoder::bitmapIteratorHasNext()
 GifFrame *AndroidGifDecoder::bitmapIteratornext()
 {
     printf("%s():: Line %d\n", __FUNCTION__, __LINE__);
-    return NULL;
+    if (bitmapIterator == NULL)
+    {
+        return NULL;
+    }
+    const uint32_t *frame = NULL;
+    uint32_t delayMs = 0;
+    bool result = bitmapIterator->next(&frame, &delayMs);
+    if (!result)
+    {
+        return NULL;
+    }
+    if (frame == NULL)
+    {
+        printf("%s():: Line %d,frame data is null\n", __FUNCTION__, __LINE__);
+        return NULL;
+    }
+    // 拷贝每一帧数据
+    int32_t pixelNum = getWidth() * getHeight();
+    printf("%s():: Line %d\n", __FUNCTION__, __LINE__);
+    uint32_t *frameData = new uint32_t[pixelNum * 4];
+    memset(frameData, 0, pixelNum * 4); // 先清空内存
+    printf("%s():: Line %d\n", __FUNCTION__, __LINE__);
+    memcpy(frameData, frame, pixelNum * 4);
+    printf("%s():: Line %d\n", __FUNCTION__, __LINE__);
+    GifFrame *gifFrame = new GifFrame(frameData, delayMs);
+    printf("%s():: Line %d\n", __FUNCTION__, __LINE__);
+    delete[] frameData; // 释放内存
+    return gifFrame;
 }
 /**
  * @brief 获取Gif动画帧数
@@ -106,7 +142,11 @@ GifFrame *AndroidGifDecoder::bitmapIteratornext()
 uint32_t AndroidGifDecoder::getFrameCount()
 {
     printf("%s():: Line %d\n", __FUNCTION__, __LINE__);
-    return 0;
+    if (gifDecoder == NULL)
+    {
+        return 0;
+    }
+    return gifDecoder->getFrameCount();
 }
 
 /**
@@ -115,10 +155,19 @@ uint32_t AndroidGifDecoder::getFrameCount()
  * @param index
  * @return uint32_t
  */
-uint32_t AndroidGifDecoder::getDelay(uint32_t index)
+uint32_t AndroidGifDecoder::getDelay(int32_t index)
 {
-    printf("%s():: Line %d\n", __FUNCTION__, __LINE__);
-    return 0;
+    // printf("%s():: Line %d\n", __FUNCTION__, __LINE__);
+    if (gifDecoder == NULL)
+    {
+        return 0;
+    }
+    if (index >= getFrameCount())
+    {
+        return 0;
+    }
+
+    return gifDecoder->getDelay(index);
 }
 
 /**
@@ -127,10 +176,31 @@ uint32_t AndroidGifDecoder::getDelay(uint32_t index)
  * @param index
  * @return GifFrame
  */
-GifFrame *AndroidGifDecoder::getFrame(uint32_t index)
+GifFrame *AndroidGifDecoder::getFrame(int32_t index)
 {
-    printf("%s():: Line %d\n", __FUNCTION__, __LINE__);
-    return NULL;
+    // printf("%s():: Line %d\n", __FUNCTION__, __LINE__);
+    if (gifDecoder == NULL)
+    {
+        return NULL;
+    }
+    if (index >= gifDecoder->getFrameCount())
+    {
+        printf("%s():: Line %d,index out of bounds\n", __FUNCTION__, __LINE__);
+        return NULL;
+    }
+
+    // 获取Gif指定帧数据
+    const uint32_t *data = gifDecoder->getFrame(index);
+    uint32_t delayMs = gifDecoder->getDelay(index);
+
+    // 拷贝每一帧数据
+    int32_t pixelNum = getWidth() * getHeight();
+    uint32_t *frameData = new uint32_t[pixelNum * 4];
+    memset(frameData, 0, pixelNum * 4); // 先清空内存
+    memcpy(frameData, data, pixelNum * 4);
+    GifFrame *gifFrame = new GifFrame(frameData, delayMs);
+    delete[] frameData; // 释放内存
+    return gifFrame;
 }
 
 /**
@@ -140,8 +210,12 @@ GifFrame *AndroidGifDecoder::getFrame(uint32_t index)
  */
 uint32_t AndroidGifDecoder::getWidth()
 {
-    printf("%s():: Line %d\n", __FUNCTION__, __LINE__);
-    return 0;
+    // printf("%s():: Line %d\n", __FUNCTION__, __LINE__);
+    if (gifDecoder == NULL)
+    {
+        return 0;
+    }
+    return gifDecoder->getWidth();
 }
 
 /**
@@ -151,8 +225,12 @@ uint32_t AndroidGifDecoder::getWidth()
  */
 uint32_t AndroidGifDecoder::getHeight()
 {
-    printf("%s():: Line %d\n", __FUNCTION__, __LINE__);
-    return 0;
+    // printf("%s():: Line %d\n", __FUNCTION__, __LINE__);
+    if (gifDecoder == NULL)
+    {
+        return 0;
+    }
+    return gifDecoder->getHeight();
 }
 
 /**
@@ -162,4 +240,7 @@ uint32_t AndroidGifDecoder::getHeight()
 void AndroidGifDecoder::destory()
 {
     printf("%s():: Line %d\n", __FUNCTION__, __LINE__);
+    if (gifDecoder != NULL)
+    {
+    }
 }
