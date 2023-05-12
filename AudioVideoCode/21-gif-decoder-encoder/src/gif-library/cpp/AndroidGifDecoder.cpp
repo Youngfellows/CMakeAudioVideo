@@ -10,6 +10,7 @@ AndroidGifDecoder::AndroidGifDecoder()
 AndroidGifDecoder::~AndroidGifDecoder()
 {
     printf("%s():: Line %d\n", __FUNCTION__, __LINE__);
+    destory();
 }
 
 /**
@@ -242,5 +243,7 @@ void AndroidGifDecoder::destory()
     printf("%s():: Line %d\n", __FUNCTION__, __LINE__);
     if (gifDecoder != NULL)
     {
+        delete gifDecoder;
     }
+    gifDecoder = NULL;
 }

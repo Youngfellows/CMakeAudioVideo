@@ -26,5 +26,7 @@ public:
     GifFrame *getFrame(int32_t index);            // 获取每一帧数据
     uint32_t getWidth();                          // 获取Gif图片宽
     uint32_t getHeight();                         // 获取Gif图片高
-    void destory();                               // 销毁Gif解码器资源
+
+private:
+    void destory(); // 销毁Gif解码器资源
 };
