@@ -27,16 +27,18 @@ ${CMAKE_CURRENT_SOURCE_DIR}/src/gif-library/cpp/DataBlock.cpp;\
 ${CMAKE_CURRENT_SOURCE_DIR}/src/gif-library/cpp/BitmapIterator.cpp;\
 ${CMAKE_CURRENT_SOURCE_DIR}/src/gif-library/cpp/GifFrame.cpp;\
 ${CMAKE_CURRENT_SOURCE_DIR}/src/SampleGifDecoder.cpp;")
-# message(STATUS "GIF_DECODER_SRC:: ${GIF_DECODER_SRC}")
 
+# message(STATUS "GIF_DECODER_SRC:: ${GIF_DECODER_SRC}")
 set(GIF_ENCODER_SRC "${CMAKE_CURRENT_SOURCE_DIR}/src/gif-library/cpp/SimpleGCTEncoder.cpp;\
 ${CMAKE_CURRENT_SOURCE_DIR}/src/gif-library/cpp/GifEncoder.cpp;\
+${CMAKE_CURRENT_SOURCE_DIR}/src/gif-library/cpp/AndroidGifEncoder.cpp;\
 ${CMAKE_CURRENT_SOURCE_DIR}/src/gif-library/cpp/BaseGifEncoder.cpp;\
 ${CMAKE_CURRENT_SOURCE_DIR}/src/gif-library/cpp/BitWritingBlock.cpp;\
 ${CMAKE_CURRENT_SOURCE_DIR}/src/gif-library/cpp/GCTGifEncoder.cpp;\
 ${CMAKE_CURRENT_SOURCE_DIR}/src/gif-library/cpp/LCTGifEncoder.cpp;\
 ${CMAKE_CURRENT_SOURCE_DIR}/src/gif-library/cpp/FastGifEncoder.cpp;\
 ${CMAKE_CURRENT_SOURCE_DIR}/src/SampleGifEncoder.cpp;")
+
 # message(STATUS "GIF_ENCODER_SRC:: ${GIF_ENCODER_SRC}")
 
 # 生成可执行文件

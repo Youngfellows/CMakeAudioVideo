@@ -20,6 +20,7 @@
  */
 
 #pragma once
+#include <iostream>
 
 struct EncodeRect {
 	int32_t x;
