@@ -183,4 +183,6 @@ AudioVideoCode/20-image-to-gif/dist/
 AudioVideoCode/21-gif-decoder-encoder/build/
 AudioVideoCode/21-gif-decoder-encoder/generate-resource/
 AudioVideoCode/21-gif-decoder-encoder/dist/
-
+AudioVideoCode/22-hash-library/build/
+AudioVideoCode/22-hash-library/generate-resource/
+AudioVideoCode/22-hash-library/dist/
