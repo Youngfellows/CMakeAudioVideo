@@ -1,4 +1,0 @@
-#cmakedefine FOO_ENABLE
-#cmakedefine FOO_STRING "@FOO_STRING@"
-
-#cmakedefine01 VAR
