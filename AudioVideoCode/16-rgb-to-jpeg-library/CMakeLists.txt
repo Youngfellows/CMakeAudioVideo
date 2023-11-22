@@ -24,13 +24,15 @@ message(STATUS "parent dir::${VAR_PARENT}")
 set(3RD_LIBRARY_DIR ${VAR_PARENT}/3rd/libjpeg-turbo)
 message(STATUS "3rd dir::${3RD_LIBRARY_DIR}")
 
+set(RELEASE "Release_")
+
 # 添加libjpeg-turbo依赖库查找路径
 # link_directories(../3rd/libjpeg-turbo/install/lib)
-link_directories(${3RD_LIBRARY_DIR}/install/lib)
+link_directories(${3RD_LIBRARY_DIR}/${RELEASE}/lib)
 
 # 添加libjpeg-turb头文件查找路径
 # include_directories(../3rd/libjpeg-turbo/install/include)
-include_directories(${3RD_LIBRARY_DIR}/install/include)
+include_directories(${3RD_LIBRARY_DIR}/${RELEASE}/include)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/src/include)
 
 # 生成可执行文件
