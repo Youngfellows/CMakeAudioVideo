@@ -12,13 +12,13 @@ if [ -e ${RESOURCE_DIR} ]; then
 fi
 mkdir -p ${RESOURCE_DIR}
 
-# 设置install目录
-INSTALL_DIR=${BUILD_ROOT}/install
-if [ -e ${INSTALL_DIR} ]; then
-    echo "rm -rf ${INSTALL_DIR}"
-    rm -rf ${INSTALL_DIR}
+# 设置Release目录
+RELEASE_DIR=${BUILD_ROOT}/Release
+if [ -e ${RELEASE_DIR} ]; then
+    echo "rm -rf ${RELEASE_DIR}"
+    rm -rf ${RELEASE_DIR}
 fi
-mkdir -p ${INSTALL_DIR}
+mkdir -p ${RELEASE_DIR}
 
 # 设置build编译目录
 BUILD_DIR=${BUILD_ROOT}/build
@@ -31,17 +31,24 @@ cd ${BUILD_DIR}
 
 # 编译
 cmake -DCMAKE_CXX_FLAGS=-g -DCMAKE_BUILD_TYPE=Release \
--DCMAKE_INSTALL_PREFIX:PATH=${PROJ_ROOT}/install $PROJ_ROOT
+-DCMAKE_INSTALL_PREFIX:PATH=${RELEASE_DIR} $PROJ_ROOT
 make -j4
 make install
 cd -
 
 # 运行
-${BUILD_ROOT}/install/bin/06-drawing-time-maze
-${BUILD_ROOT}/install/bin/06-drawing-time-fireballs
-${BUILD_ROOT}/install/bin/06-drawing-time-sierpinski-triangle
-${BUILD_ROOT}/install/bin/06-drawing-time-circles-equilateral-riangles
-${BUILD_ROOT}/install/bin/06-drawing-time-archimedean-spirals
-${BUILD_ROOT}/install/bin/06-drawing-time-image-huffle
-${BUILD_ROOT}/install/bin/06-drawing-time-phyllotaxis-spiral
-${BUILD_ROOT}/install/bin/06-drawing-time-pointillism-effect
+#{RELEASE_DIR}/bin/06-drawing-time-maze
+#{RELEASE_DIR}/bin/06-drawing-time-fireballs
+#{RELEASE_DIR}/bin/06-drawing-time-sierpinski-triangle
+#{RELEASE_DIR}/bin/06-drawing-time-circles-equilateral-riangles
+#{RELEASE_DIR}/bin/06-drawing-time-archimedean-spirals
+#{RELEASE_DIR}/bin/06-drawing-time-image-huffle
+#{RELEASE_DIR}/bin/06-drawing-time-phyllotaxis-spiral
+#{RELEASE_DIR}/bin/06-drawing-time-pointillism-effect
+
+# 遍历指定目录下所有文件，包括子目录下的所有文件,并运行
+BIN_DIR=${RELEASE_DIR}/bin
+for name in $(find $BIN_DIR -type f -name "*"); do
+    echo -e "\nrun::${name}"
+    ${name}
+done
