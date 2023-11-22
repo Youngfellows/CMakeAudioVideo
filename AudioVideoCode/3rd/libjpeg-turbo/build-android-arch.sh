@@ -6,11 +6,12 @@ echo "build root: $BUILD_ROOT"
 
 # 设置安装目录
 LIBRARY_NAME=libjpeg-turbo
-INSTALL_DIR=$BUILD_ROOT/dist/${LIBRARY_NAME}
+INSTALL_DIR=$BUILD_ROOT/Release_/${LIBRARY_NAME}
 if [ -e $INSTALL_DIR ] ;then
     echo "rm $INSTALL_DIR"
     rm -rf $INSTALL_DIR
 fi
+mkdir -p ${INSTALL_DIR}
 
 # 1. 先编译easy库文件
 # mkdir的-p选项允许一次创建多层次的目录，而不是一次只创建单独的目录

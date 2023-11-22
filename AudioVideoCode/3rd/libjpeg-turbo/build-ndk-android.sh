@@ -14,7 +14,7 @@ MY_LIBS_NAME=libjpeg-turbo
 MY_SOURCE_DIR=${PROJ_ROOT}
 
 # 编译的过程中产生的中间件的存放目录，为了区分编译目录，源码目录，install目录
-MY_BUILD_DIR=binary
+MY_BUILD_DIR=build
 
 # 设置build编译目录
 BUILD_DIR=${BUILD_ROOT}/${MY_BUILD_DIR}
@@ -24,13 +24,13 @@ if [ -e ${BUILD_DIR} ]; then
 fi
 mkdir -p ${BUILD_DIR}
 
-# 设置dist最终生成安装目录
-DIST_DIR=${BUILD_ROOT}/dist
-if [ -e ${DIST_DIR} ]; then
-    echo "rm -rf ${DIST_DIR}"
-    rm -rf ${DIST_DIR}
+# 设置Release最终生成安装目录
+RELEASE_DIR=${BUILD_ROOT}/Release_
+if [ -e ${RELEASE_DIR} ]; then
+    echo "rm -rf ${RELEASE_DIR}"
+    rm -rf ${RELEASE_DIR}
 fi
-mkdir -p ${DIST_DIR}
+mkdir -p ${RELEASE_DIR}
 
 #  CMake 环境变量
 export PATH=/mnt/d/LinuxEnvironment/cmake-3.12.1-Linux-x86_64/bin:$PATH
@@ -57,7 +57,7 @@ build_bin() {
     ARCH=$1                # arm arm64 x86 x86_64
     ANDROID_ARCH_ABI=$2    # armeabi armeabi-v7a x86 mips
     # 最终编译的安装目录
-    PREFIX=$(pwd)/dist/${MY_LIBS_NAME}/${ANDROID_ARCH_ABI}/
+    PREFIX=$(RELEASE_DIR)/${MY_LIBS_NAME}/${ANDROID_ARCH_ABI}/
     HOST=$3
     COMPILER=$4
     PROCESSOR=$6

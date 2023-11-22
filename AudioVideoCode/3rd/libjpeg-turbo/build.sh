@@ -4,6 +4,14 @@ PROJ_ROOT=$PWD
 BUILD_ROOT=${PROJ_ROOT}
 echo "build root: ${BUILD_ROOT}"
 
+# 设置Release目录
+RELEASE_DIR=${BUILD_ROOT}/Release_
+if [ -e ${RELEASE_DIR} ]; then
+    echo "rm -rf ${RELEASE_DIR}"
+    rm -rf ${RELEASE_DIR}
+fi
+mkdir -p ${RELEASE_DIR}
+
 # 设置build编译目录
 BUILD_DIR=${BUILD_ROOT}/build
 if [ -e ${BUILD_DIR} ]; then
@@ -13,17 +21,10 @@ fi
 mkdir -p ${BUILD_DIR}
 cd ${BUILD_DIR}
 
-# 设置install目录
-INSTALL_DIR=${BUILD_ROOT}/install
-if [ -e ${INSTALL_DIR} ]; then
-    echo "rm -rf ${INSTALL_DIR}"
-    rm -rf ${INSTALL_DIR}
-fi
-mkdir -p ${INSTALL_DIR}
-
 # 编译
-cmake -DCMAKE_CXX_FLAGS=-g -DCMAKE_BUILD_TYPE=Release \
--DCMAKE_INSTALL_PREFIX:PATH=${PROJ_ROOT}/install $PROJ_ROOT
+#cmake -DCMAKE_CXX_FLAGS=-g -DCMAKE_BUILD_TYPE=Release \
+cmake -DCMAKE_BUILD_TYPE=Release \
+-DCMAKE_INSTALL_PREFIX:PATH=${RELEASE_DIR} $PROJ_ROOT
 make -j4
 make install
 cd -
