@@ -12,13 +12,13 @@ if [ -e ${RESOURCE_DIR} ]; then
 fi
 mkdir -p ${RESOURCE_DIR}
 
-# 设置install目录
-INSTALL_DIR=${BUILD_ROOT}/install
-if [ -e ${INSTALL_DIR} ]; then
-    echo "rm -rf ${INSTALL_DIR}"
-    rm -rf ${INSTALL_DIR}
+# 设置Release目录
+RELEASE_DIR=${BUILD_ROOT}/Release
+if [ -e ${RELEASE_DIR} ]; then
+    echo "rm -rf ${RELEASE_DIR}"
+    rm -rf ${RELEASE_DIR}
 fi
-mkdir -p ${INSTALL_DIR}
+mkdir -p ${RELEASE_DIR}
 
 # 设置build编译目录
 BUILD_DIR=${BUILD_ROOT}/build
@@ -31,7 +31,7 @@ cd ${BUILD_DIR}
 
 # 编译
 cmake -DCMAKE_CXX_FLAGS=-g -DCMAKE_BUILD_TYPE=Release \
--DCMAKE_INSTALL_PREFIX:PATH=${PROJ_ROOT}/install $PROJ_ROOT
+-DCMAKE_INSTALL_PREFIX:PATH=${RELEASE_DIR} $PROJ_ROOT
 make -j4
 make install
 cd -
@@ -39,7 +39,7 @@ cd -
 # 运行
 # ${BUILD_ROOT}/install/bin/Sample
 # ./install/bin/Sample
-${BUILD_ROOT}/install/bin/05-rgb-to-bmp-with-libbmp
-${BUILD_ROOT}/install/bin/05-rgb-to-bmp-with-bmp
-${BUILD_ROOT}/install/bin/05-rgb-to-bmp-with-google-libbmp
-${BUILD_ROOT}/install/bin/05-rgb-to-bmp-with-qdbmp
+${RELEASE_DIR}/bin/05-rgb-to-bmp-with-libbmp
+${RELEASE_DIR}/bin/05-rgb-to-bmp-with-bmp
+${RELEASE_DIR}/bin/05-rgb-to-bmp-with-google-libbmp
+${RELEASE_DIR}/bin/05-rgb-to-bmp-with-qdbmp
