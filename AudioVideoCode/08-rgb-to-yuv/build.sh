@@ -12,13 +12,13 @@ if [ -e ${RESOURCE_DIR} ]; then
 fi
 mkdir -p ${RESOURCE_DIR}
 
-# 设置install目录
-INSTALL_DIR=${BUILD_ROOT}/install
-if [ -e ${INSTALL_DIR} ]; then
-    echo "rm -rf ${INSTALL_DIR}"
-    rm -rf ${INSTALL_DIR}
+# 设置Release目录
+RELEASE_DIR=${BUILD_ROOT}/Release
+if [ -e ${RELEASE_DIR} ]; then
+    echo "rm -rf ${RELEASE_DIR}"
+    rm -rf ${RELEASE_DIR}
 fi
-mkdir -p ${INSTALL_DIR}
+mkdir -p ${RELEASE_DIR}
 
 # 设置build编译目录
 BUILD_DIR=${BUILD_ROOT}/build
@@ -31,7 +31,7 @@ cd ${BUILD_DIR}
 
 # 编译
 cmake -DCMAKE_CXX_FLAGS=-g -DCMAKE_BUILD_TYPE=Release \
--DCMAKE_INSTALL_PREFIX:PATH=${PROJ_ROOT}/install $PROJ_ROOT
+-DCMAKE_INSTALL_PREFIX:PATH=${RELEASE_DIR} $PROJ_ROOT
 make -j4
 make install
 cd -
@@ -39,8 +39,8 @@ cd -
 # 运行
 WIDTH=711
 HEIGHT=711
-# ${BUILD_ROOT}/install/bin/08-rgb24-to-yuv444 ${WIDTH} ${HEIGHT}
-${BUILD_ROOT}/install/bin/08-rgb24-to-yuv420 ${WIDTH} ${HEIGHT}
-# ${BUILD_ROOT}/install/bin/08-yuv444-to-rgb24 ${WIDTH} ${HEIGHT}
-${BUILD_ROOT}/install/bin/08-yuv444-to-yuv420 ${WIDTH} ${HEIGHT}
-# ${BUILD_ROOT}/install/bin/08-yuv420-to-yuv444 ${WIDTH} ${HEIGHT}
+# ${BUILD_ROOT}/bin/08-rgb24-to-yuv444 ${WIDTH} ${HEIGHT}
+${RELEASE_DIR}/bin/08-rgb24-to-yuv420 ${WIDTH} ${HEIGHT}
+# ${RELEASE_DIR}/bin/08-yuv444-to-rgb24 ${WIDTH} ${HEIGHT}
+${RELEASE_DIR}/bin/08-yuv444-to-yuv420 ${WIDTH} ${HEIGHT}
+# ${RELEASE_DIR}/bin/08-yuv420-to-yuv444 ${WIDTH} ${HEIGHT}
