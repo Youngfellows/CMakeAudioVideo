@@ -6,6 +6,6 @@
 @REM ffplay -pixel_format rgb24 -video_size 711x711 -i ./res/rainbow_711x711_rgb24.rgb
 @REM ffplay -pixel_format rgb24 -video_size 711x711 -i ./res/rainbow_711x711_copy_rgb24.rgb
 
-@REM ffplay -pixel_format rgb24 -video_size 711x711 -i ./res2/rainbow-_711x711_bmp_rgb24.rgb
+@REM ffplay -pixel_format rgb24 -video_size 711x711 -i ./res/rainbow-_711x711_bmp_rgb24.rgb
 
 @REM ffplay -pixel_format rgb24 -video_size 711x711 -i ./resource/rainbow_711x711_yuv444p_to_rgb24.rgb

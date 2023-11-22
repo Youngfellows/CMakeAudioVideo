@@ -11,7 +11,7 @@ PARENT_ROOT=$(cd $(dirname $0); cd ..; pwd)
 echo "parent root:${PARENT_ROOT}"
 
 # 设置resource目录
-RESOURCE_DIR=${BUILD_ROOT}/res2
+RESOURCE_DIR=${BUILD_ROOT}/res
 if [ -e ${RESOURCE_DIR} ]; then
     echo "rm -rf ${RESOURCE_DIR}"
     rm -rf ${RESOURCE_DIR}
