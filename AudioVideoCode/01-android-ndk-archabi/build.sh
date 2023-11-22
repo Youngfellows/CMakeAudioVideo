@@ -6,7 +6,7 @@ echo "build root: $BUILD_ROOT"
 
 
 # 设置Release目录
-RELEASE_DIR=${BUILD_ROOT}/Release
+RELEASE_DIR=${BUILD_ROOT}/Release_
 if [ -e ${RELEASE_DIR} ]; then
     echo "rm -rf ${RELEASE_DIR}"
     rm -rf ${RELEASE_DIR}

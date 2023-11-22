@@ -35,6 +35,6 @@ build/
 .idea/
 install/
 dist/
-Release/
-resource/
-res/
+[Rr]elease_/
+[Rr]esource/
+[Rr]es/

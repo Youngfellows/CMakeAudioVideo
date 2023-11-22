@@ -19,10 +19,13 @@ class DeleteDirectory(object):
         self.directory_name_x86 = "x86"  # 需要删除的x86目录名称
         self.directory_name_Debug = "Debug"  # 需要删除的Debug目录名称
         self.directory_name_Release = "Release"  # 需要删除的Release目录名称
+        self.directory_name_Release2 = "Release_"  # 需要删除的Release目录名称
         self.directory_name_dot_vs = ".vs"  # 需要删除的.vs目录名称
         self.directory_name_ipch = "ipch"  # 需要删除的ipch目录名称
         self.suffix_sdf = ".sdf"  # 需要删除的.sdf文件名称
         self.dist = "dist"  # 需要删除的dist文件名称
+        self.directory_name_sources = "resource"  # 需要删除的sources文件名称
+        self.directory_name_res = "res"  # 需要删除的res文件名称
 
     def delete_directory_or_file(self):
         """
@@ -41,11 +44,14 @@ class DeleteDirectory(object):
             print("number={},{}".format(number,file))
             if os.path.isdir(file):
                 if (file == self.directory_name_build) or \
+                        (file == self.directory_name_sources) or \
+                        (file == self.directory_name_res) or \
                         (file == self.directory_name_install) or \
                         (file == self.directory_name_x64) or \
                         (file == self.directory_name_x86) or \
                         (file == self.directory_name_Debug) or \
                         (file == self.directory_name_Release) or \
+                        (file == self.directory_name_Release2) or \
                         (file == self.directory_name_ipch) or \
                         (file == self.directory_name_dot_vs) or \
                         (file == self.dist):
@@ -75,11 +81,14 @@ class DeleteDirectory(object):
                             strfilepath = parent + os.sep + dirname
                             print("strfilepath: {}".format(strfilepath))
                             if (dirname == self.directory_name_build) or \
+                                    (dirname == self.directory_name_sources) or \
+                                    (dirname == self.directory_name_res) or \
                                     (dirname == self.directory_name_install) or \
                                     (dirname == self.directory_name_x64) or \
                                     (dirname == self.directory_name_x86) or \
                                     (dirname == self.directory_name_Debug) or \
                                     (dirname == self.directory_name_Release) or \
+                                    (dirname == self.directory_name_Release2) or \
                                     (dirname == self.directory_name_ipch) or \
                                     (dirname == self.directory_name_dot_vs) or \
                                     (dirname == self.dist):
