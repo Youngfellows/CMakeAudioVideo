@@ -4,13 +4,7 @@ PROJ_ROOT=$PWD
 BUILD_ROOT=${PROJ_ROOT}
 echo "build root: ${BUILD_ROOT}"
 
-# 根据BUILDING.md编译Android平台可运行的libjpeg-turbo库
-
-# lib-name
-MY_LIBS_NAME=libeasyarray
-
 # 源码文件目录
-# MY_SOURCE_DIR=/home/sharry/Desktop/libjpeg-turbo-master
 MY_SOURCE_DIR=${PROJ_ROOT}/src
 
 # 编译的过程中产生的中间件的存放目录，为了区分编译目录，源码目录，install目录
@@ -24,13 +18,18 @@ if [ -e ${BUILD_DIR} ]; then
 fi
 mkdir -p ${BUILD_DIR}
 
-# 设置dist最终生成安装目录
-DIST_DIR=${BUILD_ROOT}/dist
-if [ -e ${DIST_DIR} ]; then
-    echo "rm -rf ${DIST_DIR}"
-    rm -rf ${DIST_DIR}
+# 设置Release安装目录
+RELEASE_DIR=$BUILD_ROOT/Release
+if [ -e $RELEASE_DIR ] ;then
+    echo "rm $RELEASE_DIR"
+    rm -rf $RELEASE_DIR
 fi
-mkdir -p ${DIST_DIR}
+mkdir -p ${RELEASE_DIR}
+
+# lib-name
+LIBRARY_NAME=easyarray
+INSTALL_DIR=$RELEASE_DIR/${LIBRARY_NAME}
+mkdir -p ${INSTALL_DIR}
 
 #  CMake 环境变量
 export PATH=/mnt/d/LinuxEnvironment/cmake-3.12.1-Linux-x86_64/bin:$PATH
@@ -57,7 +56,7 @@ build_bin() {
     ARCH=$1                # arm arm64 x86 x86_64
     ANDROID_ARCH_ABI=$2    # armeabi armeabi-v7a x86 mips
     # 最终编译的安装目录
-    PREFIX=$(pwd)/dist/${MY_LIBS_NAME}/${ANDROID_ARCH_ABI}/
+    PREFIX=${INSTALL_DIR}/${ANDROID_ARCH_ABI}/
     HOST=$3
     COMPILER=$4
     PROCESSOR=$6
