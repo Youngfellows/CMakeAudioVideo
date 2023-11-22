@@ -26,8 +26,8 @@ void gifDecoderTest1()
 {
     const char *tag = "SampleGifDecoder::";
     printf("%s%s,Line %d\n", tag, __FUNCTION__, __LINE__);
-    const char *gifFilePath1 = "./resource/test1.gif";
-    const char *outFileNamePattern1 = "./generate-resource/gif-decoder1-%d.rgb";
+    const char *gifFilePath1 = "./resources/test1.gif";
+    const char *outFileNamePattern1 = "./resource/gif-decoder1-%d.rgb";
 
     AndroidGifDecoder *androidGifDecoder = new AndroidGifDecoder();
     bool init = androidGifDecoder->initialize();
@@ -87,8 +87,8 @@ void gifDecoderTest2()
 {
     const char *tag = "SampleGifDecoder::";
     printf("\n%s%s,Line %d\n", tag, __FUNCTION__, __LINE__);
-    const char *gifFilePath2 = "./resource/test2.gif";
-    const char *outFileNamePattern2 = "./generate-resource/gif-decoder2-%d.rgb";
+    const char *gifFilePath2 = "./resources/test2.gif";
+    const char *outFileNamePattern2 = "./resource/gif-decoder2-%d.rgb";
 
     AndroidGifDecoder *androidGifDecoder2 = new AndroidGifDecoder();
     bool init = androidGifDecoder2->initialize();

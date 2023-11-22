@@ -40,13 +40,14 @@ include_directories(${VAR_PARENT}/3rd/libpng)
 set(LIB_JPEG_TURBO_DIR ${VAR_PARENT}/3rd/libjpeg-turbo)
 message(STATUS "libjpeg-turbo dir::${LIB_JPEG_TURBO_DIR}")
 
+set(RELEASE "Release_")
 # 添加libjpeg-turbo依赖库查找路径
-# link_directories(../3rd/libjpeg-turbo/install/lib)
-link_directories(${LIB_JPEG_TURBO_DIR}/install/lib)
+# link_directories(../3rd/libjpeg-turbo/Release_/lib)
+link_directories(${LIB_JPEG_TURBO_DIR}/${RELEASE}/lib)
 
 # 添加libjpeg-turb头文件查找路径
-# include_directories(../3rd/libjpeg-turbo/install/include)
-include_directories(${LIB_JPEG_TURBO_DIR}/install/include)
+# include_directories(../3rd/libjpeg-turbo/Release_/include)
+include_directories(${LIB_JPEG_TURBO_DIR}/${RELEASE}/include)
 
 set(GIFLIB_SRC
         ${VAR_PARENT}/3rd/giflib/dgif_lib.c

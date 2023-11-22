@@ -5,20 +5,20 @@ BUILD_ROOT=${PROJ_ROOT}
 echo "build root: ${BUILD_ROOT}"
 
 # 设置resource目录
-RESOURCE_DIR=${BUILD_ROOT}/generate-resource
+RESOURCE_DIR=${BUILD_ROOT}/resource
 if [ -e ${RESOURCE_DIR} ]; then
     echo "rm -rf ${RESOURCE_DIR}"
     rm -rf ${RESOURCE_DIR}
 fi
 mkdir -p ${RESOURCE_DIR}
 
-# 设置install目录
-INSTALL_DIR=${BUILD_ROOT}/dist
-if [ -e ${INSTALL_DIR} ]; then
-    echo "rm -rf ${INSTALL_DIR}"
-    rm -rf ${INSTALL_DIR}
+# 设置Release目录
+RELEASE_DIR=${BUILD_ROOT}/Release_
+if [ -e ${RELEASE_DIR} ]; then
+    echo "rm -rf ${RELEASE_DIR}"
+    rm -rf ${RELEASE_DIR}
 fi
-mkdir -p ${INSTALL_DIR}
+mkdir -p ${RELEASE_DIR}
 
 # 设置build编译目录
 BUILD_DIR=${BUILD_ROOT}/build
@@ -40,14 +40,14 @@ echo "parent dir: ${PARENT_DIR}"
 
 # 编译
 cmake -DCMAKE_CXX_FLAGS=-g -DCMAKE_BUILD_TYPE=Release \
--DCMAKE_INSTALL_PREFIX:PATH=${INSTALL_DIR} $PROJ_ROOT
+-DCMAKE_INSTALL_PREFIX:PATH=${RELEASE_DIR} $PROJ_ROOT
 make -j4
 make install
 cd -
 
 # 遍历指定目录下所有文件，包括子目录下的所有文件,并运行
-# ${INSTALL_DIR}/bin/16-rgb-to-jpeg-library
-BIN_DIR=${INSTALL_DIR}/bin/
+# ${RELEASE_DIR}/bin/16-rgb-to-jpeg-library
+BIN_DIR=${RELEASE_DIR}/bin/
 # for name in $(find $BIN_DIR -type f -name "*"); do
 #     echo -e "\nrun::${name}"
 #     ${name}

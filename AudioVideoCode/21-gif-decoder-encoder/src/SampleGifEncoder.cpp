@@ -40,11 +40,11 @@ void testGifEncoder()
     printf("%s%s():: Line %d\n", tag, __FUNCTION__, __LINE__);
 
     char *rgbFiles[] = {
-        "./generate-resource/gif-decoder2-0.rgb",
-        "./generate-resource/gif-decoder2-1.rgb",
-        "./generate-resource/gif-decoder2-2.rgb",
-        "./generate-resource/gif-decoder2-3.rgb",
-        "./generate-resource/gif-decoder2-4.rgb"};
+        "./resource/gif-decoder2-0.rgb",
+        "./resource/gif-decoder2-1.rgb",
+        "./resource/gif-decoder2-2.rgb",
+        "./resource/gif-decoder2-3.rgb",
+        "./resource/gif-decoder2-4.rgb"};
 
     AndroidGifEncoder *androidGifEncoder = new AndroidGifEncoder();
     uint32_t width = 220;
@@ -53,7 +53,7 @@ void testGifEncoder()
     bool useDither = true;
     int delayMs = 50;
     EncodingType encodingType = ENCODING_TYPE_NORMAL_LOW_MEMORY;
-    const char *filePath = "./generate-resource/gen-test2.gif";
+    const char *filePath = "./resource/gen-test2.gif";
     androidGifEncoder->initialize(width, height, filePath, encodingType, threadCount);
     androidGifEncoder->setDither(useDither);
     uint32_t size = sizeof(rgbFiles) / sizeof(rgbFiles[0]);
@@ -88,7 +88,7 @@ void testSimpleGCTGifEncoder()
     bool useDither = true;
     int delayMs = 50;
     EncodingType encodingType = ENCODING_TYPE_SIMPLE_FAST;
-    const char *filePath = "./generate-resource/simple-fast.gif";
+    const char *filePath = "./resource/simple-fast.gif";
     androidGifEncoder->initialize(width, height, filePath, encodingType, threadCount);
     androidGifEncoder->setDither(useDither);
     uint32_t size = sizeof(colors) / sizeof(colors[0]);
@@ -136,7 +136,7 @@ void testFastGifEncoder()
     bool useDither = true;
     int delayMs = 50;
     EncodingType encodingType = ENCODING_TYPE_FAST;
-    const char *filePath = "./generate-resource/fast.gif";
+    const char *filePath = "./resource/fast.gif";
     androidGifEncoder->initialize(width, height, filePath, encodingType, threadCount);
     androidGifEncoder->setDither(useDither);
     uint32_t size = sizeof(colors) / sizeof(colors[0]);
@@ -184,7 +184,7 @@ void testGCTGifEncoder()
     bool useDither = true;
     int delayMs = 50;
     EncodingType encodingType = ENCODING_TYPE_STABLE_HIGH_MEMORY;
-    const char *filePath = "./generate-resource/stable-high-memory.gif";
+    const char *filePath = "./resource/stable-high-memory.gif";
     androidGifEncoder->initialize(width, height, filePath, encodingType, threadCount);
     androidGifEncoder->setDither(useDither);
     uint32_t size = sizeof(colors) / sizeof(colors[0]);
@@ -232,7 +232,7 @@ void testLCTGifEncoder()
     bool useDither = true;
     int delayMs = 50;
     EncodingType encodingType = ENCODING_TYPE_NORMAL_LOW_MEMORY;
-    const char *filePath = "./generate-resource/normal-low-memory.gif";
+    const char *filePath = "./resource/normal-low-memory.gif";
     androidGifEncoder->initialize(width, height, filePath, encodingType, threadCount);
     androidGifEncoder->setDither(useDither);
     uint32_t size = sizeof(colors) / sizeof(colors[0]);

@@ -24,10 +24,10 @@ int AppendExtension(const ExtensionBlock *ExtensionBlock,
 int main()
 {
     const char *TAG = "image-to-gif::";
-    char *bmp = "./resource/Android.bmp";
-    char *png = "./resource/Huawei.png";
-    char *jpg = "./resource/Fuchsia.jpg";
-    char *gif = "./resource/iOS.gif";
+    char *bmp = "./resources/Android.bmp";
+    char *png = "./resources/Huawei.png";
+    char *jpg = "./resources/Fuchsia.jpg";
+    char *gif = "./resources/iOS.gif";
 
     unsigned char *bmpRGB = NULL;
     unsigned char *pngRGB = NULL;
@@ -36,7 +36,7 @@ int main()
 
     printf("开始解码 BMP 文件！\n");
     decodeBMP(bmp, &bmpRGB);
-    char *androidRGB = "./generate-resource/Android.rgb";
+    char *androidRGB = "./resource/Android.rgb";
     FILE *androidRGBFile = fopen(androidRGB, "wb");
     fwrite(bmpRGB, 400 * 400 * 3, 1, androidRGBFile);
     fclose(androidRGBFile);
@@ -44,7 +44,7 @@ int main()
 
     printf("开始解码 PNG 文件！\n");
     decodePNG(png, &pngRGB);
-    char *huaweiRGB = "./generate-resource/Huawei.rgb";
+    char *huaweiRGB = "./resource/Huawei.rgb";
     FILE *huaweiRGBFile = fopen(huaweiRGB, "wb");
     fwrite(pngRGB, 400 * 400 * 3, 1, huaweiRGBFile);
     fclose(huaweiRGBFile);
@@ -52,7 +52,7 @@ int main()
 
     printf("开始解码 JPG 文件！\n");
     decodeJPG(jpg, &jpgRGB);
-    char *fuchsiaRGB = "./generate-resource/Fuchsia.rgb";
+    char *fuchsiaRGB = "./resource/Fuchsia.rgb";
     FILE *fuchsiaRGBFile = fopen(fuchsiaRGB, "wb");
     fwrite(jpgRGB, 400 * 400 * 3, 1, fuchsiaRGBFile);
     fclose(fuchsiaRGBFile);
@@ -60,7 +60,7 @@ int main()
 
     printf("开始解码 GIF 文件！\n");
     decodeGIF(gif, &gifRGB);
-    char *iOSRGB = "./generate-resource/iOS.rgb";
+    char *iOSRGB = "./resource/iOS.rgb";
     FILE *iOSRGBFile = fopen(iOSRGB, "wb");
     fwrite(gifRGB, 400 * 400 * 3, 1, iOSRGBFile);
     fclose(iOSRGBFile);
@@ -75,7 +75,7 @@ int main()
     rgbBuffers[3] = gifRGB;
 
     printf("%s%s():: Line,%d\n", TAG, __FUNCTION__, __LINE__);
-    encodeGIF(rgbBuffers, 4, "./generate-resource/image-to-gif.gif", 7, 400, 400);
+    encodeGIF(rgbBuffers, 4, "./resources/image-to-gif.gif", 7, 400, 400);
     printf("%s%s():: Line,%d\n", TAG, __FUNCTION__, __LINE__);
 
     free(bmpRGB);
