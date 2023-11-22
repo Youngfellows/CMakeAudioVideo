@@ -4,13 +4,16 @@ PROJ_ROOT=$PWD
 BUILD_ROOT=$PROJ_ROOT
 echo "build root: $BUILD_ROOT"
 
-# 设置安装目录
-LIBRARY_NAME=easyarray
-INSTALL_DIR=$BUILD_ROOT/dist/${LIBRARY_NAME}
-if [ -e $INSTALL_DIR ] ;then
-    echo "rm $INSTALL_DIR"
-    rm -rf $INSTALL_DIR
+# 设置Release目录
+RELEASE_DIR=${BUILD_ROOT}/Release
+if [ -e ${RELEASE_DIR} ]; then
+    echo "rm -rf ${RELEASE_DIR}"
+    rm -rf ${RELEASE_DIR}
 fi
+mkdir -p ${RELEASE_DIR}
+
+LIBRARY_NAME=easyarray
+INSTALL_DIR=$RELEASE_DIR/${LIBRARY_NAME}
 
 # 1. 先编译easy库文件
 # mkdir的-p选项允许一次创建多层次的目录，而不是一次只创建单独的目录
