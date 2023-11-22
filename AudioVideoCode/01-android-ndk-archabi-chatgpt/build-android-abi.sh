@@ -4,13 +4,16 @@ PROJ_ROOT=$PWD
 BUILD_ROOT=$PROJ_ROOT
 echo "build root: $BUILD_ROOT"
 
-# 设置安装目录
-LIBRARY_NAME=easyarray
-INSTALL_DIR=$BUILD_ROOT/dist/${LIBRARY_NAME}
-if [ -e $INSTALL_DIR ] ;then
-    echo "rm $INSTALL_DIR"
-    rm -rf $INSTALL_DIR
+# 设置Release目录
+RELEASE_DIR=${BUILD_ROOT}/Release
+if [ -e ${RELEASE_DIR} ]; then
+    echo "rm -rf ${RELEASE_DIR}"
+    rm -rf ${RELEASE_DIR}
 fi
+mkdir -p ${RELEASE_DIR}
+
+LIBRARY_NAME=easyarray
+INSTALL_DIR=$RELEASE_DIR/${LIBRARY_NAME}
 
 # 1. 先编译easy库文件
 # mkdir的-p选项允许一次创建多层次的目录，而不是一次只创建单独的目录
@@ -59,24 +62,3 @@ build-android armeabi-v7a
 build-android arm64-v8a
 build-android x86
 build-android x86_64
-
-# # 2. 再编译执行文件
-# if [ -e $BUILD_ROOT/test_sdk/build ]; then
-#     echo "rm $BUILD_ROOT/test_sdk/build"
-#     rm -rf $BUILD_ROOT/test_sdk/build
-# fi
-# mkdir -p $BUILD_ROOT/test_sdk/build
-# cd $BUILD_ROOT/test_sdk/build
-
-# cmake -DCMAKE_BUILD_TYPE=Release  \
-# -DCMAKE_INSTALL_PREFIX:PATH=$PROJ_ROOT/dist $PROJ_ROOT
-# make clean
-# make -j4
-# make install
-# cd -
-
-# # 3. 执行,先设置库文件路径
-# # export LD_LIBRARY_PATH={PROJ_ROOT}/install/lib/math:$LD_LIBRARY_PATH
-# export LD_LIBRARY_PATH=${PROJ_ROOT}/dist/lib
-# echo "LD_LIBRARY_PATH:${LD_LIBRARY_PATH}"
-# ./dist/bin/Sample
