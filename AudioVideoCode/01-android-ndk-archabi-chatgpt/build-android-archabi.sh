@@ -4,10 +4,16 @@ PROJ_ROOT=$PWD
 BUILD_ROOT=${PROJ_ROOT}
 echo "build root: ${BUILD_ROOT}"
 
-# 根据BUILDING.md编译Android平台可运行的libjpeg-turbo库
+# 设置Release目录
+RELEASE_DIR=${BUILD_ROOT}/Release
+if [ -e ${RELEASE_DIR} ]; then
+    echo "rm -rf ${RELEASE_DIR}"
+    rm -rf ${RELEASE_DIR}
+fi
+mkdir -p ${RELEASE_DIR}
 
-# lib-name
-MY_LIBS_NAME=libeasyarray
+LIBRARY_NAME=easyarray
+INSTALL_DIR=$RELEASE_DIR/${LIBRARY_NAME}
 
 # 源码文件目录
 # MY_SOURCE_DIR=/home/sharry/Desktop/libjpeg-turbo-master
@@ -57,7 +63,7 @@ build_bin() {
     ARCH=$1                # arm arm64 x86 x86_64
     ANDROID_ARCH_ABI=$2    # armeabi armeabi-v7a x86 mips
     # 最终编译的安装目录
-    PREFIX=$(pwd)/dist/${MY_LIBS_NAME}/${ANDROID_ARCH_ABI}/
+    PREFIX=$INSTALL_DIR/${ANDROID_ARCH_ABI}/
     HOST=$3
     COMPILER=$4
     PROCESSOR=$6
