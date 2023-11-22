@@ -4,18 +4,16 @@ PROJ_ROOT=$PWD
 BUILD_ROOT=$PROJ_ROOT
 echo "build root: $BUILD_ROOT"
 
-# 设置安装目录
-DIST_DIR=$BUILD_ROOT/dist
-if [ -e $DIST_DIR ] ;then
-    echo "rm $DIST_DIR"
-    rm -rf $DIST_DIR
+# 设置Release目录
+RELEASE_DIR=${BUILD_ROOT}/Release
+if [ -e ${RELEASE_DIR} ]; then
+    echo "rm -rf ${RELEASE_DIR}"
+    rm -rf ${RELEASE_DIR}
 fi
+mkdir -p ${RELEASE_DIR}
+
 LIBRARY_NAME=easyarray
-INSTALL_DIR=$BUILD_ROOT/dist/${LIBRARY_NAME}
-if [ -e $INSTALL_DIR ] ;then
-    echo "rm $INSTALL_DIR"
-    rm -rf $INSTALL_DIR
-fi
+INSTALL_DIR=$RELEASE_DIR/${LIBRARY_NAME}
 
 # 1. 先编译easy库文件
 # mkdir的-p选项允许一次创建多层次的目录，而不是一次只创建单独的目录
@@ -35,14 +33,15 @@ EASY_ROOT=$PROJ_ROOT/src
 export PATH=/mnt/d/LinuxEnvironment/cmake-3.26.2-linux-x86_64/bin:$PATH
 
 # NDK编译环境
-export NDK_PATH=/mnt/d/LinuxEnvironment/android-ndk-r22b-linux-x86_64/android-ndk-r22b
-# export NDK_PATH=/mnt/d/LinuxEnvironment/android-ndk-r16b-linux-x86_64/android-ndk-r16b
+# export NDK_PATH=/mnt/d/LinuxEnvironment/android-ndk-r22b-linux-x86_64/android-ndk-r22b
+export NDK_PATH=/mnt/d/LinuxEnvironment/android-ndk-r16b-linux-x86_64/android-ndk-r16b
 export PATH=$NDK_PATH:$PATH
-TOOLCHAIN_GCC=gcc # 只能使用android-ndk-r16b-linux-x86_64
+TOOLCHAIN_GCC=gcc
+TOOLCHAIN_GXX=g++
 TOOLCHAIN_CLANG=clang
+TOOLCHAIN_CLANG=clang++
 
-TOOLCHAIN=$TOOLCHAIN_CLANG
-# TOOLCHAIN=$TOOLCHAIN_GCC
+TOOLCHAIN=$TOOLCHAIN_GCC
 ANDROID_VERSION=21
 
 build-android()
@@ -89,9 +88,6 @@ build-android()
     -DASSIMP_NO_EXPORT=TRUE \
     -DANDROID_TOOLCHAIN=${TOOLCHAIN} \
     -DCMAKE_INSTALL_PREFIX=${PREFIX} \
-    -DCMAKE_C_FLAGS="-fpic -fexceptions -frtti" \
-    -DCMAKE_CXX_FLAGS="-fpic -fexceptions -frtti" \
-    -DANDROID_STL=c++_static \
     -DBUILD_SHARED_LIBS=1 $EASY_ROOT
     
     # 注意：
@@ -113,5 +109,4 @@ build-android arm armeabi-v7a
 build-android arm arm64-v8a
 build-android x86 x86
 build-android x86_64 x86_64
-# build-android mips mips
-# build-android mips64 mips64
+
