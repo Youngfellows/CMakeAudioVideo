@@ -25,7 +25,7 @@ void yuv420pToRgb24(uint8_t *YUV, uint8_t *RGB, uint32_t width, uint32_t height)
 
 int main(int arg, char **argv)
 {
-    const char *TAG = "yuv-to-rgb-with-descampsa-yuv2rgb";
+    const char *TAG = "111-yuv-to-rgb-with-descampsa-yuv2rgb";
     // printf("\n%s::%s():: Line:%d,arg:%d\n", __FILE__, __FUNCTION__, __LINE__, arg);
     printf("\n%s::%s():: Line:%d,arg:%d\n", TAG, __FUNCTION__, __LINE__, arg);
     if (arg < 3)
